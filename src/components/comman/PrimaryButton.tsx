@@ -1,7 +1,7 @@
 import {StyleSheet, Text, TouchableOpacity, ViewStyle} from 'react-native';
 import React from 'react';
 import LinearGradient from 'react-native-linear-gradient';
-import {ColorConst, fontSize, hp, wp} from '../../utils';
+import {ColorConst, fontSize, fonts, hp, wp} from '../../utils';
 
 interface props {
   title: string;
@@ -33,6 +33,7 @@ const styles = StyleSheet.create({
   buttonText: {
     fontWeight: 'bold',
     fontSize: fontSize(18),
+    fontFamily: fonts.bold,
     color: ColorConst.white,
   },
 });

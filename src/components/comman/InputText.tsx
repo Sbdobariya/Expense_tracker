@@ -1,6 +1,6 @@
 import {StyleSheet, Text, TextInput, View, ViewStyle} from 'react-native';
 import React from 'react';
-import {ColorConst, hp, wp} from '../../utils';
+import {ColorConst, fonts, hp, wp} from '../../utils';
 
 interface props {
   value?: string;
@@ -42,6 +42,7 @@ const styles = StyleSheet.create({
     borderRadius: 14,
     paddingLeft: wp(3),
     marginHorizontal: wp(5.33),
+    fontFamily: fonts.regular,
     color: ColorConst?.dark_black,
     backgroundColor: ColorConst?.white,
     borderColor: ColorConst.light_gray,

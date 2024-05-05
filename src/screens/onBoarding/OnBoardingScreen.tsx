@@ -5,6 +5,7 @@ import {
   ColorConst,
   ImageConst,
   StringConst,
+  fonts,
 } from '../../utils';
 import React from 'react';
 import {PrimaryButton} from '../../components';
@@ -59,12 +60,13 @@ const styles = StyleSheet.create({
     alignSelf: 'center',
   },
   onBoardText: {
-    maxWidth: wp(45),
+    maxWidth: wp(50),
     marginTop: hp(10),
     fontWeight: 'bold',
     alignSelf: 'center',
     textAlign: 'center',
     fontSize: fontSize(20),
+    fontFamily: fonts.medium,
     color: ColorConst.dark_black,
   },
   onBoardText1: {
@@ -74,6 +76,7 @@ const styles = StyleSheet.create({
     alignSelf: 'center',
     textAlign: 'center',
     fontSize: fontSize(15),
+    fontFamily: fonts.regular,
     color: ColorConst.light_gray,
   },
   loginButton: {
@@ -81,7 +84,7 @@ const styles = StyleSheet.create({
   },
   buttonContainer: {
     flex: 1,
-    justifyContent: 'flex-end',
     marginBottom: hp(5),
+    justifyContent: 'flex-end',
   },
 });

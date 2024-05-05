@@ -10,6 +10,7 @@ import {GetData} from '../utils';
 import {SignUpAction} from '../redux/reducer/auth/AuthReducer';
 import TabNavigation from './TabNavigation';
 import {AuthContext} from '../utils/AuthContext';
+import AddTransactionScreen from '../screens/home/AddTransactionScreen';
 
 const Stack = createNativeStackNavigator<MainNavigatorType>();
 
@@ -54,6 +55,10 @@ const MainNavigator = () => {
           ) : (
             <>
               <Stack.Screen name="TabStack" component={TabNavigation} />
+              <Stack.Screen
+                name="AddTransactionScreen"
+                component={AddTransactionScreen}
+              />
             </>
           )}
         </Stack.Navigator>

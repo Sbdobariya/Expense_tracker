@@ -7,6 +7,7 @@ export type AuthNavigationType = {
 export type MainNavigatorType = {
   TabStack: TabStack;
   AuthStack: AuthNavigationType;
+  AddTransactionScreen: undefined;
 };
 
 export type HomeNavigationType = {

@@ -1,16 +1,19 @@
 import {ImageConst} from './ImageConst';
 import {ColorConst} from './ColorConst';
 import {StringConst} from './StringConst';
-import {hp, fontSize, wp} from './globalConstant';
 import {GetData, StoreData} from './CommanFunctions';
+import {hp, fontSize, wp, fonts} from './globalConstant';
+import ExpenseAray from './ExpenseCategory.json';
 
 export {
-  ImageConst,
   hp,
   wp,
-  fontSize,
-  StringConst,
-  ColorConst,
+  fonts,
   GetData,
+  fontSize,
   StoreData,
+  ImageConst,
+  ColorConst,
+  StringConst,
+  ExpenseAray,
 };

@@ -12,8 +12,12 @@
 		13B07FBF1A68108700A75B9A /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 13B07FB51A68108700A75B9A /* Images.xcassets */; };
 		13B07FC11A68108700A75B9A /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 13B07FB71A68108700A75B9A /* main.m */; };
 		44B671522BE668EA00F6493D /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 44B671512BE668EA00F6493D /* GoogleService-Info.plist */; };
+		61EE66BA31EE4D56BDF8B2C9 /* OpenSans-Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 8DACDE98C40442528095B404 /* OpenSans-Bold.ttf */; };
 		6CE445DEDAA1E466763D2CB4 /* Pods_expenseTracker_expenseTrackerTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 12D67830D714C23EC5328D57 /* Pods_expenseTracker_expenseTrackerTests.framework */; };
 		81AB9BB82411601600AC10FF /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 81AB9BB72411601600AC10FF /* LaunchScreen.storyboard */; };
+		852D26489D124B7DAB279F9D /* OpenSans-SemiBold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 943F6F77AE1A4D0AAE35CD31 /* OpenSans-SemiBold.ttf */; };
+		8CE674C5B483482F92F603C5 /* OpenSans-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 7F9A509A091A4C2F981CF5A8 /* OpenSans-Regular.ttf */; };
+		9B439FB13908464EABE7643E /* OpenSans-Medium.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 442024458C3A4E4FBCE7B6EA /* OpenSans-Medium.ttf */; };
 		D24B7B4CCEAC64184C0FC46F /* Pods_expenseTracker.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3B7F61F333F20EBE53C509FB /* Pods_expenseTracker.framework */; };
 		F734FBAE3098E53A7715DB6F /* PrivacyInfo.xcprivacy in Resources */ = {isa = PBXBuildFile; fileRef = B56A128AE60B2BE7E52EF188 /* PrivacyInfo.xcprivacy */; };
 /* End PBXBuildFile section */
@@ -42,11 +46,15 @@
 		13B07FB81A68108700A75B9A /* PrivacyInfo.xcprivacy */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = PrivacyInfo.xcprivacy; path = expenseTracker/PrivacyInfo.xcprivacy; sourceTree = "<group>"; };
 		3B4392A12AC88292D35C810B /* Pods-expenseTracker.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-expenseTracker.debug.xcconfig"; path = "Target Support Files/Pods-expenseTracker/Pods-expenseTracker.debug.xcconfig"; sourceTree = "<group>"; };
 		3B7F61F333F20EBE53C509FB /* Pods_expenseTracker.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_expenseTracker.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		442024458C3A4E4FBCE7B6EA /* OpenSans-Medium.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = undefined; includeInIndex = 0; lastKnownFileType = unknown; name = "OpenSans-Medium.ttf"; path = "../assets/fonts/OpenSans-Medium.ttf"; sourceTree = "<group>"; };
 		44B671512BE668EA00F6493D /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = "GoogleService-Info.plist"; path = "../../../../Downloads/GoogleService-Info.plist"; sourceTree = "<group>"; };
 		5709B34CF0A7D63546082F79 /* Pods-expenseTracker.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-expenseTracker.release.xcconfig"; path = "Target Support Files/Pods-expenseTracker/Pods-expenseTracker.release.xcconfig"; sourceTree = "<group>"; };
 		5B7EB9410499542E8C5724F5 /* Pods-expenseTracker-expenseTrackerTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-expenseTracker-expenseTrackerTests.debug.xcconfig"; path = "Target Support Files/Pods-expenseTracker-expenseTrackerTests/Pods-expenseTracker-expenseTrackerTests.debug.xcconfig"; sourceTree = "<group>"; };
+		7F9A509A091A4C2F981CF5A8 /* OpenSans-Regular.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = undefined; includeInIndex = 0; lastKnownFileType = unknown; name = "OpenSans-Regular.ttf"; path = "../assets/fonts/OpenSans-Regular.ttf"; sourceTree = "<group>"; };
 		81AB9BB72411601600AC10FF /* LaunchScreen.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; name = LaunchScreen.storyboard; path = expenseTracker/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		89C6BE57DB24E9ADA2F236DE /* Pods-expenseTracker-expenseTrackerTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-expenseTracker-expenseTrackerTests.release.xcconfig"; path = "Target Support Files/Pods-expenseTracker-expenseTrackerTests/Pods-expenseTracker-expenseTrackerTests.release.xcconfig"; sourceTree = "<group>"; };
+		8DACDE98C40442528095B404 /* OpenSans-Bold.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = undefined; includeInIndex = 0; lastKnownFileType = unknown; name = "OpenSans-Bold.ttf"; path = "../assets/fonts/OpenSans-Bold.ttf"; sourceTree = "<group>"; };
+		943F6F77AE1A4D0AAE35CD31 /* OpenSans-SemiBold.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = undefined; includeInIndex = 0; lastKnownFileType = unknown; name = "OpenSans-SemiBold.ttf"; path = "../assets/fonts/OpenSans-SemiBold.ttf"; sourceTree = "<group>"; };
 		B56A128AE60B2BE7E52EF188 /* PrivacyInfo.xcprivacy */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xml; name = PrivacyInfo.xcprivacy; path = expenseTracker/PrivacyInfo.xcprivacy; sourceTree = "<group>"; };
 		ED297162215061F000B7C4FE /* JavaScriptCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = JavaScriptCore.framework; path = System/Library/Frameworks/JavaScriptCore.framework; sourceTree = SDKROOT; };
 /* End PBXFileReference section */
@@ -130,6 +138,7 @@
 				83CBBA001A601CBA00E9B192 /* Products */,
 				2D16E6871FA4F8E400B85C8A /* Frameworks */,
 				BBD78D7AC51CEA395F1C20DB /* Pods */,
+				ACB702CB470B4134B29A2CA5 /* Resources */,
 			);
 			indentWidth = 2;
 			sourceTree = "<group>";
@@ -143,6 +152,18 @@
 				00E356EE1AD99517003FC87E /* expenseTrackerTests.xctest */,
 			);
 			name = Products;
+			sourceTree = "<group>";
+		};
+		ACB702CB470B4134B29A2CA5 /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				8DACDE98C40442528095B404 /* OpenSans-Bold.ttf */,
+				442024458C3A4E4FBCE7B6EA /* OpenSans-Medium.ttf */,
+				7F9A509A091A4C2F981CF5A8 /* OpenSans-Regular.ttf */,
+				943F6F77AE1A4D0AAE35CD31 /* OpenSans-SemiBold.ttf */,
+			);
+			name = Resources;
+			path = "";
 			sourceTree = "<group>";
 		};
 		BBD78D7AC51CEA395F1C20DB /* Pods */ = {
@@ -254,6 +275,10 @@
 				44B671522BE668EA00F6493D /* GoogleService-Info.plist in Resources */,
 				13B07FBF1A68108700A75B9A /* Images.xcassets in Resources */,
 				F734FBAE3098E53A7715DB6F /* PrivacyInfo.xcprivacy in Resources */,
+				61EE66BA31EE4D56BDF8B2C9 /* OpenSans-Bold.ttf in Resources */,
+				9B439FB13908464EABE7643E /* OpenSans-Medium.ttf in Resources */,
+				8CE674C5B483482F92F603C5 /* OpenSans-Regular.ttf in Resources */,
+				852D26489D124B7DAB279F9D /* OpenSans-SemiBold.ttf in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
