@@ -5,5 +5,22 @@ export type AuthNavigationType = {
 };
 
 export type MainNavigatorType = {
+  TabStack: TabStack;
   AuthStack: AuthNavigationType;
+};
+
+export type HomeNavigationType = {
+  HomeScreen: undefined;
+};
+export type TransactionNavigationType = {
+  TransactionScreen: undefined;
+};
+export type ProfileNavigationType = {
+  ProfileScreen: undefined;
+};
+
+export type TabStack = {
+  Home: HomeNavigationType;
+  Profile: ProfileNavigationType;
+  Transaction: TransactionNavigationType;
 };
