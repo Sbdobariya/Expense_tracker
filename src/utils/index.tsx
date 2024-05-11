@@ -1,9 +1,11 @@
 import {ImageConst} from './ImageConst';
 import {ColorConst} from './ColorConst';
 import {StringConst} from './StringConst';
+import {IncomeCategoryData} from './IncomeCategory';
 import {GetData, StoreData} from './CommanFunctions';
+import {ExpenseCategoryData} from './ExpenseCategory';
 import {hp, fontSize, wp, fonts} from './globalConstant';
-import ExpenseAray from './ExpenseCategory.json';
+import {TransactionModeData} from './TransactionMode';
 
 export {
   hp,
@@ -15,5 +17,7 @@ export {
   ImageConst,
   ColorConst,
   StringConst,
-  ExpenseAray,
+  IncomeCategoryData,
+  TransactionModeData,
+  ExpenseCategoryData,
 };

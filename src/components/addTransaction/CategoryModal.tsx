@@ -1,34 +1,73 @@
-import {FlatList, StyleSheet, Text, TouchableOpacity, View} from 'react-native';
+import {
+  FlatList,
+  Image,
+  StyleSheet,
+  Text,
+  TouchableOpacity,
+  View,
+} from 'react-native';
 import React from 'react';
 import Modal from 'react-native-modal';
 import {expenseArray} from '../../interface/Comman';
+import {ColorConst, fontSize, hp, wp} from '../../utils';
 
 interface props {
   isVisible: boolean;
   data: expenseArray[];
   toggleModal: () => void;
+  onSelectExpenseCategory: (item: expenseArray) => void;
 }
 
-const CategoryModal = ({toggleModal, isVisible, data}: props) => {
+const CategoryModal = ({
+  data,
+  isVisible,
+  toggleModal,
+  onSelectExpenseCategory,
+}: props) => {
   const renderItem = ({item}: {item: expenseArray}) => {
     return (
-      <View key={`${item?.id}cc`}>
-        <Text>{item?.id}</Text>
-      </View>
+      <TouchableOpacity
+        onPress={() => onSelectExpenseCategory(item)}
+        key={`${item?.id}cc`}
+        style={styles.renderItemContainer}>
+        <View
+          style={[
+            styles.imageContainer,
+            {
+              backgroundColor:
+                '#' +
+                (((1 << 24) * Math.random()) | 0).toString(16).padStart(6, '0'),
+            },
+          ]}>
+          <Image source={item?.image} style={styles.iconStyle} />
+        </View>
+        <Text style={styles.textStyle} numberOfLines={3} ellipsizeMode="tail">
+          {item?.name}
+        </Text>
+      </TouchableOpacity>
     );
   };
 
   return (
     <Modal
       isVisible={isVisible}
-      onBackdropPress={toggleModal}
       style={styles.modal}
-      swipeDirection={['down']}
       backdropOpacity={0.5}
       animationIn="slideInUp"
-      animationOut="slideOutDown">
+      swipeDirection={['down']}
+      onSwipeComplete={toggleModal}
+      animationOut="slideOutDown"
+      onBackdropPress={toggleModal}>
       <View style={styles.modalContent}>
-        <FlatList data={data} renderItem={renderItem} />
+        <FlatList
+          data={data}
+          numColumns={3}
+          renderItem={renderItem}
+          ListFooterComponent={() => {
+            return <View style={{height: hp(3)}} />;
+          }}
+          contentContainerStyle={{alignItems: 'center'}}
+        />
       </View>
     </Modal>
   );
@@ -37,29 +76,34 @@ const CategoryModal = ({toggleModal, isVisible, data}: props) => {
 export default CategoryModal;
 
 const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
-  },
-  buttonText: {
-    fontSize: 20,
-    color: 'blue',
-  },
   modal: {
-    justifyContent: 'flex-end',
     margin: 0,
+    justifyContent: 'flex-end',
   },
   modalContent: {
-    backgroundColor: 'white',
-    padding: 22,
-    justifyContent: 'center',
-    alignItems: 'center',
+    padding: hp(2),
     borderTopLeftRadius: 20,
     borderTopRightRadius: 20,
+    backgroundColor: ColorConst.white,
   },
-  closeButton: {
-    marginTop: 10,
-    color: 'blue',
+  renderItemContainer: {
+    width: hp(10),
+    height: hp(8),
+    alignItems: 'center',
+    marginVertical: hp(2),
+    marginHorizontal: wp(5),
+  },
+  iconStyle: {
+    width: hp(4),
+    height: hp(4),
+  },
+  textStyle: {
+    color: '#000',
+    marginTop: hp(1),
+    fontSize: fontSize(12),
+  },
+  imageContainer: {
+    padding: 15,
+    borderRadius: 15,
   },
 });

@@ -11,13 +11,14 @@ export const ImageConst = {
   transaction_focuse_ic: require('../../assets/icons/auth/transaction_focuse_icon.png'),
 
   // home
+  transfer_ic: require('../../assets/icons/home/transfer.png'),
   category_ic: require('../../assets/icons/home/category.png'),
+  plus_circle_ic: require('../../assets/icons/home/plus-circle.png'),
   add_category_ic: require('../../assets/icons/home/add_category.png'),
 
   // expense
   car_ic: require('../../assets/icons/expense/car.png'),
   tax_ic: require('../../assets/icons/expense/tax.png'),
-  baby_ic: require('../../assets/icons/expense/baby.png'),
   bill_ic: require('../../assets/icons/expense/bill.png'),
   food_ic: require('../../assets/icons/expense/food.png'),
   sport_ic: require('../../assets/icons/expense/sport.png'),
@@ -27,6 +28,7 @@ export const ImageConst = {
   social_ic: require('../../assets/icons/expense/social.png'),
   shoping_ic: require('../../assets/icons/expense/shoping.png'),
   cloting_ic: require('../../assets/icons/expense/cloting.png'),
+  glossary_ic: require('../../assets/icons/expense/glossary.png'),
   insurance_ic: require('../../assets/icons/expense/insurance.png'),
   telephone_ic: require('../../assets/icons/expense/telephone.png'),
   education_ic: require('../../assets/icons/expense/education.png'),
@@ -36,9 +38,15 @@ export const ImageConst = {
 
   // income
   sale_ic: require('../../assets/icons/income/sale.png'),
+  other_ic: require('../../assets/icons/income/other.png'),
   awards_ic: require('../../assets/icons/income/awards.png'),
   grants_ic: require('../../assets/icons/income/grants.png'),
   refund_ic: require('../../assets/icons/income/refund.png'),
   salary_ic: require('../../assets/icons/income/salary.png'),
   coupons_ic: require('../../assets/icons/income/coupons.png'),
+
+  // transactions Mode
+  upi_ic: require('../../assets/icons/transactionsMode/upi.png'),
+  cash_ic: require('../../assets/icons/transactionsMode/cash.png'),
+  card_ic: require('../../assets/icons/transactionsMode/card.png'),
 };

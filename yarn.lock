@@ -2372,6 +2372,24 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@react-native-firebase/firestore@npm:^19.2.2":
+  version: 19.2.2
+  resolution: "@react-native-firebase/firestore@npm:19.2.2"
+  peerDependencies:
+    "@react-native-firebase/app": 19.2.2
+  checksum: 3a3819b70602f7bb9335d8d2c3d0e7d807f999327e154bcfccbf59b1cd1b9160ad98524ce85d52b53e60f26e2c9c82ca4da9c3c12373cc1cffdfa6dfa56f7fcd
+  languageName: node
+  linkType: hard
+
+"@react-native-firebase/storage@npm:^19.2.2":
+  version: 19.2.2
+  resolution: "@react-native-firebase/storage@npm:19.2.2"
+  peerDependencies:
+    "@react-native-firebase/app": 19.2.2
+  checksum: 3bfbb6166ca9761226e621f6f665c716b2af973ba1030edee777c49c8963b9689938e179397bc2d0f08c1425ffcd2abcad4b5b9d6e8c86bdb16ef374e100ce26
+  languageName: node
+  linkType: hard
+
 "@react-native/assets-registry@npm:0.74.83":
   version: 0.74.83
   resolution: "@react-native/assets-registry@npm:0.74.83"
@@ -4964,6 +4982,8 @@ __metadata:
     "@react-native-async-storage/async-storage": ^1.23.1
     "@react-native-firebase/app": ^19.2.2
     "@react-native-firebase/auth": ^19.2.2
+    "@react-native-firebase/firestore": ^19.2.2
+    "@react-native-firebase/storage": ^19.2.2
     "@react-native/babel-preset": 0.74.83
     "@react-native/eslint-config": 0.74.83
     "@react-native/metro-config": 0.74.83
@@ -4980,6 +5000,7 @@ __metadata:
     prettier: 2.8.8
     react: 18.2.0
     react-native: 0.74.1
+    react-native-image-crop-picker: ^0.41.1
     react-native-linear-gradient: ^2.8.3
     react-native-modal: ^13.0.1
     react-native-responsive-fontsize: ^0.5.1
@@ -8317,6 +8338,15 @@ __metadata:
   dependencies:
     prop-types: ^15.7.2
   checksum: eb35821de36ae4eb00f97d99fc22ed79bd017248092ff1299f9d46a7ab946de16d2e6d6bfbf4cab5ef77d0d3bf47684aec761a7670ec7d36aae8d77ab8ddd171
+  languageName: node
+  linkType: hard
+
+"react-native-image-crop-picker@npm:^0.41.1":
+  version: 0.41.1
+  resolution: "react-native-image-crop-picker@npm:0.41.1"
+  peerDependencies:
+    react-native: ">=0.40.0"
+  checksum: e8c1b6fad6d52e32be5b684dde8f82830b31ef62cdc42591ef98534cbc7bd566b826670f6fde0401dfe1cc97c1fc5d0476e582c804b7e258db1885eac28c7800
   languageName: node
   linkType: hard
 

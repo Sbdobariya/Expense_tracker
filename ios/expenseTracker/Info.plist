@@ -33,6 +33,12 @@
 	</dict>
 	<key>NSLocationWhenInUseUsageDescription</key>
 	<string/>
+	<key>NSPhotoLibraryUsageDescription</key>
+	<string>Expense Tracker Want o use permission of Photo</string>
+	<key>NSCameraUsageDescription</key>
+	<string>Expense Tracker Want o use permission of Camera</string>
+	<key>NSMicrophoneUsageDescription</key>
+	<string>Expense Tracker Want o use permission of MicroPhone</string>
 	<key>UILaunchStoryboardName</key>
 	<string>LaunchScreen</string>
 	<key>UIRequiredDeviceCapabilities</key>

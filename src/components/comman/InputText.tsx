@@ -1,31 +1,41 @@
-import {StyleSheet, Text, TextInput, View, ViewStyle} from 'react-native';
+import {
+  KeyboardType,
+  StyleSheet,
+  Text,
+  TextInput,
+  View,
+  ViewStyle,
+} from 'react-native';
 import React from 'react';
 import {ColorConst, fonts, hp, wp} from '../../utils';
 
 interface props {
-  value?: string;
   placeholder?: string;
-  autoCapitalize?: 'none' | 'sentences' | 'words' | 'characters' | undefined;
+  value?: string | number;
+  keyboardType?: KeyboardType;
   inputCustomeStyle?: ViewStyle;
   onChangeText?: (xtx: string) => void;
   secureTextEntry?: boolean | undefined;
+  autoCapitalize?: 'none' | 'sentences' | 'words' | 'characters' | undefined;
 }
 
 const InputText = (props: props) => {
   const {
     value,
-    onChangeText,
     placeholder,
-    inputCustomeStyle,
-    secureTextEntry,
+    onChangeText,
+    keyboardType,
     autoCapitalize,
+    secureTextEntry,
+    inputCustomeStyle,
   } = props;
   return (
     <TextInput
-      value={value}
-      autoCapitalize={autoCapitalize}
+      value={value?.toString()}
       placeholder={placeholder}
       onChangeText={onChangeText}
+      keyboardType={keyboardType}
+      autoCapitalize={autoCapitalize}
       secureTextEntry={secureTextEntry}
       style={[styles.inputFiled, inputCustomeStyle]}
       placeholderTextColor={ColorConst?.light_gray}

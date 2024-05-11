@@ -18,12 +18,12 @@ export interface UserSignInActionRequest {
 }
 
 export interface userDataType {
-  userEmail?: string;
   userID?: string;
   userName?: string;
+  userEmail?: string;
 }
 
 export interface AuthReducerType {
-  userData?: userDataType;
   isLoading: boolean;
+  userData?: userDataType;
 }
