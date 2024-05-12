@@ -1,3 +1,4 @@
+import moment from 'moment';
 import storage from '@react-native-firebase/storage';
 import {ImageOrVideo} from 'react-native-image-crop-picker';
 
@@ -17,4 +18,20 @@ const FirebaseStorage = (
   });
 };
 
-export {FirebaseStorage};
+const transactionTimeStamp = (
+  item: {nanoseconds: number; seconds: number} | undefined,
+) => {
+  const timestamp = item && item?.seconds * 1000 + item?.nanoseconds / 1000000;
+  const transactionDate = moment(timestamp);
+  const currentDate = moment();
+
+  const timStamp = transactionDate.isSame(currentDate, 'day')
+    ? `Today ${moment(timestamp).format('h:mm A')}`
+    : transactionDate.isSame(currentDate.subtract(1, 'day'), 'day')
+    ? `Yesterday ${moment(timestamp).format('h:mm A')}`
+    : moment(timestamp).format('LL h:mm A');
+
+  return timStamp;
+};
+
+export {FirebaseStorage, transactionTimeStamp};

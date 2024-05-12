@@ -8,6 +8,7 @@ import {
   CommanHeader,
   PrimaryButton,
   StringDivider,
+  CommanLoader,
 } from '../../components';
 import {
   AuthReducerType,
@@ -15,9 +16,8 @@ import {
   userDataType,
 } from '../../interface/AuthInterFace';
 import {useDispatch, useSelector} from 'react-redux';
-import {UserSignUpAction} from '../../redux/actions/auth/AuthAction';
 import {AuthContext} from '../../utils/AuthContext';
-import CommanLoader from '../../components/comman/CommanLoader';
+import {UserSignUpAction} from '../../redux/actions/auth/AuthAction';
 
 type Signup = NativeStackScreenProps<AuthNavigationType, 'SignUpScreen'> & {
   navigation: () => void;

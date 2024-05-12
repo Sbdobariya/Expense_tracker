@@ -5,7 +5,9 @@ import {ColorConst, ImageConst, hp} from '../utils';
 import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
 import HomeStackNavigator from './homeStackNavigator/HomeStackNavigator';
 import TransactionNavigator from './transactionNavigator/TransactionNavigator';
+import WalletStackNavigator from './walletStackNavigator/WalletStackNavigator';
 import ProfileStackNavigator from './profileStackNavigator/ProfileStackNavigator';
+import StatisticsStackNavigator from './statisticsStackNavigator/StatisticsStackNavigator';
 
 const Tab = createBottomTabNavigator<TabStack>();
 
@@ -29,8 +31,8 @@ const TabNavigation = () => {
         }}
       />
       <Tab.Screen
-        name="Transaction"
-        component={TransactionNavigator}
+        name="Statistics"
+        component={StatisticsStackNavigator}
         options={{
           tabBarIcon: ({focused}) => {
             return (
@@ -39,6 +41,42 @@ const TabNavigation = () => {
                   focused
                     ? ImageConst.transaction_focuse_ic
                     : ImageConst.transaction_ic
+                }
+                style={styles.iconStyle}
+              />
+            );
+          },
+        }}
+      />
+      <Tab.Screen
+        name="Transaction"
+        component={TransactionNavigator}
+        options={{
+          unmountOnBlur: true,
+          tabBarStyle: {
+            display: 'none',
+          },
+          tabBarIcon: ({focused}) => {
+            return (
+              <Image
+                source={ImageConst.add_category_ic}
+                style={styles.addIconStyle}
+              />
+            );
+          },
+        }}
+      />
+      <Tab.Screen
+        name="Wallet"
+        component={WalletStackNavigator}
+        options={{
+          tabBarIcon: ({focused}) => {
+            return (
+              <Image
+                source={
+                  focused
+                    ? ImageConst.wallet_focuse_ic
+                    : ImageConst.wallet_icon_ic
                 }
                 style={styles.iconStyle}
               />
@@ -82,5 +120,10 @@ const styles = StyleSheet.create({
   iconStyle: {
     width: hp(3),
     height: hp(3),
+  },
+  addIconStyle: {
+    width: hp(6),
+    height: hp(6),
+    marginBottom: hp(5),
   },
 });

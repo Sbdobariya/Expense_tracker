@@ -19,9 +19,17 @@ export type TransactionNavigationType = {
 export type ProfileNavigationType = {
   ProfileScreen: undefined;
 };
+export type WalletNavigationType = {
+  WalletScreen: undefined;
+};
+export type StatisticsNavigationType = {
+  StatisticsScreen: undefined;
+};
 
 export type TabStack = {
   Home: HomeNavigationType;
+  Wallet: WalletNavigationType;
   Profile: ProfileNavigationType;
+  Statistics: StatisticsNavigationType;
   Transaction: TransactionNavigationType;
 };

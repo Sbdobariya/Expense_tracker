@@ -1,71 +1,147 @@
-import React from 'react';
-import {ColorConst, ImageConst, fontSize, fonts, hp, wp} from '../../utils';
-import {Image, StyleSheet, Text, TouchableOpacity, View} from 'react-native';
+import {
+  DeleteDataType,
+  GetTransaction,
+  TransactionData,
+  TransactionReducerType,
+} from '../../interface/Transaction';
+import React, {useEffect, useState} from 'react';
+import {HomeNavigationType} from '../../navigation';
+import {useDispatch, useSelector} from 'react-redux';
+import {useIsFocused} from '@react-navigation/native';
+import {AuthReducerType} from '../../interface/AuthInterface';
+import {Alert, FlatList, StyleSheet, Text, View} from 'react-native';
 import {NativeStackScreenProps} from '@react-navigation/native-stack';
-import {HomeNavigationType, MainNavigatorType} from '../../navigation';
-import HomeHeader from '../../components/home/HomeHeader';
-import LinearGradient from 'react-native-linear-gradient';
+import {ColorConst, StringConst, fontSize, fonts, hp, wp} from '../../utils';
+import {
+  DeteleTransactions,
+  GetTransactionAction,
+} from '../../redux/actions/addTransaction/AddTransaction';
+import {
+  HomeCard,
+  HomeHeader,
+  TransactionList,
+  EditCategoryModal,
+} from '../../components';
+import {EditTransactionData} from '../../redux/reducer/transactions/TransactionReducer';
 
 type Home = NativeStackScreenProps<HomeNavigationType, 'HomeScreen'> & {
   navigation: () => void;
 };
 
+interface stateProps {
+  isVisible: boolean;
+  item?: TransactionData;
+}
+
 const HomeScreen: React.FC<Home> = (props: Home) => {
   const {navigation} = props;
+  const dispatch = useDispatch();
+  const IsFocuse = useIsFocused();
 
+  const {userData} = useSelector(
+    (state: {authReducer: AuthReducerType}) => state?.authReducer,
+  );
+  const {transactionData} = useSelector(
+    (state: {transactionReducer: TransactionReducerType}) =>
+      state?.transactionReducer,
+  );
+
+  const [isVisibleEditModal, setIsVisibleEditModal] = useState<stateProps>({
+    isVisible: false,
+    item: undefined,
+  });
+
+  useEffect(() => {
+    if (userData?.userID && IsFocuse) {
+      const transactionData: GetTransaction = {
+        data: {
+          user_data: userData,
+        },
+        onSuccess: response => {
+          if (response) {
+          }
+        },
+        onFail: error => {
+          Alert.alert(JSON.stringify(error));
+        },
+      };
+      dispatch(GetTransactionAction(transactionData) as any);
+    }
+  }, [userData, IsFocuse]);
+
+  const onSeeAllPress = () => {
+    navigation.navigate('Wallet');
+  };
+
+  const ListHeaderComponent = () => {
+    return (
+      <View style={styles.headerContainer}>
+        <Text style={styles.headerText1}>
+          {StringConst.transactions_history}
+        </Text>
+        <Text onPress={onSeeAllPress} style={styles.seeAllText}>
+          {StringConst.see_all}
+        </Text>
+      </View>
+    );
+  };
+
+  const onTransactionPress = (item: TransactionData) => {
+    setIsVisibleEditModal({
+      isVisible: true,
+      item: item,
+    });
+  };
+
+  const onEditPress = (item: TransactionData) => {
+    dispatch(EditTransactionData(item));
+    setIsVisibleEditModal({
+      isVisible: false,
+      item: undefined,
+    });
+    navigation.navigate('Transaction');
+  };
+  const onDeletePress = (item: TransactionData) => {
+    const request: DeleteDataType = {
+      item: item,
+      id: userData?.userID,
+    };
+    dispatch(DeteleTransactions(request) as any);
+    setIsVisibleEditModal({
+      isVisible: false,
+      item: undefined,
+    });
+  };
   return (
     <View style={styles.container}>
       <HomeHeader />
-      <LinearGradient
-        colors={[ColorConst.gradiant_color1, ColorConst.gradiant_color2]}
-        style={styles.linearGradient}>
-        <Text>Total Balance</Text>
-        <Text
-          style={{
-            color: '#fff',
-            fontSize: fontSize(25),
-            fontFamily: fonts.bold,
-          }}>
-          $ 2,548.00
-        </Text>
-        <View
-          style={{
-            flexDirection: 'row',
-            justifyContent: 'space-between',
-            marginTop: hp(3),
-          }}>
-          <View>
-            <Text>Income</Text>
-            <Text
-              style={{
-                color: '#fff',
-                fontSize: fontSize(20),
-                fontFamily: fonts.semiBold,
-              }}>
-              $ 1,840.00
-            </Text>
-          </View>
-          <View>
-            <Text>Income</Text>
-            <Text
-              style={{
-                color: '#fff',
-                fontSize: fontSize(20),
-                fontFamily: fonts.semiBold,
-              }}>
-              $ 1,840.00
-            </Text>
-          </View>
-        </View>
-      </LinearGradient>
-      <TouchableOpacity
-        style={styles.addTransactionContainer}
-        onPress={() => navigation.navigate('AddTransactionScreen')}>
-        <Image
-          source={ImageConst.add_category_ic}
-          style={styles.addTransactionImage}
-        />
-      </TouchableOpacity>
+      <HomeCard transactionData={transactionData} />
+      <FlatList
+        data={transactionData}
+        renderItem={({item, index}) => {
+          return (
+            <TransactionList
+              item={item}
+              index={index}
+              onTransactionPress={onTransactionPress}
+            />
+          );
+        }}
+        showsVerticalScrollIndicator={false}
+        ListHeaderComponent={ListHeaderComponent}
+        style={{
+          marginTop: hp(1.5),
+        }}
+      />
+      <EditCategoryModal
+        onDeletePress={onDeletePress}
+        onEditPress={onEditPress}
+        isVisible={isVisibleEditModal.isVisible}
+        toggleModal={() =>
+          setIsVisibleEditModal({isVisible: false, item: undefined})
+        }
+        items={isVisibleEditModal.item || undefined}
+      />
     </View>
   );
 };
@@ -77,43 +153,32 @@ const styles = StyleSheet.create({
     flex: 1,
     backgroundColor: ColorConst.white,
   },
-  addTransactionImage: {
-    height: hp(8),
-    width: hp(8),
+  headerContainer: {
+    marginTop: hp(1.5),
+    flexDirection: 'row',
+    alignItems: 'center',
+    marginHorizontal: wp(5),
+    justifyContent: 'space-between',
   },
-  addTransactionContainer: {
-    right: wp(5),
-    bottom: hp(2),
-    position: 'absolute',
-
-    //
-    shadowColor: '#000',
-    shadowOffset: {
-      width: 0,
-      height: 9,
-    },
-    shadowOpacity: 0.48,
-    shadowRadius: 11.95,
-
-    elevation: 18,
+  itemSubContaine: {
+    gap: 10,
+    flexDirection: 'row',
+    alignItems: 'center',
   },
-  linearGradient: {
-    height: hp(22),
-    padding: hp(2),
-    marginTop: hp(-15),
-    borderRadius: hp(3),
-    marginHorizontal: wp(3),
-    justifyContent: 'center',
-
-    //
-    shadowColor: '#D0E5E4',
-    shadowOffset: {
-      width: 0,
-      height: 9,
-    },
-    shadowOpacity: 0.48,
-    shadowRadius: 11.95,
-
-    elevation: 18,
+  headerText1: {
+    color: '#000',
+    fontSize: fontSize(18),
+    fontFamily: fonts.bold,
+  },
+  seeAllText: {
+    color: 'red',
+    fontSize: fontSize(15),
+    textDecorationLine: 'underline',
+    fontFamily: fonts.regular,
+  },
+  categoryImge: {
+    width: hp(3),
+    height: hp(3),
+    borderRadius: 10,
   },
 });

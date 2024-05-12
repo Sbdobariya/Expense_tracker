@@ -1,9 +1,10 @@
-import {Alert, StyleSheet, Text, View} from 'react-native';
+import {Alert, StyleSheet, View} from 'react-native';
 import React, {useState} from 'react';
 import {ColorConst, StringConst, hp} from '../../utils';
 import {
-  CommanHeader,
   InputText,
+  CommanHeader,
+  CommanLoader,
   PrimaryButton,
   StringDivider,
 } from '../../components';
@@ -14,7 +15,6 @@ import {
   UserSignInActionRequest,
   userDataType,
 } from '../../interface/AuthInterFace';
-import CommanLoader from '../../components/comman/CommanLoader';
 import {AuthContext} from '../../utils/AuthContext';
 import {useDispatch, useSelector} from 'react-redux';
 import {UserSignInActions} from '../../redux/actions/auth/AuthAction';

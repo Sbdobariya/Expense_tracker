@@ -1,16 +1,15 @@
-import React, {useEffect, useState} from 'react';
+import {GetData} from '../utils';
 import {MainNavigatorType} from '.';
+import {useDispatch} from 'react-redux';
+import TabNavigation from './TabNavigation';
+import React, {useEffect, useState} from 'react';
+import {AuthContext} from '../utils/AuthContext';
+import {userDataType} from '../interface/AuthInterface';
 import {NavigationContainer} from '@react-navigation/native';
+import {SignUpAction} from '../redux/reducer/auth/AuthReducer';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 import AuthStackNavigator from './authStackNavigator/AuthStackNavigator';
 import {createNativeStackNavigator} from '@react-navigation/native-stack';
-import {userDataType} from '../interface/AuthInterface';
-import AsyncStorage from '@react-native-async-storage/async-storage';
-import {useDispatch} from 'react-redux';
-import {GetData} from '../utils';
-import {SignUpAction} from '../redux/reducer/auth/AuthReducer';
-import TabNavigation from './TabNavigation';
-import {AuthContext} from '../utils/AuthContext';
-import AddTransactionScreen from '../screens/home/AddTransactionScreen';
 
 const Stack = createNativeStackNavigator<MainNavigatorType>();
 
@@ -55,10 +54,6 @@ const MainNavigator = () => {
           ) : (
             <>
               <Stack.Screen name="TabStack" component={TabNavigation} />
-              <Stack.Screen
-                name="AddTransactionScreen"
-                component={AddTransactionScreen}
-              />
             </>
           )}
         </Stack.Navigator>
