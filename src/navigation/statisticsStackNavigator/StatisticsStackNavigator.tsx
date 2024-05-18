@@ -1,5 +1,5 @@
 import React from 'react';
-import {StatisticsNavigationType} from '..';
+import {StatisticsNavigationType} from '../type';
 import {createNativeStackNavigator} from '@react-navigation/native-stack';
 import StatisticsScreen from '../../screens/statistics/StatisticsScreen';
 

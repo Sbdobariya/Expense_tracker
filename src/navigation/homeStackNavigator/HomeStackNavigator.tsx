@@ -1,8 +1,8 @@
 import React from 'react';
-import {HomeNavigationType} from '..';
+import {HomeNavigationType} from '../type';
 
-import {createNativeStackNavigator} from '@react-navigation/native-stack';
 import HomeScreen from '../../screens/home/HomeScreen';
+import {createNativeStackNavigator} from '@react-navigation/native-stack';
 
 const HomeStack = createNativeStackNavigator<HomeNavigationType>();
 const HomeStackNavigator = () => {

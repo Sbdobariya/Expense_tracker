@@ -1,8 +1,7 @@
-import {StyleSheet, Text, View} from 'react-native';
 import React from 'react';
-import {createNativeStackNavigator} from '@react-navigation/native-stack';
-import {ProfileNavigationType} from '..';
+import {ProfileNavigationType} from '../type';
 import ProfileScreen from '../../screens/Profile/ProfileScreen';
+import {createNativeStackNavigator} from '@react-navigation/native-stack';
 
 const ProfileStack = createNativeStackNavigator<ProfileNavigationType>();
 

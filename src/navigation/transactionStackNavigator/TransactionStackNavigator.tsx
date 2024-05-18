@@ -1,13 +1,12 @@
-import {StyleSheet, Text, View} from 'react-native';
 import React from 'react';
-import {TransactionNavigationType} from '..';
+import {TransactionNavigationType} from '../type';
 import {createNativeStackNavigator} from '@react-navigation/native-stack';
 import TransactionScreen from '../../screens/transaction/TransactionScreen';
 
 const TransactionStack =
   createNativeStackNavigator<TransactionNavigationType>();
 
-const TransactionNavigator = () => {
+const TransactionStackNavigator = () => {
   return (
     <TransactionStack.Navigator screenOptions={{headerShown: false}}>
       <TransactionStack.Screen
@@ -18,6 +17,4 @@ const TransactionNavigator = () => {
   );
 };
 
-export default TransactionNavigator;
-
-const styles = StyleSheet.create({});
+export default TransactionStackNavigator;

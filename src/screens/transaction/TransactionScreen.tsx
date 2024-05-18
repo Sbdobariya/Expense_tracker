@@ -1,279 +1,134 @@
+import React, {useState} from 'react';
+import {useDispatch, useSelector} from 'react-redux';
+import {CalendarProvider, ExpandableCalendar} from 'react-native-calendars';
 import {
   Text,
   View,
-  Alert,
   Image,
+  FlatList,
   StyleSheet,
-  ActivityIndicator,
-  TouchableOpacity,
+  SafeAreaView,
 } from 'react-native';
+import moment from 'moment';
 import {
-  hp,
-  wp,
-  fonts,
-  fontSize,
-  ColorConst,
-  ImageConst,
-  IncomeCategoryData,
-  ExpenseCategoryData,
-  TransactionModeData,
-} from '../../utils';
-import {
-  InputText,
-  CategoryModal,
-  PrimaryButton,
-  TransactionTab,
-  TransactionHeader,
-} from '../../components';
-import {
-  AddTransaction,
-  EditTransaction,
+  DeleteDataType,
+  TransactionData,
   TransactionReducerType,
 } from '../../interface/Transaction';
-import React, {useState} from 'react';
-import {useSelector} from 'react-redux';
-import {expenseArray} from '../../interface/Comman';
-import {useNavigation} from '@react-navigation/native';
-import {
-  AddTransactionAction,
-  EditTransactionAction,
-} from '../../redux/actions/addTransaction/AddTransaction';
+import {TabStack} from '../../navigation/type';
+import {DeteleTransactions} from '../../redux/actions';
+import {ImageConst, fontSize, fonts, hp} from '../../utils';
+import {calendarProviderDate} from '../../hooks/CommanHooks';
 import {AuthReducerType} from '../../interface/AuthInterface';
-import {FirebaseStorage, UseImagePicker} from '../../hooks';
-
+import {EditCategoryModal, TransactionList} from '../../components';
+import {NavigationProp, useNavigation} from '@react-navigation/native';
+import {EditTransactionData, TransactionAction} from '../../redux/reducer';
+interface stateProps {
+  isVisible: boolean;
+  item?: TransactionData;
+}
 const TransactionScreen = () => {
-  const navigation = useNavigation();
-  const {userData} = useSelector(
-    (state: {authReducer: AuthReducerType}) => state?.authReducer,
-  );
-  const {EditedData} = useSelector(
+  const tabNavigation = useNavigation<NavigationProp<TabStack>>();
+
+  const {transactionData} = useSelector(
     (state: {transactionReducer: TransactionReducerType}) =>
       state?.transactionReducer,
   );
+  const {userData} = useSelector(
+    (state: {authReducer: AuthReducerType}) => state?.authReducer,
+  );
 
-  const [noteValue, setNoteValue] = useState(
-    EditedData?.transaction_note ? EditedData?.transaction_note : '',
-  );
-  const [activeTab, setActiveTab] = useState(
-    EditedData?.transaction_mode ? EditedData?.transaction_mode : 'income',
-  );
-  const [selectedInvoice, setSelectedInvoice] = useState<string | undefined>(
-    EditedData?.transaction_invoice
-      ? EditedData?.transaction_invoice
-      : undefined,
-  );
-  const [showCategoryModal, setShowCategoryModal] = useState({
+  const dispatch = useDispatch();
+  const [isVisibleEditModal, setIsVisibleEditModal] = useState<stateProps>({
     isVisible: false,
-    mode: '',
+    item: undefined,
   });
-  const [amountValue, setAmountValue] = useState<number | undefined>(
-    EditedData?.transaction_amount ? EditedData.transaction_amount : undefined,
-  );
-  const [selectedTransactionWay, setSelectedTransactionWay] = useState<
-    expenseArray | undefined
-  >(
-    EditedData?.transaction_account
-      ? EditedData?.transaction_account
-      : undefined,
-  );
-  const [selectedExpenseItem, setselectedExpenseItem] = useState<
-    expenseArray | undefined
-  >(
-    EditedData?.transaction_category
-      ? EditedData?.transaction_category
-      : undefined,
-  );
-  const [isImageLoader, setIsImageLoader] = useState(false);
 
-  const onToggleModal = () => {
-    setShowCategoryModal({
+  const onDateChanged = (newDate: string) => {
+    const filterdata = transactionData.filter(
+      item =>
+        moment.unix(item.transaction_createdAt.seconds).format('YYYY-MM-DD') ===
+        newDate,
+    );
+    dispatch(TransactionAction(filterdata));
+  };
+
+  const ListEmptyComponent = () => {
+    return (
+      <View
+        style={{
+          marginTop: hp(10),
+          alignItems: 'center',
+        }}>
+        <Image
+          source={ImageConst.empty_transaction_ic}
+          style={{height: hp(10), width: hp(10)}}
+          resizeMode="contain"
+        />
+        <Text style={styles.emptyContainerText}>
+          No analysis for this month
+        </Text>
+      </View>
+    );
+  };
+
+  const onTransactionPress = (item: TransactionData) => {
+    setIsVisibleEditModal({
+      isVisible: true,
+      item: item,
+    });
+  };
+
+  const onEditPress = (item: TransactionData) => {
+    dispatch(EditTransactionData(item));
+    setIsVisibleEditModal({
       isVisible: false,
-      mode: '',
+      item: undefined,
     });
+    tabNavigation.navigate('AddTransaction');
   };
-
-  const onAddButtonPress = () => {
-    if (!selectedExpenseItem) {
-      Alert.alert('', 'Please Select Category');
-    } else if (amountValue === undefined) {
-      Alert.alert('', 'Please enter amount');
-    } else {
-      const transactionDetail: AddTransaction = {
-        data: {
-          user_data: userData,
-          transaction_mode: activeTab,
-          transaction_note: noteValue,
-          transaction_amount: amountValue,
-          transaction_invoice: selectedInvoice,
-          transaction_category: selectedExpenseItem,
-          transaction_account: selectedTransactionWay,
-        },
-        onSuccess: response => {
-          if (response == 'success') {
-            setNoteValue('');
-            setAmountValue(undefined);
-            setSelectedInvoice(undefined);
-            setselectedExpenseItem(undefined);
-            setSelectedTransactionWay(undefined);
-            setSelectedTransactionWay(undefined);
-          }
-        },
-        onFail: error => {
-          Alert.alert(JSON.stringify(error));
-        },
-      };
-      AddTransactionAction(transactionDetail);
-    }
-  };
-
-  const onAddInvoicePress = () => {
-    UseImagePicker(async response => {
-      setIsImageLoader(true);
-      FirebaseStorage(response, res => {
-        setSelectedInvoice(res);
-        setIsImageLoader(false);
-      });
-    });
-  };
-
-  const onTabChange = (val: string) => {
-    setActiveTab(val);
-    setselectedExpenseItem(undefined);
-  };
-
-  const onUpDatePress = () => {
-    const request: EditTransaction = {
-      data: {
-        user_data: userData,
-        transaction_mode: activeTab,
-        transaction_note: noteValue,
-        transaction_amount: amountValue,
-        transaction_invoice: selectedInvoice,
-        transaction_id: EditedData?.transaction_id,
-        transaction_category: selectedExpenseItem,
-        transaction_account: selectedTransactionWay,
-      },
-      onFail(err) {},
-      onSuccess(res) {
-        navigation.goBack();
-      },
+  const onDeletePress = (item: TransactionData) => {
+    const request: DeleteDataType = {
+      item: item,
+      id: userData?.userID,
     };
-    EditTransactionAction(request);
+    dispatch(DeteleTransactions(request) as any);
+    setIsVisibleEditModal({
+      isVisible: false,
+      item: undefined,
+    });
   };
 
   return (
     <View style={styles.container}>
-      <TransactionHeader onBackPress={() => navigation.goBack()} />
-      <View style={styles.centerView}>
-        <View>
-          <TransactionTab
-            activeTab={activeTab}
-            onIncomePress={onTabChange}
-            onExpensePress={onTabChange}
-          />
-          <View>
-            <TouchableOpacity
-              style={styles.selectCaegoryButton}
-              onPress={() =>
-                setShowCategoryModal({isVisible: true, mode: 'TransactionWay'})
-              }>
-              <Image
-                source={
-                  selectedTransactionWay
-                    ? selectedTransactionWay.image
-                    : ImageConst.transfer_ic
-                }
-                style={styles.categoryIcon}
+      <SafeAreaView />
+      <CalendarProvider
+        date={calendarProviderDate()}
+        onDateChanged={onDateChanged}>
+        <ExpandableCalendar firstDay={1} />
+        <FlatList
+          data={transactionData}
+          renderItem={({item, index}) => {
+            return (
+              <TransactionList
+                item={item}
+                index={index}
+                onTransactionPress={onTransactionPress}
               />
-              <Text style={styles.selectCategory}>
-                {selectedTransactionWay
-                  ? selectedTransactionWay.name
-                  : 'Select Account'}
-              </Text>
-            </TouchableOpacity>
-            <TouchableOpacity
-              style={styles.selectCaegoryButton}
-              onPress={() =>
-                setShowCategoryModal({isVisible: true, mode: 'category'})
-              }>
-              <Image
-                source={
-                  selectedExpenseItem
-                    ? selectedExpenseItem.image
-                    : ImageConst.category_ic
-                }
-                style={styles.categoryIcon}
-              />
-              <Text style={styles.selectCategory}>
-                {selectedExpenseItem
-                  ? selectedExpenseItem?.name
-                  : 'Select Category'}
-              </Text>
-            </TouchableOpacity>
-          </View>
-          <InputText
-            value={amountValue}
-            keyboardType="number-pad"
-            placeholder="Enter Amount"
-            onChangeText={text => {
-              const numericValue = parseFloat(text);
-
-              if (!isNaN(numericValue)) {
-                setAmountValue(numericValue);
-              }
-            }}
-            inputCustomeStyle={styles.amountInputStyle}
-          />
-          <InputText
-            value={noteValue}
-            keyboardType="default"
-            placeholder="Add Notes"
-            onChangeText={text => setNoteValue(text)}
-            inputCustomeStyle={styles.amountInputStyle}
-          />
-          <TouchableOpacity
-            style={styles.invoiceContainer}
-            onPress={onAddInvoicePress}>
-            <View style={styles.plusButton}>
-              <Image
-                source={ImageConst.plus_circle_ic}
-                style={styles.addButton}
-              />
-              <Text style={styles.addInvoiceText}>Add Invoice</Text>
-            </View>
-            {selectedInvoice !== undefined && (
-              <Image
-                source={{uri: selectedInvoice}}
-                style={styles.selectedInvoiceImage}
-              />
-            )}
-            {isImageLoader && <ActivityIndicator />}
-          </TouchableOpacity>
-        </View>
-        <PrimaryButton
-          title={EditedData ? 'Update' : 'Add'}
-          onPress={EditedData ? onUpDatePress : onAddButtonPress}
-          customeGradientStyle={styles.bottomAddButton}
+            );
+          }}
+          showsVerticalScrollIndicator={false}
+          ListEmptyComponent={ListEmptyComponent}
         />
-      </View>
-      <CategoryModal
-        data={
-          showCategoryModal.mode == 'category'
-            ? activeTab == 'expense'
-              ? ExpenseCategoryData
-              : IncomeCategoryData
-            : TransactionModeData
+      </CalendarProvider>
+      <EditCategoryModal
+        onDeletePress={onDeletePress}
+        onEditPress={onEditPress}
+        isVisible={isVisibleEditModal.isVisible}
+        toggleModal={() =>
+          setIsVisibleEditModal({isVisible: false, item: undefined})
         }
-        isVisible={showCategoryModal.isVisible}
-        toggleModal={onToggleModal}
-        onSelectExpenseCategory={item => {
-          onToggleModal();
-          if (showCategoryModal.mode == 'category') {
-            setselectedExpenseItem(item);
-          } else {
-            setSelectedTransactionWay(item);
-          }
-        }}
+        items={isVisibleEditModal.item || undefined}
       />
     </View>
   );
@@ -282,88 +137,13 @@ const TransactionScreen = () => {
 export default TransactionScreen;
 
 const styles = StyleSheet.create({
-  bottomAddButton: {
-    marginBottom: hp(3),
-  },
   container: {
     flex: 1,
-    backgroundColor: ColorConst.white,
+    backgroundColor: '#fff',
   },
-  selectCaegoryButton: {
-    gap: 10,
+  emptyContainerText: {
     marginTop: hp(2),
-    padding: hp(1.5),
-    borderRadius: 12,
-    flexDirection: 'row',
-    alignItems: 'center',
-    marginHorizontal: wp(4),
-    backgroundColor: '#29756F',
-  },
-  centerView: {
-    flex: 1,
-    borderRadius: 20,
-    marginTop: hp(-15),
-    marginBottom: hp(8),
-    marginHorizontal: wp(7),
-    backgroundColor: '#FFFFFF',
-    justifyContent: 'space-between',
-
-    // shado
-    shadowColor: '#000',
-    shadowOffset: {
-      width: 0,
-      height: 3,
-    },
-    shadowOpacity: 0.29,
-    shadowRadius: 4.65,
-    elevation: 7,
-  },
-  categoryIcon: {
-    height: hp(3),
-    width: hp(3),
-  },
-  selectCategory: {
-    color: '#FFFFFF',
-    fontSize: fontSize(15),
+    fontSize: fontSize(20),
     fontFamily: fonts.medium,
-  },
-  amountInputStyle: {
-    height: hp(6),
-    color: '#000',
-    marginTop: hp(2),
-    fontSize: fontSize(12),
-    marginHorizontal: wp(4),
-    fontFamily: fonts.medium,
-  },
-  invoiceContainer: {
-    height: hp(6),
-    borderWidth: 1,
-    marginTop: hp(2),
-    padding: hp(1.5),
-    borderRadius: 10,
-    alignItems: 'center',
-    flexDirection: 'row',
-    borderStyle: 'dashed',
-    marginHorizontal: wp(4),
-    justifyContent: 'space-between',
-  },
-  addButton: {
-    width: hp(3),
-    height: hp(3),
-  },
-  addInvoiceText: {
-    color: '#000',
-    fontSize: fontSize(13),
-    fontFamily: fonts.medium,
-  },
-  plusButton: {
-    gap: wp(2),
-    flexDirection: 'row',
-    alignItems: 'center',
-  },
-  selectedInvoiceImage: {
-    width: hp(6),
-    height: hp(4),
-    borderRadius: 10,
   },
 });

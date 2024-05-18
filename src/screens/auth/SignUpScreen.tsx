@@ -1,6 +1,5 @@
 import React, {useState} from 'react';
 import {Alert, StyleSheet, View} from 'react-native';
-import {AuthNavigationType} from '../../navigation';
 import {ColorConst, StringConst, hp} from '../../utils';
 import {NativeStackScreenProps} from '@react-navigation/native-stack';
 import {
@@ -17,7 +16,8 @@ import {
 } from '../../interface/AuthInterFace';
 import {useDispatch, useSelector} from 'react-redux';
 import {AuthContext} from '../../utils/AuthContext';
-import {UserSignUpAction} from '../../redux/actions/auth/AuthAction';
+import {UserSignUpAction} from '../../redux/actions';
+import {AuthNavigationType} from '../../navigation/type';
 
 type Signup = NativeStackScreenProps<AuthNavigationType, 'SignUpScreen'> & {
   navigation: () => void;

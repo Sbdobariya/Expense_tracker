@@ -6,10 +6,7 @@ import {
   EditTransaction,
   GetTransaction,
 } from '../../../interface/Transaction';
-import {
-  DeleteTransaction,
-  TransactionAction,
-} from '../../reducer/transactions/TransactionReducer';
+import {DeleteTransaction, TransactionAction} from '../../reducer';
 
 export const AddTransactionAction = (request: AddTransaction) => {
   firestore()

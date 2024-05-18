@@ -25,6 +25,8 @@ const HomeCard = ({transactionData}: {transactionData: TransactionData[]}) => {
     }
   });
 
+  const totalIncomExpense = totalIncome - totalExpense;
+
   return (
     <LinearGradient
       colors={[ColorConst.gradiant_color1, ColorConst.gradiant_color2]}
@@ -33,7 +35,13 @@ const HomeCard = ({transactionData}: {transactionData: TransactionData[]}) => {
         <Text style={styles.totalBalance}>{StringConst.total_balance}</Text>
         <Image source={ImageConst.chevron_down_ic} style={styles.rupeesIcon} />
       </View>
-      <AmountText num={totalExpense + totalIncome} />
+      <AmountText
+        customeNumStyle={{
+          fontFamily: fonts.bold,
+          fontSize: fontSize(22),
+        }}
+        num={totalIncomExpense}
+      />
       <View style={styles.subContainer}>
         <View>
           <View style={styles.incomeView}>

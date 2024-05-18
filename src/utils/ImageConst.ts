@@ -5,11 +5,11 @@ export const ImageConst = {
   header_bg_ic: require('../../assets/icons/auth/header_bg.png'),
   left_icon_ic: require('../../assets/icons/auth/left_icon.png'),
   onBoading_ic: require('../../assets/icons/auth/on_boarding.png'),
-  wallet_icon_ic: require('../../assets/icons/auth/wallet_icon.png'),
+  staitics_ic: require('../../assets/icons/auth/statitics_ic.png'),
   home_focuse_ic: require('../../assets/icons/auth/home_focuse_icon.png'),
   transaction_ic: require('../../assets/icons/auth/transaction_icon.png'),
-  wallet_focuse_ic: require('../../assets/icons/auth/wallet_focuse_icon.png'),
   profile_focuse_ic: require('../../assets/icons/auth/profile_focuse_icon.png'),
+  statitics_focuse_icon: require('../../assets/icons/auth/statitics_focuse_icon.png'),
   transaction_focuse_ic: require('../../assets/icons/auth/transaction_focuse_icon.png'),
 
   // home
@@ -58,4 +58,7 @@ export const ImageConst = {
   upi_ic: require('../../assets/icons/transactionsMode/upi.png'),
   cash_ic: require('../../assets/icons/transactionsMode/cash.png'),
   card_ic: require('../../assets/icons/transactionsMode/card.png'),
+
+  // transaction
+  empty_transaction_ic: require('../../assets/icons/transaction/empty_transaction.png'),
 };

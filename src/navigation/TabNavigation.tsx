@@ -1,13 +1,15 @@
 import React from 'react';
-import {TabStack} from '.';
+import {
+  HomeStackNavigator,
+  ProfileStackNavigator,
+  AddTransactionNavigator,
+  StatisticsStackNavigator,
+} from './index';
+import {TabStack} from './type';
 import {Image, StyleSheet} from 'react-native';
 import {ColorConst, ImageConst, hp} from '../utils';
 import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
-import HomeStackNavigator from './homeStackNavigator/HomeStackNavigator';
-import TransactionNavigator from './transactionNavigator/TransactionNavigator';
-import WalletStackNavigator from './walletStackNavigator/WalletStackNavigator';
-import ProfileStackNavigator from './profileStackNavigator/ProfileStackNavigator';
-import StatisticsStackNavigator from './statisticsStackNavigator/StatisticsStackNavigator';
+import TransactionStackNavigator from './transactionStackNavigator/TransactionStackNavigator';
 
 const Tab = createBottomTabNavigator<TabStack>();
 
@@ -31,8 +33,8 @@ const TabNavigation = () => {
         }}
       />
       <Tab.Screen
-        name="Statistics"
-        component={StatisticsStackNavigator}
+        name="Transaction"
+        component={TransactionStackNavigator}
         options={{
           tabBarIcon: ({focused}) => {
             return (
@@ -49,8 +51,8 @@ const TabNavigation = () => {
         }}
       />
       <Tab.Screen
-        name="Transaction"
-        component={TransactionNavigator}
+        name="AddTransaction"
+        component={AddTransactionNavigator}
         options={{
           unmountOnBlur: true,
           tabBarStyle: {
@@ -67,16 +69,16 @@ const TabNavigation = () => {
         }}
       />
       <Tab.Screen
-        name="Wallet"
-        component={WalletStackNavigator}
+        name="Statistics"
+        component={StatisticsStackNavigator}
         options={{
           tabBarIcon: ({focused}) => {
             return (
               <Image
                 source={
                   focused
-                    ? ImageConst.wallet_focuse_ic
-                    : ImageConst.wallet_icon_ic
+                    ? ImageConst.statitics_focuse_icon
+                    : ImageConst.staitics_ic
                 }
                 style={styles.iconStyle}
               />

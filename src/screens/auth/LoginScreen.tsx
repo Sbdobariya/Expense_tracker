@@ -8,16 +8,16 @@ import {
   PrimaryButton,
   StringDivider,
 } from '../../components';
-import {NativeStackScreenProps} from '@react-navigation/native-stack';
-import {AuthNavigationType} from '../../navigation';
 import {
+  userDataType,
   AuthReducerType,
   UserSignInActionRequest,
-  userDataType,
 } from '../../interface/AuthInterFace';
 import {AuthContext} from '../../utils/AuthContext';
 import {useDispatch, useSelector} from 'react-redux';
-import {UserSignInActions} from '../../redux/actions/auth/AuthAction';
+import {UserSignInActions} from '../../redux/actions';
+import {AuthNavigationType} from '../../navigation/type';
+import {NativeStackScreenProps} from '@react-navigation/native-stack';
 
 type Login = NativeStackScreenProps<AuthNavigationType, 'LoginScreen'> & {
   navigation: () => void;

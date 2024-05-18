@@ -5,36 +5,33 @@ import {
   TransactionReducerType,
 } from '../../interface/Transaction';
 import React, {useEffect, useState} from 'react';
-import {HomeNavigationType} from '../../navigation';
+
 import {useDispatch, useSelector} from 'react-redux';
-import {useIsFocused} from '@react-navigation/native';
+import {
+  useIsFocused,
+  useNavigation,
+  NavigationProp,
+} from '@react-navigation/native';
 import {AuthReducerType} from '../../interface/AuthInterface';
 import {Alert, FlatList, StyleSheet, Text, View} from 'react-native';
-import {NativeStackScreenProps} from '@react-navigation/native-stack';
 import {ColorConst, StringConst, fontSize, fonts, hp, wp} from '../../utils';
-import {
-  DeteleTransactions,
-  GetTransactionAction,
-} from '../../redux/actions/addTransaction/AddTransaction';
 import {
   HomeCard,
   HomeHeader,
   TransactionList,
   EditCategoryModal,
 } from '../../components';
-import {EditTransactionData} from '../../redux/reducer/transactions/TransactionReducer';
-
-type Home = NativeStackScreenProps<HomeNavigationType, 'HomeScreen'> & {
-  navigation: () => void;
-};
+import {TabStack} from '../../navigation/type';
+import {EditTransactionData} from '../../redux/reducer';
+import {DeteleTransactions, GetTransactionAction} from '../../redux/actions';
 
 interface stateProps {
   isVisible: boolean;
   item?: TransactionData;
 }
 
-const HomeScreen: React.FC<Home> = (props: Home) => {
-  const {navigation} = props;
+const HomeScreen: React.FC = () => {
+  const tabNavigation = useNavigation<NavigationProp<TabStack>>();
   const dispatch = useDispatch();
   const IsFocuse = useIsFocused();
 
@@ -70,7 +67,7 @@ const HomeScreen: React.FC<Home> = (props: Home) => {
   }, [userData, IsFocuse]);
 
   const onSeeAllPress = () => {
-    navigation.navigate('Wallet');
+    tabNavigation.navigate('Transaction');
   };
 
   const ListHeaderComponent = () => {
@@ -99,7 +96,7 @@ const HomeScreen: React.FC<Home> = (props: Home) => {
       isVisible: false,
       item: undefined,
     });
-    navigation.navigate('Transaction');
+    tabNavigation.navigate('AddTransaction');
   };
   const onDeletePress = (item: TransactionData) => {
     const request: DeleteDataType = {

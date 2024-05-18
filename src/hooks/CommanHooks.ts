@@ -1,6 +1,7 @@
 import moment from 'moment';
 import storage from '@react-native-firebase/storage';
 import {ImageOrVideo} from 'react-native-image-crop-picker';
+import {CalendarUtils} from 'react-native-calendars';
 
 const FirebaseStorage = (
   response: ImageOrVideo,
@@ -34,4 +35,11 @@ const transactionTimeStamp = (
   return timStamp;
 };
 
-export {FirebaseStorage, transactionTimeStamp};
+const calendarProviderDate = () => {
+  const today = new Date();
+  return CalendarUtils.getCalendarDateString(
+    new Date().setDate(today.getDate()),
+  );
+};
+
+export {FirebaseStorage, transactionTimeStamp, calendarProviderDate};

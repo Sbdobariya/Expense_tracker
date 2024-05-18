@@ -1,5 +1,5 @@
 import React from 'react';
-import {AuthNavigationType} from '..';
+import {AuthNavigationType} from '../type';
 import LoginScreen from '../../screens/auth/LoginScreen';
 import SignUpScreen from '../../screens/auth/SignUpScreen';
 import OnBoardingScreen from '../../screens/onBoarding/OnBoardingScreen';

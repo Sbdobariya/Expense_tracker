@@ -1,12 +1,12 @@
 import {GetData} from '../utils';
-import {MainNavigatorType} from '.';
 import {useDispatch} from 'react-redux';
+import {MainNavigatorType} from './type';
 import TabNavigation from './TabNavigation';
+import {SignUpAction} from '../redux/reducer';
 import React, {useEffect, useState} from 'react';
 import {AuthContext} from '../utils/AuthContext';
 import {userDataType} from '../interface/AuthInterface';
 import {NavigationContainer} from '@react-navigation/native';
-import {SignUpAction} from '../redux/reducer/auth/AuthReducer';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import AuthStackNavigator from './authStackNavigator/AuthStackNavigator';
 import {createNativeStackNavigator} from '@react-navigation/native-stack';

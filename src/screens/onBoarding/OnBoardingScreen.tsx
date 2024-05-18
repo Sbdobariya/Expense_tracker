@@ -1,15 +1,15 @@
 import {
   hp,
   wp,
+  fonts,
   fontSize,
   ColorConst,
   ImageConst,
   StringConst,
-  fonts,
 } from '../../utils';
 import React from 'react';
 import {PrimaryButton} from '../../components';
-import {AuthNavigationType} from '../../navigation';
+import {AuthNavigationType} from '../../navigation/type';
 import {NativeStackScreenProps} from '@react-navigation/native-stack';
 import {Image, SafeAreaView, StyleSheet, Text, View} from 'react-native';
 
