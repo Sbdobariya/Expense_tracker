@@ -1,23 +1,23 @@
-import React, {useState} from 'react';
-import {Alert, StyleSheet, View} from 'react-native';
-import {ColorConst, StringConst, hp} from '../../utils';
-import {NativeStackScreenProps} from '@react-navigation/native-stack';
 import {
   InputText,
   CommanHeader,
+  CommanLoader,
   PrimaryButton,
   StringDivider,
-  CommanLoader,
 } from '../../components';
 import {
+  userDataType,
   AuthReducerType,
   UserSignUpActionRequest,
-  userDataType,
 } from '../../interface/AuthInterFace';
-import {useDispatch, useSelector} from 'react-redux';
+import React, {useState} from 'react';
 import {AuthContext} from '../../utils/AuthContext';
+import {useDispatch, useSelector} from 'react-redux';
 import {UserSignUpAction} from '../../redux/actions';
+import {Alert, StyleSheet, View} from 'react-native';
+import {ColorConst, StringConst, hp} from '../../utils';
 import {AuthNavigationType} from '../../navigation/type';
+import {NativeStackScreenProps} from '@react-navigation/native-stack';
 
 type Signup = NativeStackScreenProps<AuthNavigationType, 'SignUpScreen'> & {
   navigation: () => void;
@@ -36,11 +36,11 @@ const SignUpScreen: React.FC<Signup> = (props: Signup) => {
   const [password, setPassword] = useState('');
 
   const onSingupPress = () => {
-    if (name == '') {
+    if (name === '') {
       Alert.alert('Please enter name');
-    } else if (email == '') {
+    } else if (email === '') {
       Alert.alert('Please enter email');
-    } else if (password == '') {
+    } else if (password === '') {
       Alert.alert('Please enter password');
     } else if (password?.length < 6) {
       Alert.alert('Minimum length of password is 6s');

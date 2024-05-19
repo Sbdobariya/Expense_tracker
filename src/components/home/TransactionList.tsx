@@ -1,6 +1,7 @@
 import React from 'react';
 import {transactionTimeStamp} from '../../hooks';
 import {fontSize, fonts, hp, wp} from '../../utils';
+import {randomeBGColor} from '../../hooks/CommanHooks';
 import {TransactionData} from '../../interface/Transaction';
 import {Image, StyleSheet, Text, TouchableOpacity, View} from 'react-native';
 
@@ -11,9 +12,8 @@ interface props {
 }
 
 const TransactionList = ({item, index, onTransactionPress}: props) => {
-  const bgColor =
-    '#' + (((1 << 24) * Math.random()) | 0).toString(16).padStart(6, '0');
-  const color = item.transaction_mode == 'income' ? '#25A969' : 'red';
+  const color = item.transaction_mode === 'income' ? '#25A969' : 'red';
+
   return (
     <TouchableOpacity
       style={styles.renderItemContainer}
@@ -24,7 +24,7 @@ const TransactionList = ({item, index, onTransactionPress}: props) => {
           style={[
             styles.categoryImageView,
             {
-              backgroundColor: bgColor,
+              backgroundColor: randomeBGColor(),
             },
           ]}>
           <Image
@@ -38,7 +38,7 @@ const TransactionList = ({item, index, onTransactionPress}: props) => {
             {item.transaction_category?.name}
           </Text>
           <Text style={styles.timeStamp}>
-            {transactionTimeStamp(item.transaction_createdAt)}
+            {transactionTimeStamp(item.timestamp)}
           </Text>
         </View>
       </View>
@@ -50,7 +50,7 @@ const TransactionList = ({item, index, onTransactionPress}: props) => {
               color: color,
             },
           ]}>
-          {item.transaction_mode == 'income' ? '+' : '-'}
+          {item.transaction_mode === 'income' ? '+' : '-'}
         </Text>
         <Text
           style={[

@@ -9,14 +9,20 @@ import React from 'react';
 import {hp} from '../../utils';
 
 interface props {
-  onIconPress: () => void;
+  onIconPress?: () => void;
   source: ImageSourcePropType;
   customeIconStyle?: ImageStyle;
+  touchableRef?: React.LegacyRef<TouchableOpacity>;
 }
 
-const TouchableIcon = ({onIconPress, source, customeIconStyle}: props) => {
+const TouchableIcon = ({
+  onIconPress,
+  source,
+  customeIconStyle,
+  touchableRef,
+}: props) => {
   return (
-    <TouchableOpacity onPress={onIconPress}>
+    <TouchableOpacity ref={touchableRef} onPress={onIconPress}>
       <Image
         source={source}
         style={[styles.iconStyle, customeIconStyle]}

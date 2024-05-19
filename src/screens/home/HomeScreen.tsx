@@ -49,22 +49,23 @@ const HomeScreen: React.FC = () => {
   });
 
   useEffect(() => {
-    if (userData?.userID && IsFocuse) {
-      const transactionData: GetTransaction = {
-        data: {
-          user_data: userData,
-        },
-        onSuccess: response => {
-          if (response) {
-          }
-        },
-        onFail: error => {
-          Alert.alert(JSON.stringify(error));
-        },
-      };
-      dispatch(GetTransactionAction(transactionData) as any);
-    }
-  }, [userData, IsFocuse]);
+    const fetchData = async () => {
+      if (userData?.userID && IsFocuse) {
+        const transactionData: GetTransaction = {
+          data: {
+            user_data: userData,
+          },
+          onSuccess: _response => {},
+          onFail: error => {
+            Alert.alert(JSON.stringify(error));
+          },
+        };
+        dispatch(GetTransactionAction(transactionData) as any);
+      }
+    };
+
+    fetchData();
+  }, [userData, IsFocuse, dispatch]);
 
   const onSeeAllPress = () => {
     tabNavigation.navigate('Transaction');
@@ -126,9 +127,7 @@ const HomeScreen: React.FC = () => {
         }}
         showsVerticalScrollIndicator={false}
         ListHeaderComponent={ListHeaderComponent}
-        style={{
-          marginTop: hp(1.5),
-        }}
+        style={styles.flatlistStyle}
       />
       <EditCategoryModal
         onDeletePress={onDeletePress}
@@ -177,5 +176,8 @@ const styles = StyleSheet.create({
     width: hp(3),
     height: hp(3),
     borderRadius: 10,
+  },
+  flatlistStyle: {
+    marginTop: hp(1.5),
   },
 });

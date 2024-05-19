@@ -2,6 +2,7 @@
 import InputText from './comman/InputText';
 import CommanLoader from './comman/CommanLoader';
 import CommanHeader from './comman/CommanHeader';
+import PopOverModal from './comman/PopOverModal';
 import StringDivider from './comman/StringDivider';
 import TouchableIcon from './comman/TouchableIcon';
 import PrimaryButton from './comman/PrimaryButton';
@@ -22,6 +23,7 @@ export {
   InputText,
   HomeHeader,
   CommanLoader,
+  PopOverModal,
   CommanHeader,
   PrimaryButton,
   TouchableIcon,

@@ -36,9 +36,9 @@ const LoginScreen: React.FC<Login> = (props: Login) => {
   const [password, setPassword] = useState('');
 
   const onLoginPress = () => {
-    if (email == '') {
+    if (email === '') {
       Alert.alert('Please enter email');
-    } else if (password == '') {
+    } else if (password === '') {
       Alert.alert('Please enter password');
     } else {
       const userData: UserSignInActionRequest = {

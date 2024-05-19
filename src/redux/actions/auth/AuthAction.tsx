@@ -63,7 +63,7 @@ export const UserSignInActions = createAsyncThunk(
         dispatch(SignUpAction(userData));
         dispatch(AuthLoader(false));
       })
-      .catch(error => {
+      .catch(() => {
         dispatch(AuthLoader(false));
         request?.onFail && request?.onFail('invalid-credential');
       });

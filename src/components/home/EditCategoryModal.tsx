@@ -23,6 +23,8 @@ const EditCategoryModal = ({
   onEditPress,
   onDeletePress,
 }: props) => {
+  const styles = styling(items?.transaction_mode);
+
   return (
     <Modal
       isVisible={isVisible}
@@ -34,14 +36,7 @@ const EditCategoryModal = ({
       animationOut="slideOutDown"
       onBackdropPress={toggleModal}>
       <View style={styles.modalContent}>
-        <View
-          style={[
-            styles.headerContainer,
-            {
-              backgroundColor:
-                items?.transaction_mode === 'income' ? 'green' : 'red',
-            },
-          ]}>
+        <View style={styles.headerContainer}>
           <View style={styles.headerImageContainer}>
             <TouchableIcon
               onIconPress={() => items && onDeletePress(items)}
@@ -54,14 +49,14 @@ const EditCategoryModal = ({
               customeIconStyle={styles.headerImage}
             />
           </View>
-          <View style={{alignItems: 'center'}}>
+          <View style={styles.headersubContainer}>
             <Text style={styles.incomeExpenseText}>
               {items?.transaction_mode}
             </Text>
             <AmountText num={items?.transaction_amount} />
           </View>
           <Text style={styles.timeStamp}>
-            {transactionTimeStamp(items?.transaction_createdAt)}
+            {transactionTimeStamp(items?.timestamp)}
           </Text>
         </View>
         <View style={styles.bottomContainer}>
@@ -90,56 +85,62 @@ const EditCategoryModal = ({
 
 export default EditCategoryModal;
 
-const styles = StyleSheet.create({
-  modal: {
-    margin: 0,
-  },
-  modalContent: {
-    overflow: 'hidden',
-    borderRadius: hp(2),
-    marginHorizontal: wp(5),
-    backgroundColor: ColorConst.white,
-  },
-  headerImageContainer: {
-    gap: hp(1),
-    flexDirection: 'row',
-    alignSelf: 'flex-end',
-  },
-  incomeExpenseText: {
-    color: '#fff',
-    fontSize: fontSize(18),
-    fontFamily: fonts.bold,
-  },
-  timeStamp: {
-    color: '#fff',
-    marginTop: hp(2),
-    textAlign: 'right',
-    fontSize: fontSize(15),
-  },
-  headerImage: {
-    tintColor: '#fff',
-  },
-  headerContainer: {
-    padding: hp(2),
-  },
-  bottomHeaderText: {
-    color: '#000',
-    fontSize: fontSize(18),
-    fontFamily: fonts.bold,
-  },
-  bottomSubContainer: {
-    gap: 10,
-    flexDirection: 'row',
-    alignItems: 'center',
-  },
-  bottomContainer: {
-    gap: 10,
-    padding: hp(2),
-  },
-  notesText: {
-    color: '#438883',
-    textAlign: 'center',
-    fontSize: fontSize(13),
-    fontFamily: fonts.medium,
-  },
-});
+const styling = (item?: string) => {
+  return StyleSheet.create({
+    modal: {
+      margin: 0,
+    },
+    modalContent: {
+      overflow: 'hidden',
+      borderRadius: hp(2),
+      marginHorizontal: wp(5),
+      backgroundColor: ColorConst.white,
+    },
+    headerImageContainer: {
+      gap: hp(1),
+      flexDirection: 'row',
+      alignSelf: 'flex-end',
+    },
+    incomeExpenseText: {
+      color: '#fff',
+      fontSize: fontSize(18),
+      fontFamily: fonts.bold,
+    },
+    timeStamp: {
+      color: '#fff',
+      marginTop: hp(2),
+      textAlign: 'right',
+      fontSize: fontSize(15),
+    },
+    headerImage: {
+      tintColor: '#fff',
+    },
+    headerContainer: {
+      padding: hp(2),
+      backgroundColor: item === 'income' ? 'green' : 'red',
+    },
+    bottomHeaderText: {
+      color: '#000',
+      fontSize: fontSize(18),
+      fontFamily: fonts.bold,
+    },
+    bottomSubContainer: {
+      gap: 10,
+      flexDirection: 'row',
+      alignItems: 'center',
+    },
+    bottomContainer: {
+      gap: 10,
+      padding: hp(2),
+    },
+    notesText: {
+      color: '#438883',
+      textAlign: 'center',
+      fontSize: fontSize(13),
+      fontFamily: fonts.medium,
+    },
+    headersubContainer: {
+      alignItems: 'center',
+    },
+  });
+};

@@ -60,5 +60,9 @@ export const ImageConst = {
   card_ic: require('../../assets/icons/transactionsMode/card.png'),
 
   // transaction
+  menu_ic: require('../../assets/icons/transaction/menu.png'),
+  search_ic: require('../../assets/icons/transaction/search.png'),
+  left_arrow_ic: require('../../assets/icons/transaction/left-arrow.png'),
+  right_arrow_ic: require('../../assets/icons/transaction/right-arrow.png'),
   empty_transaction_ic: require('../../assets/icons/transaction/empty_transaction.png'),
 };

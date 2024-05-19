@@ -3,7 +3,7 @@ import {useDispatch} from 'react-redux';
 import {MainNavigatorType} from './type';
 import TabNavigation from './TabNavigation';
 import {SignUpAction} from '../redux/reducer';
-import React, {useEffect, useState} from 'react';
+import React, {useCallback, useEffect, useState} from 'react';
 import {AuthContext} from '../utils/AuthContext';
 import {userDataType} from '../interface/AuthInterface';
 import {NavigationContainer} from '@react-navigation/native';
@@ -17,17 +17,18 @@ const MainNavigator = () => {
   const dispatch = useDispatch();
 
   const [userData, setUserData] = useState<userDataType | undefined>();
-  useEffect(() => {
-    fetchData();
-  }, []);
-
-  const fetchData = async () => {
+  const fetchData = useCallback(async () => {
     const getUserData = await GetData('userData');
     if (getUserData !== undefined) {
-      setUserData(JSON.parse(getUserData));
-      dispatch(SignUpAction(JSON.parse(getUserData)));
+      const parsedUserData = JSON.parse(getUserData);
+      setUserData(parsedUserData);
+      dispatch(SignUpAction(parsedUserData));
     }
-  };
+  }, [dispatch]);
+
+  useEffect(() => {
+    fetchData();
+  }, [fetchData]);
 
   const authContext = React.useMemo(
     () => ({

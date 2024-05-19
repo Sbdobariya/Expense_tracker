@@ -3,7 +3,7 @@ import React from 'react';
 
 const StatisticsScreen = () => {
   return (
-    <View>
+    <View style={styles.container}>
       <Text>statisticsScreen</Text>
     </View>
   );
@@ -11,4 +11,8 @@ const StatisticsScreen = () => {
 
 export default StatisticsScreen;
 
-const styles = StyleSheet.create({});
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+  },
+});

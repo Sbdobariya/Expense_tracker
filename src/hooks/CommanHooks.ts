@@ -1,4 +1,4 @@
-import moment from 'moment';
+import moment, {MomentInput} from 'moment';
 import storage from '@react-native-firebase/storage';
 import {ImageOrVideo} from 'react-native-image-crop-picker';
 import {CalendarUtils} from 'react-native-calendars';
@@ -19,20 +19,17 @@ const FirebaseStorage = (
   });
 };
 
-const transactionTimeStamp = (
-  item: {nanoseconds: number; seconds: number} | undefined,
-) => {
-  const timestamp = item && item?.seconds * 1000 + item?.nanoseconds / 1000000;
-  const transactionDate = moment(timestamp);
+const transactionTimeStamp = (item: MomentInput) => {
+  const transactionDate = moment(item);
   const currentDate = moment();
 
-  const timStamp = transactionDate.isSame(currentDate, 'day')
-    ? `Today ${moment(timestamp).format('h:mm A')}`
-    : transactionDate.isSame(currentDate.subtract(1, 'day'), 'day')
-    ? `Yesterday ${moment(timestamp).format('h:mm A')}`
-    : moment(timestamp).format('LL h:mm A');
-
-  return timStamp;
+  if (transactionDate.isSame(currentDate, 'day')) {
+    return `Today ${transactionDate.format('hh:mm A')}`;
+  } else if (transactionDate.isSame(currentDate.subtract(1, 'day'), 'day')) {
+    return `Yesterday ${transactionDate.format('hh:mm A')}`;
+  } else {
+    return transactionDate.format('D MMMM');
+  }
 };
 
 const calendarProviderDate = () => {
@@ -42,4 +39,17 @@ const calendarProviderDate = () => {
   );
 };
 
-export {FirebaseStorage, transactionTimeStamp, calendarProviderDate};
+const randomeBGColor = () => {
+  var x = Math.floor(Math.random() * 256);
+  var y = Math.floor(Math.random() * 256);
+  var z = Math.floor(Math.random() * 256);
+  var bgColor = 'rgb(' + x + ',' + y + ',' + z + ')';
+  return bgColor;
+};
+
+export {
+  randomeBGColor,
+  FirebaseStorage,
+  transactionTimeStamp,
+  calendarProviderDate,
+};

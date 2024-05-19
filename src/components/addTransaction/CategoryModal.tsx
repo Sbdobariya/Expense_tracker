@@ -10,68 +10,69 @@ import React from 'react';
 import Modal from 'react-native-modal';
 import {expenseArray} from '../../interface/Comman';
 import {ColorConst, fontSize, hp, wp} from '../../utils';
+import {randomeBGColor} from '../../hooks/CommanHooks';
 
-interface props {
+interface Props {
   isVisible: boolean;
   data: expenseArray[];
   toggleModal: () => void;
   onSelectExpenseCategory: (item: expenseArray) => void;
 }
 
+const renderItem = ({
+  item,
+  onSelectExpenseCategory,
+}: {
+  item: expenseArray;
+  onSelectExpenseCategory: (item: expenseArray) => void;
+}) => (
+  <TouchableOpacity
+    onPress={() => onSelectExpenseCategory(item)}
+    key={`${item?.id}cc`}
+    style={styles.renderItemContainer}>
+    <View
+      style={[
+        styles.imageContainer,
+        {
+          backgroundColor: randomeBGColor(),
+        },
+      ]}>
+      <Image source={item?.image} style={styles.iconStyle} />
+    </View>
+    <Text style={styles.textStyle} numberOfLines={3} ellipsizeMode="tail">
+      {item?.name}
+    </Text>
+  </TouchableOpacity>
+);
+
 const CategoryModal = ({
   data,
   isVisible,
   toggleModal,
   onSelectExpenseCategory,
-}: props) => {
-  const renderItem = ({item}: {item: expenseArray}) => {
-    return (
-      <TouchableOpacity
-        onPress={() => onSelectExpenseCategory(item)}
-        key={`${item?.id}cc`}
-        style={styles.renderItemContainer}>
-        <View
-          style={[
-            styles.imageContainer,
-            {
-              backgroundColor:
-                '#' +
-                (((1 << 24) * Math.random()) | 0).toString(16).padStart(6, '0'),
-            },
-          ]}>
-          <Image source={item?.image} style={styles.iconStyle} />
-        </View>
-        <Text style={styles.textStyle} numberOfLines={3} ellipsizeMode="tail">
-          {item?.name}
-        </Text>
-      </TouchableOpacity>
-    );
-  };
-
-  return (
-    <Modal
-      isVisible={isVisible}
-      style={styles.modal}
-      backdropOpacity={0.5}
-      animationIn="slideInUp"
-      swipeDirection={['down']}
-      onSwipeComplete={toggleModal}
-      animationOut="slideOutDown"
-      onBackdropPress={toggleModal}>
-      <View style={styles.modalContent}>
-        <FlatList
-          data={data}
-          numColumns={3}
-          renderItem={renderItem}
-          ListFooterComponent={() => {
-            return <View style={{height: hp(3)}} />;
-          }}
-          contentContainerStyle={{alignItems: 'center'}}
-        />
-      </View>
-    </Modal>
-  );
-};
+}: Props) => (
+  <Modal
+    isVisible={isVisible}
+    style={styles.modal}
+    backdropOpacity={0.5}
+    animationIn="slideInUp"
+    swipeDirection={['down']}
+    onSwipeComplete={toggleModal}
+    animationOut="slideOutDown"
+    onBackdropPress={toggleModal}>
+    <View style={styles.modalContent}>
+      <FlatList
+        data={data}
+        numColumns={3}
+        renderItem={({item}) => renderItem({item, onSelectExpenseCategory})}
+        ListFooterComponent={() => {
+          return <View style={styles.footerStyle} />;
+        }}
+        contentContainerStyle={styles.contentContainerStyle}
+      />
+    </View>
+  </Modal>
+);
 
 export default CategoryModal;
 
@@ -105,5 +106,11 @@ const styles = StyleSheet.create({
   imageContainer: {
     padding: 15,
     borderRadius: 15,
+  },
+  contentContainerStyle: {
+    alignItems: 'center',
+  },
+  footerStyle: {
+    height: hp(3),
   },
 });

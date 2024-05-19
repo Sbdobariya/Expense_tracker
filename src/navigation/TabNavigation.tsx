@@ -58,11 +58,11 @@ const TabNavigation = () => {
           tabBarStyle: {
             display: 'none',
           },
-          tabBarIcon: ({focused}) => {
+          tabBarIcon: ({}) => {
             return (
               <Image
-                source={ImageConst.add_category_ic}
                 style={styles.addIconStyle}
+                source={ImageConst.add_category_ic}
               />
             );
           },

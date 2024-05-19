@@ -109,7 +109,7 @@ const AddTransactionScreen = () => {
           transaction_account: selectedTransactionWay,
         },
         onSuccess: response => {
-          if (response == 'success') {
+          if (response === 'success') {
             setNoteValue('');
             setAmountValue(undefined);
             setSelectedInvoice(undefined);
@@ -153,8 +153,8 @@ const AddTransactionScreen = () => {
         transaction_category: selectedExpenseItem,
         transaction_account: selectedTransactionWay,
       },
-      onFail(err) {},
-      onSuccess(res) {
+      onFail(_err) {},
+      onSuccess(_res) {
         navigation.goBack();
         dispatch(EditTransactionData(undefined));
       },
@@ -264,8 +264,8 @@ const AddTransactionScreen = () => {
       </View>
       <CategoryModal
         data={
-          showCategoryModal.mode == 'category'
-            ? activeTab == 'expense'
+          showCategoryModal.mode === 'category'
+            ? activeTab === 'expense'
               ? ExpenseCategoryData
               : IncomeCategoryData
             : TransactionModeData
@@ -274,7 +274,7 @@ const AddTransactionScreen = () => {
         toggleModal={onToggleModal}
         onSelectExpenseCategory={item => {
           onToggleModal();
-          if (showCategoryModal.mode == 'category') {
+          if (showCategoryModal.mode === 'category') {
             setselectedExpenseItem(item);
           } else {
             setSelectedTransactionWay(item);

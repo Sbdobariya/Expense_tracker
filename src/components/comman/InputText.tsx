@@ -1,13 +1,6 @@
-import {
-  KeyboardType,
-  StyleSheet,
-  Text,
-  TextInput,
-  View,
-  ViewStyle,
-} from 'react-native';
 import React from 'react';
 import {ColorConst, fonts, hp, wp} from '../../utils';
+import {KeyboardType, StyleSheet, TextInput, ViewStyle} from 'react-native';
 
 interface props {
   placeholder?: string;

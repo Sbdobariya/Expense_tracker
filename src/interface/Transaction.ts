@@ -33,19 +33,20 @@ export interface EditTransaction {
     transaction_account: expenseArray | undefined;
     transaction_category: expenseArray | undefined;
   };
-  transaction_createdAt?: {nanoseconds: number; seconds: number};
   onSuccess?: (res: any) => void;
   onFail?: (err: any) => void;
 }
+
 export interface TransactionData {
+  timestamp: string | null;
   transaction_id?: string;
   transaction_mode: string;
   transaction_note: string;
   transaction_amount: number;
   transaction_invoice: string;
+  transaction_createdAt: string;
   transaction_account: expenseArray | undefined;
   transaction_category: expenseArray | undefined;
-  transaction_createdAt: {nanoseconds: number; seconds: number};
 }
 
 export interface TransactionReducerType {

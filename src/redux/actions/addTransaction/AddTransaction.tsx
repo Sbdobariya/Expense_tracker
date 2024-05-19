@@ -1,21 +1,25 @@
-import {createAsyncThunk} from '@reduxjs/toolkit';
-import firestore from '@react-native-firebase/firestore';
+import moment from 'moment';
 import {
   AddTransaction,
   DeleteDataType,
   EditTransaction,
   GetTransaction,
 } from '../../../interface/Transaction';
+import {createAsyncThunk} from '@reduxjs/toolkit';
+import firestore from '@react-native-firebase/firestore';
 import {DeleteTransaction, TransactionAction} from '../../reducer';
 
 export const AddTransactionAction = (request: AddTransaction) => {
+  const Today = moment(new Date()).format('YYYY-MM-DD');
+
   firestore()
     .collection('Transactions')
     .doc(request.data.user_data?.userID)
     .collection('incomeExpense')
     .add({
       transaction_id: '',
-      transaction_createdAt: new Date(),
+      transaction_createdAt: Today,
+      timestamp: firestore.FieldValue.serverTimestamp(),
       transaction_mode: request.data.transaction_mode,
       transaction_amount: request.data.transaction_amount,
       transaction_account: request.data.transaction_account,
@@ -39,18 +43,23 @@ export const AddTransactionAction = (request: AddTransaction) => {
 export const GetTransactionAction = createAsyncThunk(
   'GetTransactionAction',
   async (request: GetTransaction, {dispatch}) => {
-    firestore()
+    const querySnapshot = await firestore()
       .collection('Transactions')
       .doc(request?.data.user_data?.userID)
       .collection('incomeExpense')
       .orderBy('transaction_createdAt', 'desc')
-      .get()
-      .then(querySnapshot => {
-        const data = querySnapshot?.docs?.map(snp => {
-          return snp?.data();
-        });
-        dispatch(TransactionAction(data));
-      });
+      .get();
+
+    const data = querySnapshot?.docs?.map(snp => {
+      const transactionData = snp.data();
+      return {
+        ...transactionData,
+        timestamp: transactionData.timestamp
+          ? transactionData.timestamp.toDate().toISOString()
+          : null,
+      };
+    });
+    dispatch(TransactionAction(data));
   },
 );
 
