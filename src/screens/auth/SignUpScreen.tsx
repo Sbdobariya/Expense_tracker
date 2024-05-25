@@ -16,15 +16,11 @@ import {useDispatch, useSelector} from 'react-redux';
 import {UserSignUpAction} from '../../redux/actions';
 import {Alert, StyleSheet, View} from 'react-native';
 import {ColorConst, StringConst, hp} from '../../utils';
-import {AuthNavigationType} from '../../navigation/type';
-import {NativeStackScreenProps} from '@react-navigation/native-stack';
+import {AuthNavigationType, RootPage} from '../../navigation/type';
+import {NavigationProp, useNavigation} from '@react-navigation/native';
 
-type Signup = NativeStackScreenProps<AuthNavigationType, 'SignUpScreen'> & {
-  navigation: () => void;
-};
-
-const SignUpScreen: React.FC<Signup> = (props: Signup) => {
-  const {navigation} = props;
+const SignUpScreen: React.FC = () => {
+  const navigation = useNavigation<NavigationProp<AuthNavigationType>>();
   const dispatch = useDispatch();
   const {signUp} = React.useContext(AuthContext);
   const {isLoading} = useSelector(
@@ -93,7 +89,7 @@ const SignUpScreen: React.FC<Signup> = (props: Signup) => {
       <StringDivider
         titleTwo={StringConst.login}
         titleOne={StringConst.already_have_an_account}
-        onPress={() => navigation.navigate('LoginScreen')}
+        onPress={() => navigation.navigate(RootPage.LoginScreen)}
       />
     </View>
   );

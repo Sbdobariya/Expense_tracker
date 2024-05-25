@@ -9,19 +9,12 @@ import {
 } from '../../utils';
 import React from 'react';
 import {PrimaryButton} from '../../components';
-import {AuthNavigationType} from '../../navigation/type';
-import {NativeStackScreenProps} from '@react-navigation/native-stack';
+import {NavigationProp, useNavigation} from '@react-navigation/native';
 import {Image, SafeAreaView, StyleSheet, Text, View} from 'react-native';
+import {AuthNavigationType, RootPage} from '../../navigation/type';
 
-type OnBoardScreen = NativeStackScreenProps<
-  AuthNavigationType,
-  'onBoarding'
-> & {
-  navigation: () => void;
-};
-
-const OnBoardingScreen: React.FC<OnBoardScreen> = (props: OnBoardScreen) => {
-  const {navigation} = props;
+const OnBoardingScreen: React.FC = () => {
+  const navigation = useNavigation<NavigationProp<AuthNavigationType>>();
 
   return (
     <View style={styles.container}>
@@ -35,12 +28,12 @@ const OnBoardingScreen: React.FC<OnBoardScreen> = (props: OnBoardScreen) => {
       <View style={styles.buttonContainer}>
         <PrimaryButton
           title={'Sign Up'}
-          onPress={() => navigation.navigate('SignUpScreen')}
+          onPress={() => navigation.navigate(RootPage.SignUpScreen)}
         />
         <PrimaryButton
           title={'Login'}
           customeGradientStyle={styles.loginButton}
-          onPress={() => navigation.navigate('LoginScreen')}
+          onPress={() => navigation.navigate(RootPage.LoginScreen)}
         />
       </View>
     </View>

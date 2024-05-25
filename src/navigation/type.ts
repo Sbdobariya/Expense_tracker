@@ -1,7 +1,18 @@
+export enum RootPage {
+  OnBoarding = 'onBoarding',
+  LoginScreen = 'LoginScreen',
+  SignUpScreen = 'SignUpScreen',
+  HomeScreen = 'HomeScreen',
+  ProfileScreen = 'ProfileScreen',
+  StatisticsScreen = 'StatisticsScreen',
+  TransactionScreen = 'TransactionScreen',
+  AddTransactionScreen = 'AddTransactionScreen',
+}
+
 export type AuthNavigationType = {
-  onBoarding: undefined;
-  LoginScreen: undefined;
-  SignUpScreen: undefined;
+  [RootPage.OnBoarding]: undefined;
+  [RootPage.LoginScreen]: undefined;
+  [RootPage.SignUpScreen]: undefined;
 };
 
 export type MainNavigatorType = {
@@ -11,19 +22,19 @@ export type MainNavigatorType = {
 };
 
 export type HomeNavigationType = {
-  HomeScreen: undefined;
-};
-export type AddTransactionNavigationType = {
-  AddTransactionScreen: undefined;
+  [RootPage.HomeScreen]: undefined;
 };
 export type ProfileNavigationType = {
-  ProfileScreen: undefined;
-};
-export type TransactionNavigationType = {
-  TransactionScreen: undefined;
+  [RootPage.ProfileScreen]: undefined;
 };
 export type StatisticsNavigationType = {
-  StatisticsScreen: undefined;
+  [RootPage.StatisticsScreen]: undefined;
+};
+export type TransactionNavigationType = {
+  [RootPage.TransactionScreen]: undefined;
+};
+export type AddTransactionNavigationType = {
+  [RootPage.AddTransactionScreen]: undefined;
 };
 
 export type TabStack = {

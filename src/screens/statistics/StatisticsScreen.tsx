@@ -1,7 +1,7 @@
-import {StyleSheet, Text, View} from 'react-native';
 import React from 'react';
+import {StyleSheet, Text, View} from 'react-native';
 
-const StatisticsScreen = () => {
+const StatisticsScreen: React.FC = () => {
   return (
     <View style={styles.container}>
       <Text>statisticsScreen</Text>

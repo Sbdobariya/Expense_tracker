@@ -1,5 +1,5 @@
 import React from 'react';
-import {AuthNavigationType} from '../type';
+import {AuthNavigationType, RootPage} from '../type';
 import LoginScreen from '../../screens/auth/LoginScreen';
 import SignUpScreen from '../../screens/auth/SignUpScreen';
 import OnBoardingScreen from '../../screens/onBoarding/OnBoardingScreen';
@@ -10,9 +10,12 @@ const AuthStack = createNativeStackNavigator<AuthNavigationType>();
 const AuthStackNavigator = () => {
   return (
     <AuthStack.Navigator screenOptions={{headerShown: false}}>
-      <AuthStack.Screen name="onBoarding" component={OnBoardingScreen} />
-      <AuthStack.Screen name="LoginScreen" component={LoginScreen} />
-      <AuthStack.Screen name="SignUpScreen" component={SignUpScreen} />
+      <AuthStack.Screen
+        name={RootPage.OnBoarding}
+        component={OnBoardingScreen}
+      />
+      <AuthStack.Screen name={RootPage.LoginScreen} component={LoginScreen} />
+      <AuthStack.Screen name={RootPage.SignUpScreen} component={SignUpScreen} />
     </AuthStack.Navigator>
   );
 };

@@ -19,7 +19,7 @@ interface Props {
   onSelectExpenseCategory: (item: expenseArray) => void;
 }
 
-const renderItem = ({
+const RenderItem = ({
   item,
   onSelectExpenseCategory,
 }: {
@@ -45,12 +45,12 @@ const renderItem = ({
   </TouchableOpacity>
 );
 
-const CategoryModal = ({
+const CategoryModal: React.FC<Props> = ({
   data,
   isVisible,
   toggleModal,
   onSelectExpenseCategory,
-}: Props) => (
+}) => (
   <Modal
     isVisible={isVisible}
     style={styles.modal}
@@ -64,10 +64,13 @@ const CategoryModal = ({
       <FlatList
         data={data}
         numColumns={3}
-        renderItem={({item}) => renderItem({item, onSelectExpenseCategory})}
-        ListFooterComponent={() => {
-          return <View style={styles.footerStyle} />;
-        }}
+        renderItem={({item}) => (
+          <RenderItem
+            item={item}
+            onSelectExpenseCategory={onSelectExpenseCategory}
+          />
+        )}
+        ListFooterComponent={() => <View style={styles.footerStyle} />}
         contentContainerStyle={styles.contentContainerStyle}
       />
     </View>

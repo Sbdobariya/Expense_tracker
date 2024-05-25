@@ -5,7 +5,6 @@ import {
   TransactionReducerType,
 } from '../../interface/Transaction';
 import React, {useEffect, useState} from 'react';
-
 import {useDispatch, useSelector} from 'react-redux';
 import {
   useIsFocused,
@@ -51,7 +50,7 @@ const HomeScreen: React.FC = () => {
   useEffect(() => {
     const fetchData = async () => {
       if (userData?.userID && IsFocuse) {
-        const transactionData: GetTransaction = {
+        const data: GetTransaction = {
           data: {
             user_data: userData,
           },
@@ -60,7 +59,7 @@ const HomeScreen: React.FC = () => {
             Alert.alert(JSON.stringify(error));
           },
         };
-        dispatch(GetTransactionAction(transactionData) as any);
+        dispatch(GetTransactionAction(data) as any);
       }
     };
 
