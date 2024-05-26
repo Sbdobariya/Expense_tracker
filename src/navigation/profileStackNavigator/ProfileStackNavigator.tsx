@@ -5,7 +5,7 @@ import {createNativeStackNavigator} from '@react-navigation/native-stack';
 
 const ProfileStack = createNativeStackNavigator<ProfileNavigationType>();
 
-const ProfileStackNavigator = () => {
+const ProfileStackNavigator: React.FC = () => {
   return (
     <ProfileStack.Navigator screenOptions={{headerShown: false}}>
       <ProfileStack.Screen

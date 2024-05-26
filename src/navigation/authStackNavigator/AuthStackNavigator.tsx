@@ -1,13 +1,11 @@
 import React from 'react';
 import {AuthNavigationType, RootPage} from '../type';
-// import LoginScreen from '../../screens/auth/LoginScreen';
-// import SignUpScreen from '../../screens/auth/SignUpScreen';
 import {createNativeStackNavigator} from '@react-navigation/native-stack';
 import {LoginScreen, OnBoardingScreen, SignUpScreen} from '../../screens';
 
 const AuthStack = createNativeStackNavigator<AuthNavigationType>();
 
-const AuthStackNavigator = () => {
+const AuthStackNavigator: React.FC = () => {
   return (
     <AuthStack.Navigator screenOptions={{headerShown: false}}>
       <AuthStack.Screen

@@ -8,14 +8,12 @@ import {
   StringDivider,
 } from '../../../components';
 import {
-  userDataType,
   AuthReducerType,
   UserSignInActionRequest,
 } from '../../../interface/AuthInterFace';
 import {styles} from './LoginScreenStyle';
 import {useDispatch, useSelector} from 'react-redux';
 import {AuthStrings} from '../../../constants/String';
-import {AuthContext} from '../../../utils/AuthContext';
 import {UserSignInActions} from '../../../redux/actions';
 import {AuthNavigationType, RootPage} from '../../../navigation/type';
 import {NavigationProp, useNavigation} from '@react-navigation/native';
@@ -24,13 +22,12 @@ const LoginScreen: React.FC = () => {
   const navigation = useNavigation<NavigationProp<AuthNavigationType>>();
 
   const dispatch = useDispatch();
-  const {signIn} = React.useContext(AuthContext);
   const {isLoading} = useSelector(
     (state: {authReducer: AuthReducerType}) => state?.authReducer,
   );
 
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
+  const [email, setEmail] = useState('sanket@gmail.com');
+  const [password, setPassword] = useState('123456');
 
   const onLoginPress = () => {
     if (email === '') {
@@ -40,9 +37,7 @@ const LoginScreen: React.FC = () => {
     } else {
       const userData: UserSignInActionRequest = {
         data: {userEmail: email, userPassword: password},
-        onSuccess: response => {
-          signIn(response as userDataType);
-        },
+        onSuccess: _response => {},
         onFail: error => {
           Alert.alert(JSON.stringify(error));
         },

@@ -6,7 +6,7 @@ import {createNativeStackNavigator} from '@react-navigation/native-stack';
 const TransactionStack =
   createNativeStackNavigator<TransactionNavigationType>();
 
-const TransactionStackNavigator = () => {
+const TransactionStackNavigator: React.FC = () => {
   return (
     <TransactionStack.Navigator screenOptions={{headerShown: false}}>
       <TransactionStack.Screen

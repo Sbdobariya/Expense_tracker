@@ -1,23 +1,47 @@
+import {
+  LogoutModal,
+  MenuItemList,
+  TouchableIcon,
+  UpdateNameModal,
+} from '../../components';
 import React from 'react';
 import {useSelector} from 'react-redux';
 import {useProfile} from './useProfile';
+import {HomeImages} from '../../../assets';
 import {styles} from './ProfileScreenStyle';
-import {LogoutModal, MenuItemList} from '../../components';
-import {FlatList, SafeAreaView, Text, View} from 'react-native';
+import {ProfileStrings} from '../../constants/String';
 import {AuthReducerType} from '../../interface/AuthInterface';
+import {FlatList, SafeAreaView, Text, View} from 'react-native';
 
 const ProfileScreen: React.FC = () => {
   const {userData} = useSelector(
     (state: {authReducer: AuthReducerType}) => state?.authReducer,
   );
 
-  const {MenuItem, onYesPress, isVisibleLogOutModal, onItemPress, toggleModal} =
-    useProfile();
+  const {
+    MenuItem,
+    onYesPress,
+    onItemPress,
+    toggleModal,
+    onToggleModal,
+    isVisibleLogOutModal,
+    isUpdateModalVisible,
+  } = useProfile();
 
   return (
     <View style={styles.container}>
       <SafeAreaView />
-      <Text style={styles.userNameText}>{userData?.userName}</Text>
+      <View style={styles.headerContainer}>
+        <View style={styles.userNameView}>
+          <Text style={styles.userName}>{ProfileStrings.username}</Text>
+          <Text style={styles.userNameText}>{userData?.userName}</Text>
+        </View>
+        <TouchableIcon
+          onIconPress={onToggleModal}
+          source={HomeImages.edit_ic}
+          customeIconStyle={styles.editIcon}
+        />
+      </View>
       <FlatList
         data={MenuItem}
         style={styles.flatlist}
@@ -30,6 +54,10 @@ const ProfileScreen: React.FC = () => {
         onYesPress={onYesPress}
         toggleModal={toggleModal}
         isVisible={isVisibleLogOutModal}
+      />
+      <UpdateNameModal
+        isVisible={isUpdateModalVisible}
+        toggleModal={onToggleModal}
       />
     </View>
   );

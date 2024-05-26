@@ -46,12 +46,8 @@ const StatisticsScreen: React.FC = () => {
       }));
       setPieChartData(modifiedData);
     }
-  }, [label]);
-  const pieData = [
-    {value: 54, color: '#177AD5'},
-    {value: 40, color: '#79D2DE'},
-    {value: 20, color: '#ED6665'},
-  ];
+  }, [label, transactionData]);
+
   return (
     <View style={styles.container}>
       <SafeAreaView />

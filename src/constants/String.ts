@@ -22,6 +22,7 @@ export const ProfileStrings = Object.freeze({
   yes: 'Yes',
   logout: 'Logout',
   account: 'Account',
+  username: 'Username',
   settings: 'Settings',
   export_data: 'Export Data',
   wanna_logout: 'Are you sure do you wanna logout?',

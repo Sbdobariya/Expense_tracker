@@ -1,20 +1,20 @@
-import React from 'react';
 import {
   HomeStackNavigator,
   ProfileStackNavigator,
   AddTransactionNavigator,
   StatisticsStackNavigator,
 } from './index';
+import React from 'react';
+import {ColorConst, hp} from '../theme';
 import {RootPage, TabStack} from './type';
 import {Image, StyleSheet} from 'react-native';
+import {AuthImages, HomeImages} from '../../assets';
 import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
 import TransactionStackNavigator from './transactionStackNavigator/TransactionStackNavigator';
-import {AuthImages, HomeImages} from '../../assets';
-import {ColorConst, hp} from '../theme';
 
 const Tab = createBottomTabNavigator<TabStack>();
 
-const TabNavigation = () => {
+const TabNavigation: React.FC = () => {
   return (
     <Tab.Navigator screenOptions={{headerShown: false, tabBarShowLabel: false}}>
       <Tab.Screen

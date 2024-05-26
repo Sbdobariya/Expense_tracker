@@ -21,6 +21,7 @@ import EditCategoryModal from './home/EditCategoryModal';
 // Profile
 import MenuItemList from './Profile/MenuItemList';
 import LogoutModal from './Profile/LogoutModal';
+import UpdateNameModal from './Profile/UpdateNameModal';
 
 export {
   HomeCard,
@@ -36,6 +37,7 @@ export {
   StringDivider,
   CategoryModal,
   TransactionTab,
+  UpdateNameModal,
   TransactionList,
   EditCategoryModal,
   TransactionHeader,

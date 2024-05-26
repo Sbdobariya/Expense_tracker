@@ -5,7 +5,7 @@ import {createNativeStackNavigator} from '@react-navigation/native-stack';
 
 const StatisticsStack = createNativeStackNavigator<StatisticsNavigationType>();
 
-const StatisticsStackNavigator = () => {
+const StatisticsStackNavigator: React.FC = () => {
   return (
     <StatisticsStack.Navigator screenOptions={{headerShown: false}}>
       <StatisticsStack.Screen
