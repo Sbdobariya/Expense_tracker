@@ -1,29 +1,29 @@
 import {
-  DeleteDataType,
-  GetTransaction,
-  TransactionData,
-  TransactionReducerType,
-} from '../../interface/Transaction';
-import React, {useEffect, useState} from 'react';
-import {useDispatch, useSelector} from 'react-redux';
-import {
-  useIsFocused,
-  useNavigation,
-  NavigationProp,
-} from '@react-navigation/native';
-import {AuthReducerType} from '../../interface/AuthInterface';
-import {Alert, FlatList, StyleSheet, Text, View} from 'react-native';
-import {
   HomeCard,
   HomeHeader,
   TransactionList,
   EditCategoryModal,
 } from '../../components';
-import {RootPage, TabStack} from '../../navigation/type';
-import {EditTransactionData} from '../../redux/reducer';
-import {DeteleTransactions, GetTransactionAction} from '../../redux/actions';
-import {ColorConst, fontSize, fonts, hp, wp} from '../../theme';
+import {
+  useIsFocused,
+  useNavigation,
+  NavigationProp,
+} from '@react-navigation/native';
+import {
+  DeleteDataType,
+  GetTransaction,
+  TransactionData,
+  TransactionReducerType,
+} from '../../interface/Transaction';
+import {styles} from './HomeScreenStyle';
+import React, {useEffect, useState} from 'react';
 import {HomeStrings} from '../../constants/String';
+import {useDispatch, useSelector} from 'react-redux';
+import {EditTransactionData} from '../../redux/reducer';
+import {RootPage, TabStack} from '../../navigation/type';
+import {Alert, FlatList, Text, View} from 'react-native';
+import {AuthReducerType} from '../../interface/AuthInterface';
+import {DeteleTransactions, GetTransactionAction} from '../../redux/actions';
 
 interface stateProps {
   isVisible: boolean;
@@ -147,41 +147,3 @@ const HomeScreen: React.FC = () => {
 };
 
 export default HomeScreen;
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: ColorConst.white,
-  },
-  headerContainer: {
-    marginTop: hp(1.5),
-    flexDirection: 'row',
-    alignItems: 'center',
-    marginHorizontal: wp(5),
-    justifyContent: 'space-between',
-  },
-  itemSubContaine: {
-    gap: 10,
-    flexDirection: 'row',
-    alignItems: 'center',
-  },
-  headerText1: {
-    color: '#000',
-    fontSize: fontSize(18),
-    fontFamily: fonts.bold,
-  },
-  seeAllText: {
-    color: 'red',
-    fontSize: fontSize(15),
-    textDecorationLine: 'underline',
-    fontFamily: fonts.regular,
-  },
-  categoryImge: {
-    width: hp(3),
-    height: hp(3),
-    borderRadius: 10,
-  },
-  flatlistStyle: {
-    marginTop: hp(1.5),
-  },
-});

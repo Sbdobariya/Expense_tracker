@@ -1,8 +1,7 @@
 import React from 'react';
+import {AddTransactionScreen} from '../../screens';
 import {AddTransactionNavigationType, RootPage} from '../type';
-
 import {createNativeStackNavigator} from '@react-navigation/native-stack';
-import AddTransactionScreen from '../../screens/addTransaction/AddTransactionScreen';
 
 const TransactionStack =
   createNativeStackNavigator<AddTransactionNavigationType>();

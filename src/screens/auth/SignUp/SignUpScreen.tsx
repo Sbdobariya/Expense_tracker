@@ -1,61 +1,72 @@
-import {Alert, StyleSheet, View} from 'react-native';
-import React, {useState} from 'react';
 import {
   InputText,
   CommanHeader,
   CommanLoader,
   PrimaryButton,
   StringDivider,
-} from '../../components';
+} from '../../../components';
 import {
   userDataType,
   AuthReducerType,
-  UserSignInActionRequest,
-} from '../../interface/AuthInterFace';
-import {AuthContext} from '../../utils/AuthContext';
+  UserSignUpActionRequest,
+} from '../../../interface/AuthInterFace';
+import React, {useState} from 'react';
+import {Alert, View} from 'react-native';
+import {styles} from './SignUpScreenStyle';
 import {useDispatch, useSelector} from 'react-redux';
-import {UserSignInActions} from '../../redux/actions';
-import {AuthNavigationType, RootPage} from '../../navigation/type';
+import {AuthStrings} from '../../../constants/String';
+import {AuthContext} from '../../../utils/AuthContext';
+import {UserSignUpAction} from '../../../redux/actions';
+import {AuthNavigationType, RootPage} from '../../../navigation/type';
 import {NavigationProp, useNavigation} from '@react-navigation/native';
-import {ColorConst, hp} from '../../theme';
-import {AuthStrings} from '../../constants/String';
 
-const LoginScreen: React.FC = () => {
+const SignUpScreen: React.FC = () => {
   const navigation = useNavigation<NavigationProp<AuthNavigationType>>();
-
   const dispatch = useDispatch();
-  const {signIn} = React.useContext(AuthContext);
+  const {signUp} = React.useContext(AuthContext);
   const {isLoading} = useSelector(
     (state: {authReducer: AuthReducerType}) => state?.authReducer,
   );
 
+  const [name, setName] = useState('');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
 
-  const onLoginPress = () => {
-    if (email === '') {
+  const onSingupPress = () => {
+    if (name === '') {
+      Alert.alert('Please enter name');
+    } else if (email === '') {
       Alert.alert('Please enter email');
     } else if (password === '') {
       Alert.alert('Please enter password');
+    } else if (password?.length < 6) {
+      Alert.alert('Minimum length of password is 6s');
     } else {
-      const userData: UserSignInActionRequest = {
-        data: {userEmail: email, userPassword: password},
+      const userData: UserSignUpActionRequest = {
+        data: {userName: name, userEmail: email, userPassword: password},
         onSuccess: response => {
-          signIn(response as userDataType);
+          signUp(response as userDataType);
         },
         onFail: error => {
           Alert.alert(JSON.stringify(error));
         },
       };
-      dispatch(UserSignInActions(userData) as any);
+      dispatch(UserSignUpAction(userData) as any);
     }
   };
+
   return (
     <View style={styles.container}>
       <CommanLoader isVisible={isLoading} />
       <CommanHeader
-        title={AuthStrings.login}
+        title={AuthStrings.sign_up}
         onPress={() => navigation.goBack()}
+      />
+      <InputText
+        value={name}
+        placeholder={AuthStrings.name}
+        inputCustomeStyle={styles.nameInput}
+        onChangeText={(txt: string) => setName(txt)}
       />
       <InputText
         value={email}
@@ -68,16 +79,16 @@ const LoginScreen: React.FC = () => {
         value={password}
         autoCapitalize="none"
         placeholder={AuthStrings.Password}
-        inputCustomeStyle={styles.passwordInput}
+        inputCustomeStyle={styles.emailInput}
         onChangeText={(txt: string) => setPassword(txt)}
       />
       <PrimaryButton
-        onPress={onLoginPress}
-        title={AuthStrings.login}
-        customeGradientStyle={styles.loginButtonStyle}
+        onPress={onSingupPress}
+        title={AuthStrings.sign_up}
+        customeGradientStyle={styles.signUpButtonStyle}
       />
       <StringDivider
-        titleTwo={AuthStrings.sign_up}
+        titleTwo={AuthStrings.login}
         titleOne={AuthStrings.already_have_an_account}
         onPress={() => navigation.navigate(RootPage.LoginScreen)}
       />
@@ -85,20 +96,4 @@ const LoginScreen: React.FC = () => {
   );
 };
 
-export default LoginScreen;
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: ColorConst.white,
-  },
-  emailInput: {
-    marginTop: hp(6.89),
-  },
-  passwordInput: {
-    marginTop: hp(2.95),
-  },
-  loginButtonStyle: {
-    marginTop: hp(10),
-  },
-});
+export default SignUpScreen;

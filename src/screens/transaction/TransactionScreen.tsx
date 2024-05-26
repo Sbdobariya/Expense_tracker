@@ -1,11 +1,3 @@
-import {
-  Text,
-  View,
-  Image,
-  FlatList,
-  StyleSheet,
-  SafeAreaView,
-} from 'react-native';
 import moment from 'moment';
 import {
   PopOverModal,
@@ -18,17 +10,18 @@ import {
   TransactionData,
   TransactionReducerType,
 } from '../../interface/Transaction';
-import {RootPage, TabStack} from '../../navigation/type';
+import {styles} from './TransactionScreenStyle';
+import {TransactionImages} from '../../../assets';
 import React, {useEffect, useState} from 'react';
 import {useDispatch, useSelector} from 'react-redux';
 import {DeteleTransactions} from '../../redux/actions';
 import {EditTransactionData} from '../../redux/reducer';
+import {RootPage, TabStack} from '../../navigation/type';
 import {calendarProviderDate} from '../../hooks/CommanHooks';
 import {AuthReducerType} from '../../interface/AuthInterface';
+import {Text, View, Image, FlatList, SafeAreaView} from 'react-native';
 import {NavigationProp, useNavigation} from '@react-navigation/native';
 import {CalendarProvider, ExpandableCalendar} from 'react-native-calendars';
-import {TransactionImages} from '../../../assets';
-import {fontSize, fonts, hp} from '../../theme';
 
 interface stateProps {
   isVisible: boolean;
@@ -170,52 +163,3 @@ const TransactionScreen: React.FC = () => {
 };
 
 export default TransactionScreen;
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#fff',
-  },
-  emptyContainerText: {
-    marginTop: hp(2),
-    fontSize: fontSize(20),
-    fontFamily: fonts.medium,
-  },
-  emptyComponentContainer: {
-    marginTop: hp(10),
-    alignItems: 'center',
-  },
-  emptyImageStyle: {
-    width: hp(10),
-    height: hp(10),
-  },
-  calenderStyle: {
-    borderTopWidth: 0,
-    shadowColor: '#000',
-    shadowOffset: {
-      width: 0,
-      height: 1,
-    },
-    elevation: 1,
-    shadowRadius: 1.0,
-    shadowOpacity: 0.18,
-  },
-  customeIconStyle: {
-    width: hp(2),
-    height: hp(2),
-  },
-  rightArrowContainer: {
-    gap: hp(2),
-    flexDirection: 'row',
-    alignItems: 'center',
-  },
-  headerContainer: {
-    padding: hp(2),
-    flexDirection: 'row',
-    justifyContent: 'space-between',
-  },
-  popoverView: {
-    gap: hp(2),
-    flexDirection: 'row',
-  },
-});

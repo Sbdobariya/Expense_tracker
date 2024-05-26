@@ -1,9 +1,9 @@
 import React from 'react';
 import {AuthNavigationType, RootPage} from '../type';
-import LoginScreen from '../../screens/auth/LoginScreen';
-import SignUpScreen from '../../screens/auth/SignUpScreen';
-import OnBoardingScreen from '../../screens/onBoarding/OnBoardingScreen';
+// import LoginScreen from '../../screens/auth/LoginScreen';
+// import SignUpScreen from '../../screens/auth/SignUpScreen';
 import {createNativeStackNavigator} from '@react-navigation/native-stack';
+import {LoginScreen, OnBoardingScreen, SignUpScreen} from '../../screens';
 
 const AuthStack = createNativeStackNavigator<AuthNavigationType>();
 

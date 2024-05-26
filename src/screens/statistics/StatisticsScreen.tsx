@@ -1,10 +1,10 @@
 import React, {useEffect, useState} from 'react';
-import {SafeAreaView, StyleSheet, View} from 'react-native';
+import {SafeAreaView, View} from 'react-native';
 import {PieChart} from 'react-native-gifted-charts';
 import {useSelector} from 'react-redux';
 import {TransactionReducerType} from '../../interface/Transaction';
 import DropdownComponent from '../../components/comman/DropDown';
-import {ColorConst} from '../../theme';
+import {styles} from './StatisticsScreenStyle';
 
 interface chartData {
   text: string;
@@ -68,10 +68,3 @@ const StatisticsScreen: React.FC = () => {
 };
 
 export default StatisticsScreen;
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: ColorConst.white,
-  },
-});

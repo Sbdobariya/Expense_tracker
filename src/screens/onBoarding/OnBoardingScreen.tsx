@@ -1,11 +1,11 @@
 import React from 'react';
-import {PrimaryButton} from '../../components';
-import {NavigationProp, useNavigation} from '@react-navigation/native';
-import {Image, SafeAreaView, StyleSheet, Text, View} from 'react-native';
-import {AuthNavigationType, RootPage} from '../../navigation/type';
 import {AuthImages} from '../../../assets';
-import {fontSize, ColorConst, fonts, hp, wp} from '../../theme';
+import {PrimaryButton} from '../../components';
+import {styles} from './OnBoardingScreenStyle';
 import {AuthStrings} from '../../constants/String';
+import {Image, SafeAreaView, Text, View} from 'react-native';
+import {AuthNavigationType, RootPage} from '../../navigation/type';
+import {NavigationProp, useNavigation} from '@react-navigation/native';
 
 const OnBoardingScreen: React.FC = () => {
   const navigation = useNavigation<NavigationProp<AuthNavigationType>>();
@@ -35,43 +35,3 @@ const OnBoardingScreen: React.FC = () => {
 };
 
 export default OnBoardingScreen;
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-  },
-  onBoardImageStyle: {
-    width: hp(38),
-    height: hp(30),
-    marginTop: hp(3),
-    alignSelf: 'center',
-  },
-  onBoardText: {
-    maxWidth: wp(50),
-    marginTop: hp(10),
-    fontWeight: 'bold',
-    alignSelf: 'center',
-    textAlign: 'center',
-    fontSize: fontSize(20),
-    fontFamily: fonts.medium,
-    color: ColorConst.dark_black,
-  },
-  onBoardText1: {
-    maxWidth: wp(70),
-    marginTop: hp(3),
-    fontWeight: 'bold',
-    alignSelf: 'center',
-    textAlign: 'center',
-    fontSize: fontSize(15),
-    fontFamily: fonts.regular,
-    color: ColorConst.light_gray,
-  },
-  loginButton: {
-    marginTop: hp(1.9),
-  },
-  buttonContainer: {
-    flex: 1,
-    marginBottom: hp(5),
-    justifyContent: 'flex-end',
-  },
-});
