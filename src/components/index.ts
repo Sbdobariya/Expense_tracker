@@ -18,11 +18,17 @@ import HomeHeader from './home/HomeHeader';
 import TransactionList from './home/TransactionList';
 import EditCategoryModal from './home/EditCategoryModal';
 
+// Profile
+import MenuItemList from './Profile/MenuItemList';
+import LogoutModal from './Profile/LogoutModal';
+
 export {
   HomeCard,
   InputText,
   HomeHeader,
+  LogoutModal,
   CommanLoader,
+  MenuItemList,
   PopOverModal,
   CommanHeader,
   PrimaryButton,

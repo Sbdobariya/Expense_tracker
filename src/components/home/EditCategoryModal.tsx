@@ -1,12 +1,12 @@
 import React from 'react';
 import Modal from 'react-native-modal';
+import {HomeImages} from '../../../assets';
 import ImageText from '../comman/ImageText';
 import AmountText from '../comman/AmountText';
 import {transactionTimeStamp} from '../../hooks';
 import {StyleSheet, Text, View} from 'react-native';
 import TouchableIcon from '../comman/TouchableIcon';
 import {TransactionData} from '../../interface/Transaction';
-import {HomeImages} from '../../../assets';
 import {ColorConst, fontSize, fonts, hp, wp} from '../../theme';
 
 interface props {
