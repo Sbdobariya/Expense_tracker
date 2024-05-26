@@ -8,17 +8,6 @@ import {
   TouchableOpacity,
 } from 'react-native';
 import {
-  hp,
-  wp,
-  fonts,
-  fontSize,
-  ColorConst,
-  ImageConst,
-  IncomeCategoryData,
-  ExpenseCategoryData,
-  TransactionModeData,
-} from '../../utils';
-import {
   InputText,
   CategoryModal,
   PrimaryButton,
@@ -38,6 +27,13 @@ import {EditTransactionData} from '../../redux/reducer';
 import {FirebaseStorage, UseImagePicker} from '../../hooks';
 import {AuthReducerType} from '../../interface/AuthInterface';
 import {AddTransactionAction, EditTransactionAction} from '../../redux/actions';
+import {HomeImages} from '../../../assets';
+import {
+  ExpenseCategoryData,
+  IncomeCategoryData,
+  TransactionModeData,
+} from '../../utils';
+import {ColorConst, fontSize, fonts, hp, wp} from '../../theme';
 
 const AddTransactionScreen = () => {
   const navigation = useNavigation();
@@ -187,7 +183,7 @@ const AddTransactionScreen = () => {
                 source={
                   selectedTransactionWay
                     ? selectedTransactionWay.image
-                    : ImageConst.transfer_ic
+                    : HomeImages.transfer_ic
                 }
                 style={styles.categoryIcon}
               />
@@ -206,7 +202,7 @@ const AddTransactionScreen = () => {
                 source={
                   selectedExpenseItem
                     ? selectedExpenseItem.image
-                    : ImageConst.category_ic
+                    : HomeImages.category_ic
                 }
                 style={styles.categoryIcon}
               />
@@ -242,7 +238,7 @@ const AddTransactionScreen = () => {
             onPress={onAddInvoicePress}>
             <View style={styles.plusButton}>
               <Image
-                source={ImageConst.plus_circle_ic}
+                source={HomeImages.plus_circle_ic}
                 style={styles.addButton}
               />
               <Text style={styles.addInvoiceText}>Add Invoice</Text>

@@ -1,9 +1,16 @@
 export enum RootPage {
-  OnBoarding = 'onBoarding',
-  LoginScreen = 'LoginScreen',
-  SignUpScreen = 'SignUpScreen',
+  Home = 'Home',
+  Profile = 'Profile',
+  TabStack = 'TabStack',
+  AuthStack = 'AuthStack',
   HomeScreen = 'HomeScreen',
+  OnBoarding = 'onBoarding',
+  Statistics = 'Statistics',
+  LoginScreen = 'LoginScreen',
+  Transaction = 'Transaction',
+  SignUpScreen = 'SignUpScreen',
   ProfileScreen = 'ProfileScreen',
+  AddTransaction = 'AddTransaction',
   StatisticsScreen = 'StatisticsScreen',
   TransactionScreen = 'TransactionScreen',
   AddTransactionScreen = 'AddTransactionScreen',
@@ -16,9 +23,8 @@ export type AuthNavigationType = {
 };
 
 export type MainNavigatorType = {
-  TabStack: TabStack;
-  AuthStack: AuthNavigationType;
-  AddTransactionScreen: undefined;
+  [RootPage.TabStack]: TabStack;
+  [RootPage.AuthStack]: AuthNavigationType;
 };
 
 export type HomeNavigationType = {
@@ -31,16 +37,20 @@ export type StatisticsNavigationType = {
   [RootPage.StatisticsScreen]: undefined;
 };
 export type TransactionNavigationType = {
-  [RootPage.TransactionScreen]: undefined;
+  [RootPage.TransactionScreen]: {someParam: string};
 };
 export type AddTransactionNavigationType = {
   [RootPage.AddTransactionScreen]: undefined;
 };
 
 export type TabStack = {
-  Home: HomeNavigationType;
-  Profile: ProfileNavigationType;
-  Statistics: StatisticsNavigationType;
-  Transaction: TransactionNavigationType;
-  AddTransaction: AddTransactionNavigationType;
+  [RootPage.Home]: HomeNavigationType;
+  [RootPage.Profile]: ProfileNavigationType;
+  [RootPage.Statistics]: StatisticsNavigationType;
+  [RootPage.Transaction]: {
+    screen: keyof TransactionNavigationType;
+  };
+  [RootPage.AddTransaction]: {
+    screen: keyof AddTransactionNavigationType;
+  };
 };

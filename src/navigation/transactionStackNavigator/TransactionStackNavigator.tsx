@@ -1,5 +1,5 @@
 import React from 'react';
-import {TransactionNavigationType} from '../type';
+import {RootPage, TransactionNavigationType} from '../type';
 import {createNativeStackNavigator} from '@react-navigation/native-stack';
 import TransactionScreen from '../../screens/transaction/TransactionScreen';
 
@@ -10,7 +10,7 @@ const TransactionStackNavigator = () => {
   return (
     <TransactionStack.Navigator screenOptions={{headerShown: false}}>
       <TransactionStack.Screen
-        name="TransactionScreen"
+        name={RootPage.TransactionScreen}
         component={TransactionScreen}
       />
     </TransactionStack.Navigator>

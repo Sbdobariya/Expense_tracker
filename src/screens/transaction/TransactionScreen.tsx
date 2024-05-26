@@ -18,22 +18,23 @@ import {
   TransactionData,
   TransactionReducerType,
 } from '../../interface/Transaction';
-import {TabStack} from '../../navigation/type';
+import {RootPage, TabStack} from '../../navigation/type';
 import React, {useEffect, useState} from 'react';
 import {useDispatch, useSelector} from 'react-redux';
 import {DeteleTransactions} from '../../redux/actions';
 import {EditTransactionData} from '../../redux/reducer';
-import {ImageConst, fontSize, fonts, hp} from '../../utils';
 import {calendarProviderDate} from '../../hooks/CommanHooks';
 import {AuthReducerType} from '../../interface/AuthInterface';
 import {NavigationProp, useNavigation} from '@react-navigation/native';
 import {CalendarProvider, ExpandableCalendar} from 'react-native-calendars';
+import {TransactionImages} from '../../../assets';
+import {fontSize, fonts, hp} from '../../theme';
 
 interface stateProps {
   isVisible: boolean;
   item?: TransactionData;
 }
-const TransactionScreen = () => {
+const TransactionScreen: React.FC = () => {
   const tabNavigation = useNavigation<NavigationProp<TabStack>>();
   const {transactionData} = useSelector(
     (state: {transactionReducer: TransactionReducerType}) =>
@@ -75,7 +76,7 @@ const TransactionScreen = () => {
     return (
       <View style={styles.emptyComponentContainer}>
         <Image
-          source={ImageConst.empty_transaction_ic}
+          source={TransactionImages.empty_transaction_ic}
           style={styles.emptyImageStyle}
           resizeMode="contain"
         />
@@ -99,7 +100,9 @@ const TransactionScreen = () => {
       isVisible: false,
       item: undefined,
     });
-    tabNavigation.navigate('AddTransaction');
+    tabNavigation.navigate(RootPage.AddTransaction, {
+      screen: RootPage.AddTransactionScreen,
+    });
   };
   const onDeletePress = (item: TransactionData) => {
     const request: DeleteDataType = {
@@ -130,9 +133,9 @@ const TransactionScreen = () => {
                   setAllTransactions(transactionData);
                 }
               }}
-              source={ImageConst.menu_ic}
+              source={TransactionImages.menu_ic}
             />
-            <TouchableIcon source={ImageConst.search_ic} />
+            <TouchableIcon source={TransactionImages.search_ic} />
           </View>
         </View>
         {applyFilter && (

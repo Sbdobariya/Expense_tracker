@@ -1,17 +1,11 @@
-import {
-  hp,
-  wp,
-  fonts,
-  fontSize,
-  ColorConst,
-  ImageConst,
-  StringConst,
-} from '../../utils';
 import React from 'react';
 import {PrimaryButton} from '../../components';
 import {NavigationProp, useNavigation} from '@react-navigation/native';
 import {Image, SafeAreaView, StyleSheet, Text, View} from 'react-native';
 import {AuthNavigationType, RootPage} from '../../navigation/type';
+import {AuthImages} from '../../../assets';
+import {fontSize, ColorConst, fonts, hp, wp} from '../../theme';
+import {AuthStrings} from '../../constants/String';
 
 const OnBoardingScreen: React.FC = () => {
   const navigation = useNavigation<NavigationProp<AuthNavigationType>>();
@@ -21,10 +15,10 @@ const OnBoardingScreen: React.FC = () => {
       <SafeAreaView />
       <Image
         style={styles.onBoardImageStyle}
-        source={ImageConst?.onBoading_ic}
+        source={AuthImages.onBoading_ic}
       />
-      <Text style={styles.onBoardText}>{StringConst.on_board_text}</Text>
-      <Text style={styles.onBoardText1}>{StringConst.on_board_text1}</Text>
+      <Text style={styles.onBoardText}>{AuthStrings.on_board_text}</Text>
+      <Text style={styles.onBoardText1}>{AuthStrings.on_board_text1}</Text>
       <View style={styles.buttonContainer}>
         <PrimaryButton
           title={'Sign Up'}

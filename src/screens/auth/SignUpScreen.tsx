@@ -15,9 +15,10 @@ import {AuthContext} from '../../utils/AuthContext';
 import {useDispatch, useSelector} from 'react-redux';
 import {UserSignUpAction} from '../../redux/actions';
 import {Alert, StyleSheet, View} from 'react-native';
-import {ColorConst, StringConst, hp} from '../../utils';
 import {AuthNavigationType, RootPage} from '../../navigation/type';
 import {NavigationProp, useNavigation} from '@react-navigation/native';
+import {ColorConst, hp} from '../../theme';
+import {AuthStrings} from '../../constants/String';
 
 const SignUpScreen: React.FC = () => {
   const navigation = useNavigation<NavigationProp<AuthNavigationType>>();
@@ -58,37 +59,37 @@ const SignUpScreen: React.FC = () => {
     <View style={styles.container}>
       <CommanLoader isVisible={isLoading} />
       <CommanHeader
-        title={StringConst.sign_up}
+        title={AuthStrings.sign_up}
         onPress={() => navigation.goBack()}
       />
       <InputText
         value={name}
-        placeholder={StringConst.name}
+        placeholder={AuthStrings.name}
         inputCustomeStyle={styles.nameInput}
         onChangeText={(txt: string) => setName(txt)}
       />
       <InputText
         value={email}
         autoCapitalize="none"
-        placeholder={StringConst.email}
+        placeholder={AuthStrings.email}
         inputCustomeStyle={styles.emailInput}
         onChangeText={(txt: string) => setEmail(txt)}
       />
       <InputText
         value={password}
         autoCapitalize="none"
-        placeholder={StringConst.Password}
+        placeholder={AuthStrings.Password}
         inputCustomeStyle={styles.emailInput}
         onChangeText={(txt: string) => setPassword(txt)}
       />
       <PrimaryButton
         onPress={onSingupPress}
-        title={StringConst?.sign_up}
+        title={AuthStrings.sign_up}
         customeGradientStyle={styles.signUpButtonStyle}
       />
       <StringDivider
-        titleTwo={StringConst.login}
-        titleOne={StringConst.already_have_an_account}
+        titleTwo={AuthStrings.login}
+        titleOne={AuthStrings.already_have_an_account}
         onPress={() => navigation.navigate(RootPage.LoginScreen)}
       />
     </View>

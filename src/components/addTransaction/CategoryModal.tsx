@@ -9,8 +9,8 @@ import {
 import React from 'react';
 import Modal from 'react-native-modal';
 import {expenseArray} from '../../interface/Comman';
-import {ColorConst, fontSize, hp, wp} from '../../utils';
 import {randomeBGColor} from '../../hooks/CommanHooks';
+import {ColorConst, fontSize, hp, wp} from '../../theme';
 
 interface Props {
   isVisible: boolean;

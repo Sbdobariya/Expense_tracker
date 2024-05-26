@@ -1,9 +1,9 @@
 import React from 'react';
 import {transactionTimeStamp} from '../../hooks';
-import {fontSize, fonts, hp, wp} from '../../utils';
 import {randomeBGColor} from '../../hooks/CommanHooks';
 import {TransactionData} from '../../interface/Transaction';
 import {Image, StyleSheet, Text, TouchableOpacity, View} from 'react-native';
+import {fontSize, fonts, hp, wp} from '../../theme';
 
 interface props {
   index: number;

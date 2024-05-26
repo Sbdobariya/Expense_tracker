@@ -1,19 +1,19 @@
-import {ImageConst} from './ImageConst';
+import {TransactionModeImages} from '../../assets';
 
 export const TransactionModeData = [
   {
     id: 1,
     name: 'Cash',
-    image: ImageConst.cash_ic,
+    image: TransactionModeImages.cash_ic,
   },
   {
     id: 2,
     name: 'Credit / Debit Card',
-    image: ImageConst.card_ic,
+    image: TransactionModeImages.card_ic,
   },
   {
     id: 3,
     name: 'UPI / Net Banking',
-    image: ImageConst.upi_ic,
+    image: TransactionModeImages.upi_ic,
   },
 ];

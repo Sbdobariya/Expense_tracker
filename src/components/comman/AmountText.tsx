@@ -1,6 +1,7 @@
 import React from 'react';
-import {ImageConst, fontSize, fonts, hp} from '../../utils';
 import {Image, StyleSheet, Text, TextStyle, View} from 'react-native';
+import {HomeImages} from '../../../assets';
+import {fontSize, fonts, hp} from '../../theme';
 
 const AmountText = ({
   num,
@@ -11,7 +12,7 @@ const AmountText = ({
 }) => {
   return (
     <View style={styles.subIncomeView}>
-      <Image source={ImageConst.rupee_ic} style={styles.rupeesIcon} />
+      <Image source={HomeImages.rupee_ic} style={styles.rupeesIcon} />
       <Text style={[styles.incomeNum, customeNumStyle]}>{num}.00</Text>
     </View>
   );

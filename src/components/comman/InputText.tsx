@@ -1,6 +1,6 @@
 import React from 'react';
-import {ColorConst, fonts, hp, wp} from '../../utils';
 import {KeyboardType, StyleSheet, TextInput, ViewStyle} from 'react-native';
+import {ColorConst, fonts, hp, wp} from '../../theme';
 
 interface props {
   placeholder?: string;
@@ -31,7 +31,7 @@ const InputText = (props: props) => {
       autoCapitalize={autoCapitalize}
       secureTextEntry={secureTextEntry}
       style={[styles.inputFiled, inputCustomeStyle]}
-      placeholderTextColor={ColorConst?.light_gray}
+      placeholderTextColor={ColorConst.light_gray}
     />
   );
 };

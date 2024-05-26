@@ -1,16 +1,17 @@
 import React from 'react';
 import LinearGradient from 'react-native-linear-gradient';
-import {ColorConst, ImageConst, fontSize, fonts, hp, wp} from '../../utils';
 import {Image, StyleSheet, Text, TouchableOpacity, View} from 'react-native';
+import {AuthImages} from '../../../assets';
+import {ColorConst, fontSize, fonts, hp, wp} from '../../theme';
 
 const TransactionHeader = ({onBackPress}: {onBackPress: () => void}) => {
   return (
     <LinearGradient
       colors={[ColorConst.gradiant_color1, ColorConst.gradiant_color2]}
       style={[styles.linearGradient]}>
-      <Image style={styles.headerImage} source={ImageConst.header_bg_ic} />
+      <Image style={styles.headerImage} source={AuthImages.header_bg_ic} />
       <TouchableOpacity onPress={onBackPress}>
-        <Image source={ImageConst.left_icon_ic} style={styles.leftIconStyle} />
+        <Image source={AuthImages.left_icon_ic} style={styles.leftIconStyle} />
       </TouchableOpacity>
       <Text style={styles.heraderText}>Add Transaction</Text>
       <View style={styles.leftIconStyle} />

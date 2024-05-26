@@ -1,17 +1,11 @@
-import {
-  hp,
-  wp,
-  fonts,
-  fontSize,
-  ColorConst,
-  ImageConst,
-  StringConst,
-} from '../../utils';
 import React from 'react';
 import AmountText from '../comman/AmountText';
 import {Image, StyleSheet, Text, View} from 'react-native';
 import LinearGradient from 'react-native-linear-gradient';
 import {TransactionData} from '../../interface/Transaction';
+import {HomeImages} from '../../../assets';
+import {ColorConst, fontSize, fonts, hp, wp} from '../../theme';
+import {HomeStrings} from '../../constants/String';
 
 const HomeCard = ({transactionData}: {transactionData: TransactionData[]}) => {
   let totalIncome = 0;
@@ -32,8 +26,8 @@ const HomeCard = ({transactionData}: {transactionData: TransactionData[]}) => {
       colors={[ColorConst.gradiant_color1, ColorConst.gradiant_color2]}
       style={styles.linearGradient}>
       <View style={styles.subIncomeView}>
-        <Text style={styles.totalBalance}>{StringConst.total_balance}</Text>
-        <Image source={ImageConst.chevron_down_ic} style={styles.rupeesIcon} />
+        <Text style={styles.totalBalance}>{HomeStrings.total_balance}</Text>
+        <Image source={HomeImages.chevron_down_ic} style={styles.rupeesIcon} />
       </View>
       <AmountText
         customeNumStyle={{
@@ -45,15 +39,15 @@ const HomeCard = ({transactionData}: {transactionData: TransactionData[]}) => {
       <View style={styles.subContainer}>
         <View>
           <View style={styles.incomeView}>
-            <Image source={ImageConst.downArrow_ic} style={styles.arrowImage} />
-            <Text style={styles.incomeExpense}>{StringConst.income}</Text>
+            <Image source={HomeImages.downArrow_ic} style={styles.arrowImage} />
+            <Text style={styles.incomeExpense}>{HomeStrings.income}</Text>
           </View>
           <AmountText num={totalIncome} customeNumStyle={styles.expenseNum} />
         </View>
         <View>
           <View style={styles.incomeView}>
-            <Image source={ImageConst.upArrow_ic} style={styles.arrowImage} />
-            <Text style={styles.incomeExpense}>{StringConst.expense}</Text>
+            <Image source={HomeImages.upArrow_ic} style={styles.arrowImage} />
+            <Text style={styles.incomeExpense}>{HomeStrings.expense}</Text>
           </View>
           <AmountText num={totalExpense} customeNumStyle={styles.expenseNum} />
         </View>

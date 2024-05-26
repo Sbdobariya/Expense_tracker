@@ -1,6 +1,5 @@
 import {Alert, StyleSheet, View} from 'react-native';
 import React, {useState} from 'react';
-import {ColorConst, StringConst, hp} from '../../utils';
 import {
   InputText,
   CommanHeader,
@@ -18,6 +17,8 @@ import {useDispatch, useSelector} from 'react-redux';
 import {UserSignInActions} from '../../redux/actions';
 import {AuthNavigationType, RootPage} from '../../navigation/type';
 import {NavigationProp, useNavigation} from '@react-navigation/native';
+import {ColorConst, hp} from '../../theme';
+import {AuthStrings} from '../../constants/String';
 
 const LoginScreen: React.FC = () => {
   const navigation = useNavigation<NavigationProp<AuthNavigationType>>();
@@ -53,31 +54,31 @@ const LoginScreen: React.FC = () => {
     <View style={styles.container}>
       <CommanLoader isVisible={isLoading} />
       <CommanHeader
-        title={StringConst.login}
+        title={AuthStrings.login}
         onPress={() => navigation.goBack()}
       />
       <InputText
         value={email}
         autoCapitalize="none"
-        placeholder={StringConst.email}
+        placeholder={AuthStrings.email}
         inputCustomeStyle={styles.emailInput}
         onChangeText={(txt: string) => setEmail(txt)}
       />
       <InputText
         value={password}
         autoCapitalize="none"
-        placeholder={StringConst.Password}
+        placeholder={AuthStrings.Password}
         inputCustomeStyle={styles.passwordInput}
         onChangeText={(txt: string) => setPassword(txt)}
       />
       <PrimaryButton
         onPress={onLoginPress}
-        title={StringConst?.login}
+        title={AuthStrings.login}
         customeGradientStyle={styles.loginButtonStyle}
       />
       <StringDivider
-        titleTwo={StringConst.sign_up}
-        titleOne={StringConst.already_have_an_account}
+        titleTwo={AuthStrings.sign_up}
+        titleOne={AuthStrings.already_have_an_account}
         onPress={() => navigation.navigate(RootPage.LoginScreen)}
       />
     </View>

@@ -1,5 +1,5 @@
 import React from 'react';
-import {StatisticsNavigationType} from '../type';
+import {RootPage, StatisticsNavigationType} from '../type';
 import {createNativeStackNavigator} from '@react-navigation/native-stack';
 import StatisticsScreen from '../../screens/statistics/StatisticsScreen';
 
@@ -9,7 +9,7 @@ const StatisticsStackNavigator = () => {
   return (
     <StatisticsStack.Navigator screenOptions={{headerShown: false}}>
       <StatisticsStack.Screen
-        name="StatisticsScreen"
+        name={RootPage.StatisticsScreen}
         component={StatisticsScreen}
       />
     </StatisticsStack.Navigator>

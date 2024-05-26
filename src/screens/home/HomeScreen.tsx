@@ -13,16 +13,17 @@ import {
 } from '@react-navigation/native';
 import {AuthReducerType} from '../../interface/AuthInterface';
 import {Alert, FlatList, StyleSheet, Text, View} from 'react-native';
-import {ColorConst, StringConst, fontSize, fonts, hp, wp} from '../../utils';
 import {
   HomeCard,
   HomeHeader,
   TransactionList,
   EditCategoryModal,
 } from '../../components';
-import {TabStack} from '../../navigation/type';
+import {RootPage, TabStack} from '../../navigation/type';
 import {EditTransactionData} from '../../redux/reducer';
 import {DeteleTransactions, GetTransactionAction} from '../../redux/actions';
+import {ColorConst, fontSize, fonts, hp, wp} from '../../theme';
+import {HomeStrings} from '../../constants/String';
 
 interface stateProps {
   isVisible: boolean;
@@ -67,17 +68,19 @@ const HomeScreen: React.FC = () => {
   }, [userData, IsFocuse, dispatch]);
 
   const onSeeAllPress = () => {
-    tabNavigation.navigate('Transaction');
+    tabNavigation.navigate(RootPage.Transaction, {
+      screen: RootPage.TransactionScreen,
+    });
   };
 
   const ListHeaderComponent = () => {
     return (
       <View style={styles.headerContainer}>
         <Text style={styles.headerText1}>
-          {StringConst.transactions_history}
+          {HomeStrings.transactions_history}
         </Text>
         <Text onPress={onSeeAllPress} style={styles.seeAllText}>
-          {StringConst.see_all}
+          {HomeStrings.see_all}
         </Text>
       </View>
     );
@@ -96,7 +99,9 @@ const HomeScreen: React.FC = () => {
       isVisible: false,
       item: undefined,
     });
-    tabNavigation.navigate('AddTransaction');
+    tabNavigation.navigate(RootPage.AddTransaction, {
+      screen: RootPage.AddTransactionScreen,
+    });
   };
   const onDeletePress = (item: TransactionData) => {
     const request: DeleteDataType = {

@@ -5,11 +5,12 @@ import {
   AddTransactionNavigator,
   StatisticsStackNavigator,
 } from './index';
-import {TabStack} from './type';
+import {RootPage, TabStack} from './type';
 import {Image, StyleSheet} from 'react-native';
-import {ColorConst, ImageConst, hp} from '../utils';
 import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
 import TransactionStackNavigator from './transactionStackNavigator/TransactionStackNavigator';
+import {AuthImages, HomeImages} from '../../assets';
+import {ColorConst, hp} from '../theme';
 
 const Tab = createBottomTabNavigator<TabStack>();
 
@@ -17,14 +18,14 @@ const TabNavigation = () => {
   return (
     <Tab.Navigator screenOptions={{headerShown: false, tabBarShowLabel: false}}>
       <Tab.Screen
-        name="Home"
+        name={RootPage.Home}
         component={HomeStackNavigator}
         options={{
           tabBarIcon: ({focused}) => {
             return (
               <Image
                 source={
-                  focused ? ImageConst.home_focuse_ic : ImageConst.home_ic
+                  focused ? AuthImages.home_focuse_ic : AuthImages.home_ic
                 }
                 style={styles.iconStyle}
               />
@@ -33,7 +34,7 @@ const TabNavigation = () => {
         }}
       />
       <Tab.Screen
-        name="Transaction"
+        name={RootPage.Transaction}
         component={TransactionStackNavigator}
         options={{
           tabBarIcon: ({focused}) => {
@@ -41,8 +42,8 @@ const TabNavigation = () => {
               <Image
                 source={
                   focused
-                    ? ImageConst.transaction_focuse_ic
-                    : ImageConst.transaction_ic
+                    ? AuthImages.transaction_focuse_ic
+                    : AuthImages.transaction_ic
                 }
                 style={styles.iconStyle}
               />
@@ -51,7 +52,7 @@ const TabNavigation = () => {
         }}
       />
       <Tab.Screen
-        name="AddTransaction"
+        name={RootPage.AddTransaction}
         component={AddTransactionNavigator}
         options={{
           unmountOnBlur: true,
@@ -62,14 +63,14 @@ const TabNavigation = () => {
             return (
               <Image
                 style={styles.addIconStyle}
-                source={ImageConst.add_category_ic}
+                source={HomeImages.add_category_ic}
               />
             );
           },
         }}
       />
       <Tab.Screen
-        name="Statistics"
+        name={RootPage.Statistics}
         component={StatisticsStackNavigator}
         options={{
           tabBarIcon: ({focused}) => {
@@ -77,8 +78,8 @@ const TabNavigation = () => {
               <Image
                 source={
                   focused
-                    ? ImageConst.statitics_focuse_icon
-                    : ImageConst.staitics_ic
+                    ? AuthImages.statitics_focuse_icon
+                    : AuthImages.staitics_ic
                 }
                 style={styles.iconStyle}
               />
@@ -87,14 +88,14 @@ const TabNavigation = () => {
         }}
       />
       <Tab.Screen
-        name="Profile"
+        name={RootPage.Profile}
         component={ProfileStackNavigator}
         options={{
           tabBarIcon: ({focused}) => {
             return (
               <Image
                 source={
-                  focused ? ImageConst.profile_focuse_ic : ImageConst.profile_ic
+                  focused ? AuthImages.profile_focuse_ic : AuthImages.profile_ic
                 }
                 style={styles.iconStyle}
               />

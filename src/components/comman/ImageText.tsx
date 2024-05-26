@@ -1,6 +1,6 @@
 import React from 'react';
-import {fontSize, fonts, hp} from '../../utils';
 import {Image, ImageSourcePropType, StyleSheet, Text, View} from 'react-native';
+import {fontSize, fonts, hp} from '../../theme';
 
 interface props {
   title: string | undefined;

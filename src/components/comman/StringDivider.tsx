@@ -1,6 +1,6 @@
 import React from 'react';
-import {ColorConst, fonts, hp, wp} from '../../utils';
 import {StyleSheet, Text, TouchableOpacity, View} from 'react-native';
+import {ColorConst, fonts, hp, wp} from '../../theme';
 
 interface props {
   titleOne?: string;
@@ -32,7 +32,7 @@ const styles = StyleSheet.create({
   titleTwoStyle: {
     fontWeight: '600',
     fontFamily: fonts.regular,
-    color: ColorConst?.violet_100,
+    color: ColorConst.violet_100,
     textDecorationLine: 'underline',
   },
   titleTwoView: {

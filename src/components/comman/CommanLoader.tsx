@@ -1,6 +1,6 @@
 import React from 'react';
-import {ColorConst} from '../../utils';
 import {ActivityIndicator, StyleSheet} from 'react-native';
+import {ColorConst} from '../../theme';
 
 const CommanLoader = ({isVisible}: {isVisible: boolean}) => {
   return (
@@ -9,7 +9,7 @@ const CommanLoader = ({isVisible}: {isVisible: boolean}) => {
         <ActivityIndicator
           size={'large'}
           style={styles.indicatorStyle}
-          color={ColorConst?.dark_black}
+          color={ColorConst.dark_black}
         />
       ) : null}
     </>

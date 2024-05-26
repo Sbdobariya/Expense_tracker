@@ -6,7 +6,8 @@ import {transactionTimeStamp} from '../../hooks';
 import {StyleSheet, Text, View} from 'react-native';
 import TouchableIcon from '../comman/TouchableIcon';
 import {TransactionData} from '../../interface/Transaction';
-import {ColorConst, ImageConst, fontSize, fonts, hp, wp} from '../../utils';
+import {HomeImages} from '../../../assets';
+import {ColorConst, fontSize, fonts, hp, wp} from '../../theme';
 
 interface props {
   isVisible: boolean;
@@ -40,12 +41,12 @@ const EditCategoryModal = ({
           <View style={styles.headerImageContainer}>
             <TouchableIcon
               onIconPress={() => items && onDeletePress(items)}
-              source={ImageConst.delete_ic}
+              source={HomeImages.delete_ic}
               customeIconStyle={styles.headerImage}
             />
             <TouchableIcon
               onIconPress={() => items && onEditPress(items)}
-              source={ImageConst.edit_ic}
+              source={HomeImages.edit_ic}
               customeIconStyle={styles.headerImage}
             />
           </View>

@@ -1,7 +1,7 @@
 import {StyleSheet, Text, TouchableOpacity, ViewStyle} from 'react-native';
 import React from 'react';
 import LinearGradient from 'react-native-linear-gradient';
-import {ColorConst, fontSize, fonts, hp, wp} from '../../utils';
+import {ColorConst, fontSize, fonts, hp, wp} from '../../theme';
 
 interface props {
   title: string;

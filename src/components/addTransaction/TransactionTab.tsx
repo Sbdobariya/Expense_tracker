@@ -1,6 +1,6 @@
 import React from 'react';
-import {ColorConst, fontSize, fonts, hp} from '../../utils';
 import {StyleSheet, Text, TouchableOpacity, View} from 'react-native';
+import {ColorConst, fontSize, fonts, hp} from '../../theme';
 
 interface props {
   activeTab: string;

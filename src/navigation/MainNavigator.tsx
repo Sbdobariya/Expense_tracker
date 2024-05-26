@@ -1,6 +1,6 @@
 import {GetData} from '../utils';
 import {useDispatch} from 'react-redux';
-import {MainNavigatorType} from './type';
+import {MainNavigatorType, RootPage} from './type';
 import TabNavigation from './TabNavigation';
 import {SignUpAction} from '../redux/reducer';
 import React, {useCallback, useEffect, useState} from 'react';
@@ -51,10 +51,16 @@ const MainNavigator = () => {
       <AuthContext.Provider value={authContext}>
         <Stack.Navigator screenOptions={{headerShown: false}}>
           {userData === undefined ? (
-            <Stack.Screen name="AuthStack" component={AuthStackNavigator} />
+            <Stack.Screen
+              name={RootPage.AuthStack}
+              component={AuthStackNavigator}
+            />
           ) : (
             <>
-              <Stack.Screen name="TabStack" component={TabNavigation} />
+              <Stack.Screen
+                name={RootPage.TabStack}
+                component={TabNavigation}
+              />
             </>
           )}
         </Stack.Navigator>

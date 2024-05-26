@@ -3,7 +3,8 @@ import {useSelector} from 'react-redux';
 import {Image, StyleSheet, Text} from 'react-native';
 import LinearGradient from 'react-native-linear-gradient';
 import {AuthReducerType} from '../../interface/AuthInterface';
-import {ColorConst, ImageConst, fontSize, fonts, hp, wp} from '../../utils';
+import {AuthImages} from '../../../assets';
+import {ColorConst, fontSize, fonts, hp, wp} from '../../theme';
 
 const HomeHeader = () => {
   const {userData} = useSelector(
@@ -25,7 +26,7 @@ const HomeHeader = () => {
     <LinearGradient
       colors={[ColorConst.gradiant_color1, ColorConst.gradiant_color2]}
       style={[styles.linearGradient]}>
-      <Image style={styles.headerImage} source={ImageConst.header_bg_ic} />
+      <Image style={styles.headerImage} source={AuthImages.header_bg_ic} />
       <Text style={styles.timeStyle}>{timeData()},</Text>
       <Text style={styles.heraderText}>{userData?.userName}</Text>
     </LinearGradient>
