@@ -1,15 +1,15 @@
 import {
   InputText,
-  CommanHeader,
-  CommanLoader,
   PrimaryButton,
   StringDivider,
+  CommonHeader,
+  CommonLoader,
 } from '../../../components';
 import {
-  userDataType,
+  UserDataType,
   AuthReducerType,
   UserSignUpActionRequest,
-} from '../../../interface/AuthInterFace';
+} from '../../../interface';
 import React, {useState} from 'react';
 import {Alert, View} from 'react-native';
 import {styles} from './SignUpScreenStyle';
@@ -45,7 +45,7 @@ const SignUpScreen: React.FC = () => {
       const userData: UserSignUpActionRequest = {
         data: {userName: name, userEmail: email, userPassword: password},
         onSuccess: response => {
-          signUp(response as userDataType);
+          signUp(response as UserDataType);
         },
         onFail: error => {
           Alert.alert(JSON.stringify(error));
@@ -57,35 +57,35 @@ const SignUpScreen: React.FC = () => {
 
   return (
     <View style={styles.container}>
-      <CommanLoader isVisible={isLoading} />
-      <CommanHeader
+      <CommonLoader isVisible={isLoading} />
+      <CommonHeader
         title={AuthStrings.sign_up}
         onPress={() => navigation.goBack()}
       />
       <InputText
         value={name}
         placeholder={AuthStrings.name}
-        inputCustomeStyle={styles.nameInput}
+        inputCustomStyle={styles.nameInput}
         onChangeText={(txt: string) => setName(txt)}
       />
       <InputText
         value={email}
         autoCapitalize="none"
         placeholder={AuthStrings.email}
-        inputCustomeStyle={styles.emailInput}
+        inputCustomStyle={styles.emailInput}
         onChangeText={(txt: string) => setEmail(txt)}
       />
       <InputText
         value={password}
         autoCapitalize="none"
         placeholder={AuthStrings.Password}
-        inputCustomeStyle={styles.emailInput}
+        inputCustomStyle={styles.emailInput}
         onChangeText={(txt: string) => setPassword(txt)}
       />
       <PrimaryButton
         onPress={onSingupPress}
         title={AuthStrings.sign_up}
-        customeGradientStyle={styles.signUpButtonStyle}
+        customGradientStyle={styles.signUpButtonStyle}
       />
       <StringDivider
         titleTwo={AuthStrings.login}

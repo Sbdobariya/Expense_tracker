@@ -1,22 +1,23 @@
 import {GetData} from '../utils';
 import {useDispatch} from 'react-redux';
+import {UserDataType} from '../interface';
 import TabNavigation from './TabNavigation';
 import {SignUpAction} from '../redux/reducer';
 import React, {useEffect, useState} from 'react';
 import {AuthContext} from '../utils/AuthContext';
 import {MainNavigatorType, RootPage} from './type';
-import {userDataType} from '../interface/AuthInterface';
 import {NavigationContainer} from '@react-navigation/native';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import AuthStackNavigator from './authStackNavigator/AuthStackNavigator';
 import {createNativeStackNavigator} from '@react-navigation/native-stack';
+import {AccountScreen} from '../screens';
 
 const Stack = createNativeStackNavigator<MainNavigatorType>();
 
 const MainNavigator = () => {
   const dispatch = useDispatch();
 
-  const [userData, setUserData] = useState<userDataType | undefined>();
+  const [userData, setUserData] = useState<UserDataType | undefined>();
   useEffect(() => {
     fetchData();
   }, []);
@@ -32,7 +33,7 @@ const MainNavigator = () => {
 
   const authContext = React.useMemo(
     () => ({
-      signIn: async (data: userDataType) => {
+      signIn: async (data: UserDataType) => {
         setUserData(data);
       },
       signOut: () => {
@@ -43,7 +44,7 @@ const MainNavigator = () => {
           console.log('error----------', error);
         }
       },
-      signUp: async (data: userDataType) => {
+      signUp: async (data: UserDataType) => {
         setUserData(data);
       },
     }),
@@ -60,7 +61,16 @@ const MainNavigator = () => {
               component={AuthStackNavigator}
             />
           ) : (
-            <Stack.Screen name={RootPage.TabStack} component={TabNavigation} />
+            <>
+              <Stack.Screen
+                name={RootPage.TabStack}
+                component={TabNavigation}
+              />
+              <Stack.Screen
+                name={RootPage.AccountScreen}
+                component={AccountScreen}
+              />
+            </>
           )}
         </Stack.Navigator>
       </AuthContext.Provider>

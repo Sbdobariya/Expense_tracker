@@ -6,7 +6,7 @@ interface props {
   placeholder?: string;
   value?: string | number;
   keyboardType?: KeyboardType;
-  inputCustomeStyle?: ViewStyle;
+  inputCustomStyle?: ViewStyle;
   onChangeText?: (xtx: string) => void;
   secureTextEntry?: boolean | undefined;
   autoCapitalize?: 'none' | 'sentences' | 'words' | 'characters' | undefined;
@@ -20,7 +20,7 @@ const InputText = (props: props) => {
     keyboardType,
     autoCapitalize,
     secureTextEntry,
-    inputCustomeStyle,
+    inputCustomStyle,
   } = props;
   return (
     <TextInput
@@ -30,7 +30,7 @@ const InputText = (props: props) => {
       keyboardType={keyboardType}
       autoCapitalize={autoCapitalize}
       secureTextEntry={secureTextEntry}
-      style={[styles.inputFiled, inputCustomeStyle]}
+      style={[styles.inputFiled, inputCustomStyle]}
       placeholderTextColor={ColorConst.light_gray}
     />
   );

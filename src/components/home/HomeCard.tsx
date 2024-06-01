@@ -1,8 +1,8 @@
 import React from 'react';
-import AmountText from '../comman/AmountText';
+import AmountText from '../common/AmountText';
 import {Image, StyleSheet, Text, View} from 'react-native';
 import LinearGradient from 'react-native-linear-gradient';
-import {TransactionData} from '../../interface/Transaction';
+import {TransactionData} from '../../interface';
 import {HomeImages} from '../../../assets';
 import {ColorConst, fontSize, fonts, hp, wp} from '../../theme';
 import {HomeStrings} from '../../constants/String';
@@ -19,22 +19,22 @@ const HomeCard = ({transactionData}: {transactionData: TransactionData[]}) => {
     }
   });
 
-  const totalIncomExpense = totalIncome - totalExpense;
+  const totalIncomeExpense = totalIncome - totalExpense;
 
   return (
     <LinearGradient
-      colors={[ColorConst.gradiant_color1, ColorConst.gradiant_color2]}
+      colors={[ColorConst.gradient_color1, ColorConst.gradient_color2]}
       style={styles.linearGradient}>
       <View style={styles.subIncomeView}>
         <Text style={styles.totalBalance}>{HomeStrings.total_balance}</Text>
         <Image source={HomeImages.chevron_down_ic} style={styles.rupeesIcon} />
       </View>
       <AmountText
-        customeNumStyle={{
+        customNumStyle={{
           fontFamily: fonts.bold,
           fontSize: fontSize(22),
         }}
-        num={totalIncomExpense}
+        num={totalIncomeExpense}
       />
       <View style={styles.subContainer}>
         <View>
@@ -42,14 +42,14 @@ const HomeCard = ({transactionData}: {transactionData: TransactionData[]}) => {
             <Image source={HomeImages.downArrow_ic} style={styles.arrowImage} />
             <Text style={styles.incomeExpense}>{HomeStrings.income}</Text>
           </View>
-          <AmountText num={totalIncome} customeNumStyle={styles.expenseNum} />
+          <AmountText num={totalIncome} customNumStyle={styles.expenseNum} />
         </View>
         <View>
           <View style={styles.incomeView}>
             <Image source={HomeImages.upArrow_ic} style={styles.arrowImage} />
             <Text style={styles.incomeExpense}>{HomeStrings.expense}</Text>
           </View>
-          <AmountText num={totalExpense} customeNumStyle={styles.expenseNum} />
+          <AmountText num={totalExpense} customNumStyle={styles.expenseNum} />
         </View>
       </View>
     </LinearGradient>

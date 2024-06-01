@@ -9,22 +9,22 @@ interface props {
   onPress?: () => void;
 }
 
-const CommanHeader = ({title, onPress}: props) => {
+const CommonHeader = ({title, onPress}: props) => {
   return (
     <LinearGradient
-      colors={[ColorConst.gradiant_color1, ColorConst.gradiant_color2]}
+      colors={[ColorConst.gradient_color1, ColorConst.gradient_color2]}
       style={[styles.linearGradient]}>
       <Image style={styles.headerImage} source={AuthImages.header_bg_ic} />
       <TouchableOpacity onPress={onPress}>
         <Image source={AuthImages.left_icon_ic} style={styles.leftIconStyle} />
       </TouchableOpacity>
-      <Text style={styles.heraderText}>{title}</Text>
+      <Text style={styles.headerText}>{title}</Text>
       <View style={styles.leftIconStyle} />
     </LinearGradient>
   );
 };
 
-export default CommanHeader;
+export default CommonHeader;
 
 const styles = StyleSheet.create({
   headerImage: {
@@ -35,7 +35,7 @@ const styles = StyleSheet.create({
     width: hp(3.44),
     height: hp(3.44),
   },
-  heraderText: {
+  headerText: {
     textAlign: 'center',
     fontWeight: 'bold',
     fontSize: fontSize(18),

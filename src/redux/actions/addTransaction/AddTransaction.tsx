@@ -4,7 +4,7 @@ import {
   DeleteDataType,
   EditTransaction,
   GetTransaction,
-} from '../../../interface/Transaction';
+} from '../../../interface';
 import {createAsyncThunk} from '@reduxjs/toolkit';
 import firestore from '@react-native-firebase/firestore';
 import {DeleteTransaction, TransactionAction} from '../../reducer';
@@ -63,8 +63,8 @@ export const GetTransactionAction = createAsyncThunk(
   },
 );
 
-export const DeteleTransactions = createAsyncThunk(
-  'DeteleTransactions',
+export const DeleteTransactions = createAsyncThunk(
+  'DeleteTransactions',
   async (request: DeleteDataType, {dispatch}) => {
     dispatch(DeleteTransaction(request.item));
     firestore()

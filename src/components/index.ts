@@ -1,11 +1,11 @@
 // comman
-import InputText from './comman/InputText';
-import CommanLoader from './comman/CommanLoader';
-import CommanHeader from './comman/CommanHeader';
-import PopOverModal from './comman/PopOverModal';
-import StringDivider from './comman/StringDivider';
-import TouchableIcon from './comman/TouchableIcon';
-import PrimaryButton from './comman/PrimaryButton';
+import InputText from './common/InputText';
+import CommonLoader from './common/CommonLoader';
+import CommonHeader from './common/CommonHeader';
+import PopOverModal from './common/PopOverModal';
+import StringDivider from './common/StringDivider';
+import TouchableIcon from './common/TouchableIcon';
+import PrimaryButton from './common/PrimaryButton';
 
 // addTransaction
 import CategoryModal from './addTransaction/CategoryModal';
@@ -26,10 +26,10 @@ export {
   HomeCard,
   InputText,
   HomeHeader,
-  CommanLoader,
+  CommonLoader,
   MenuItemList,
   PopOverModal,
-  CommanHeader,
+  CommonHeader,
   PrimaryButton,
   TouchableIcon,
   StringDivider,

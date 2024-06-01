@@ -1,7 +1,6 @@
 import React from 'react';
-import {transactionTimeStamp} from '../../hooks';
-import {randomeBGColor} from '../../hooks/CommanHooks';
-import {TransactionData} from '../../interface/Transaction';
+import {RandomBGColor, TransactionTimeStamp} from '../../hooks';
+import {TransactionData} from '../../interface';
 import {Image, StyleSheet, Text, TouchableOpacity, View} from 'react-native';
 import {fontSize, fonts, hp, wp} from '../../theme';
 
@@ -24,7 +23,7 @@ const TransactionList = ({item, index, onTransactionPress}: props) => {
           style={[
             styles.categoryImageView,
             {
-              backgroundColor: randomeBGColor(),
+              backgroundColor: RandomBGColor(),
             },
           ]}>
           <Image
@@ -38,7 +37,7 @@ const TransactionList = ({item, index, onTransactionPress}: props) => {
             {item.transaction_category?.name}
           </Text>
           <Text style={styles.timeStamp}>
-            {transactionTimeStamp(item.timestamp)}
+            {TransactionTimeStamp(item.timestamp)}
           </Text>
         </View>
       </View>

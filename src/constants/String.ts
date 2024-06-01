@@ -25,5 +25,6 @@ export const ProfileStrings = Object.freeze({
   username: 'Username',
   settings: 'Settings',
   export_data: 'Export Data',
+  account_balance: 'Account Balance',
   wanna_logout: 'Are you sure do you wanna logout?',
 });

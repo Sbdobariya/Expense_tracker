@@ -1,12 +1,12 @@
 import React from 'react';
 import Modal from 'react-native-modal';
 import {HomeImages} from '../../../assets';
-import ImageText from '../comman/ImageText';
-import AmountText from '../comman/AmountText';
-import {transactionTimeStamp} from '../../hooks';
+import ImageText from '../common/ImageText';
+import AmountText from '../common/AmountText';
+import {TransactionTimeStamp} from '../../hooks';
 import {StyleSheet, Text, View} from 'react-native';
-import TouchableIcon from '../comman/TouchableIcon';
-import {TransactionData} from '../../interface/Transaction';
+import TouchableIcon from '../common/TouchableIcon';
+import {TransactionData} from '../../interface';
 import {ColorConst, fontSize, fonts, hp, wp} from '../../theme';
 
 interface props {
@@ -42,12 +42,12 @@ const EditCategoryModal = ({
             <TouchableIcon
               onIconPress={() => items && onDeletePress(items)}
               source={HomeImages.delete_ic}
-              customeIconStyle={styles.headerImage}
+              customIconStyle={styles.headerImage}
             />
             <TouchableIcon
               onIconPress={() => items && onEditPress(items)}
               source={HomeImages.edit_ic}
-              customeIconStyle={styles.headerImage}
+              customIconStyle={styles.headerImage}
             />
           </View>
           <View style={styles.headersubContainer}>
@@ -57,7 +57,7 @@ const EditCategoryModal = ({
             <AmountText num={items?.transaction_amount} />
           </View>
           <Text style={styles.timeStamp}>
-            {transactionTimeStamp(items?.timestamp)}
+            {TransactionTimeStamp(items?.timestamp)}
           </Text>
         </View>
         <View style={styles.bottomContainer}>

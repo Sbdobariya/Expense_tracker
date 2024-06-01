@@ -19,7 +19,7 @@ const FirebaseStorage = (
   });
 };
 
-const transactionTimeStamp = (item: MomentInput) => {
+const TransactionTimeStamp = (item: MomentInput) => {
   const transactionDate = moment(item);
   const currentDate = moment();
 
@@ -32,14 +32,14 @@ const transactionTimeStamp = (item: MomentInput) => {
   }
 };
 
-const calendarProviderDate = () => {
+const CalendarProviderDate = () => {
   const today = new Date();
   return CalendarUtils.getCalendarDateString(
     new Date().setDate(today.getDate()),
   );
 };
 
-const randomeBGColor = () => {
+const RandomBGColor = () => {
   var x = Math.floor(Math.random() * 256);
   var y = Math.floor(Math.random() * 256);
   var z = Math.floor(Math.random() * 256);
@@ -61,8 +61,8 @@ const getTime = () => {
 
 export {
   getTime,
-  randomeBGColor,
+  RandomBGColor,
   FirebaseStorage,
-  transactionTimeStamp,
-  calendarProviderDate,
+  TransactionTimeStamp,
+  CalendarProviderDate,
 };

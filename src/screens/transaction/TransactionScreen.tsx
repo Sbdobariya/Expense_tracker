@@ -5,28 +5,25 @@ import {
   TransactionList,
   EditCategoryModal,
 } from '../../components';
-import {
-  DeleteDataType,
-  TransactionData,
-  TransactionReducerType,
-} from '../../interface/Transaction';
 import {styles} from './TransactionScreenStyle';
 import {TransactionImages} from '../../../assets';
 import React, {useEffect, useState} from 'react';
 import {useDispatch, useSelector} from 'react-redux';
-import {DeteleTransactions} from '../../redux/actions';
+import {DeleteTransactions} from '../../redux/actions';
 import {EditTransactionData} from '../../redux/reducer';
 import {RootPage, TabStack} from '../../navigation/type';
-import {calendarProviderDate} from '../../hooks/CommanHooks';
-import {AuthReducerType} from '../../interface/AuthInterface';
 import {Text, View, Image, FlatList, SafeAreaView} from 'react-native';
 import {NavigationProp, useNavigation} from '@react-navigation/native';
 import {CalendarProvider, ExpandableCalendar} from 'react-native-calendars';
+import {
+  AuthReducerType,
+  DeleteDataType,
+  StateProps,
+  TransactionData,
+  TransactionReducerType,
+} from '../../interface';
+import {CalendarProviderDate} from '../../hooks';
 
-interface stateProps {
-  isVisible: boolean;
-  item?: TransactionData;
-}
 const TransactionScreen: React.FC = () => {
   const tabNavigation = useNavigation<NavigationProp<TabStack>>();
   const {transactionData} = useSelector(
@@ -37,7 +34,7 @@ const TransactionScreen: React.FC = () => {
     (state: {authReducer: AuthReducerType}) => state?.authReducer,
   );
   const dispatch = useDispatch();
-  const [isVisibleEditModal, setIsVisibleEditModal] = useState<stateProps>({
+  const [isVisibleEditModal, setIsVisibleEditModal] = useState<StateProps>({
     isVisible: false,
     item: undefined,
   });
@@ -102,7 +99,7 @@ const TransactionScreen: React.FC = () => {
       item: item,
       id: userData?.userID,
     };
-    dispatch(DeteleTransactions(request) as any);
+    dispatch(DeleteTransactions(request) as any);
     setIsVisibleEditModal({
       isVisible: false,
       item: undefined,
@@ -113,7 +110,7 @@ const TransactionScreen: React.FC = () => {
     <View style={styles.container}>
       <SafeAreaView />
       <CalendarProvider
-        date={calendarProviderDate()}
+        date={CalendarProviderDate()}
         onDateChanged={onDateChanged}>
         <View style={styles.headerContainer}>
           <Text>My Money</Text>

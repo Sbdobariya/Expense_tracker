@@ -35,7 +35,7 @@ const DropdownComponent: React.FC<componentProps> = ({onChange, value}) => {
         placeholder={'Select item'}
         onFocus={() => setIsFocus(true)}
         onBlur={() => setIsFocus(false)}
-        style={[styles.dropdown, isFocus && styles.focuseColor]}
+        style={[styles.dropdown, isFocus && styles.focusColor]}
       />
     </View>
   );
@@ -55,7 +55,7 @@ const styles = StyleSheet.create({
     borderColor: 'gray',
     paddingHorizontal: wp(4),
   },
-  focuseColor: {
+  focusColor: {
     borderColor: 'blue',
   },
 });

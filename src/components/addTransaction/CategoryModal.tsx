@@ -8,23 +8,23 @@ import {
 } from 'react-native';
 import React from 'react';
 import Modal from 'react-native-modal';
-import {expenseArray} from '../../interface/Comman';
-import {randomeBGColor} from '../../hooks/CommanHooks';
 import {ColorConst, fontSize, hp, wp} from '../../theme';
+import {ExpenseArray} from '../../interface';
+import {RandomBGColor} from '../../hooks';
 
 interface Props {
   isVisible: boolean;
-  data: expenseArray[];
+  data: ExpenseArray[];
   toggleModal: () => void;
-  onSelectExpenseCategory: (item: expenseArray) => void;
+  onSelectExpenseCategory: (item: ExpenseArray) => void;
 }
 
 const RenderItem = ({
   item,
   onSelectExpenseCategory,
 }: {
-  item: expenseArray;
-  onSelectExpenseCategory: (item: expenseArray) => void;
+  item: ExpenseArray;
+  onSelectExpenseCategory: (item: ExpenseArray) => void;
 }) => (
   <TouchableOpacity
     onPress={() => onSelectExpenseCategory(item)}
@@ -34,7 +34,7 @@ const RenderItem = ({
       style={[
         styles.imageContainer,
         {
-          backgroundColor: randomeBGColor(),
+          backgroundColor: RandomBGColor(),
         },
       ]}>
       <Image source={item?.image} style={styles.iconStyle} />

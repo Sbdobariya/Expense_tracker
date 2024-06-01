@@ -1,5 +1,5 @@
 import {createSlice} from '@reduxjs/toolkit';
-import {TransactionReducerType} from '../../../interface/Transaction';
+import {TransactionReducerType} from '../../../interface';
 
 const initialState: TransactionReducerType = {
   transactionData: [],

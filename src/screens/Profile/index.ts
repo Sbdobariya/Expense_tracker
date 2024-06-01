@@ -1,1 +1,2 @@
-export {default as ProfileScreen} from './ProfileScreen';
+export * from './profile-screen';
+export * from './account-screen';

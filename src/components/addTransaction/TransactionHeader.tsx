@@ -7,13 +7,13 @@ import {ColorConst, fontSize, fonts, hp, wp} from '../../theme';
 const TransactionHeader = ({onBackPress}: {onBackPress: () => void}) => {
   return (
     <LinearGradient
-      colors={[ColorConst.gradiant_color1, ColorConst.gradiant_color2]}
+      colors={[ColorConst.gradient_color1, ColorConst.gradient_color2]}
       style={[styles.linearGradient]}>
       <Image style={styles.headerImage} source={AuthImages.header_bg_ic} />
       <TouchableOpacity onPress={onBackPress}>
         <Image source={AuthImages.left_icon_ic} style={styles.leftIconStyle} />
       </TouchableOpacity>
-      <Text style={styles.heraderText}>Add Transaction</Text>
+      <Text style={styles.headerText}>Add Transaction</Text>
       <View style={styles.leftIconStyle} />
     </LinearGradient>
   );
@@ -31,7 +31,7 @@ const styles = StyleSheet.create({
     borderBottomStartRadius: hp(5),
     justifyContent: 'space-between',
   },
-  heraderText: {
+  headerText: {
     fontWeight: 'bold',
     textAlign: 'center',
     fontSize: fontSize(18),

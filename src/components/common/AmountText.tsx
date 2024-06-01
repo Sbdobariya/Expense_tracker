@@ -1,19 +1,31 @@
 import React from 'react';
-import {Image, StyleSheet, Text, TextStyle, View} from 'react-native';
+import {
+  Image,
+  ImageStyle,
+  StyleSheet,
+  Text,
+  TextStyle,
+  View,
+} from 'react-native';
 import {HomeImages} from '../../../assets';
 import {fontSize, fonts, hp} from '../../theme';
 
 const AmountText = ({
   num,
-  customeNumStyle,
+  customNumStyle,
+  customRupeeIcon,
 }: {
   num: number | undefined;
-  customeNumStyle?: TextStyle;
+  customNumStyle?: TextStyle;
+  customRupeeIcon?: ImageStyle;
 }) => {
   return (
     <View style={styles.subIncomeView}>
-      <Image source={HomeImages.rupee_ic} style={styles.rupeesIcon} />
-      <Text style={[styles.incomeNum, customeNumStyle]}>{num}.00</Text>
+      <Image
+        source={HomeImages.rupee_ic}
+        style={[styles.rupeesIcon, customRupeeIcon]}
+      />
+      <Text style={[styles.incomeNum, customNumStyle]}>{num}.00</Text>
     </View>
   );
 };

@@ -2,7 +2,7 @@ import React from 'react';
 import {ActivityIndicator, StyleSheet} from 'react-native';
 import {ColorConst} from '../../theme';
 
-const CommanLoader = ({isVisible}: {isVisible: boolean}) => {
+const CommonLoader = ({isVisible}: {isVisible: boolean}) => {
   return (
     <>
       {isVisible ? (
@@ -16,7 +16,7 @@ const CommanLoader = ({isVisible}: {isVisible: boolean}) => {
   );
 };
 
-export default CommanLoader;
+export default CommonLoader;
 
 const styles = StyleSheet.create({
   indicatorStyle: {

@@ -9,6 +9,7 @@ export enum RootPage {
   LoginScreen = 'LoginScreen',
   Transaction = 'Transaction',
   SignUpScreen = 'SignUpScreen',
+  AccountScreen = 'AccountScreen',
   ProfileScreen = 'ProfileScreen',
   AddTransaction = 'AddTransaction',
   StatisticsScreen = 'StatisticsScreen',
@@ -24,6 +25,7 @@ export type AuthNavigationType = {
 
 export type MainNavigatorType = {
   [RootPage.TabStack]: TabStack;
+  [RootPage.AccountScreen]: undefined;
   [RootPage.AuthStack]: AuthNavigationType;
 };
 

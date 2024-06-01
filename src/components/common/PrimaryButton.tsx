@@ -6,15 +6,15 @@ import {ColorConst, fontSize, fonts, hp, wp} from '../../theme';
 interface props {
   title: string;
   onPress?: () => void;
-  customeGradientStyle?: ViewStyle;
+  customGradientStyle?: ViewStyle;
 }
 
-const PrimaryButton = ({title, onPress, customeGradientStyle}: props) => {
+const PrimaryButton = ({title, onPress, customGradientStyle}: props) => {
   return (
     <TouchableOpacity onPress={onPress} activeOpacity={0.5}>
       <LinearGradient
-        colors={[ColorConst.gradiant_color1, ColorConst.gradiant_color2]}
-        style={[styles.linearGradient, customeGradientStyle]}>
+        colors={[ColorConst.gradient_color1, ColorConst.gradient_color2]}
+        style={[styles.linearGradient, customGradientStyle]}>
         <Text style={styles.buttonText}>{title}</Text>
       </LinearGradient>
     </TouchableOpacity>

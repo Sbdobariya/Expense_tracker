@@ -26,7 +26,7 @@ const OnBoardingScreen: React.FC = () => {
         />
         <PrimaryButton
           title={'Login'}
-          customeGradientStyle={styles.loginButton}
+          customGradientStyle={styles.loginButton}
           onPress={() => navigation.navigate(RootPage.LoginScreen)}
         />
       </View>

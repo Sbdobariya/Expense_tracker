@@ -3,20 +3,20 @@ import {
   useIsFocused,
   useNavigation,
 } from '@react-navigation/native';
-import {
-  DeleteDataType,
-  GetTransaction,
-  TransactionData,
-  TransactionReducerType,
-} from '../../interface/Transaction';
 import {Alert} from 'react-native';
 import {useEffect, useState} from 'react';
-import {stateProps} from '../../interface/Comman';
 import {useDispatch, useSelector} from 'react-redux';
 import {EditTransactionData} from '../../redux/reducer';
 import {RootPage, TabStack} from '../../navigation/type';
-import {AuthReducerType} from '../../interface/AuthInterface';
-import {DeteleTransactions, GetTransactionAction} from '../../redux/actions';
+import {DeleteTransactions, GetTransactionAction} from '../../redux/actions';
+import {
+  AuthReducerType,
+  DeleteDataType,
+  GetTransaction,
+  StateProps,
+  TransactionData,
+  TransactionReducerType,
+} from '../../interface';
 
 export const useHome = () => {
   const IsFocuse = useIsFocused();
@@ -31,7 +31,7 @@ export const useHome = () => {
       state?.transactionReducer,
   );
 
-  const [isVisibleEditModal, setIsVisibleEditModal] = useState<stateProps>({
+  const [isVisibleEditModal, setIsVisibleEditModal] = useState<StateProps>({
     isVisible: false,
     item: undefined,
   });
@@ -75,7 +75,7 @@ export const useHome = () => {
       item: item,
       id: userData?.userID,
     };
-    dispatch(DeteleTransactions(request) as any);
+    dispatch(DeleteTransactions(request) as any);
     setIsVisibleEditModal({
       isVisible: false,
       item: undefined,

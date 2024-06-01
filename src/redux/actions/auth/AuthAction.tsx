@@ -1,7 +1,7 @@
 import {
   UserSignInActionRequest,
   UserSignUpActionRequest,
-} from '../../../interface/AuthInterface';
+} from '../../../interface';
 import {StoreData} from '../../../utils';
 import auth from '@react-native-firebase/auth';
 import {createAsyncThunk} from '@reduxjs/toolkit';

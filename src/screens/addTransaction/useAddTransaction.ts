@@ -1,17 +1,17 @@
 import {useState} from 'react';
 import {Alert} from 'react-native';
-import {
-  AddTransaction,
-  EditTransaction,
-  TransactionReducerType,
-} from '../../interface/Transaction';
-import {expenseArray} from '../../interface/Comman';
 import {useDispatch, useSelector} from 'react-redux';
 import {useNavigation} from '@react-navigation/native';
 import {EditTransactionData} from '../../redux/reducer';
 import {FirebaseStorage, UseImagePicker} from '../../hooks';
-import {AuthReducerType} from '../../interface/AuthInterface';
 import {AddTransactionAction, EditTransactionAction} from '../../redux/actions';
+import {
+  AddTransaction,
+  AuthReducerType,
+  EditTransaction,
+  ExpenseArray,
+  TransactionReducerType,
+} from '../../interface';
 
 export const useAddTransaction = () => {
   const dispatch = useDispatch();
@@ -44,14 +44,14 @@ export const useAddTransaction = () => {
     EditedData?.transaction_amount ? EditedData.transaction_amount : undefined,
   );
   const [selectedTransactionWay, setSelectedTransactionWay] = useState<
-    expenseArray | undefined
+    ExpenseArray | undefined
   >(
     EditedData?.transaction_account
       ? EditedData?.transaction_account
       : undefined,
   );
-  const [selectedExpenseItem, setselectedExpenseItem] = useState<
-    expenseArray | undefined
+  const [selectedExpenseItem, setSelectedExpenseItem] = useState<
+    ExpenseArray | undefined
   >(
     EditedData?.transaction_category
       ? EditedData?.transaction_category
@@ -86,7 +86,7 @@ export const useAddTransaction = () => {
             setNoteValue('');
             setAmountValue(undefined);
             setSelectedInvoice(undefined);
-            setselectedExpenseItem(undefined);
+            setSelectedExpenseItem(undefined);
             setSelectedTransactionWay(undefined);
             setSelectedTransactionWay(undefined);
           }
@@ -110,7 +110,7 @@ export const useAddTransaction = () => {
   };
   const onTabChange = (val: string) => {
     setActiveTab(val);
-    setselectedExpenseItem(undefined);
+    setSelectedExpenseItem(undefined);
   };
 
   const onUpDatePress = () => {
@@ -157,7 +157,7 @@ export const useAddTransaction = () => {
     showCategoryModal,
     selectedExpenseItem,
     setShowCategoryModal,
-    setselectedExpenseItem,
+    setSelectedExpenseItem,
     selectedTransactionWay,
     setSelectedTransactionWay,
   };

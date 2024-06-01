@@ -2,16 +2,16 @@ import {Alert, View} from 'react-native';
 import React, {useState} from 'react';
 import {
   InputText,
-  CommanHeader,
-  CommanLoader,
   PrimaryButton,
   StringDivider,
+  CommonHeader,
+  CommonLoader,
 } from '../../../components';
 import {
   AuthReducerType,
   UserSignInActionRequest,
-  userDataType,
-} from '../../../interface/AuthInterFace';
+  UserDataType,
+} from '../../../interface';
 import {styles} from './LoginScreenStyle';
 import {useDispatch, useSelector} from 'react-redux';
 import {AuthStrings} from '../../../constants/String';
@@ -42,7 +42,7 @@ const LoginScreen: React.FC = () => {
       const userData: UserSignInActionRequest = {
         data: {userEmail: email, userPassword: password},
         onSuccess: response => {
-          signIn(response as userDataType);
+          signIn(response as UserDataType);
         },
         onFail: error => {
           Alert.alert(JSON.stringify(error));
@@ -53,8 +53,8 @@ const LoginScreen: React.FC = () => {
   };
   return (
     <View style={styles.container}>
-      <CommanLoader isVisible={isLoading} />
-      <CommanHeader
+      <CommonLoader isVisible={isLoading} />
+      <CommonHeader
         title={AuthStrings.login}
         onPress={() => navigation.goBack()}
       />
@@ -62,20 +62,20 @@ const LoginScreen: React.FC = () => {
         value={email}
         autoCapitalize="none"
         placeholder={AuthStrings.email}
-        inputCustomeStyle={styles.emailInput}
+        inputCustomStyle={styles.emailInput}
         onChangeText={(txt: string) => setEmail(txt)}
       />
       <InputText
         value={password}
         autoCapitalize="none"
         placeholder={AuthStrings.Password}
-        inputCustomeStyle={styles.passwordInput}
+        inputCustomStyle={styles.passwordInput}
         onChangeText={(txt: string) => setPassword(txt)}
       />
       <PrimaryButton
         onPress={onLoginPress}
         title={AuthStrings.login}
-        customeGradientStyle={styles.loginButtonStyle}
+        customGradientStyle={styles.loginButtonStyle}
       />
       <StringDivider
         titleTwo={AuthStrings.sign_up}

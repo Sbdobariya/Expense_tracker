@@ -17,7 +17,7 @@ export interface UserSignInActionRequest {
   onFail?: (err: any) => void;
 }
 
-export interface userDataType {
+export interface UserDataType {
   userID?: string;
   userName?: string;
   userEmail?: string;
@@ -25,5 +25,5 @@ export interface userDataType {
 
 export interface AuthReducerType {
   isLoading: boolean;
-  userData?: userDataType;
+  userData?: UserDataType;
 }

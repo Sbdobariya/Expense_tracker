@@ -1,12 +1,16 @@
-import {MenuItemList, TouchableIcon, UpdateNameModal} from '../../components';
 import React from 'react';
 import {useSelector} from 'react-redux';
 import {useProfile} from './useProfile';
-import {HomeImages} from '../../../assets';
+import {HomeImages} from '../../../../assets';
 import {styles} from './ProfileScreenStyle';
-import {ProfileStrings} from '../../constants/String';
-import {AuthReducerType} from '../../interface/AuthInterface';
+import {ProfileStrings} from '../../../constants/String';
 import {FlatList, SafeAreaView, Text, View} from 'react-native';
+import {AuthReducerType} from '../../../interface';
+import {
+  MenuItemList,
+  TouchableIcon,
+  UpdateNameModal,
+} from '../../../components';
 
 const ProfileScreen: React.FC = () => {
   const {userData} = useSelector(
@@ -27,7 +31,7 @@ const ProfileScreen: React.FC = () => {
         <TouchableIcon
           onIconPress={onToggleModal}
           source={HomeImages.edit_ic}
-          customeIconStyle={styles.editIcon}
+          customIconStyle={styles.editIcon}
         />
       </View>
       <FlatList

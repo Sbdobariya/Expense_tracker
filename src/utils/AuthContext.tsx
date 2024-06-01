@@ -1,10 +1,10 @@
 import * as React from 'react';
-import {userDataType} from '../interface/AuthInterface';
+import {UserDataType} from '../interface';
 
 interface authContext {
-  signIn: (data: userDataType) => Promise<void>;
+  signIn: (data: UserDataType) => Promise<void>;
   signOut: () => void;
-  signUp: (data: userDataType) => Promise<void>;
+  signUp: (data: UserDataType) => Promise<void>;
 }
 
 export const AuthContext = React.createContext<authContext>({} as authContext);

@@ -15,7 +15,7 @@ import {
 import {
   IncomeCategoryData,
   ExpenseCategoryData,
-  TransactionModeData,
+  TransactionAccountData,
 } from '../../utils';
 import React from 'react';
 import {HomeImages} from '../../../assets';
@@ -42,7 +42,7 @@ const AddTransactionScreen: React.FC = () => {
     showCategoryModal,
     selectedExpenseItem,
     setShowCategoryModal,
-    setselectedExpenseItem,
+    setSelectedExpenseItem,
     selectedTransactionWay,
     setSelectedTransactionWay,
   } = useAddTransaction();
@@ -108,14 +108,14 @@ const AddTransactionScreen: React.FC = () => {
                 setAmountValue(numericValue);
               }
             }}
-            inputCustomeStyle={styles.amountInputStyle}
+            inputCustomStyle={styles.amountInputStyle}
           />
           <InputText
             value={noteValue}
             keyboardType="default"
             placeholder="Add Notes"
             onChangeText={text => setNoteValue(text)}
-            inputCustomeStyle={styles.amountInputStyle}
+            inputCustomStyle={styles.amountInputStyle}
           />
           <TouchableOpacity
             style={styles.invoiceContainer}
@@ -139,7 +139,7 @@ const AddTransactionScreen: React.FC = () => {
         <PrimaryButton
           title={EditedData ? 'Update' : 'Add'}
           onPress={EditedData ? onUpDatePress : onAddButtonPress}
-          customeGradientStyle={styles.bottomAddButton}
+          customGradientStyle={styles.bottomAddButton}
         />
       </View>
       <CategoryModal
@@ -148,14 +148,14 @@ const AddTransactionScreen: React.FC = () => {
             ? activeTab === 'expense'
               ? ExpenseCategoryData
               : IncomeCategoryData
-            : TransactionModeData
+            : TransactionAccountData
         }
         isVisible={showCategoryModal.isVisible}
         toggleModal={onToggleModal}
         onSelectExpenseCategory={item => {
           onToggleModal();
           if (showCategoryModal.mode === 'category') {
-            setselectedExpenseItem(item);
+            setSelectedExpenseItem(item);
           } else {
             setSelectedTransactionWay(item);
           }

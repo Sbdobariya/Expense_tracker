@@ -1,7 +1,7 @@
 // AddTransaction
 import {
   AddTransactionAction,
-  DeteleTransactions,
+  DeleteTransactions,
   EditTransactionAction,
   GetTransactionAction,
 } from './addTransaction/AddTransaction';
@@ -12,7 +12,7 @@ import {UserSignInActions, UserSignUpAction} from './auth/AuthAction';
 export {
   UserSignUpAction,
   UserSignInActions,
-  DeteleTransactions,
+  DeleteTransactions,
   AddTransactionAction,
   GetTransactionAction,
   EditTransactionAction,

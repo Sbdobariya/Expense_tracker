@@ -1,6 +1,6 @@
 import {TransactionModeImages} from '../../assets';
 
-export const TransactionModeData = [
+export const TransactionAccountData = [
   {
     id: 1,
     name: 'Cash',

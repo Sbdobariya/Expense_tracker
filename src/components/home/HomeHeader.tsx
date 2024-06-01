@@ -1,11 +1,11 @@
 import React from 'react';
 import {useSelector} from 'react-redux';
 import {AuthImages} from '../../../assets';
-import {getTime} from '../../hooks/CommanHooks';
 import {Image, StyleSheet, Text} from 'react-native';
 import LinearGradient from 'react-native-linear-gradient';
-import {AuthReducerType} from '../../interface/AuthInterface';
+import {AuthReducerType} from '../../interface';
 import {ColorConst, fontSize, fonts, hp, wp} from '../../theme';
+import {getTime} from '../../hooks';
 
 const HomeHeader = () => {
   const {userData} = useSelector(
@@ -14,11 +14,11 @@ const HomeHeader = () => {
 
   return (
     <LinearGradient
-      colors={[ColorConst.gradiant_color1, ColorConst.gradiant_color2]}
+      colors={[ColorConst.gradient_color1, ColorConst.gradient_color2]}
       style={[styles.linearGradient]}>
       <Image style={styles.headerImage} source={AuthImages.header_bg_ic} />
       <Text style={styles.timeStyle}>{getTime()},</Text>
-      <Text style={styles.heraderText}>{userData?.userName}</Text>
+      <Text style={styles.headerText}>{userData?.userName}</Text>
     </LinearGradient>
   );
 };
@@ -34,7 +34,7 @@ const styles = StyleSheet.create({
     borderBottomStartRadius: hp(5),
     paddingLeft: wp(3),
   },
-  heraderText: {
+  headerText: {
     fontSize: fontSize(18),
     fontFamily: fonts.bold,
     color: ColorConst.white,

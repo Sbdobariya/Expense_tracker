@@ -2,8 +2,8 @@ import React, {useEffect, useState} from 'react';
 import {SafeAreaView, View} from 'react-native';
 import {PieChart} from 'react-native-gifted-charts';
 import {useSelector} from 'react-redux';
-import {TransactionReducerType} from '../../interface/Transaction';
-import DropdownComponent from '../../components/comman/DropDown';
+import {TransactionReducerType} from '../../interface';
+import DropdownComponent from '../../components/common/DropDown';
 import {styles} from './StatisticsScreenStyle';
 
 interface chartData {

@@ -11,21 +11,21 @@ import {hp} from '../../theme';
 interface props {
   onIconPress?: () => void;
   source: ImageSourcePropType;
-  customeIconStyle?: ImageStyle;
+  customIconStyle?: ImageStyle;
   touchableRef?: React.LegacyRef<TouchableOpacity>;
 }
 
 const TouchableIcon = ({
   onIconPress,
   source,
-  customeIconStyle,
+  customIconStyle,
   touchableRef,
 }: props) => {
   return (
     <TouchableOpacity ref={touchableRef} onPress={onIconPress}>
       <Image
         source={source}
-        style={[styles.iconStyle, customeIconStyle]}
+        style={[styles.iconStyle, customIconStyle]}
         resizeMode="contain"
       />
     </TouchableOpacity>

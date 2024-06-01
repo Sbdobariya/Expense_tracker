@@ -1,5 +1,5 @@
 import {createSlice} from '@reduxjs/toolkit';
-import {AuthReducerType} from '../../../interface/AuthInterface';
+import {AuthReducerType} from '../../../interface';
 
 const initialState: AuthReducerType = {
   userData: {},

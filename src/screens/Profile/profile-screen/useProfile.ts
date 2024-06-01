@@ -1,9 +1,11 @@
 import React, {useState} from 'react';
-import {ColorConst} from '../../theme';
-import {ProfileImage} from '../../../assets';
+import {ColorConst} from '../../../theme';
+import {ProfileImage} from '../../../../assets';
 import auth from '@react-native-firebase/auth';
-import {ProfileStrings} from '../../constants/String';
-import {AuthContext} from '../../utils/AuthContext';
+import {ProfileStrings} from '../../../constants/String';
+import {AuthContext} from '../../../utils/AuthContext';
+import {NavigationProp, useNavigation} from '@react-navigation/native';
+import {MainNavigatorType, RootPage} from '../../../navigation/type';
 
 export const useProfile = () => {
   const MenuItem = [
@@ -26,6 +28,7 @@ export const useProfile = () => {
       image: ProfileImage.logout_ic,
     },
   ];
+  const navigation = useNavigation<NavigationProp<MainNavigatorType>>();
   const {signOut} = React.useContext(AuthContext);
   const [isUpdateModalVisible, setIsUpdateModalVisible] = useState(false);
 
@@ -33,6 +36,8 @@ export const useProfile = () => {
     if (props === ProfileStrings.logout) {
       signOut();
       auth().signOut();
+    } else if (props === ProfileStrings.account) {
+      navigation.navigate(RootPage.AccountScreen);
     }
   };
 
