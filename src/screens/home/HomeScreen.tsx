@@ -63,10 +63,10 @@ const HomeScreen: React.FC = () => {
         style={styles.flatlistStyle}
       />
       <EditCategoryModal
-        onDeletePress={onDeletePress}
         onEditPress={onEditPress}
-        isVisible={isVisibleEditModal.isVisible}
         toggleModal={toggleModal}
+        onDeletePress={onDeletePress}
+        isVisible={isVisibleEditModal.isVisible}
         items={isVisibleEditModal.item || undefined}
       />
     </View>

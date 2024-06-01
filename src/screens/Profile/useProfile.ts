@@ -3,7 +3,6 @@ import {ColorConst} from '../../theme';
 import {ProfileImage} from '../../../assets';
 import auth from '@react-native-firebase/auth';
 import {ProfileStrings} from '../../constants/String';
-import AsyncStorage from '@react-native-async-storage/async-storage';
 import {AuthContext} from '../../utils/AuthContext';
 
 export const useProfile = () => {
@@ -27,35 +26,22 @@ export const useProfile = () => {
       image: ProfileImage.logout_ic,
     },
   ];
-  const [isVisibleLogOutModal, setIsVisibleLogOutModal] = useState(false);
+  const {signOut} = React.useContext(AuthContext);
   const [isUpdateModalVisible, setIsUpdateModalVisible] = useState(false);
-
-  const onYesPress = async () => {
-    try {
-      toggleModal();
-      auth().signOut();
-      await AsyncStorage.clear();
-    } catch (error) {
-      console.log('error----------', error);
-    }
-  };
 
   const onItemPress = (props: string) => {
     if (props === ProfileStrings.logout) {
-      setIsVisibleLogOutModal(true);
+      signOut();
+      auth().signOut();
     }
   };
 
-  const toggleModal = () => setIsVisibleLogOutModal(false);
   const onToggleModal = () => setIsUpdateModalVisible(!isUpdateModalVisible);
 
   return {
     MenuItem,
-    onYesPress,
-    toggleModal,
     onItemPress,
     onToggleModal,
-    isVisibleLogOutModal,
     isUpdateModalVisible,
   };
 };

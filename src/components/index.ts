@@ -20,14 +20,12 @@ import EditCategoryModal from './home/EditCategoryModal';
 
 // Profile
 import MenuItemList from './Profile/MenuItemList';
-import LogoutModal from './Profile/LogoutModal';
 import UpdateNameModal from './Profile/UpdateNameModal';
 
 export {
   HomeCard,
   InputText,
   HomeHeader,
-  LogoutModal,
   CommanLoader,
   MenuItemList,
   PopOverModal,

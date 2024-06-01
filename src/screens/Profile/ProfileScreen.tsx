@@ -1,9 +1,4 @@
-import {
-  LogoutModal,
-  MenuItemList,
-  TouchableIcon,
-  UpdateNameModal,
-} from '../../components';
+import {MenuItemList, TouchableIcon, UpdateNameModal} from '../../components';
 import React from 'react';
 import {useSelector} from 'react-redux';
 import {useProfile} from './useProfile';
@@ -18,15 +13,8 @@ const ProfileScreen: React.FC = () => {
     (state: {authReducer: AuthReducerType}) => state?.authReducer,
   );
 
-  const {
-    MenuItem,
-    onYesPress,
-    onItemPress,
-    toggleModal,
-    onToggleModal,
-    isVisibleLogOutModal,
-    isUpdateModalVisible,
-  } = useProfile();
+  const {MenuItem, onItemPress, onToggleModal, isUpdateModalVisible} =
+    useProfile();
 
   return (
     <View style={styles.container}>
@@ -48,12 +36,6 @@ const ProfileScreen: React.FC = () => {
         renderItem={({item}) => {
           return <MenuItemList item={item} onItemPress={onItemPress} />;
         }}
-      />
-      <LogoutModal
-        onNoPress={toggleModal}
-        onYesPress={onYesPress}
-        toggleModal={toggleModal}
-        isVisible={isVisibleLogOutModal}
       />
       <UpdateNameModal
         isVisible={isUpdateModalVisible}

@@ -10,6 +10,7 @@ import {
 import {
   AuthReducerType,
   UserSignInActionRequest,
+  userDataType,
 } from '../../../interface/AuthInterFace';
 import {styles} from './LoginScreenStyle';
 import {useDispatch, useSelector} from 'react-redux';
@@ -17,11 +18,14 @@ import {AuthStrings} from '../../../constants/String';
 import {UserSignInActions} from '../../../redux/actions';
 import {AuthNavigationType, RootPage} from '../../../navigation/type';
 import {NavigationProp, useNavigation} from '@react-navigation/native';
+import {AuthContext} from '../../../utils/AuthContext';
 
 const LoginScreen: React.FC = () => {
   const navigation = useNavigation<NavigationProp<AuthNavigationType>>();
 
   const dispatch = useDispatch();
+  const {signIn} = React.useContext(AuthContext);
+
   const {isLoading} = useSelector(
     (state: {authReducer: AuthReducerType}) => state?.authReducer,
   );
@@ -37,7 +41,9 @@ const LoginScreen: React.FC = () => {
     } else {
       const userData: UserSignInActionRequest = {
         data: {userEmail: email, userPassword: password},
-        onSuccess: _response => {},
+        onSuccess: response => {
+          signIn(response as userDataType);
+        },
         onFail: error => {
           Alert.alert(JSON.stringify(error));
         },
