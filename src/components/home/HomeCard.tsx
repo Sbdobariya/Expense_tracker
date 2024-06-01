@@ -1,11 +1,11 @@
 import React from 'react';
-import AmountText from '../common/AmountText';
-import {Image, StyleSheet, Text, View} from 'react-native';
+import {Image, Platform, StyleSheet, Text, View} from 'react-native';
 import LinearGradient from 'react-native-linear-gradient';
 import {TransactionData} from '../../interface';
 import {HomeImages} from '../../../assets';
 import {ColorConst, fontSize, fonts, hp, wp} from '../../theme';
 import {HomeStrings} from '../../constants/String';
+import AmountText from '../common/AmountText';
 
 const HomeCard = ({transactionData}: {transactionData: TransactionData[]}) => {
   let totalIncome = 0;
@@ -62,7 +62,7 @@ const styles = StyleSheet.create({
   linearGradient: {
     height: hp(22),
     padding: hp(2),
-    marginTop: hp(-15),
+    marginTop: Platform.OS === 'ios' ? hp(-15) : hp(-15),
     borderRadius: hp(3),
     marginHorizontal: wp(3),
     justifyContent: 'center',

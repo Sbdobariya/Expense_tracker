@@ -1,6 +1,6 @@
 export * from './home';
 export * from './auth';
-export * from './Profile';
+export * from './profile';
 export * from './statistics';
 export * from './onBoarding';
 export * from './transaction';

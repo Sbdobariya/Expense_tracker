@@ -19,7 +19,7 @@ import {
 } from '../../interface';
 
 export const useHome = () => {
-  const IsFocuse = useIsFocused();
+  const IsFocus = useIsFocused();
   const dispatch = useDispatch();
   const tabNavigation = useNavigation<NavigationProp<TabStack>>();
 
@@ -37,7 +37,7 @@ export const useHome = () => {
   });
   useEffect(() => {
     const fetchData = async () => {
-      if (userData?.userID && IsFocuse) {
+      if (userData?.userID && IsFocus) {
         const data: GetTransaction = {
           data: {
             user_data: userData,
@@ -52,7 +52,7 @@ export const useHome = () => {
     };
 
     fetchData();
-  }, [userData, IsFocuse, dispatch]);
+  }, [userData, IsFocus, dispatch]);
 
   const onEditPress = (item: TransactionData) => {
     dispatch(EditTransactionData(item));

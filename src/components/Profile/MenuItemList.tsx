@@ -16,7 +16,7 @@ const MenuItemList = ({item, onItemPress}: MenuItemListProps) => {
   return (
     <TouchableOpacity
       key={item.id}
-      style={styles.conainer}
+      style={styles.container}
       onPress={() => onItemPress(item.name)}>
       <View
         style={[
@@ -35,7 +35,7 @@ const MenuItemList = ({item, onItemPress}: MenuItemListProps) => {
 export default MenuItemList;
 
 const styles = StyleSheet.create({
-  conainer: {
+  container: {
     gap: hp(1),
     padding: hp(1.5),
     marginBottom: 1,

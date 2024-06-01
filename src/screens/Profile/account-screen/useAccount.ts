@@ -1,5 +1,5 @@
 import {NavigationProp, useNavigation} from '@react-navigation/native';
-import {MainNavigatorType} from '../../../navigation/type';
+import {MainNavigatorType, RootPage} from '../../../navigation/type';
 import {useSelector} from 'react-redux';
 import {useEffect, useState} from 'react';
 import {ImageSourcePropType} from 'react-native';
@@ -62,11 +62,17 @@ export const useAccount = () => {
   const onBackPress = () => {
     navigation.goBack();
   };
+  const onAccountListPress = (props: ModifiedData) => {
+    navigation.navigate(RootPage.AccountDetails, {
+      params: props,
+    });
+  };
 
   return {
     onBackPress,
     accountData,
     transactionData,
     totalIncomeExpense,
+    onAccountListPress,
   };
 };

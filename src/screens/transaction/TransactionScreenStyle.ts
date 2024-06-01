@@ -1,5 +1,5 @@
 import {StyleSheet} from 'react-native';
-import {hp, fontSize, fonts} from '../../theme';
+import {hp, fontSize, fonts, ColorConst} from '../../theme';
 
 export const styles = StyleSheet.create({
   container: {
@@ -47,5 +47,9 @@ export const styles = StyleSheet.create({
   popoverView: {
     gap: hp(2),
     flexDirection: 'row',
+  },
+  myMoney: {
+    color: ColorConst.dark_black,
+    fontSize: fontSize(13),
   },
 });

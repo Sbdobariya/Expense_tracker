@@ -1,3 +1,5 @@
+import {ModifiedData} from '../interface';
+
 export enum RootPage {
   Home = 'Home',
   Profile = 'Profile',
@@ -11,6 +13,7 @@ export enum RootPage {
   SignUpScreen = 'SignUpScreen',
   AccountScreen = 'AccountScreen',
   ProfileScreen = 'ProfileScreen',
+  AccountDetails = 'AccountDetails',
   AddTransaction = 'AddTransaction',
   StatisticsScreen = 'StatisticsScreen',
   TransactionScreen = 'TransactionScreen',
@@ -26,6 +29,9 @@ export type AuthNavigationType = {
 export type MainNavigatorType = {
   [RootPage.TabStack]: TabStack;
   [RootPage.AccountScreen]: undefined;
+  [RootPage.AccountDetails]: {
+    params: ModifiedData;
+  };
   [RootPage.AuthStack]: AuthNavigationType;
 };
 

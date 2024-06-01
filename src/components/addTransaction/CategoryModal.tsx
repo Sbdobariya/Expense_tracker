@@ -1,16 +1,9 @@
-import {
-  FlatList,
-  Image,
-  StyleSheet,
-  Text,
-  TouchableOpacity,
-  View,
-} from 'react-native';
+import {FlatList, StyleSheet, Text, TouchableOpacity, View} from 'react-native';
 import React from 'react';
 import Modal from 'react-native-modal';
 import {ColorConst, fontSize, hp, wp} from '../../theme';
 import {ExpenseArray} from '../../interface';
-import {RandomBGColor} from '../../hooks';
+import CategoryIcons from '../common/CategoryIcons';
 
 interface Props {
   isVisible: boolean;
@@ -30,15 +23,11 @@ const RenderItem = ({
     onPress={() => onSelectExpenseCategory(item)}
     key={`${item?.id}cc`}
     style={styles.renderItemContainer}>
-    <View
-      style={[
-        styles.imageContainer,
-        {
-          backgroundColor: RandomBGColor(),
-        },
-      ]}>
-      <Image source={item?.image} style={styles.iconStyle} />
-    </View>
+    <CategoryIcons
+      imageSource={item?.image}
+      customCategoryImageView={styles.imageContainer}
+      customCategoryImage={styles.iconStyle}
+    />
     <Text style={styles.textStyle} numberOfLines={3} ellipsizeMode="tail">
       {item?.name}
     </Text>

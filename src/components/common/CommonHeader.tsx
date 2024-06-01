@@ -1,4 +1,11 @@
-import {Image, StyleSheet, Text, TouchableOpacity, View} from 'react-native';
+import {
+  Image,
+  Platform,
+  StyleSheet,
+  Text,
+  TouchableOpacity,
+  View,
+} from 'react-native';
 import React from 'react';
 import LinearGradient from 'react-native-linear-gradient';
 import {AuthImages} from '../../../assets';
@@ -32,8 +39,8 @@ const styles = StyleSheet.create({
     position: 'absolute',
   },
   leftIconStyle: {
-    width: hp(3.44),
-    height: hp(3.44),
+    width: hp(5),
+    height: hp(5),
   },
   headerText: {
     textAlign: 'center',
@@ -43,11 +50,11 @@ const styles = StyleSheet.create({
     fontFamily: fonts.bold,
   },
   linearGradient: {
-    height: hp(18),
-    paddingTop: hp(7),
+    height: Platform.OS == 'ios' ? hp(18) : hp(13),
+    paddingTop: Platform.OS == 'ios' ? hp(7) : hp(3),
     flexDirection: 'row',
     alignItems: 'center',
-    paddingHorizontal: wp(6.4),
+    paddingHorizontal: wp(2),
     justifyContent: 'space-between',
   },
 });

@@ -7,7 +7,7 @@ import {
 import React from 'react';
 import {ColorConst, hp} from '../theme';
 import {RootPage, TabStack} from './type';
-import {Image, StyleSheet} from 'react-native';
+import {Image, Platform, StyleSheet} from 'react-native';
 import {AuthImages, HomeImages} from '../../assets';
 import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
 import TransactionStackNavigator from './transactionStackNavigator/TransactionStackNavigator';
@@ -16,7 +16,14 @@ const Tab = createBottomTabNavigator<TabStack>();
 
 const TabNavigation: React.FC = () => {
   return (
-    <Tab.Navigator screenOptions={{headerShown: false, tabBarShowLabel: false}}>
+    <Tab.Navigator
+      screenOptions={{
+        headerShown: false,
+        tabBarShowLabel: false,
+        tabBarStyle: {
+          height: hp(9),
+        },
+      }}>
       <Tab.Screen
         name={RootPage.Home}
         component={HomeStackNavigator}
@@ -28,6 +35,7 @@ const TabNavigation: React.FC = () => {
                   focused ? AuthImages.home_focuse_ic : AuthImages.home_ic
                 }
                 style={styles.iconStyle}
+                resizeMode="contain"
               />
             );
           },
@@ -46,6 +54,7 @@ const TabNavigation: React.FC = () => {
                     : AuthImages.transaction_ic
                 }
                 style={styles.iconStyle}
+                resizeMode="contain"
               />
             );
           },
@@ -64,6 +73,7 @@ const TabNavigation: React.FC = () => {
               <Image
                 style={styles.addIconStyle}
                 source={HomeImages.add_category_ic}
+                resizeMode="contain"
               />
             );
           },
@@ -82,6 +92,7 @@ const TabNavigation: React.FC = () => {
                     : AuthImages.staitics_ic
                 }
                 style={styles.iconStyle}
+                resizeMode="contain"
               />
             );
           },
@@ -98,6 +109,7 @@ const TabNavigation: React.FC = () => {
                   focused ? AuthImages.profile_focuse_ic : AuthImages.profile_ic
                 }
                 style={styles.iconStyle}
+                resizeMode="contain"
               />
             );
           },
@@ -121,12 +133,12 @@ const styles = StyleSheet.create({
     marginTop: hp(1),
   },
   iconStyle: {
-    width: hp(3),
-    height: hp(3),
+    width: hp(4),
+    height: hp(4),
   },
   addIconStyle: {
     width: hp(6),
     height: hp(6),
-    marginBottom: hp(5),
+    marginBottom: Platform.OS === 'ios' ? hp(5) : hp(10),
   },
 });

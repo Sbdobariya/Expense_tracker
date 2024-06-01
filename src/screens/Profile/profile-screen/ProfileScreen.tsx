@@ -35,6 +35,7 @@ const ProfileScreen: React.FC = () => {
         />
       </View>
       <FlatList
+        bounces={false}
         data={MenuItem}
         style={styles.flatlist}
         renderItem={({item}) => {

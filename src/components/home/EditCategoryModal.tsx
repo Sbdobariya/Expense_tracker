@@ -2,12 +2,12 @@ import React from 'react';
 import Modal from 'react-native-modal';
 import {HomeImages} from '../../../assets';
 import ImageText from '../common/ImageText';
-import AmountText from '../common/AmountText';
 import {TransactionTimeStamp} from '../../hooks';
 import {StyleSheet, Text, View} from 'react-native';
 import TouchableIcon from '../common/TouchableIcon';
 import {TransactionData} from '../../interface';
 import {ColorConst, fontSize, fonts, hp, wp} from '../../theme';
+import AmountText from '../common/AmountText';
 
 interface props {
   isVisible: boolean;
@@ -50,7 +50,7 @@ const EditCategoryModal = ({
               customIconStyle={styles.headerImage}
             />
           </View>
-          <View style={styles.headersubContainer}>
+          <View style={styles.headerSubContainer}>
             <Text style={styles.incomeExpenseText}>
               {items?.transaction_mode}
             </Text>
@@ -140,7 +140,7 @@ const styling = (item?: string) => {
       fontSize: fontSize(13),
       fontFamily: fonts.medium,
     },
-    headersubContainer: {
+    headerSubContainer: {
       alignItems: 'center',
     },
   });

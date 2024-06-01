@@ -1,6 +1,13 @@
 import React from 'react';
 import LinearGradient from 'react-native-linear-gradient';
-import {Image, StyleSheet, Text, TouchableOpacity, View} from 'react-native';
+import {
+  Image,
+  Platform,
+  StyleSheet,
+  Text,
+  TouchableOpacity,
+  View,
+} from 'react-native';
 import {AuthImages} from '../../../assets';
 import {ColorConst, fontSize, fonts, hp, wp} from '../../theme';
 
@@ -23,12 +30,11 @@ export default TransactionHeader;
 
 const styles = StyleSheet.create({
   linearGradient: {
-    width: '100%',
-    height: hp(35),
-    paddingTop: hp(10),
     flexDirection: 'row',
-    borderBottomEndRadius: hp(5),
-    borderBottomStartRadius: hp(5),
+    height: Platform.OS == 'ios' ? hp(35) : hp(30),
+    paddingTop: Platform.OS === 'ios' ? hp(10) : hp(5),
+    borderBottomLeftRadius: hp(5),
+    borderBottomRightRadius: hp(5),
     justifyContent: 'space-between',
   },
   headerText: {
@@ -43,7 +49,7 @@ const styles = StyleSheet.create({
     position: 'absolute',
   },
   leftIconStyle: {
-    width: hp(3.44),
-    height: hp(3.44),
+    width: hp(5),
+    height: hp(5),
   },
 });

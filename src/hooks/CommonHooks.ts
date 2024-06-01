@@ -32,6 +32,19 @@ const TransactionTimeStamp = (item: MomentInput) => {
   }
 };
 
+const AccountDetailTimeStamp = (item: MomentInput) => {
+  const transactionDate = moment(item);
+  const currentDate = moment();
+
+  if (transactionDate.isSame(currentDate, 'day')) {
+    return `Today`;
+  } else if (transactionDate.isSame(currentDate.subtract(1, 'day'), 'day')) {
+    return `Yesterday`;
+  } else {
+    return transactionDate.format('D MMMM');
+  }
+};
+
 const CalendarProviderDate = () => {
   const today = new Date();
   return CalendarUtils.getCalendarDateString(
@@ -65,4 +78,5 @@ export {
   FirebaseStorage,
   TransactionTimeStamp,
   CalendarProviderDate,
+  AccountDetailTimeStamp,
 };

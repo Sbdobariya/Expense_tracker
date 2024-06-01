@@ -1,8 +1,9 @@
 import React from 'react';
-import {RandomBGColor, TransactionTimeStamp} from '../../hooks';
+import {TransactionTimeStamp} from '../../hooks';
 import {TransactionData} from '../../interface';
-import {Image, StyleSheet, Text, TouchableOpacity, View} from 'react-native';
+import {StyleSheet, Text, TouchableOpacity, View} from 'react-native';
 import {fontSize, fonts, hp, wp} from '../../theme';
+import CategoryIcons from '../common/CategoryIcons';
 
 interface props {
   index: number;
@@ -13,29 +14,19 @@ interface props {
 const TransactionList = ({item, index, onTransactionPress}: props) => {
   const color = item.transaction_mode === 'income' ? '#25A969' : 'red';
 
+  const Notes =
+    item.transaction_note.length === 0 ? 'Not Added' : item.transaction_note;
   return (
     <TouchableOpacity
       style={styles.renderItemContainer}
       key={index}
       onPress={() => onTransactionPress(item)}>
-      <View style={styles.itemSubContaine}>
-        <View
-          style={[
-            styles.categoryImageView,
-            {
-              backgroundColor: RandomBGColor(),
-            },
-          ]}>
-          <Image
-            source={item?.transaction_category?.image}
-            style={styles.categoryImge}
-            resizeMode="contain"
-          />
-        </View>
+      <View style={styles.itemSubContainer}>
+        {item?.transaction_category?.image && (
+          <CategoryIcons imageSource={item?.transaction_category?.image} />
+        )}
         <View>
-          <Text style={styles.categoryText}>
-            {item.transaction_category?.name}
-          </Text>
+          <Text style={styles.categoryText}>{Notes}</Text>
           <Text style={styles.timeStamp}>
             {TransactionTimeStamp(item.timestamp)}
           </Text>
@@ -75,7 +66,7 @@ const styles = StyleSheet.create({
     marginHorizontal: wp(4),
     justifyContent: 'space-between',
   },
-  itemSubContaine: {
+  itemSubContainer: {
     gap: 10,
     flexDirection: 'row',
     alignItems: 'center',
@@ -97,7 +88,7 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'center',
   },
-  categoryImge: {
+  categoryImage: {
     width: hp(3),
     height: hp(3),
     borderRadius: 10,

@@ -1,5 +1,5 @@
 import {StyleSheet} from 'react-native';
-import {ColorConst, fontSize, fonts, hp} from '../../../theme';
+import {ColorConst, fontSize, fonts, hp, wp} from '../../../theme';
 
 export const styles = StyleSheet.create({
   container: {
@@ -28,5 +28,36 @@ export const styles = StyleSheet.create({
   },
   headerContainer: {
     alignItems: 'center',
+  },
+  flatlistStyle: {
+    marginTop: hp(7),
+  },
+  listContainer: {
+    flexDirection: 'row',
+    paddingVertical: hp(2),
+    borderBottomWidth: 1,
+    alignItems: 'center',
+    justifyContent: 'space-between',
+    paddingHorizontal: wp(5),
+    borderBottomColor: '#F1F1FA',
+  },
+  listSubContainer: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    gap: hp(1),
+  },
+  listImage: {
+    width: hp(3),
+    height: hp(3),
+  },
+  accountName: {
+    fontSize: fontSize(15),
+    fontFamily: fonts.semiBold,
+    color: ColorConst.dark_black,
+  },
+  transactionAmount: {
+    fontSize: fontSize(17),
+    fontFamily: fonts.semiBold,
+    color: ColorConst.dark_black,
   },
 });

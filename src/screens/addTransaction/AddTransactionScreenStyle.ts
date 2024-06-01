@@ -3,7 +3,7 @@ import {ColorConst, fontSize, fonts, hp, wp} from '../../theme';
 
 export const styles = StyleSheet.create({
   bottomAddButton: {
-    marginBottom: hp(3),
+    marginTop: hp(5),
   },
   container: {
     flex: 1,
@@ -26,7 +26,6 @@ export const styles = StyleSheet.create({
     marginBottom: hp(8),
     marginHorizontal: wp(7),
     backgroundColor: '#FFFFFF',
-    justifyContent: 'space-between',
 
     // shado
     shadowColor: '#000',

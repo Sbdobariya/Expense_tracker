@@ -1,7 +1,7 @@
 import React from 'react';
 import {useSelector} from 'react-redux';
 import {AuthImages} from '../../../assets';
-import {Image, StyleSheet, Text} from 'react-native';
+import {Image, Platform, StyleSheet, Text} from 'react-native';
 import LinearGradient from 'react-native-linear-gradient';
 import {AuthReducerType} from '../../interface';
 import {ColorConst, fontSize, fonts, hp, wp} from '../../theme';
@@ -27,11 +27,10 @@ export default HomeHeader;
 
 const styles = StyleSheet.create({
   linearGradient: {
-    width: '100%',
-    height: hp(35),
-    paddingTop: hp(10),
-    borderBottomEndRadius: hp(5),
-    borderBottomStartRadius: hp(5),
+    height: Platform.OS == 'ios' ? hp(35) : hp(30),
+    paddingTop: Platform.OS === 'ios' ? hp(10) : hp(3),
+    borderBottomLeftRadius: hp(5),
+    borderBottomRightRadius: hp(5),
     paddingLeft: wp(3),
   },
   headerText: {

@@ -10,7 +10,7 @@ import {NavigationContainer} from '@react-navigation/native';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import AuthStackNavigator from './authStackNavigator/AuthStackNavigator';
 import {createNativeStackNavigator} from '@react-navigation/native-stack';
-import {AccountScreen} from '../screens';
+import {AccountDetails, AccountScreen} from '../screens';
 
 const Stack = createNativeStackNavigator<MainNavigatorType>();
 
@@ -69,6 +69,10 @@ const MainNavigator = () => {
               <Stack.Screen
                 name={RootPage.AccountScreen}
                 component={AccountScreen}
+              />
+              <Stack.Screen
+                name={RootPage.AccountDetails}
+                component={AccountDetails}
               />
             </>
           )}

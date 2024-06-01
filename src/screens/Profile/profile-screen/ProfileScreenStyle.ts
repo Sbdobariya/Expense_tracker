@@ -4,9 +4,11 @@ import {ColorConst, fontSize, hp, wp} from '../../../theme';
 export const styles = StyleSheet.create({
   container: {
     flex: 1,
+    backgroundColor: ColorConst.white,
   },
   userNameText: {
     fontSize: fontSize(25),
+    color: ColorConst.dark_black,
   },
   flatlist: {
     flexGrow: 0,

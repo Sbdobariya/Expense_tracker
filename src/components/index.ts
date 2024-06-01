@@ -1,11 +1,13 @@
 // comman
 import InputText from './common/InputText';
+import AmountText from './common/AmountText';
 import CommonLoader from './common/CommonLoader';
 import CommonHeader from './common/CommonHeader';
 import PopOverModal from './common/PopOverModal';
 import StringDivider from './common/StringDivider';
 import TouchableIcon from './common/TouchableIcon';
 import PrimaryButton from './common/PrimaryButton';
+import CategoryIcons from './common/CategoryIcons';
 
 // addTransaction
 import CategoryModal from './addTransaction/CategoryModal';
@@ -19,18 +21,20 @@ import TransactionList from './home/TransactionList';
 import EditCategoryModal from './home/EditCategoryModal';
 
 // Profile
-import MenuItemList from './Profile/MenuItemList';
-import UpdateNameModal from './Profile/UpdateNameModal';
+import MenuItemList from './profile/MenuItemList';
+import UpdateNameModal from './profile/UpdateNameModal';
 
 export {
   HomeCard,
   InputText,
+  AmountText,
   HomeHeader,
   CommonLoader,
   MenuItemList,
   PopOverModal,
   CommonHeader,
   PrimaryButton,
+  CategoryIcons,
   TouchableIcon,
   StringDivider,
   CategoryModal,

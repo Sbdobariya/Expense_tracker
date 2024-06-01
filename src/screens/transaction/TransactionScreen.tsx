@@ -113,7 +113,7 @@ const TransactionScreen: React.FC = () => {
         date={CalendarProviderDate()}
         onDateChanged={onDateChanged}>
         <View style={styles.headerContainer}>
-          <Text>My Money</Text>
+          <Text style={styles.myMoney}>My Money</Text>
           <View style={styles.popoverView}>
             <PopOverModal
               popupText={applyFilter ? 'Reset Filter ' : 'Apply Filter'}
