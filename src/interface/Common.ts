@@ -24,3 +24,16 @@ export interface ModifiedData {
   transactionAmount: number;
   accountImage: ImageSourcePropType | null;
 }
+
+export interface ChartData {
+  color: string;
+  text: string;
+  value: number;
+  percentage?: number;
+  focused?: boolean;
+}
+
+export interface FilterDataProps {
+  id: number;
+  label: string;
+}

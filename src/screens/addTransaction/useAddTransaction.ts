@@ -138,6 +138,7 @@ export const useAddTransaction = () => {
       onSuccess(_res) {
         navigation.goBack();
         dispatch(EditTransactionData(undefined));
+        ShowTostMessage('Transaction Updated', 'success');
       },
     };
     EditTransactionAction(request);

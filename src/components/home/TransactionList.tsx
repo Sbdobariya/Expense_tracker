@@ -7,14 +7,16 @@ import CategoryIcons from '../common/CategoryIcons';
 
 interface Props {
   index: number;
+  disabled?: boolean;
   item: TransactionData;
-  onTransactionPress: (item: TransactionData) => void;
+  onTransactionPress?: (item: TransactionData) => void;
 }
 
 const TransactionList: React.FC<Props> = ({
   item,
   index,
   onTransactionPress,
+  disabled = false,
 }) => {
   const color = item.transaction_mode === 'income' ? '#25A969' : 'red';
 
@@ -22,9 +24,10 @@ const TransactionList: React.FC<Props> = ({
     item.transaction_note.length === 0 ? 'Not Added' : item.transaction_note;
   return (
     <TouchableOpacity
+      disabled={disabled}
       style={styles.renderItemContainer}
       key={index}
-      onPress={() => onTransactionPress(item)}>
+      onPress={() => onTransactionPress && onTransactionPress(item)}>
       <View style={styles.itemSubContainer}>
         {item?.transaction_category?.image && (
           <CategoryIcons imageSource={item?.transaction_category?.image} />

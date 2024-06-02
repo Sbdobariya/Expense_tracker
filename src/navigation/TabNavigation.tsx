@@ -82,6 +82,7 @@ const TabNavigation: React.FC = () => {
         name={RootPage.Statistics}
         component={StatisticsStackNavigator}
         options={{
+          unmountOnBlur: true,
           tabBarIcon: ({focused}) => {
             return (
               <Image

@@ -1,9 +1,16 @@
 import {StyleSheet} from 'react-native';
-import {ColorConst} from '../../theme';
+import {ColorConst, hp} from '../../theme';
 
 export const styles = StyleSheet.create({
   container: {
     flex: 1,
+    backgroundColor: ColorConst.profile_header,
+  },
+  subView: {
+    flex: 1,
+    borderTopLeftRadius: hp(5),
+    borderTopRightRadius: hp(5),
     backgroundColor: ColorConst.white,
+    paddingTop: hp(5),
   },
 });

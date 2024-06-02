@@ -26,6 +26,10 @@ import EditCategoryModal from './home/EditCategoryModal';
 import MenuItemList from './profile/MenuItemList';
 import UpdateNameModal from './profile/UpdateNameModal';
 
+// Statistics
+import StatisticsTab from './statistics/StatisticsTab';
+import ChartComponent from './statistics/ChartComponent';
+
 export {
   HomeCard,
   InputText,
@@ -35,6 +39,7 @@ export {
   SelectButton,
   MenuItemList,
   PopOverModal,
+  StatisticsTab,
   CommonHeader,
   PrimaryButton,
   CategoryIcons,
@@ -42,6 +47,7 @@ export {
   StringDivider,
   CategoryModal,
   TransactionTab,
+  ChartComponent,
   UpdateNameModal,
   CustomStatusBar,
   TransactionList,
