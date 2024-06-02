@@ -12,7 +12,7 @@ import {
   UserSignUpActionRequest,
 } from '../../../interface';
 import React, {useState} from 'react';
-import {Alert, View} from 'react-native';
+import {View} from 'react-native';
 import {styles} from './SignUpScreenStyle';
 import {useDispatch, useSelector} from 'react-redux';
 import {AuthStrings} from '../../../constants/String';
@@ -21,6 +21,7 @@ import {UserSignUpAction} from '../../../redux/actions';
 import {AuthNavigationType, RootPage} from '../../../navigation/type';
 import {NavigationProp, useNavigation} from '@react-navigation/native';
 import {ColorConst} from '../../../theme';
+import {ShowTostMessage} from '../../../utils';
 
 const SignUpScreen: React.FC = () => {
   const navigation = useNavigation<NavigationProp<AuthNavigationType>>();
@@ -36,13 +37,13 @@ const SignUpScreen: React.FC = () => {
 
   const onSingupPress = () => {
     if (name === '') {
-      Alert.alert('Please enter name');
+      ShowTostMessage('Please enter name', 'error');
     } else if (email === '') {
-      Alert.alert('Please enter email');
+      ShowTostMessage('Please enter email', 'error');
     } else if (password === '') {
-      Alert.alert('Please enter password');
+      ShowTostMessage('Please enter password', 'error');
     } else if (password?.length < 6) {
-      Alert.alert('Minimum length of password is 6s');
+      ShowTostMessage('Minimum length of password is 6s', 'error');
     } else {
       const userData: UserSignUpActionRequest = {
         data: {userName: name, userEmail: email, userPassword: password},
@@ -50,7 +51,7 @@ const SignUpScreen: React.FC = () => {
           signUp(response as UserDataType);
         },
         onFail: error => {
-          Alert.alert(JSON.stringify(error));
+          ShowTostMessage(JSON.stringify(error), 'error');
         },
       };
       dispatch(UserSignUpAction(userData) as any);

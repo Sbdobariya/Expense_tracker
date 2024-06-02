@@ -136,8 +136,8 @@ const styles = StyleSheet.create({
     height: hp(4),
   },
   addIconStyle: {
-    width: hp(6),
-    height: hp(6),
+    width: hp(7),
+    height: hp(7),
     marginBottom: Platform.OS === 'ios' ? hp(5) : hp(10),
   },
 });

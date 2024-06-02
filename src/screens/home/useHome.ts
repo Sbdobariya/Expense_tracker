@@ -3,7 +3,6 @@ import {
   useIsFocused,
   useNavigation,
 } from '@react-navigation/native';
-import {Alert} from 'react-native';
 import {useEffect, useState} from 'react';
 import {useDispatch, useSelector} from 'react-redux';
 import {EditTransactionData} from '../../redux/reducer';
@@ -17,6 +16,7 @@ import {
   TransactionData,
   TransactionReducerType,
 } from '../../interface';
+import {ShowTostMessage} from '../../utils';
 
 export const useHome = () => {
   const IsFocus = useIsFocused();
@@ -44,7 +44,7 @@ export const useHome = () => {
           },
           onSuccess: _response => {},
           onFail: error => {
-            Alert.alert(JSON.stringify(error));
+            ShowTostMessage(JSON.stringify(error), 'error');
           },
         };
         dispatch(GetTransactionAction(data) as any);

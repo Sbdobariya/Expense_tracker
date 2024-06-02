@@ -1,5 +1,4 @@
 import {useState} from 'react';
-import {Alert} from 'react-native';
 import {useDispatch, useSelector} from 'react-redux';
 import {useNavigation} from '@react-navigation/native';
 import {EditTransactionData} from '../../redux/reducer';
@@ -16,6 +15,7 @@ import {HomeImages} from '../../../assets';
 import {
   ExpenseCategoryData,
   IncomeCategoryData,
+  ShowTostMessage,
   TransactionAccountData,
 } from '../../utils';
 
@@ -73,9 +73,11 @@ export const useAddTransaction = () => {
 
   const onAddButtonPress = () => {
     if (!selectedExpenseItem) {
-      Alert.alert('', 'Please Select Category');
+      ShowTostMessage('Please Select Category', 'error');
     } else if (amountValue === undefined) {
-      Alert.alert('', 'Please enter amount');
+      ShowTostMessage('Please enter amount', 'error');
+    } else if (!selectedTransactionWay) {
+      ShowTostMessage('Please Select Account', 'error');
     } else {
       const transactionDetail: AddTransaction = {
         data: {
@@ -95,10 +97,11 @@ export const useAddTransaction = () => {
             setSelectedExpenseItem(undefined);
             setSelectedTransactionWay(undefined);
             setSelectedTransactionWay(undefined);
+            ShowTostMessage('Transaction Added', 'success');
           }
         },
         onFail: error => {
-          Alert.alert(JSON.stringify(error));
+          ShowTostMessage(JSON.stringify(error), 'error');
         },
       };
       AddTransactionAction(transactionDetail);

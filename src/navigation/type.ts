@@ -15,6 +15,7 @@ export enum RootPage {
   ProfileScreen = 'ProfileScreen',
   AccountDetails = 'AccountDetails',
   AddTransaction = 'AddTransaction',
+  ExportDataScreen = 'ExportDataScreen',
   StatisticsScreen = 'StatisticsScreen',
   TransactionScreen = 'TransactionScreen',
   AddTransactionScreen = 'AddTransactionScreen',
@@ -29,6 +30,7 @@ export type AuthNavigationType = {
 export type MainNavigatorType = {
   [RootPage.TabStack]: TabStack;
   [RootPage.AccountScreen]: undefined;
+  [RootPage.ExportDataScreen]: undefined;
   [RootPage.AccountDetails]: {
     params: ModifiedData;
   };

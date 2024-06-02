@@ -50,7 +50,7 @@ const styles = StyleSheet.create({
     fontFamily: fonts.bold,
   },
   linearGradient: {
-    height: Platform.OS == 'ios' ? hp(18) : hp(13),
+    height: Platform.OS == 'ios' ? hp(18) : hp(10),
     paddingTop: Platform.OS == 'ios' ? hp(7) : hp(3),
     flexDirection: 'row',
     alignItems: 'center',

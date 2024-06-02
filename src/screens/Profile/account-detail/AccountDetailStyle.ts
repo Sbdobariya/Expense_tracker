@@ -55,24 +55,29 @@ export const styles = StyleSheet.create({
   },
   transactionCategory: {
     fontWeight: 'bold',
-    fontSize: fontSize(16),
+    fontSize: fontSize(18),
     color: ColorConst.dark_black,
   },
   transactionNote: {
     color: '#999',
+    fontSize: fontSize(15),
+    fontFamily: fonts.medium,
   },
   transactionTime: {
     color: '#999',
+    fontSize: fontSize(15),
+    fontFamily: fonts.medium,
   },
   transactionAmount: {
-    fontSize: fontSize(16),
+    fontSize: fontSize(18),
     fontFamily: fonts.semiBold,
   },
   date: {
     fontWeight: 'bold',
-    fontSize: fontSize(16),
+    fontSize: fontSize(18),
     padding: hp(1),
     backgroundColor: '#eee',
+    color: ColorConst.dark_black,
   },
   flatlistStyle: {
     marginTop: hp(5),

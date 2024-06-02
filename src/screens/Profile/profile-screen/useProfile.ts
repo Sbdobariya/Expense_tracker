@@ -43,6 +43,8 @@ export const useProfile = () => {
       auth().signOut();
     } else if (props === ProfileStrings.account) {
       navigation.navigate(RootPage.AccountScreen);
+    } else {
+      navigation.navigate(RootPage.ExportDataScreen);
     }
   };
 

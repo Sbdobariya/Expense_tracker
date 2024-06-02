@@ -1,4 +1,4 @@
-import {Alert, View} from 'react-native';
+import {View} from 'react-native';
 import React, {useState} from 'react';
 import {
   InputText,
@@ -21,6 +21,7 @@ import {AuthNavigationType, RootPage} from '../../../navigation/type';
 import {NavigationProp, useNavigation} from '@react-navigation/native';
 import {AuthContext} from '../../../utils/AuthContext';
 import {ColorConst} from '../../../theme';
+import {ShowTostMessage} from '../../../utils';
 
 const LoginScreen: React.FC = () => {
   const navigation = useNavigation<NavigationProp<AuthNavigationType>>();
@@ -37,9 +38,9 @@ const LoginScreen: React.FC = () => {
 
   const onLoginPress = () => {
     if (email === '') {
-      Alert.alert('Please enter email');
+      ShowTostMessage('Please enter email', 'error');
     } else if (password === '') {
-      Alert.alert('Please enter password');
+      ShowTostMessage('Please enter password', 'error');
     } else {
       const userData: UserSignInActionRequest = {
         data: {userEmail: email, userPassword: password},
@@ -47,7 +48,7 @@ const LoginScreen: React.FC = () => {
           signIn(response as UserDataType);
         },
         onFail: error => {
-          Alert.alert(JSON.stringify(error));
+          ShowTostMessage(JSON.stringify(error), 'error');
         },
       };
       dispatch(UserSignInActions(userData) as any);
