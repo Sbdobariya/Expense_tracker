@@ -102,6 +102,7 @@ const TabNavigation: React.FC = () => {
         name={RootPage.Profile}
         component={ProfileStackNavigator}
         options={{
+          unmountOnBlur: true,
           tabBarIcon: ({focused}) => {
             return (
               <Image

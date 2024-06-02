@@ -1,5 +1,5 @@
-import {StyleSheet} from 'react-native';
-import {ColorConst, fontSize, hp, wp} from '../../../theme';
+import {Platform, StyleSheet} from 'react-native';
+import {ColorConst, fontSize, fonts, hp, wp} from '../../../theme';
 
 export const styles = StyleSheet.create({
   container: {
@@ -9,28 +9,29 @@ export const styles = StyleSheet.create({
   userNameText: {
     fontSize: fontSize(25),
     color: ColorConst.dark_black,
+    fontFamily: fonts.bold,
+  },
+  userEmailText: {
+    fontSize: fontSize(20),
+    color: ColorConst.dark_black,
+    fontFamily: fonts.semiBold,
   },
   flatlist: {
     flexGrow: 0,
     borderRadius: hp(2),
     marginHorizontal: wp(4),
+    marginTop: hp(5),
   },
   userName: {
     color: ColorConst.light_gray,
   },
-  editIcon: {
-    width: hp(3),
-    height: hp(3),
-    marginRight: wp(10),
-  },
+
   headerContainer: {
-    marginTop: hp(5),
-    flexDirection: 'row',
-    marginBottom: hp(3),
+    marginTop: Platform.OS === 'ios' ? hp(-8) : hp(-10),
     alignItems: 'center',
-    justifyContent: 'space-between',
   },
-  userNameView: {
-    marginLeft: wp(10),
+  userProfile: {
+    height: hp(15),
+    width: hp(15),
   },
 });

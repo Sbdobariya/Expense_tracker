@@ -4,6 +4,7 @@ import {
   StyleSheet,
   TouchableOpacity,
   ImageSourcePropType,
+  ViewStyle,
 } from 'react-native';
 import React from 'react';
 import {hp} from '../../theme';
@@ -13,6 +14,7 @@ interface Props {
   source: ImageSourcePropType;
   customIconStyle?: ImageStyle;
   touchableRef?: React.LegacyRef<TouchableOpacity>;
+  customTouchableStyle?: ViewStyle;
 }
 
 const TouchableIcon: React.FC<Props> = ({
@@ -20,9 +22,13 @@ const TouchableIcon: React.FC<Props> = ({
   source,
   customIconStyle,
   touchableRef,
+  customTouchableStyle,
 }) => {
   return (
-    <TouchableOpacity ref={touchableRef} onPress={onIconPress}>
+    <TouchableOpacity
+      ref={touchableRef}
+      onPress={onIconPress}
+      style={[customTouchableStyle]}>
       <Image
         source={source}
         style={[styles.iconStyle, customIconStyle]}

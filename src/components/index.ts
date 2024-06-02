@@ -25,11 +25,11 @@ import EditCategoryModal from './home/EditCategoryModal';
 // Profile
 import MenuItemList from './profile/MenuItemList';
 import UpdateNameModal from './profile/UpdateNameModal';
+import ProfileHeader from './profile/ProfileHeader';
 
 // Statistics
 import StatisticsTab from './statistics/StatisticsTab';
 import ChartComponent from './statistics/ChartComponent';
-
 export {
   HomeCard,
   InputText,
@@ -47,6 +47,7 @@ export {
   StringDivider,
   CategoryModal,
   TransactionTab,
+  ProfileHeader,
   ChartComponent,
   UpdateNameModal,
   CustomStatusBar,

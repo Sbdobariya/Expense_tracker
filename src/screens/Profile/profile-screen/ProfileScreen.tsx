@@ -1,16 +1,15 @@
 import React from 'react';
 import {useSelector} from 'react-redux';
 import {useProfile} from './useProfile';
-import {HomeImages} from '../../../../assets';
+import {ProfileImage} from '../../../../assets';
 import {styles} from './ProfileScreenStyle';
-import {ProfileStrings} from '../../../constants/String';
-import {FlatList, SafeAreaView, Text, View} from 'react-native';
+import {FlatList, Image, Text, View} from 'react-native';
 import {AuthReducerType} from '../../../interface';
 import {
-  CustomStatusBar,
   MenuItemList,
-  TouchableIcon,
   UpdateNameModal,
+  CustomStatusBar,
+  ProfileHeader,
 } from '../../../components';
 import {ColorConst} from '../../../theme';
 
@@ -32,23 +31,17 @@ const ProfileScreen: React.FC = () => {
   return (
     <View style={styles.container}>
       <CustomStatusBar
-        backgroundColor={ColorConst.white}
+        backgroundColor={ColorConst.profile_header}
         barStyle="dark-content"
       />
-      <SafeAreaView />
+      <ProfileHeader title="Profile" onToggleModal={onToggleModal} />
       <View style={styles.headerContainer}>
-        <View style={styles.userNameView}>
-          <Text style={styles.userName}>{ProfileStrings.username}</Text>
-          <Text style={styles.userNameText}>{userData?.userName}</Text>
-        </View>
-        <TouchableIcon
-          onIconPress={onToggleModal}
-          source={HomeImages.edit_ic}
-          customIconStyle={styles.editIcon}
-        />
+        <Image source={ProfileImage.user_ic} style={styles.userProfile} />
+        <Text style={styles.userNameText}>{userData?.userName}</Text>
+        <Text style={styles.userEmailText}>{userData?.userEmail}</Text>
       </View>
+
       <FlatList
-        bounces={false}
         data={MenuItem}
         style={styles.flatlist}
         renderItem={({item}) => {

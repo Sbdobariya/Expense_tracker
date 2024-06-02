@@ -83,7 +83,6 @@ const styling = (selectedTab?: string) =>
       borderRadius: hp(10),
     },
     secondContainer: {
-      // flexDirection: 'row',
       marginHorizontal: wp(3),
       padding: hp(2),
       borderRadius: hp(2),
@@ -100,14 +99,14 @@ const styling = (selectedTab?: string) =>
       backgroundColor: selectedTab === 'income' ? '#3f918b' : 'transparent',
       flex: 1,
       alignItems: 'center',
-      padding: hp(1),
+      padding: hp(1.5),
       borderRadius: hp(10),
     },
     expenseButtonStyle: {
       backgroundColor: selectedTab === 'expense' ? '#3f918b' : 'transparent',
       flex: 1,
       alignItems: 'center',
-      padding: hp(1),
+      padding: hp(1.5),
       borderRadius: hp(10),
     },
     incomeText: {

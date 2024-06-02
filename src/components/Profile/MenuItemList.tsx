@@ -44,8 +44,8 @@ const styles = StyleSheet.create({
     backgroundColor: ColorConst.white,
   },
   image: {
-    width: hp(3),
-    height: hp(3),
+    width: hp(4),
+    height: hp(4),
   },
   imageView: {
     padding: hp(1),
@@ -54,7 +54,7 @@ const styles = StyleSheet.create({
     borderRadius: hp(1.6),
   },
   text: {
-    fontSize: fontSize(15),
+    fontSize: fontSize(18),
     fontFamily: fonts.medium,
     color: ColorConst.dark_black,
   },
