@@ -5,6 +5,7 @@ import {ColorConst, fontSize, fonts, hp, wp} from '../../theme';
 
 interface Props {
   title: string;
+  disabled?: boolean;
   onPress?: () => void;
   customGradientStyle?: ViewStyle;
 }
@@ -12,10 +13,12 @@ interface Props {
 const PrimaryButton: React.FC<Props> = ({
   title,
   onPress,
+  disabled,
   customGradientStyle,
 }) => {
   return (
     <TouchableOpacity
+      disabled={disabled}
       onPress={onPress}
       activeOpacity={0.5}
       style={[customGradientStyle]}>

@@ -2,7 +2,7 @@ import {GetData} from '../utils';
 import {useDispatch} from 'react-redux';
 import {UserDataType} from '../interface';
 import TabNavigation from './TabNavigation';
-import {SignUpAction} from '../redux/reducer';
+import {userDataAction} from '../redux/reducer';
 import React, {useEffect, useState} from 'react';
 import {AuthContext} from '../utils/AuthContext';
 import {MainNavigatorType, RootPage} from './type';
@@ -27,7 +27,7 @@ const MainNavigator = () => {
     if (getUserData !== undefined) {
       const parsedUserData = JSON.parse(getUserData);
       setUserData(parsedUserData);
-      dispatch(SignUpAction(parsedUserData));
+      dispatch(userDataAction(parsedUserData));
     }
   };
 

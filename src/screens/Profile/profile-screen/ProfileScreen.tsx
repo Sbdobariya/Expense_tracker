@@ -19,8 +19,15 @@ const ProfileScreen: React.FC = () => {
     (state: {authReducer: AuthReducerType}) => state?.authReducer,
   );
 
-  const {MenuItem, onItemPress, onToggleModal, isUpdateModalVisible} =
-    useProfile();
+  const {
+    MenuItem,
+    onItemPress,
+    onToggleModal,
+    isUpdateModalVisible,
+    userName,
+    onChangeText,
+    onSubmitPress,
+  } = useProfile();
 
   return (
     <View style={styles.container}>
@@ -49,6 +56,9 @@ const ProfileScreen: React.FC = () => {
         }}
       />
       <UpdateNameModal
+        onSubmitPress={onSubmitPress}
+        onChangeText={onChangeText}
+        userName={userName}
         isVisible={isUpdateModalVisible}
         toggleModal={onToggleModal}
       />

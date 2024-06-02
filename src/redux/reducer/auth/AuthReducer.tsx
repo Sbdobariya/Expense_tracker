@@ -10,7 +10,7 @@ const AuthReducer = createSlice({
   name: 'AuthReducer',
   initialState,
   reducers: {
-    SignUpAction: (state, action) => {
+    userDataAction: (state, action) => {
       state.userData = action.payload;
     },
     AuthLoader: (state, action) => {
@@ -19,6 +19,6 @@ const AuthReducer = createSlice({
   },
 });
 
-export const {SignUpAction, AuthLoader} = AuthReducer.actions;
+export const {userDataAction, AuthLoader} = AuthReducer.actions;
 
 export default AuthReducer.reducer;

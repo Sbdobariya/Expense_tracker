@@ -5,7 +5,7 @@ import {
 import {StoreData} from '../../../utils';
 import auth from '@react-native-firebase/auth';
 import {createAsyncThunk} from '@reduxjs/toolkit';
-import {AuthLoader, SignUpAction} from '../../reducer/auth/AuthReducer';
+import {AuthLoader, userDataAction} from '../../reducer/auth/AuthReducer';
 
 export const UserSignUpAction = createAsyncThunk(
   'user/signup',
@@ -25,7 +25,7 @@ export const UserSignUpAction = createAsyncThunk(
         StoreData('userData', JSON.stringify(userData));
         dispatch(AuthLoader(false));
         request?.onSuccess && request?.onSuccess(userData);
-        dispatch(SignUpAction(userData));
+        dispatch(userDataAction(userData));
         return user.updateProfile({
           displayName: request?.data?.userName,
         });
@@ -60,7 +60,7 @@ export const UserSignInActions = createAsyncThunk(
         };
         StoreData('userData', JSON.stringify(userData));
         request?.onSuccess && request?.onSuccess(userData);
-        dispatch(SignUpAction(userData));
+        dispatch(userDataAction(userData));
         dispatch(AuthLoader(false));
       })
       .catch(() => {

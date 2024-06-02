@@ -1,5 +1,5 @@
 // AuthReducer
-import {AuthLoader, SignUpAction} from './auth/AuthReducer';
+import {AuthLoader, userDataAction} from './auth/AuthReducer';
 
 // TransactionReducer
 import {
@@ -10,7 +10,7 @@ import {
 
 export {
   AuthLoader,
-  SignUpAction,
+  userDataAction,
   DeleteTransaction,
   TransactionAction,
   EditTransactionData,
