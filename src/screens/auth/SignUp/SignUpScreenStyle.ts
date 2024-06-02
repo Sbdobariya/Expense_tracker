@@ -1,5 +1,5 @@
 import {StyleSheet} from 'react-native';
-import {ColorConst, hp} from '../../../theme';
+import {ColorConst, fontSize, fonts, hp} from '../../../theme';
 
 export const styles = StyleSheet.create({
   container: {
@@ -8,9 +8,15 @@ export const styles = StyleSheet.create({
   },
   nameInput: {
     marginTop: hp(6.89),
+    fontSize: fontSize(15),
+    fontFamily: fonts.regular,
+    color: ColorConst.dark_black,
   },
   emailInput: {
     marginTop: hp(2.95),
+    fontSize: fontSize(15),
+    fontFamily: fonts.regular,
+    color: ColorConst.dark_black,
   },
   signUpButtonStyle: {
     marginTop: hp(10),

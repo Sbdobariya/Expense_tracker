@@ -10,14 +10,16 @@ import {
 import {HomeImages} from '../../../assets';
 import {fontSize, fonts, hp} from '../../theme';
 
-const AmountText = ({
-  num,
-  customNumStyle,
-  customRupeeIcon,
-}: {
+interface Props {
   num: number | undefined;
   customNumStyle?: TextStyle;
   customRupeeIcon?: ImageStyle;
+}
+
+const AmountText: React.FC<Props> = ({
+  num,
+  customNumStyle,
+  customRupeeIcon,
 }) => {
   return (
     <View style={styles.subIncomeView}>

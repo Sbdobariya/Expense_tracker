@@ -8,20 +8,15 @@ import {
 import React from 'react';
 import TouchableIcon from './TouchableIcon';
 import {Popover, PopoverController} from 'react-native-modal-popover';
+import {ColorConst, fontSize, hp} from '../../theme';
 
-const styles = StyleSheet.create({
-  content: {
-    padding: 16,
-    borderRadius: 8,
-  },
-});
-interface props {
+interface Props {
   onPopupPress: () => void;
   popupText: string;
   source: ImageSourcePropType;
 }
 
-const PopOverModal = ({source, onPopupPress, popupText}: props) => (
+const PopOverModal: React.FC<Props> = ({source, onPopupPress, popupText}) => (
   <PopoverController>
     {({
       openPopover,
@@ -34,6 +29,7 @@ const PopOverModal = ({source, onPopupPress, popupText}: props) => (
         <View>
           <TouchableIcon
             source={source}
+            customIconStyle={styles.customIconStyle}
             touchableRef={setPopoverAnchor}
             onIconPress={openPopover}
           />
@@ -48,7 +44,7 @@ const PopOverModal = ({source, onPopupPress, popupText}: props) => (
                 closePopover();
                 onPopupPress();
               }}>
-              <Text>{popupText}</Text>
+              <Text style={styles.text}>{popupText}</Text>
             </TouchableOpacity>
           </Popover>
         </View>
@@ -58,3 +54,18 @@ const PopOverModal = ({source, onPopupPress, popupText}: props) => (
 );
 
 export default PopOverModal;
+
+const styles = StyleSheet.create({
+  text: {
+    fontSize: fontSize(15),
+    color: ColorConst.dark_black,
+  },
+  content: {
+    padding: 16,
+    borderRadius: 8,
+  },
+  customIconStyle: {
+    height: hp(3),
+    width: hp(3),
+  },
+});

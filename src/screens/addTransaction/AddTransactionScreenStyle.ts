@@ -9,21 +9,11 @@ export const styles = StyleSheet.create({
     flex: 1,
     backgroundColor: ColorConst.white,
   },
-  selectCaegoryButton: {
-    gap: 10,
-    marginTop: hp(2),
-    padding: hp(1.5),
-    borderRadius: 12,
-    flexDirection: 'row',
-    alignItems: 'center',
-    marginHorizontal: wp(4),
-    backgroundColor: '#29756F',
-  },
   centerView: {
-    flex: 1,
     borderRadius: 20,
     marginTop: hp(-15),
     marginBottom: hp(8),
+    paddingBottom: hp(5),
     marginHorizontal: wp(7),
     backgroundColor: '#FFFFFF',
 
@@ -36,15 +26,6 @@ export const styles = StyleSheet.create({
     shadowOpacity: 0.29,
     shadowRadius: 4.65,
     elevation: 7,
-  },
-  categoryIcon: {
-    height: hp(3),
-    width: hp(3),
-  },
-  selectCategory: {
-    color: '#FFFFFF',
-    fontSize: fontSize(15),
-    fontFamily: fonts.medium,
   },
   amountInputStyle: {
     height: hp(6),

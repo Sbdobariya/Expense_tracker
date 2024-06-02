@@ -1,13 +1,13 @@
 import React from 'react';
 import {Image, ImageSourcePropType, StyleSheet, Text, View} from 'react-native';
-import {fontSize, fonts, hp} from '../../theme';
+import {ColorConst, fontSize, fonts, hp} from '../../theme';
 
-interface props {
+interface Props {
   title: string | undefined;
   source: ImageSourcePropType | undefined;
 }
 
-const ImageText = ({title, source}: props) => {
+const ImageText: React.FC<Props> = ({title, source}) => {
   return (
     <View style={styles.container}>
       <Image source={source} style={styles.imageStyle} />
@@ -34,5 +34,6 @@ const styles = StyleSheet.create({
   txtStyle: {
     fontSize: fontSize(15),
     fontFamily: fonts.regular,
+    color: ColorConst.dark_black,
   },
 });

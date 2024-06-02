@@ -3,6 +3,7 @@ import {
   HomeHeader,
   TransactionList,
   EditCategoryModal,
+  CustomStatusBar,
 } from '../../components';
 import React from 'react';
 import {useHome} from './useHome';
@@ -11,6 +12,7 @@ import {FlatList, Text, View} from 'react-native';
 import {HomeStrings} from '../../constants/String';
 import {RootPage, TabStack} from '../../navigation/type';
 import {useNavigation, NavigationProp} from '@react-navigation/native';
+import {ColorConst} from '../../theme';
 
 const HomeScreen: React.FC = () => {
   const tabNavigation = useNavigation<NavigationProp<TabStack>>();
@@ -45,10 +47,11 @@ const HomeScreen: React.FC = () => {
 
   return (
     <View style={styles.container}>
+      <CustomStatusBar backgroundColor={ColorConst.status_bar} />
       <HomeHeader />
       <HomeCard transactionData={transactionData} />
       <FlatList
-        data={transactionData}
+        data={transactionData?.slice(0, 10)}
         renderItem={({item, index}) => {
           return (
             <TransactionList

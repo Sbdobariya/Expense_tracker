@@ -2,13 +2,13 @@ import React from 'react';
 import {StyleSheet, Text, TouchableOpacity, View} from 'react-native';
 import {ColorConst, fonts, hp, wp} from '../../theme';
 
-interface props {
+interface Props {
   titleOne?: string;
   titleTwo?: string;
   onPress?: () => void;
 }
 
-const StringDivider = (props: props) => {
+const StringDivider: React.FC<Props> = props => {
   const {titleOne, titleTwo, onPress} = props;
 
   return (

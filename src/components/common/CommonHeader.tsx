@@ -11,12 +11,12 @@ import LinearGradient from 'react-native-linear-gradient';
 import {AuthImages} from '../../../assets';
 import {ColorConst, fontSize, fonts, hp, wp} from '../../theme';
 
-interface props {
+interface Props {
   title: string;
   onPress?: () => void;
 }
 
-const CommonHeader = ({title, onPress}: props) => {
+const CommonHeader: React.FC<Props> = ({title, onPress}) => {
   return (
     <LinearGradient
       colors={[ColorConst.gradient_color1, ColorConst.gradient_color2]}

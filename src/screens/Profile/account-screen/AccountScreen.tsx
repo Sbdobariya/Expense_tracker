@@ -3,8 +3,14 @@ import React from 'react';
 import {styles} from './AccountScreenStyle';
 import {useAccount} from './useAccount';
 import {ProfileStrings} from '../../../constants/String';
-import {AmountText, CategoryIcons, CommonHeader} from '../../../components';
+import {
+  AmountText,
+  CategoryIcons,
+  CommonHeader,
+  CustomStatusBar,
+} from '../../../components';
 import {ModifiedData} from '../../../interface';
+import {ColorConst} from '../../../theme';
 
 const AccountScreen: React.FC = () => {
   const {onBackPress, totalIncomeExpense, accountData, onAccountListPress} =
@@ -12,6 +18,10 @@ const AccountScreen: React.FC = () => {
 
   return (
     <View style={styles.container}>
+      <CustomStatusBar
+        backgroundColor={ColorConst.status_bar}
+        barStyle="dark-content"
+      />
       <CommonHeader title={'Accounts'} onPress={onBackPress} />
       <View style={styles.subContainer}>
         <View style={styles.headerContainer}>

@@ -7,10 +7,12 @@ import {ProfileStrings} from '../../../constants/String';
 import {FlatList, SafeAreaView, Text, View} from 'react-native';
 import {AuthReducerType} from '../../../interface';
 import {
+  CustomStatusBar,
   MenuItemList,
   TouchableIcon,
   UpdateNameModal,
 } from '../../../components';
+import {ColorConst} from '../../../theme';
 
 const ProfileScreen: React.FC = () => {
   const {userData} = useSelector(
@@ -22,6 +24,10 @@ const ProfileScreen: React.FC = () => {
 
   return (
     <View style={styles.container}>
+      <CustomStatusBar
+        backgroundColor={ColorConst.white}
+        barStyle="dark-content"
+      />
       <SafeAreaView />
       <View style={styles.headerContainer}>
         <View style={styles.userNameView}>

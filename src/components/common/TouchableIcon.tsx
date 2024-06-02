@@ -8,19 +8,19 @@ import {
 import React from 'react';
 import {hp} from '../../theme';
 
-interface props {
+interface Props {
   onIconPress?: () => void;
   source: ImageSourcePropType;
   customIconStyle?: ImageStyle;
   touchableRef?: React.LegacyRef<TouchableOpacity>;
 }
 
-const TouchableIcon = ({
+const TouchableIcon: React.FC<Props> = ({
   onIconPress,
   source,
   customIconStyle,
   touchableRef,
-}: props) => {
+}) => {
   return (
     <TouchableOpacity ref={touchableRef} onPress={onIconPress}>
       <Image

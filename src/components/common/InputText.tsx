@@ -2,7 +2,7 @@ import React from 'react';
 import {KeyboardType, StyleSheet, TextInput, ViewStyle} from 'react-native';
 import {ColorConst, fonts, hp, wp} from '../../theme';
 
-interface props {
+interface Props {
   placeholder?: string;
   value?: string | number;
   keyboardType?: KeyboardType;
@@ -12,7 +12,7 @@ interface props {
   autoCapitalize?: 'none' | 'sentences' | 'words' | 'characters' | undefined;
 }
 
-const InputText = (props: props) => {
+const InputText: React.FC<Props> = props => {
   const {
     value,
     placeholder,
@@ -31,7 +31,7 @@ const InputText = (props: props) => {
       autoCapitalize={autoCapitalize}
       secureTextEntry={secureTextEntry}
       style={[styles.inputFiled, inputCustomStyle]}
-      placeholderTextColor={ColorConst.light_gray}
+      placeholderTextColor={ColorConst.dark_black}
     />
   );
 };

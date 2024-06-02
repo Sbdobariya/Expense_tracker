@@ -4,6 +4,7 @@ import {
   TouchableIcon,
   TransactionList,
   EditCategoryModal,
+  CustomStatusBar,
 } from '../../components';
 import {styles} from './TransactionScreenStyle';
 import {TransactionImages} from '../../../assets';
@@ -23,6 +24,7 @@ import {
   TransactionReducerType,
 } from '../../interface';
 import {CalendarProviderDate} from '../../hooks';
+import {ColorConst} from '../../theme';
 
 const TransactionScreen: React.FC = () => {
   const tabNavigation = useNavigation<NavigationProp<TabStack>>();
@@ -108,6 +110,10 @@ const TransactionScreen: React.FC = () => {
 
   return (
     <View style={styles.container}>
+      <CustomStatusBar
+        backgroundColor={ColorConst.white}
+        barStyle="dark-content"
+      />
       <SafeAreaView />
       <CalendarProvider
         date={CalendarProviderDate()}
@@ -125,7 +131,6 @@ const TransactionScreen: React.FC = () => {
               }}
               source={TransactionImages.menu_ic}
             />
-            <TouchableIcon source={TransactionImages.search_ic} />
           </View>
         </View>
         {applyFilter && (

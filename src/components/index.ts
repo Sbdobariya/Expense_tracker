@@ -8,8 +8,10 @@ import StringDivider from './common/StringDivider';
 import TouchableIcon from './common/TouchableIcon';
 import PrimaryButton from './common/PrimaryButton';
 import CategoryIcons from './common/CategoryIcons';
+import CustomStatusBar from './common/CustomStatusBar';
 
 // addTransaction
+import SelectButton from './addTransaction/SelectButton';
 import CategoryModal from './addTransaction/CategoryModal';
 import TransactionTab from './addTransaction/TransactionTab';
 import TransactionHeader from './addTransaction/TransactionHeader';
@@ -30,6 +32,7 @@ export {
   AmountText,
   HomeHeader,
   CommonLoader,
+  SelectButton,
   MenuItemList,
   PopOverModal,
   CommonHeader,
@@ -40,6 +43,7 @@ export {
   CategoryModal,
   TransactionTab,
   UpdateNameModal,
+  CustomStatusBar,
   TransactionList,
   EditCategoryModal,
   TransactionHeader,

@@ -2,7 +2,11 @@ import React from 'react';
 import {ActivityIndicator, StyleSheet} from 'react-native';
 import {ColorConst} from '../../theme';
 
-const CommonLoader = ({isVisible}: {isVisible: boolean}) => {
+interface Props {
+  isVisible: boolean;
+}
+
+const CommonLoader: React.FC<Props> = ({isVisible}) => {
   return (
     <>
       {isVisible ? (

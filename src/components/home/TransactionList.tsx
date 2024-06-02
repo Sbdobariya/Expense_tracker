@@ -5,13 +5,17 @@ import {StyleSheet, Text, TouchableOpacity, View} from 'react-native';
 import {fontSize, fonts, hp, wp} from '../../theme';
 import CategoryIcons from '../common/CategoryIcons';
 
-interface props {
+interface Props {
   index: number;
   item: TransactionData;
   onTransactionPress: (item: TransactionData) => void;
 }
 
-const TransactionList = ({item, index, onTransactionPress}: props) => {
+const TransactionList: React.FC<Props> = ({
+  item,
+  index,
+  onTransactionPress,
+}) => {
   const color = item.transaction_mode === 'income' ? '#25A969' : 'red';
 
   const Notes =

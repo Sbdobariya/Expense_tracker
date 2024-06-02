@@ -2,7 +2,7 @@ import React from 'react';
 import {ColorConst, fontSize, fonts, hp} from '../../theme';
 import {Image, StyleSheet, Text, TouchableOpacity, View} from 'react-native';
 
-interface MenuItemListProps {
+interface Props {
   item: {
     id: number;
     image: number;
@@ -12,7 +12,7 @@ interface MenuItemListProps {
   onItemPress: (item: string) => void;
 }
 
-const MenuItemList = ({item, onItemPress}: MenuItemListProps) => {
+const MenuItemList: React.FC<Props> = ({item, onItemPress}) => {
   return (
     <TouchableOpacity
       key={item.id}

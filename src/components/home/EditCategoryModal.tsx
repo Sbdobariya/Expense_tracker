@@ -9,7 +9,7 @@ import {TransactionData} from '../../interface';
 import {ColorConst, fontSize, fonts, hp, wp} from '../../theme';
 import AmountText from '../common/AmountText';
 
-interface props {
+interface Props {
   isVisible: boolean;
   toggleModal: () => void;
   items?: TransactionData;
@@ -17,13 +17,13 @@ interface props {
   onDeletePress: (item: TransactionData) => void;
 }
 
-const EditCategoryModal = ({
+const EditCategoryModal: React.FC<Props> = ({
   items,
   isVisible,
   toggleModal,
   onEditPress,
   onDeletePress,
-}: props) => {
+}) => {
   const styles = styling(items?.transaction_mode);
 
   return (
@@ -98,7 +98,7 @@ const styling = (item?: string) => {
       backgroundColor: ColorConst.white,
     },
     headerImageContainer: {
-      gap: hp(1),
+      gap: hp(2),
       flexDirection: 'row',
       alignSelf: 'flex-end',
     },
@@ -115,6 +115,8 @@ const styling = (item?: string) => {
     },
     headerImage: {
       tintColor: '#fff',
+      height: hp(3.5),
+      width: hp(3.5),
     },
     headerContainer: {
       padding: hp(2),

@@ -24,7 +24,7 @@ export const ExpenseCategoryData = [
   {
     id: 5,
     name: 'Clothing',
-    image: ExpenseImages.cloting_ic,
+    image: ExpenseImages.clothing_ic,
   },
   {
     id: 6,
@@ -59,7 +59,7 @@ export const ExpenseCategoryData = [
   {
     id: 12,
     name: 'Shopping',
-    image: ExpenseImages.shoping_ic,
+    image: ExpenseImages.shopping_ic,
   },
   {
     id: 13,
@@ -84,7 +84,7 @@ export const ExpenseCategoryData = [
   {
     id: 17,
     name: 'Transport',
-    image: ExpenseImages.transportng_ic,
+    image: ExpenseImages.transporting_ic,
   },
   {
     id: 17,

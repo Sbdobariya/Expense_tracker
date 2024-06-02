@@ -4,6 +4,7 @@ import {ColorConst, fontSize, fonts, hp, wp} from '../../theme';
 export const styles = StyleSheet.create({
   container: {
     flex: 1,
+    backgroundColor: ColorConst.white,
   },
   onBoardImageStyle: {
     width: hp(38),

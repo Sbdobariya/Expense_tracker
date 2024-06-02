@@ -3,18 +3,25 @@ import React from 'react';
 import LinearGradient from 'react-native-linear-gradient';
 import {ColorConst, fontSize, fonts, hp, wp} from '../../theme';
 
-interface props {
+interface Props {
   title: string;
   onPress?: () => void;
   customGradientStyle?: ViewStyle;
 }
 
-const PrimaryButton = ({title, onPress, customGradientStyle}: props) => {
+const PrimaryButton: React.FC<Props> = ({
+  title,
+  onPress,
+  customGradientStyle,
+}) => {
   return (
-    <TouchableOpacity onPress={onPress} activeOpacity={0.5}>
+    <TouchableOpacity
+      onPress={onPress}
+      activeOpacity={0.5}
+      style={[customGradientStyle]}>
       <LinearGradient
         colors={[ColorConst.gradient_color1, ColorConst.gradient_color2]}
-        style={[styles.linearGradient, customGradientStyle]}>
+        style={styles.linearGradient}>
         <Text style={styles.buttonText}>{title}</Text>
       </LinearGradient>
     </TouchableOpacity>

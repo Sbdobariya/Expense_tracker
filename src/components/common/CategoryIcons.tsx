@@ -10,17 +10,17 @@ import React from 'react';
 import {RandomBGColor} from '../../hooks';
 import {hp} from '../../theme';
 
-interface CategoryIconsProps {
+interface Props {
   imageSource: ImageSourcePropType;
   customCategoryImageView?: ViewStyle;
   customCategoryImage?: ImageStyle;
 }
 
-const CategoryIcons = ({
+const CategoryIcons: React.FC<Props> = ({
   imageSource,
   customCategoryImageView,
   customCategoryImage,
-}: CategoryIconsProps) => {
+}) => {
   return (
     <View
       style={[

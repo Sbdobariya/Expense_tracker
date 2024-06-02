@@ -6,6 +6,7 @@ export const ColorConst = {
   light_20: '#91919F',
   light_gray: '#91919F',
   violet_100: '#7F3DFF',
+  status_bar: '#70aca7',
   dark_black: '#212325',
   profile_header: '#418984',
   gradient_color1: '#69AEA9',

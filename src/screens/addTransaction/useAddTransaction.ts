@@ -12,6 +12,12 @@ import {
   ExpenseArray,
   TransactionReducerType,
 } from '../../interface';
+import {HomeImages} from '../../../assets';
+import {
+  ExpenseCategoryData,
+  IncomeCategoryData,
+  TransactionAccountData,
+} from '../../utils';
 
 export const useAddTransaction = () => {
   const dispatch = useDispatch();
@@ -139,6 +145,30 @@ export const useAddTransaction = () => {
     dispatch(EditTransactionData(undefined));
   };
 
+  const onSelectCategoryPress = (item: string) => {
+    setShowCategoryModal({isVisible: true, mode: item});
+  };
+
+  const AccountImage = selectedTransactionWay
+    ? selectedTransactionWay.image
+    : HomeImages.transfer_ic;
+  const AccountName = selectedTransactionWay
+    ? selectedTransactionWay.name
+    : 'Select Account';
+  const CategoryImage = selectedExpenseItem
+    ? selectedExpenseItem.image
+    : HomeImages.category_ic;
+  const CategoryName = selectedExpenseItem
+    ? selectedExpenseItem?.name
+    : 'Select Category';
+
+  const CategoryModalData =
+    showCategoryModal.mode === 'category'
+      ? activeTab === 'expense'
+        ? ExpenseCategoryData
+        : IncomeCategoryData
+      : TransactionAccountData;
+
   return {
     activeTab,
     noteValue,
@@ -147,18 +177,21 @@ export const useAddTransaction = () => {
     onBackPress,
     setNoteValue,
     onTabChange,
+    AccountName,
+    AccountImage,
+    CategoryName,
     isImageLoader,
     onToggleModal,
+    CategoryImage,
     onUpDatePress,
     setAmountValue,
     selectedInvoice,
     onAddButtonPress,
     onAddInvoicePress,
     showCategoryModal,
-    selectedExpenseItem,
-    setShowCategoryModal,
+    CategoryModalData,
+    onSelectCategoryPress,
     setSelectedExpenseItem,
-    selectedTransactionWay,
     setSelectedTransactionWay,
   };
 };

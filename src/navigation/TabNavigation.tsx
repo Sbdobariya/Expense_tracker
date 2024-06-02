@@ -28,12 +28,11 @@ const TabNavigation: React.FC = () => {
         name={RootPage.Home}
         component={HomeStackNavigator}
         options={{
+          unmountOnBlur: true,
           tabBarIcon: ({focused}) => {
             return (
               <Image
-                source={
-                  focused ? AuthImages.home_focuse_ic : AuthImages.home_ic
-                }
+                source={focused ? AuthImages.home_focus_ic : AuthImages.home_ic}
                 style={styles.iconStyle}
                 resizeMode="contain"
               />
@@ -50,7 +49,7 @@ const TabNavigation: React.FC = () => {
               <Image
                 source={
                   focused
-                    ? AuthImages.transaction_focuse_ic
+                    ? AuthImages.transaction_focus_ic
                     : AuthImages.transaction_ic
                 }
                 style={styles.iconStyle}
@@ -88,8 +87,8 @@ const TabNavigation: React.FC = () => {
               <Image
                 source={
                   focused
-                    ? AuthImages.statitics_focuse_icon
-                    : AuthImages.staitics_ic
+                    ? AuthImages.statistics_focus_icon
+                    : AuthImages.statistics_ic
                 }
                 style={styles.iconStyle}
                 resizeMode="contain"
@@ -106,7 +105,7 @@ const TabNavigation: React.FC = () => {
             return (
               <Image
                 source={
-                  focused ? AuthImages.profile_focuse_ic : AuthImages.profile_ic
+                  focused ? AuthImages.profile_focus_ic : AuthImages.profile_ic
                 }
                 style={styles.iconStyle}
                 resizeMode="contain"

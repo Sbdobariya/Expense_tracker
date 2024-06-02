@@ -5,6 +5,8 @@ import {useSelector} from 'react-redux';
 import {TransactionReducerType} from '../../interface';
 import DropdownComponent from '../../components/common/DropDown';
 import {styles} from './StatisticsScreenStyle';
+import {CustomStatusBar} from '../../components';
+import {ColorConst} from '../../theme';
 
 interface chartData {
   text: string;
@@ -50,6 +52,10 @@ const StatisticsScreen: React.FC = () => {
 
   return (
     <View style={styles.container}>
+      <CustomStatusBar
+        backgroundColor={ColorConst.white}
+        barStyle="dark-content"
+      />
       <SafeAreaView />
       <DropdownComponent
         value={value}

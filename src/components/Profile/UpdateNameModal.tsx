@@ -3,12 +3,12 @@ import React from 'react';
 import Modal from 'react-native-modal';
 import {ColorConst, hp} from '../../theme';
 
-interface UpdateNameModalProps {
+interface Props {
   isVisible: boolean;
   toggleModal: () => void;
 }
 
-const UpdateNameModal = ({isVisible, toggleModal}: UpdateNameModalProps) => {
+const UpdateNameModal: React.FC<Props> = ({isVisible, toggleModal}) => {
   return (
     <Modal
       isVisible={isVisible}

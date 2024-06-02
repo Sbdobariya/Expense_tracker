@@ -11,7 +11,11 @@ import {
 import {AuthImages} from '../../../assets';
 import {ColorConst, fontSize, fonts, hp, wp} from '../../theme';
 
-const TransactionHeader = ({onBackPress}: {onBackPress: () => void}) => {
+interface TransactionHeaderProps {
+  onBackPress: () => void;
+}
+
+const TransactionHeader: React.FC<TransactionHeaderProps> = ({onBackPress}) => {
   return (
     <LinearGradient
       colors={[ColorConst.gradient_color1, ColorConst.gradient_color2]}

@@ -50,6 +50,6 @@ export const styles = StyleSheet.create({
   },
   myMoney: {
     color: ColorConst.dark_black,
-    fontSize: fontSize(13),
+    fontSize: fontSize(17),
   },
 });

@@ -2,13 +2,17 @@ import React from 'react';
 import {StyleSheet, Text, TouchableOpacity, View} from 'react-native';
 import {ColorConst, fontSize, fonts, hp} from '../../theme';
 
-interface props {
+interface Props {
   activeTab: string;
   onIncomePress: (val: string) => void;
   onExpensePress: (val: string) => void;
 }
 
-const TransactionTab = ({activeTab, onExpensePress, onIncomePress}: props) => {
+const TransactionTab: React.FC<Props> = ({
+  activeTab,
+  onExpensePress,
+  onIncomePress,
+}) => {
   const styles = styling(activeTab);
 
   return (

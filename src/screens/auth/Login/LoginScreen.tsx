@@ -6,6 +6,7 @@ import {
   StringDivider,
   CommonHeader,
   CommonLoader,
+  CustomStatusBar,
 } from '../../../components';
 import {
   AuthReducerType,
@@ -19,6 +20,7 @@ import {UserSignInActions} from '../../../redux/actions';
 import {AuthNavigationType, RootPage} from '../../../navigation/type';
 import {NavigationProp, useNavigation} from '@react-navigation/native';
 import {AuthContext} from '../../../utils/AuthContext';
+import {ColorConst} from '../../../theme';
 
 const LoginScreen: React.FC = () => {
   const navigation = useNavigation<NavigationProp<AuthNavigationType>>();
@@ -53,6 +55,7 @@ const LoginScreen: React.FC = () => {
   };
   return (
     <View style={styles.container}>
+      <CustomStatusBar backgroundColor={ColorConst.status_bar} />
       <CommonLoader isVisible={isLoading} />
       <CommonHeader
         title={AuthStrings.login}

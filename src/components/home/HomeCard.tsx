@@ -7,7 +7,11 @@ import {ColorConst, fontSize, fonts, hp, wp} from '../../theme';
 import {HomeStrings} from '../../constants/String';
 import AmountText from '../common/AmountText';
 
-const HomeCard = ({transactionData}: {transactionData: TransactionData[]}) => {
+interface Props {
+  transactionData: TransactionData[];
+}
+
+const HomeCard: React.FC<Props> = ({transactionData}) => {
   let totalIncome = 0;
   let totalExpense = 0;
 
