@@ -52,4 +52,8 @@ export const styles = StyleSheet.create({
     color: ColorConst.dark_black,
     fontSize: fontSize(17),
   },
+  filterImage: {
+    height: hp(5),
+    width: hp(5),
+  },
 });

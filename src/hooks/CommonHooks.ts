@@ -2,12 +2,14 @@ import moment, {MomentInput} from 'moment';
 import storage from '@react-native-firebase/storage';
 import {ImageOrVideo} from 'react-native-image-crop-picker';
 import {CalendarUtils} from 'react-native-calendars';
+import {Platform} from 'react-native';
 
 const FirebaseStorage = (
   response: ImageOrVideo,
   resolve: (res: string) => void,
 ) => {
-  const docPath = response.sourceURL || '';
+  const docPath =
+    Platform.OS === 'ios' ? response.sourceURL ?? '' : response.path ?? '';
   const docName = response.filename;
   const reference = storage().ref();
   const task = reference.child('/invoices/' + docName).putFile(docPath);
@@ -45,13 +47,6 @@ const AccountDetailTimeStamp = (item: MomentInput) => {
   }
 };
 
-const CalendarProviderDate = () => {
-  const today = new Date();
-  return CalendarUtils.getCalendarDateString(
-    new Date().setDate(today.getDate()),
-  );
-};
-
 const RandomBGColor = () => {
   var x = Math.floor(Math.random() * 256);
   var y = Math.floor(Math.random() * 256);
@@ -77,6 +72,5 @@ export {
   RandomBGColor,
   FirebaseStorage,
   TransactionTimeStamp,
-  CalendarProviderDate,
   AccountDetailTimeStamp,
 };

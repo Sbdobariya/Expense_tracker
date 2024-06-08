@@ -1,6 +1,4 @@
-import moment from 'moment';
 import {
-  PopOverModal,
   TouchableIcon,
   TransactionList,
   EditCategoryModal,
@@ -8,61 +6,26 @@ import {
 } from '../../components';
 import {styles} from './TransactionScreenStyle';
 import {TransactionImages} from '../../../assets';
-import React, {useEffect, useState} from 'react';
-import {useDispatch, useSelector} from 'react-redux';
-import {DeleteTransactions} from '../../redux/actions';
-import {EditTransactionData} from '../../redux/reducer';
-import {RootPage, TabStack} from '../../navigation/type';
+import React from 'react';
 import {Text, View, Image, FlatList, SafeAreaView} from 'react-native';
-import {NavigationProp, useNavigation} from '@react-navigation/native';
 import {CalendarProvider, ExpandableCalendar} from 'react-native-calendars';
-import {
-  AuthReducerType,
-  DeleteDataType,
-  StateProps,
-  TransactionData,
-  TransactionReducerType,
-} from '../../interface';
-import {CalendarProviderDate} from '../../hooks';
+
 import {ColorConst} from '../../theme';
+import {useTransactions} from './useTransactions';
 
 const TransactionScreen: React.FC = () => {
-  const tabNavigation = useNavigation<NavigationProp<TabStack>>();
-  const {transactionData} = useSelector(
-    (state: {transactionReducer: TransactionReducerType}) =>
-      state?.transactionReducer,
-  );
-  const {userData} = useSelector(
-    (state: {authReducer: AuthReducerType}) => state?.authReducer,
-  );
-  const dispatch = useDispatch();
-  const [isVisibleEditModal, setIsVisibleEditModal] = useState<StateProps>({
-    isVisible: false,
-    item: undefined,
-  });
-  const [applyFilter, setApplyFilter] = useState(false);
-  const [allTransactions, setAllTransactions] = useState<TransactionData[]>([]);
-  const Today = moment(new Date()).format('YYYY-MM-DD');
-
-  useEffect(() => {
-    setAllTransactions(transactionData);
-  }, [transactionData]);
-
-  useEffect(() => {
-    if (applyFilter) {
-      const filterdata = transactionData.filter(
-        item => item.transaction_createdAt === Today,
-      );
-      setAllTransactions(filterdata);
-    }
-  }, [applyFilter, transactionData, Today]);
-
-  const onDateChanged = (newDate: string) => {
-    const filterdata = transactionData.filter(
-      item => item.transaction_createdAt === newDate,
-    );
-    setAllTransactions(filterdata);
-  };
+  const {
+    applyFilter,
+    onEditPress,
+    toggleModal,
+    selectedDate,
+    onDateChanged,
+    onDeletePress,
+    allTransactions,
+    handleFilterToggle,
+    onTransactionPress,
+    isVisibleEditModal,
+  } = useTransactions();
 
   const ListEmptyComponent = () => {
     return (
@@ -78,35 +41,7 @@ const TransactionScreen: React.FC = () => {
       </View>
     );
   };
-
-  const onTransactionPress = (item: TransactionData) => {
-    setIsVisibleEditModal({
-      isVisible: true,
-      item: item,
-    });
-  };
-
-  const onEditPress = (item: TransactionData) => {
-    dispatch(EditTransactionData(item));
-    setIsVisibleEditModal({
-      isVisible: false,
-      item: undefined,
-    });
-    tabNavigation.navigate(RootPage.AddTransaction, {
-      screen: RootPage.AddTransactionScreen,
-    });
-  };
-  const onDeletePress = (item: TransactionData) => {
-    const request: DeleteDataType = {
-      item: item,
-      id: userData?.userID,
-    };
-    dispatch(DeleteTransactions(request) as any);
-    setIsVisibleEditModal({
-      isVisible: false,
-      item: undefined,
-    });
-  };
+  console.log('allTransactions----------', allTransactions);
 
   return (
     <View style={styles.container}>
@@ -115,21 +50,18 @@ const TransactionScreen: React.FC = () => {
         barStyle="dark-content"
       />
       <SafeAreaView />
-      <CalendarProvider
-        date={CalendarProviderDate()}
-        onDateChanged={onDateChanged}>
+      <CalendarProvider date={selectedDate} onDateChanged={onDateChanged}>
         <View style={styles.headerContainer}>
           <Text style={styles.myMoney}>My Money</Text>
           <View style={styles.popoverView}>
-            <PopOverModal
-              popupText={applyFilter ? 'Reset Filter ' : 'Apply Filter'}
-              onPopupPress={() => {
-                setApplyFilter(!applyFilter);
-                if (applyFilter) {
-                  setAllTransactions(transactionData);
-                }
-              }}
-              source={TransactionImages.menu_ic}
+            <TouchableIcon
+              source={
+                !applyFilter
+                  ? TransactionImages.filter_ic
+                  : TransactionImages.cancel_filter_ic
+              }
+              onIconPress={handleFilterToggle}
+              customIconStyle={styles.filterImage}
             />
           </View>
         </View>
@@ -155,9 +87,7 @@ const TransactionScreen: React.FC = () => {
         onDeletePress={onDeletePress}
         onEditPress={onEditPress}
         isVisible={isVisibleEditModal.isVisible}
-        toggleModal={() =>
-          setIsVisibleEditModal({isVisible: false, item: undefined})
-        }
+        toggleModal={toggleModal}
         items={isVisibleEditModal.item || undefined}
       />
     </View>

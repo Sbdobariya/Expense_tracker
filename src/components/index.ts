@@ -3,7 +3,6 @@ import InputText from './common/InputText';
 import AmountText from './common/AmountText';
 import CommonLoader from './common/CommonLoader';
 import CommonHeader from './common/CommonHeader';
-import PopOverModal from './common/PopOverModal';
 import StringDivider from './common/StringDivider';
 import TouchableIcon from './common/TouchableIcon';
 import PrimaryButton from './common/PrimaryButton';
@@ -38,7 +37,6 @@ export {
   CommonLoader,
   SelectButton,
   MenuItemList,
-  PopOverModal,
   StatisticsTab,
   CommonHeader,
   PrimaryButton,
