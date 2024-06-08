@@ -2059,7 +2059,7 @@ PODS:
     - React-Core
   - react-native-pdf (6.7.5):
     - React-Core
-  - react-native-safe-area-context (4.10.3):
+  - react-native-safe-area-context (4.10.4):
     - React-Core
   - react-native-splash-screen (3.3.0):
     - React-Core
@@ -2332,6 +2332,8 @@ PODS:
     - Firebase/Storage (= 10.24.0)
     - React-Core
     - RNFBApp
+  - RNFS (2.20.0):
+    - React-Core
   - RNImageCropPicker (0.41.1):
     - React-Core
     - React-RCTImage
@@ -2439,6 +2441,7 @@ DEPENDENCIES:
   - "RNFBAuth (from `../node_modules/@react-native-firebase/auth`)"
   - "RNFBFirestore (from `../node_modules/@react-native-firebase/firestore`)"
   - "RNFBStorage (from `../node_modules/@react-native-firebase/storage`)"
+  - RNFS (from `../node_modules/react-native-fs`)
   - RNImageCropPicker (from `../node_modules/react-native-image-crop-picker`)
   - RNPermissions (from `../node_modules/react-native-permissions`)
   - RNScreens (from `../node_modules/react-native-screens`)
@@ -2603,6 +2606,8 @@ EXTERNAL SOURCES:
     :path: "../node_modules/@react-native-firebase/firestore"
   RNFBStorage:
     :path: "../node_modules/@react-native-firebase/storage"
+  RNFS:
+    :path: "../node_modules/react-native-fs"
   RNImageCropPicker:
     :path: "../node_modules/react-native-image-crop-picker"
   RNPermissions:
@@ -2669,7 +2674,7 @@ SPEC CHECKSUMS:
   react-native-blob-util: 18b510205c080a453574a7d2344d64673d0ad9af
   react-native-html-to-pdf: 4c5c6e26819fe202971061594058877aa9b25265
   react-native-pdf: 103940c90d62adfd259f63cca99c7c0c306b514c
-  react-native-safe-area-context: b01d8f42d4e62a7be5a3e69fd332e0c7e67584c7
+  react-native-safe-area-context: 399a5859f6acbdf67f671c69b53113f535f3b5b0
   react-native-splash-screen: 4312f786b13a81b5169ef346d76d33bc0c6dc457
   react-native-webview: 8d9a168c762d031dd94105191737f871cae153dc
   React-nativeconfig: 21d89c65ca39875fad2c5c465e0e013e514eba21
@@ -2701,14 +2706,15 @@ SPEC CHECKSUMS:
   RNFBAuth: 40b9953bc9a8e2e207843e424aa82aa84bf34057
   RNFBFirestore: ed29ba9f6fda6341b660d78fd333d39af5641d91
   RNFBStorage: 591d676ad5596b11ca1b0e324111dbdc6cb7aa95
+  RNFS: 4ac0f0ea233904cb798630b3c077808c06931688
   RNImageCropPicker: 601604515fd6fbba318147b0a56aed0be9379415
-  RNPermissions: 88cb833d70198c254e3ea7ccc4179fde91670700
+  RNPermissions: 952f63a8bf2a40d0398cbb5957707396f8d8ad21
   RNScreens: 30249f9331c3b00ae7cb7922e11f58b3ed369c07
   RNSVG: a48668fd382115bc89761ce291a81c4ca5f2fd2e
   SocketRocket: abac6f5de4d4d62d24e11868d7a2f427e0ef940d
   TOCropViewController: 80b8985ad794298fb69d3341de183f33d1853654
   Yoga: dafebc41bc66910af33077aaa41078e89fd635bf
 
-PODFILE CHECKSUM: cd4825bb5415663be20c1b181653da4450ef136c
+PODFILE CHECKSUM: d61e0b33618ad5024fd12b9c999b3633e15475ea
 
 COCOAPODS: 1.15.2

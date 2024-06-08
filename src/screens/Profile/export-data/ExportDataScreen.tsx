@@ -1,30 +1,25 @@
-import {
-  Alert,
-  Button,
-  Dimensions,
-  PermissionsAndroid,
-  Platform,
-  StyleSheet,
-  Text,
-  View,
-} from 'react-native';
+import {View} from 'react-native';
 import React, {useState} from 'react';
 import {
   CommonHeader,
   CustomStatusBar,
+  ExportDataDropDown,
   PrimaryButton,
 } from '../../../components';
-import {ColorConst} from '../../../theme';
+import {ColorConst, hp} from '../../../theme';
 import {useExportData} from './useExportData';
-import WebView from 'react-native-webview';
-import RNHTMLtoPDF from 'react-native-html-to-pdf';
-import {PERMISSIONS, request} from 'react-native-permissions';
-import Pdf from 'react-native-pdf';
+import {ExportDataType, TimeDuration} from '../../../constants/StaticData';
+import {styles} from './ExportDataScreenStyle';
 
 const ExportDataScreen: React.FC = () => {
-  const {onBackPress} = useExportData();
-
-  const [count, setCount] = useState(1);
+  const {
+    onBackPress,
+    onDateChange,
+    onDataChange,
+    selectedData,
+    selectedDate,
+    onExportPress,
+  } = useExportData();
 
   const transactions = [
     {
@@ -208,190 +203,56 @@ const ExportDataScreen: React.FC = () => {
   ];
 
   const [data, setData] = useState(transactions);
-  const [pdf, setPdf] = useState();
-
-  const generateHtml = transactions => {
-    let balance = 0;
-
-    const rows = transactions
-      .map(transaction => {
-        let debit = '';
-        let credit = '';
-
-        if (transaction.transaction_mode === 'income') {
-          credit = transaction.transaction_amount.toFixed(2);
-          balance += transaction.transaction_amount;
-        } else {
-          debit = transaction.transaction_amount.toFixed(2);
-          balance -= transaction.transaction_amount;
-        }
-
-        return `
-        <tr>
-          <td>${new Date(transaction.timestamp).toLocaleDateString()}</td>
-          <td>${
-            transaction.transaction_note ||
-            transaction.transaction_category.name
-          }</td>
-          <td class="debit">${debit}</td>
-          <td class="credit">${credit}</td>
-          <td class="balance">${balance.toFixed(2)} Cr</td>
-        </tr>
-      `;
-      })
-      .join('');
-
-    return `
-      <!DOCTYPE html>
-      <html>
-      <head>
-          <style>
-              body {
-                  font-family: 'Helvetica';
-                  font-size: 12px;
-                  margin: 0;
-                  padding: 0;
-              }
-              header, footer {
-                  height: 50px;
-                  background-color: #fff;
-                  color: #000;
-                  display: flex;
-                  justify-content: space-between;
-                  align-items: center;
-                  padding: 0 20px;
-                  border-bottom: 1px solid #000;
-              }
-              footer {
-                  border-top: 1px solid #000;
-                  border-bottom: none;
-              }
-              table {
-                  width: 100%;
-                  border-collapse: collapse;
-                  margin: 20px 0;
-              }
-              th, td {
-                  border: 1px solid #000;
-                  padding: 8px;
-                  text-align: right;
-              }
-              th {
-                  background-color: #f2f2f2;
-                  text-align: center;
-              }
-              td:first-child {
-                  text-align: left;
-              }
-              .credit {
-                  color: green;
-              }
-              .debit {
-                  color: red;
-              }
-              .balance {
-                  color: blue;
-              }
-              .right-align {
-                  text-align: right;
-              }
-              .center-align {
-                  text-align: center;
-              }
-          </style>
-      </head>
-      <body>
-          <header>
-              <h1>Transaction Report</h1>
-              <div>
-                  <p>Expense Tracker</p>
-              </div>
-          </header>
-          <main>
-              <h2>Transactions</h2>
-              <table>
-                  <thead>
-                      <tr>
-                          <th>Date</th>
-                          <th>Details</th>
-                          <th>Debit(-)</th>
-                          <th>Credit(+)</th>
-                          <th>Balance</th>
-                      </tr>
-                  </thead>
-                  <tbody>
-                      ${rows}
-                  </tbody>
-              </table>
-          </main>
-          <footer>
-              <p>Thank you for your business!</p>
-          </footer>
-      </body>
-      </html>
-    `;
-  };
-  const htmlContent = generateHtml(data);
-
-  const createPDF = async () => {
-    const htmlContent = generateHtml(data);
-
-    let options = {
-      html: htmlContent,
-      fileName: 'TransactionReport',
-      directory: 'Documents',
-      base64: true,
-    };
-
-    const granted = await request(PERMISSIONS.ANDROID.WRITE_EXTERNAL_STORAGE);
-    console.log('granted----------', granted);
-    // if (Platform.OS === 'android') {
-
-    //   const granted = await PermissionsAndroid.request(
-    //     PermissionsAndroid.PERMISSIONS.WRITE_EXTERNAL_STORAGE,
-    //     {
-    //       title: 'External Storage Write Permission',
-    //       message: 'App needs write permission',
-    //     },
-    //   );
-    //   if (granted !== PermissionsAndroid.RESULTS.GRANTED) {
-    //     Alert.alert('Storage Permission Not Granted');
-    //     return;
-    //   }
-    // }
-
-    let file = await RNHTMLtoPDF.convert(options);
-    console.log(file.filePath);
-    setPdf(file.filePath);
-  };
+  const [pdf, setPdf] = useState<string | undefined>();
 
   return (
-    <View style={{flex: 1}}>
+    <View style={styles.container}>
       <CustomStatusBar
         backgroundColor={ColorConst.status_bar}
         barStyle="dark-content"
       />
-      <Button title="Create PDF" onPress={createPDF} />
-
       <CommonHeader title={'Export Data'} onPress={onBackPress} />
-      <Pdf
-        source={{uri: pdf}}
-        onError={error => {
-          console.log(error);
-        }}
-        onPressLink={uri => {
-          console.log(`Link pressed: ${uri}`);
-        }}
-        style={{
-          flex: 1,
-          width: Dimensions.get('window').width,
-          height: Dimensions.get('window').height,
-        }}
-      />
+      <View style={styles.subContainer}>
+        <View>
+          <ExportDataDropDown
+            placeholder={'Select item'}
+            title={'What data do your want to export?'}
+            data={ExportDataType}
+            onChange={onDataChange}
+            value={selectedData.value}
+          />
+          <ExportDataDropDown
+            placeholder={'Select Date Range'}
+            title={'When Date Range?'}
+            data={TimeDuration}
+            onChange={onDateChange}
+            value={selectedDate.value}
+          />
+        </View>
+        <PrimaryButton
+          title="Export Data"
+          onPress={onExportPress}
+          customGradientStyle={{marginBottom: hp(7)}}
+        />
+      </View>
+      {/* {pdfPath ? (
+        <Pdf
+          source={{uri: pdfPath}}
+          onError={error => {
+            console.log(error);
+          }}
+          onPressLink={uri => {
+            console.log(`Link pressed: ${uri}`);
+          }}
+          style={{
+            flex: 1,
+            width: Dimensions.get('window').width,
+            height: Dimensions.get('window').height,
+          }}
+        />
+      ) : null} */}
     </View>
   );
 };
 
 export default ExportDataScreen;
-
-const styles = StyleSheet.create({});

@@ -16,8 +16,8 @@ prepare_react_native_project!
 
 
 setup_permissions([
-  # 'PhotoLibrary',
-  # 'PhotoLibraryAddOnly',
+  'PhotoLibrary',
+  'PhotoLibraryAddOnly',
 ])
 
 linkage = ENV['USE_FRAMEWORKS']
