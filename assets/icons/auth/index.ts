@@ -1,4 +1,6 @@
 export const AuthImages = {
+  view_ic: require('./view.png'),
+  hide_ic: require('./hide.png'),
   home_ic: require('./home_icon.png'),
   profile_ic: require('./user_ic.png'),
   header_bg_ic: require('./header_bg.png'),

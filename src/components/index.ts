@@ -8,6 +8,8 @@ import TouchableIcon from './common/TouchableIcon';
 import PrimaryButton from './common/PrimaryButton';
 import CategoryIcons from './common/CategoryIcons';
 import CustomStatusBar from './common/CustomStatusBar';
+import PasswordInput from './common/PasswordInput';
+
 
 // addTransaction
 import SelectButton from './addTransaction/SelectButton';
@@ -45,6 +47,7 @@ export {
   StringDivider,
   CategoryModal,
   TransactionTab,
+  PasswordInput,
   ProfileHeader,
   ChartComponent,
   UpdateNameModal,

@@ -5,6 +5,7 @@ import {
   CommonHeader,
   CommonLoader,
   CustomStatusBar,
+  PasswordInput,
 } from '../../../components';
 import {
   UserDataType,
@@ -34,8 +35,9 @@ const SignUpScreen: React.FC = () => {
   const [name, setName] = useState('');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+  const [passwordHide, setPasswordHide] = useState(true);
 
-  const onSingupPress = () => {
+  const onSingUpPress = () => {
     if (name === '') {
       ShowTostMessage('Please enter name', 'error');
     } else if (email === '') {
@@ -75,19 +77,19 @@ const SignUpScreen: React.FC = () => {
       <InputText
         value={email}
         autoCapitalize="none"
+        keyboardType="email-address"
         placeholder={AuthStrings.email}
         inputCustomStyle={styles.emailInput}
         onChangeText={(txt: string) => setEmail(txt)}
       />
-      <InputText
-        value={password}
-        autoCapitalize="none"
-        placeholder={AuthStrings.Password}
-        inputCustomStyle={styles.emailInput}
-        onChangeText={(txt: string) => setPassword(txt)}
+      <PasswordInput
+        password={password}
+        setPassword={setPassword}
+        passwordHide={passwordHide}
+        setPasswordHide={setPasswordHide}
       />
       <PrimaryButton
-        onPress={onSingupPress}
+        onPress={onSingUpPress}
         title={AuthStrings.sign_up}
         customGradientStyle={styles.signUpButtonStyle}
       />

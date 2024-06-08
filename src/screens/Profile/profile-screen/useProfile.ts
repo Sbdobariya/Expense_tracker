@@ -9,6 +9,7 @@ import {MainNavigatorType, RootPage} from '../../../navigation/type';
 import {StoreData} from '../../../utils';
 import {userDataAction} from '../../../redux/reducer';
 import {useDispatch} from 'react-redux';
+import {Alert} from 'react-native';
 
 export const useProfile = () => {
   const MenuItem = [
@@ -39,8 +40,20 @@ export const useProfile = () => {
 
   const onItemPress = (props: string) => {
     if (props === ProfileStrings.logout) {
-      signOut();
-      auth().signOut();
+      Alert.alert('Log Out', 'Are you sure, do you want to log out?', [
+        {
+          text: 'Cancel',
+          onPress: () => console.log('Cancel Pressed'),
+          style: 'cancel',
+        },
+        {
+          text: 'Yes',
+          onPress: () => {
+            signOut();
+            auth().signOut();
+          },
+        },
+      ]);
     } else if (props === ProfileStrings.account) {
       navigation.navigate(RootPage.AccountScreen);
     } else {

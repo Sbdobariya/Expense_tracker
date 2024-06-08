@@ -1,7 +1,7 @@
 import React from 'react';
 import {AuthNavigationType, RootPage} from '../type';
 import {createNativeStackNavigator} from '@react-navigation/native-stack';
-import {LoginScreen, OnBoardingScreen, SignUpScreen} from '../../screens';
+import {ForgotPassword,LoginScreen, OnBoardingScreen, SignUpScreen} from '../../screens';
 
 const AuthStack = createNativeStackNavigator<AuthNavigationType>();
 
@@ -14,6 +14,10 @@ const AuthStackNavigator: React.FC = () => {
       />
       <AuthStack.Screen name={RootPage.LoginScreen} component={LoginScreen} />
       <AuthStack.Screen name={RootPage.SignUpScreen} component={SignUpScreen} />
+      <AuthStack.Screen
+        name={RootPage.ForgotPassword}
+        component={ForgotPassword}
+      />
     </AuthStack.Navigator>
   );
 };

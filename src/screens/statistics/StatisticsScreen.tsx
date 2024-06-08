@@ -1,5 +1,5 @@
 import React from 'react';
-import {View} from 'react-native';
+import {Text, View} from 'react-native';
 import {styles} from './StatisticsScreenStyle';
 import {ChartComponent, CustomStatusBar, StatisticsTab} from '../../components';
 import {ColorConst} from '../../theme';
@@ -30,7 +30,16 @@ const StatisticsScreen: React.FC = () => {
           selectedTab={selectedTab}
           subCategoryFilter={subCategoryFilter}
         />
-        <ChartComponent chartData={pieChartData} filteredData={filteredData} />
+        {pieChartData?.length !== 0 ? (
+          <ChartComponent
+            chartData={pieChartData}
+            filteredData={filteredData}
+          />
+        ) : (
+          <View style={styles.emptyData}>
+            <Text style={styles.noDataText}>No Data</Text>
+          </View>
+        )}
       </View>
     </View>
   );

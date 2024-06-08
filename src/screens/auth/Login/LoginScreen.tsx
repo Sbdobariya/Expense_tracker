@@ -1,4 +1,4 @@
-import {View} from 'react-native';
+import {Image, Text, TouchableOpacity, View} from 'react-native';
 import React, {useState} from 'react';
 import {
   InputText,
@@ -7,6 +7,7 @@ import {
   CommonHeader,
   CommonLoader,
   CustomStatusBar,
+  PasswordInput,
 } from '../../../components';
 import {
   AuthReducerType,
@@ -20,7 +21,7 @@ import {UserSignInActions} from '../../../redux/actions';
 import {AuthNavigationType, RootPage} from '../../../navigation/type';
 import {NavigationProp, useNavigation} from '@react-navigation/native';
 import {AuthContext} from '../../../utils/AuthContext';
-import {ColorConst} from '../../../theme';
+import {ColorConst, fontSize, hp, wp} from '../../../theme';
 import {ShowTostMessage} from '../../../utils';
 
 const LoginScreen: React.FC = () => {
@@ -35,6 +36,7 @@ const LoginScreen: React.FC = () => {
 
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+  const [passwordHide, setPasswordHide] = useState(true);
 
   const onLoginPress = () => {
     if (email === '') {
@@ -65,17 +67,22 @@ const LoginScreen: React.FC = () => {
       <InputText
         value={email}
         autoCapitalize="none"
+        keyboardType="email-address"
         placeholder={AuthStrings.email}
         inputCustomStyle={styles.emailInput}
         onChangeText={(txt: string) => setEmail(txt)}
       />
-      <InputText
-        value={password}
-        autoCapitalize="none"
-        placeholder={AuthStrings.Password}
-        inputCustomStyle={styles.passwordInput}
-        onChangeText={(txt: string) => setPassword(txt)}
+      <PasswordInput
+        password={password}
+        setPassword={setPassword}
+        passwordHide={passwordHide}
+        setPasswordHide={setPasswordHide}
       />
+      <TouchableOpacity
+        style={styles.forgotPass}
+        onPress={() => navigation.navigate(RootPage.ForgotPassword)}>
+        <Text style={styles.forgotPassText}>Forgot Password</Text>
+      </TouchableOpacity>
       <PrimaryButton
         onPress={onLoginPress}
         title={AuthStrings.login}
@@ -84,7 +91,7 @@ const LoginScreen: React.FC = () => {
       <StringDivider
         titleTwo={AuthStrings.sign_up}
         titleOne={AuthStrings.already_have_an_account}
-        onPress={() => navigation.navigate(RootPage.LoginScreen)}
+        onPress={() => navigation.navigate(RootPage.SignUpScreen)}
       />
     </View>
   );

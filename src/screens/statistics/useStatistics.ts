@@ -49,12 +49,10 @@ export const useStatistics = () => {
             return true;
         }
       });
-
       setFilteredData(intervalFilteredData);
 
       const categorySum: CategorySum = {};
-
-      filteredData.forEach(item => {
+      intervalFilteredData.forEach(item => {
         const categoryName = item.transaction_category?.name;
         const transactionAmount = item.transaction_amount;
 
@@ -76,16 +74,20 @@ export const useStatistics = () => {
         color: RandomBGColor(),
       }));
 
-      const maxPercentageData = modifiedData.reduce((prev, current) =>
-        prev.percentage! > current.percentage! ? prev : current,
-      );
+      if (modifiedData?.length !== 0) {
+        const maxPercentageData = modifiedData.reduce((prev, current) =>
+          prev.percentage! > current.percentage! ? prev : current,
+        );
 
-      const finalData = modifiedData.map(data => ({
-        ...data,
-        focused: data === maxPercentageData,
-      }));
+        const finalData = modifiedData.map(data => ({
+          ...data,
+          focused: data === maxPercentageData,
+        }));
 
-      setPieChartData(finalData);
+        setPieChartData(finalData);
+      } else {
+        setPieChartData([]);
+      }
     }
   }, [selectedTab, transactionData, subCategoryFilter]);
 

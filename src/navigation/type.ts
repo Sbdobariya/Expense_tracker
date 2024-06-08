@@ -14,6 +14,7 @@ export enum RootPage {
   AccountScreen = 'AccountScreen',
   ProfileScreen = 'ProfileScreen',
   AccountDetails = 'AccountDetails',
+  ForgotPassword = 'ForgotPassword',
   AddTransaction = 'AddTransaction',
   ExportDataScreen = 'ExportDataScreen',
   StatisticsScreen = 'StatisticsScreen',
@@ -25,6 +26,7 @@ export type AuthNavigationType = {
   [RootPage.OnBoarding]: undefined;
   [RootPage.LoginScreen]: undefined;
   [RootPage.SignUpScreen]: undefined;
+  [RootPage.ForgotPassword]: undefined;
 };
 
 export type MainNavigatorType = {

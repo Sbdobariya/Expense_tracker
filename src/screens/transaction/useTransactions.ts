@@ -68,9 +68,7 @@ export const useTransactions = () => {
 
   const handleFilterToggle = () => {
     setApplyFilter(!applyFilter);
-    console.log('applyFilter----------', applyFilter);
     if (applyFilter) {
-      console.log('if');
       setAllTransactions(transactionData);
     }
     setSelectedDate('2024-06-03');
