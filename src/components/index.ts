@@ -9,7 +9,7 @@ import PrimaryButton from './common/PrimaryButton';
 import CategoryIcons from './common/CategoryIcons';
 import CustomStatusBar from './common/CustomStatusBar';
 import PasswordInput from './common/PasswordInput';
-
+import DropdownComponent from './common/DropDown';
 
 // addTransaction
 import SelectButton from './addTransaction/SelectButton';
@@ -27,10 +27,12 @@ import EditCategoryModal from './home/EditCategoryModal';
 import MenuItemList from './profile/MenuItemList';
 import UpdateNameModal from './profile/UpdateNameModal';
 import ProfileHeader from './profile/ProfileHeader';
+import ExportDataDropDown from './profile/ExportDataDropDown';
 
 // Statistics
 import StatisticsTab from './statistics/StatisticsTab';
 import ChartComponent from './statistics/ChartComponent';
+
 export {
   HomeCard,
   InputText,
@@ -39,20 +41,22 @@ export {
   CommonLoader,
   SelectButton,
   MenuItemList,
-  StatisticsTab,
   CommonHeader,
+  StatisticsTab,
   PrimaryButton,
   CategoryIcons,
   TouchableIcon,
   StringDivider,
   CategoryModal,
-  TransactionTab,
   PasswordInput,
   ProfileHeader,
+  TransactionTab,
   ChartComponent,
+  TransactionList,
   UpdateNameModal,
   CustomStatusBar,
-  TransactionList,
   EditCategoryModal,
   TransactionHeader,
+  DropdownComponent,
+  ExportDataDropDown,
 };

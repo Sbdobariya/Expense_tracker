@@ -21,6 +21,32 @@ const FirebaseStorage = (
   });
 };
 
+const FirebaseStoragePDF = (
+  docPath: string,
+  resolve: (res: string) => void,
+) => {
+  const docName = 'transaction.pdf';
+  const reference = storage().ref();
+  const task = reference.child('/invoices/' + docName).putFile(docPath);
+  task?.on('state_changed', async onSnap => {
+    const imageUrl = await storage()
+      .ref(onSnap?.ref?.fullPath)
+      .getDownloadURL();
+    resolve(imageUrl);
+  });
+  // const docPath =
+  //   Platform.OS === 'ios' ? response.sourceURL ?? '' : response.path ?? '';
+  // const docName = response.filename;
+  // const reference = storage().ref();
+  // const task = reference.child('/invoices/' + docName).putFile(docPath);
+  // task?.on('state_changed', async onSnap => {
+  //   const imageUrl = await storage()
+  //     .ref(onSnap?.ref?.fullPath)
+  //     .getDownloadURL();
+  //   resolve(imageUrl);
+  // });
+};
+
 const TransactionTimeStamp = (item: MomentInput) => {
   const transactionDate = moment(item);
   const currentDate = moment();
@@ -71,6 +97,7 @@ export {
   getTime,
   RandomBGColor,
   FirebaseStorage,
+  FirebaseStoragePDF,
   TransactionTimeStamp,
   AccountDetailTimeStamp,
 };
