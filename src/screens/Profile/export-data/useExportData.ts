@@ -1,5 +1,5 @@
 import {NavigationProp, useNavigation} from '@react-navigation/native';
-import {MainNavigatorType, RootPage} from '../../../navigation/type';
+import {MainNavigatorType} from '../../../navigation/type';
 import {useEffect, useState} from 'react';
 import {useSelector} from 'react-redux';
 import {TransactionData, TransactionReducerType} from '../../../interface';
@@ -102,14 +102,19 @@ export const useExportData = () => {
           debit = transaction.transaction_amount.toFixed(2);
           balance -= transaction.transaction_amount;
         }
-
         return `
         <tr>
-          <td>${new Date(transaction.timestamp).toLocaleDateString()}</td>
-          <td>${
-            transaction.transaction_note ||
-            transaction.transaction_category.name
-          }</td>
+        <td>${
+          transaction.timestamp
+            ? new Date(transaction.timestamp).toLocaleDateString()
+            : ''
+        }</td>
+                 <td>${
+                   transaction.transaction_note ??
+                   transaction.transaction_category?.name ??
+                   ''
+                 }</td>
+
           <td class="debit">${debit}</td>
           <td class="credit">${credit}</td>
           <td class="balance">${balance.toFixed(2)} Cr</td>
@@ -230,7 +235,7 @@ export const useExportData = () => {
     ReactNativeBlobUtil.config({
       fileCache: true,
       appendExt: 'pdf',
-      path: `${dirs.DocumentDir}/${'TransactionReport.pdf'}`,
+      path: `${dirs.DocumentDir}/TransactionReport.pdf`,
       addAndroidDownloads: {
         useDownloadManager: true,
         notification: true,
@@ -241,8 +246,14 @@ export const useExportData = () => {
     })
       .fetch('GET', `file://${sourceFilePath}`)
       .then(res => {
-        console.log('res----------', res.path());
-        if (Platform.OS === 'ios') {
+        console.log('File downloaded to:', res.path());
+
+        if (Platform.OS === 'android') {
+          const filePath = `file://${res.path()}`;
+          Share.open({url: filePath, type: 'application/pdf'})
+            .then(resp => console.log(resp))
+            .catch(err => console.log(err));
+        } else if (Platform.OS === 'ios') {
           const filePath = res.path();
           let options = {
             type: 'application/pdf',
