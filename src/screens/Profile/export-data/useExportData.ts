@@ -1,14 +1,14 @@
 import {NavigationProp, useNavigation} from '@react-navigation/native';
-import {MainNavigatorType, RootPage} from '../../../navigation/type';
+import {MainNavigatorType} from '../../../navigation/type';
 import {useEffect, useState} from 'react';
 import {useSelector} from 'react-redux';
 import {TransactionData, TransactionReducerType} from '../../../interface';
 import RNHTMLtoPDF from 'react-native-html-to-pdf';
 import {ShowTostMessage} from '../../../utils';
-import {Alert, Platform} from 'react-native';
+import {PermissionsAndroid, Platform} from 'react-native';
 import RNFS from 'react-native-fs';
-import storage from '@react-native-firebase/storage';
-import {FirebaseStoragePDF} from '../../../hooks';
+import Share from 'react-native-share';
+import {PERMISSIONS, request} from 'react-native-permissions';
 
 export const useExportData = () => {
   const {transactionData} = useSelector(
@@ -90,26 +90,38 @@ export const useExportData = () => {
 
   const generateHtml = () => {
     let balance = 0;
+    let totalIncome = 0;
+    let totalExpense = 0;
 
     const rows = filteredData
       .map(transaction => {
         let debit = '';
         let credit = '';
+        let rowClass = '';
 
         if (transaction.transaction_mode === 'income') {
           credit = transaction.transaction_amount.toFixed(2);
+          totalIncome += transaction.transaction_amount;
           balance += transaction.transaction_amount;
+          rowClass = 'income';
         } else {
           debit = transaction.transaction_amount.toFixed(2);
+          totalExpense += transaction.transaction_amount;
           balance -= transaction.transaction_amount;
+          rowClass = 'expense';
         }
 
         return `
-        <tr>
-          <td>${new Date(transaction.timestamp).toLocaleDateString()}</td>
+        <tr class="${rowClass}">
           <td>${
-            transaction.transaction_note ||
-            transaction.transaction_category.name
+            transaction.timestamp
+              ? new Date(transaction.timestamp).toLocaleDateString()
+              : ''
+          }</td>
+          <td>${
+            transaction.transaction_note ??
+            transaction.transaction_category?.name ??
+            ''
           }</td>
           <td class="debit">${debit}</td>
           <td class="credit">${credit}</td>
@@ -119,93 +131,73 @@ export const useExportData = () => {
       })
       .join('');
 
+    // Total rows
+    const totalRow = `
+      <tr>
+        <td colspan="2">Total Income</td>
+        <td colspan="3" class="right-align">${totalIncome.toFixed(2)}</td>
+      </tr>
+      <tr>
+        <td colspan="2">Total Expense</td>
+        <td colspan="3" class="right-align">${totalExpense.toFixed(2)}</td>
+      </tr>
+      <tr>
+        <td colspan="2">Remaining Balance</td>
+        <td colspan="3" class="right-align">${balance.toFixed(2)}</td>
+      </tr>
+    `;
+
     return `
       <!DOCTYPE html>
       <html>
-      <head>
+        <head>
           <style>
-              body {
-                  font-family: 'Helvetica';
-                  font-size: 12px;
-                  margin: 0;
-                  padding: 0;
-              }
-              header, footer {
-                  height: 50px;
-                  background-color: #fff;
-                  color: #000;
-                  display: flex;
-                  justify-content: space-between;
-                  align-items: center;
-                  padding: 0 20px;
-                  border-bottom: 1px solid #000;
-              }
-              footer {
-                  border-top: 1px solid #000;
-                  border-bottom: none;
-              }
-              table {
-                  width: 100%;
-                  border-collapse: collapse;
-                  margin: 20px 0;
-              }
-              th, td {
-                  border: 1px solid #000;
-                  padding: 8px;
-                  text-align: right;
-              }
-              th {
-                  background-color: #f2f2f2;
-                  text-align: center;
-              }
-              td:first-child {
-                  text-align: left;
-              }
-              .credit {
-                  color: green;
-              }
-              .debit {
-                  color: red;
-              }
-              .balance {
-                  color: blue;
-              }
-              .right-align {
-                  text-align: right;
-              }
-              .center-align {
-                  text-align: center;
-              }
+            table {
+              width: 100%;
+              border-collapse: collapse;
+            }
+            th, td {
+              border: 1px solid black;
+              padding: 8px;
+              text-align: right;
+            }
+            th {
+              background-color: #f2f2f2;
+            }
+            .debit {
+              color: red;
+            }
+            .credit {
+              color: green;
+            }
+            .income {
+              background-color: lightgreen;
+            }
+            .expense {
+              background-color: lightcoral;
+            }
+            .right-align {
+              text-align: right;
+            }
           </style>
-      </head>
-      <body>
-          <header>
-              <h1>Transaction Report</h1>
-              <div>
-                  <p>Expense Tracker</p>
-              </div>
-          </header>
-          <main>
-              <h2>Transactions</h2>
-              <table>
-                  <thead>
-                      <tr>
-                          <th>Date</th>
-                          <th>Details</th>
-                          <th>Debit(-)</th>
-                          <th>Credit(+)</th>
-                          <th>Balance</th>
-                      </tr>
-                  </thead>
-                  <tbody>
-                      ${rows}
-                  </tbody>
-              </table>
-          </main>
-          <footer>
-              <p>Thank you for your business!</p>
-          </footer>
-      </body>
+        </head>
+        <body>
+          <table>
+            <thead>
+              <tr>
+                <th>Date</th>
+                <th>Details</th>
+                <th>Debit(-)</th>
+                <th>Credit(+)</th>
+                <th>Balance</th>
+              </tr>
+            </thead>
+            <tbody>
+              ${rows}
+              ${totalRow}
+            </tbody>
+          </table>
+        </body>
       </html>
     `;
   };
@@ -227,60 +219,37 @@ export const useExportData = () => {
   };
 
   const downloadPDF = async (sourceFilePath: any) => {
-    FirebaseStoragePDF(sourceFilePath, res => {
-      console.log('res----------', res);
-      const destinationPath = RNFS.DocumentDirectoryPath + '/example.pdf';
-      console.log('destinationPath----------', destinationPath);
-      RNFS.downloadFile({
-        fromUrl: res,
-        toFile: destinationPath,
-        background: true, // Enable downloading in the background (iOS only)
-        discretionary: true, // Allow the OS to control the timing and speed (iOS only)
-        progress: res => {
-          // Handle download progress updates if needed
-          const progress = (res.bytesWritten / res.contentLength) * 100;
-          console.log(`Progress: ${progress.toFixed(2)}%`);
-        },
-      })
-        .promise.then(response => {
-          console.log('File downloaded!', response);
-        })
-        .catch(err => {
-          console.log('Download error:', err);
-        });
-    });
-    // const docPath = sourceFilePath;
-    // const docName = 'transaction.pdf';
-    // const reference = storage().ref();
-    // const task = reference.child('/invoices/' + docName).putFile(docPath);
-    // task?.on('state_changed', async onSnap => {
-    //   const imageUrl = await storage()
-    //     .ref(onSnap?.ref?.fullPath)
-    //     .getDownloadURL();
-    //   console.log('imageUrl----------', imageUrl);
-    // });
-    // const destinationPath = RNFS.DocumentDirectoryPath + '/example.pdf';
-    // const storageRef = storage().ref();
-    // const tempFilePath = `${RNFS.TemporaryDirectoryPath}/${sourceFilePath}`;
-    // await storageRef.writeToFile(tempFilePath);
+    // const downloadDir = RNFS.DownloadDirectoryPath;
+    // const targetFilePath = `${downloadDir}/transaction.pdf`;
 
-    // RNFS.downloadFile({
-    //   fromUrl: 'file://' + sourceFilePath,
-    //   toFile: destinationPath,
-    //   background: true, // Enable downloading in the background (iOS only)
-    //   discretionary: true, // Allow the OS to control the timing and speed (iOS only)
-    //   progress: res => {
-    //     // Handle download progress updates if needed
-    //     const progress = (res.bytesWritten / res.contentLength) * 100;
-    //     console.log(`Progress: ${progress.toFixed(2)}%`);
-    //   },
-    // })
-    //   .promise.then(response => {
-    //     console.log('File downloaded!', response);
-    //   })
-    //   .catch(err => {
-    //     console.log('Download error:', err);
-    //   });
+    // try {
+    //   await RNFS.copyFile(sourceFilePath, targetFilePath);
+    //   ShowTostMessage('File Download Successfully', 'success');
+    // } catch (error) {
+    //   ShowTostMessage('Tried Again', 'error');
+    // }
+    const destinationPath =
+      RNFS.DownloadDirectoryPath + '/TransactionReport.pdf';
+    RNFS.downloadFile({
+      fromUrl: `file://${sourceFilePath}`,
+      toFile: destinationPath,
+    })
+      .promise.then(response => {
+        if (Platform.OS === 'ios') {
+          const filePath = `file://${sourceFilePath}`;
+          let options = {
+            type: 'application/pdf',
+            url: filePath,
+            saveToFiles: true,
+          };
+          Share.open(options)
+            .then(resp => console.log(resp))
+            .catch(err => console.log(err));
+        }
+      })
+      .catch(err => {
+        console.log('err----------', err);
+      });
   };
 
   return {
