@@ -203,25 +203,6 @@ export const useExportData = () => {
     `;
   };
 
-  // const requestStoragePermission = async (callback: (res: boolean) => void) => {
-  //   console.log('Platform.Version----------', Platform.Version);
-  //   if (Platform.OS === 'android' && Platform.Version < 33) {
-  //     const granted = await PermissionsAndroid.requestMultiple([
-  //       'android.permission.WRITE_EXTERNAL_STORAGE',
-  //       'android.permission.READ_EXTERNAL_STORAGE',
-  //     ]);
-  //     console.log('granted----------', granted);
-  //     if (
-  //       granted['android.permission.WRITE_EXTERNAL_STORAGE'] !== 'granted' ||
-  //       granted['android.permission.READ_EXTERNAL_STORAGE'] !== 'granted'
-  //     ) {
-  //       callback(false);
-  //     } else {
-  //       callback(true);
-  //     }
-  //   }
-  // };
-  console.log('Platform.Version----------', Platform.Version);
   const requestStoragePermission = async (callback: (res: boolean) => void) => {
     try {
       const permission = PERMISSIONS.ANDROID.WRITE_EXTERNAL_STORAGE;
