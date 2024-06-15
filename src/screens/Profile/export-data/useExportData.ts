@@ -8,7 +8,14 @@ import {ShowTostMessage} from '../../../utils';
 import {PermissionsAndroid, Platform} from 'react-native';
 import RNFS from 'react-native-fs';
 import Share from 'react-native-share';
-import {PERMISSIONS, request} from 'react-native-permissions';
+import {
+  PERMISSIONS,
+  RESULTS,
+  check,
+  openSettings,
+  request,
+} from 'react-native-permissions';
+import FileViewer from 'react-native-file-viewer';
 
 export const useExportData = () => {
   const {transactionData} = useSelector(
@@ -170,12 +177,6 @@ export const useExportData = () => {
             .credit {
               color: green;
             }
-            .income {
-              background-color: lightgreen;
-            }
-            .expense {
-              background-color: lightcoral;
-            }
             .right-align {
               text-align: right;
             }
@@ -202,6 +203,43 @@ export const useExportData = () => {
     `;
   };
 
+  // const requestStoragePermission = async (callback: (res: boolean) => void) => {
+  //   console.log('Platform.Version----------', Platform.Version);
+  //   if (Platform.OS === 'android' && Platform.Version < 33) {
+  //     const granted = await PermissionsAndroid.requestMultiple([
+  //       'android.permission.WRITE_EXTERNAL_STORAGE',
+  //       'android.permission.READ_EXTERNAL_STORAGE',
+  //     ]);
+  //     console.log('granted----------', granted);
+  //     if (
+  //       granted['android.permission.WRITE_EXTERNAL_STORAGE'] !== 'granted' ||
+  //       granted['android.permission.READ_EXTERNAL_STORAGE'] !== 'granted'
+  //     ) {
+  //       callback(false);
+  //     } else {
+  //       callback(true);
+  //     }
+  //   }
+  // };
+  console.log('Platform.Version----------', Platform.Version);
+  const requestStoragePermission = async (callback: (res: boolean) => void) => {
+    try {
+      const permission = PERMISSIONS.ANDROID.WRITE_EXTERNAL_STORAGE;
+      const result = await check(permission);
+      console.log('result----------', result);
+      if (result !== RESULTS.GRANTED) {
+        const requestResult = await request(permission);
+        if (requestResult !== RESULTS.GRANTED) {
+          openSettings();
+        }
+      } else {
+        callback(true);
+      }
+    } catch (error) {
+      console.error('Permission request error:', error);
+    }
+  };
+
   const onExportPress = async () => {
     if (selectedDate.name === '' || selectedData.name === '') {
       ShowTostMessage('Please Select data', 'error');
@@ -214,42 +252,60 @@ export const useExportData = () => {
         base64: true,
       };
       const file = await RNHTMLtoPDF.convert(options);
-      downloadPDF(file.filePath);
+      if (Platform.OS === 'android') {
+        requestStoragePermission(res => {
+          if (res) {
+            downloadPDF(file.filePath);
+          }
+        });
+      } else {
+        downloadPDF(file.filePath);
+      }
     }
   };
 
   const downloadPDF = async (sourceFilePath: any) => {
-    // const downloadDir = RNFS.DownloadDirectoryPath;
-    // const targetFilePath = `${downloadDir}/transaction.pdf`;
-
-    // try {
-    //   await RNFS.copyFile(sourceFilePath, targetFilePath);
-    //   ShowTostMessage('File Download Successfully', 'success');
-    // } catch (error) {
-    //   ShowTostMessage('Tried Again', 'error');
-    // }
-    const destinationPath =
-      RNFS.DownloadDirectoryPath + '/TransactionReport.pdf';
-    RNFS.downloadFile({
-      fromUrl: `file://${sourceFilePath}`,
-      toFile: destinationPath,
-    })
-      .promise.then(response => {
-        if (Platform.OS === 'ios') {
-          const filePath = `file://${sourceFilePath}`;
-          let options = {
-            type: 'application/pdf',
-            url: filePath,
-            saveToFiles: true,
-          };
-          Share.open(options)
-            .then(resp => console.log(resp))
-            .catch(err => console.log(err));
-        }
+    const currentDate = new Date();
+    const formattedDate = `${currentDate.getDate()}-${
+      currentDate.getMonth() + 1
+    }-${currentDate.getFullYear()}`;
+    const fileName = `TransactionReport-${formattedDate}.pdf`;
+    if (Platform.OS === 'android') {
+      const destinationPath = RNFS.DownloadDirectoryPath + `/${fileName}`;
+      try {
+        await RNFS.copyFile(sourceFilePath, destinationPath);
+        ShowTostMessage('File Download Successfully', 'success');
+      } catch (error) {
+        ShowTostMessage('Tried Again', 'error');
+      }
+    } else {
+      const destinationPath = RNFS.DocumentDirectoryPath + `/${fileName}`;
+      RNFS.downloadFile({
+        fromUrl: `file://${sourceFilePath}`,
+        toFile: destinationPath,
       })
-      .catch(err => {
-        console.log('err----------', err);
-      });
+        .promise.then(response => {
+          if (Platform.OS === 'ios') {
+            const filePath = `file://${sourceFilePath}`;
+            let options = {
+              type: 'application/pdf',
+              url: filePath,
+              saveToFiles: true,
+            };
+            Share.open(options)
+              .then(resp => {
+                ShowTostMessage('File Download Successfully', 'success');
+                FileViewer.open(filePath);
+              })
+              .catch(err => {
+                ShowTostMessage('Tried Again', 'error');
+              });
+          }
+        })
+        .catch(err => {
+          console.log('err----------', err);
+        });
+    }
   };
 
   return {

@@ -5150,6 +5150,7 @@ __metadata:
     react-native: 0.74.1
     react-native-calendars: ^1.1305.0
     react-native-element-dropdown: ^2.12.0
+    react-native-file-viewer: ^2.1.5
     react-native-fs: ^2.20.0
     react-native-gifted-charts: ^1.4.10
     react-native-html-to-pdf: ^0.12.0
@@ -8561,6 +8562,15 @@ __metadata:
     react: "*"
     react-native: "*"
   checksum: 116841290b58ecbee2e3134219f83e82236290b48e52c0cb26719844514702d0240d6dcf958847ff003b2e6a50de005787a6999a3ddffaf3b760ac01f9ca7d3f
+  languageName: node
+  linkType: hard
+
+"react-native-file-viewer@npm:^2.1.5":
+  version: 2.1.5
+  resolution: "react-native-file-viewer@npm:2.1.5"
+  peerDependencies:
+    react-native: ">=0.47"
+  checksum: 390e1e3ce20c3b2fb7d2394d6bedf1c6c5d25f799fb5b344c7ecb72267327403caf2528916a7419e094caecccf41dac8b62dd0d31fa5991725e36dcdd24b725e
   languageName: node
   linkType: hard
 
