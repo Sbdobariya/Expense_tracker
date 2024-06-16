@@ -31,6 +31,7 @@ export const useTransactions = () => {
   const [applyFilter, setApplyFilter] = useState(false);
   const [allTransactions, setAllTransactions] = useState<TransactionData[]>([]);
   const [selectedDate, setSelectedDate] = useState(Today);
+  const [searchText, setSearchText] = useState('');
 
   const onEditPress = (item: TransactionData) => {
     dispatch(EditTransactionData(item));
@@ -71,7 +72,7 @@ export const useTransactions = () => {
     if (applyFilter) {
       setAllTransactions(transactionData);
     }
-    setSelectedDate('2024-06-03');
+    setSelectedDate(Today);
   };
 
   const onDeletePress = (item: TransactionData) => {
@@ -96,11 +97,28 @@ export const useTransactions = () => {
   const toggleModal = () =>
     setIsVisibleEditModal({isVisible: false, item: undefined});
 
+  const onChangeText = (text: string) => {
+    if (text) {
+      setSearchText(text);
+      const filterData = allTransactions.filter(transaction => {
+        return transaction.transaction_note
+          .toLowerCase()
+          .includes(text.toLowerCase());
+      });
+      setAllTransactions(filterData);
+    } else {
+      setSearchText(text);
+      setAllTransactions(transactionData);
+    }
+  };
+
   return {
+    searchText,
     applyFilter,
     onEditPress,
     toggleModal,
     selectedDate,
+    onChangeText,
     onDateChanged,
     onDeletePress,
     allTransactions,

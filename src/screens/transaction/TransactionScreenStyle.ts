@@ -43,6 +43,8 @@ export const styles = StyleSheet.create({
     padding: hp(2),
     flexDirection: 'row',
     justifyContent: 'space-between',
+    alignItems: 'center',
+    gap: hp(1.5),
   },
   popoverView: {
     gap: hp(2),
@@ -53,7 +55,7 @@ export const styles = StyleSheet.create({
     fontSize: fontSize(17),
   },
   filterImage: {
-    height: hp(5),
-    width: hp(5),
+    height: hp(4),
+    width: hp(4),
   },
 });

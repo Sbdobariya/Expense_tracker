@@ -10,6 +10,7 @@ import CategoryIcons from './common/CategoryIcons';
 import CustomStatusBar from './common/CustomStatusBar';
 import PasswordInput from './common/PasswordInput';
 import DropdownComponent from './common/DropDown';
+import SearchBar from './common/SearchBar';
 
 // addTransaction
 import SelectButton from './addTransaction/SelectButton';
@@ -35,6 +36,7 @@ import ChartComponent from './statistics/ChartComponent';
 
 export {
   HomeCard,
+  SearchBar,
   InputText,
   AmountText,
   HomeHeader,

@@ -3,6 +3,7 @@ import {
   TransactionList,
   EditCategoryModal,
   CustomStatusBar,
+  SearchBar,
 } from '../../components';
 import {styles} from './TransactionScreenStyle';
 import {TransactionImages} from '../../../assets';
@@ -25,6 +26,8 @@ const TransactionScreen: React.FC = () => {
     handleFilterToggle,
     onTransactionPress,
     isVisibleEditModal,
+    searchText,
+    onChangeText,
   } = useTransactions();
 
   const ListEmptyComponent = () => {
@@ -41,7 +44,6 @@ const TransactionScreen: React.FC = () => {
       </View>
     );
   };
-  console.log('allTransactions----------', allTransactions);
 
   return (
     <View style={styles.container}>
@@ -52,14 +54,14 @@ const TransactionScreen: React.FC = () => {
       <SafeAreaView />
       <CalendarProvider date={selectedDate} onDateChanged={onDateChanged}>
         <View style={styles.headerContainer}>
-          <Text style={styles.myMoney}>My Money</Text>
+          <SearchBar
+            placeholder="Search"
+            value={searchText}
+            onChangeText={onChangeText}
+          />
           <View style={styles.popoverView}>
             <TouchableIcon
-              source={
-                !applyFilter
-                  ? TransactionImages.filter_ic
-                  : TransactionImages.cancel_filter_ic
-              }
+              source={TransactionImages.calendar_ic}
               onIconPress={handleFilterToggle}
               customIconStyle={styles.filterImage}
             />
