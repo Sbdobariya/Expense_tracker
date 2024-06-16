@@ -5,7 +5,7 @@ import {useSelector} from 'react-redux';
 import {TransactionData, TransactionReducerType} from '../../../interface';
 import RNHTMLtoPDF from 'react-native-html-to-pdf';
 import {ShowTostMessage} from '../../../utils';
-import {PermissionsAndroid, Platform} from 'react-native';
+import {Platform} from 'react-native';
 import RNFS from 'react-native-fs';
 import Share from 'react-native-share';
 import {
@@ -203,24 +203,6 @@ export const useExportData = () => {
     `;
   };
 
-  const requestStoragePermission = async (callback: (res: boolean) => void) => {
-    try {
-      const permission = PERMISSIONS.ANDROID.WRITE_EXTERNAL_STORAGE;
-      const result = await check(permission);
-      console.log('result----------', result);
-      if (result !== RESULTS.GRANTED) {
-        const requestResult = await request(permission);
-        if (requestResult !== RESULTS.GRANTED) {
-          openSettings();
-        }
-      } else {
-        callback(true);
-      }
-    } catch (error) {
-      console.error('Permission request error:', error);
-    }
-  };
-
   const onExportPress = async () => {
     if (selectedDate.name === '' || selectedData.name === '') {
       ShowTostMessage('Please Select data', 'error');
@@ -233,17 +215,57 @@ export const useExportData = () => {
         base64: true,
       };
       const file = await RNHTMLtoPDF.convert(options);
+
       if (Platform.OS === 'android') {
-        requestStoragePermission(res => {
-          if (res) {
-            downloadPDF(file.filePath);
-          }
-        });
+        request(PERMISSIONS.ANDROID.WRITE_EXTERNAL_STORAGE).then(
+          async result => {
+            switch (result) {
+              case RESULTS.UNAVAILABLE:
+                break;
+              case RESULTS.DENIED:
+                break;
+              case RESULTS.GRANTED:
+                downloadPDF(file.filePath);
+                break;
+              case RESULTS.BLOCKED:
+                openSettings();
+                break;
+            }
+          },
+        );
       } else {
         downloadPDF(file.filePath);
       }
     }
   };
+
+  // async function downloadPDF(sourceFilePath: string) {
+  //   const currentDate = new Date();
+  //   const formattedDate = `${currentDate.getDate()}-${
+  //     currentDate.getMonth() + 1
+  //   }-${currentDate.getFullYear()}`;
+  //   const fileName = `TransactionReport-${formattedDate}.pdf`;
+
+  //   if (Platform.OS === 'android') {
+  //     const destinationPath = `${RNFS.DocumentDirectoryPath}/${fileName}`;
+
+  //     try {
+  //       const destinationExists = await RNFS.exists(destinationPath);
+  //       if (destinationExists) {
+  //         await RNFS.unlink(destinationPath);
+  //       }
+
+  //       await RNFS.copyFile(sourceFilePath, destinationPath);
+  //       ShowTostMessage('File Downloaded Successfully', 'success');
+
+  //       // Open the downloaded file using FileViewer
+  //       FileViewer.open(destinationPath);
+  //     } catch (error) {
+  //       console.log('Error:', error);
+  //       ShowTostMessage('Failed to Download File', 'error');
+  //     }
+  //   }
+  // }
 
   const downloadPDF = async (sourceFilePath: any) => {
     const currentDate = new Date();
@@ -254,8 +276,14 @@ export const useExportData = () => {
     if (Platform.OS === 'android') {
       const destinationPath = RNFS.DownloadDirectoryPath + `/${fileName}`;
       try {
+        const destinationExists = await RNFS.exists(destinationPath);
+        if (destinationExists) {
+          await RNFS.unlink(destinationPath);
+        }
+
         await RNFS.copyFile(sourceFilePath, destinationPath);
         ShowTostMessage('File Download Successfully', 'success');
+        FileViewer.open(destinationPath);
       } catch (error) {
         ShowTostMessage('Tried Again', 'error');
       }

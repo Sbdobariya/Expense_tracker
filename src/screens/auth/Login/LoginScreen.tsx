@@ -1,4 +1,4 @@
-import {Image, Text, TouchableOpacity, View} from 'react-native';
+import {Keyboard, Text, TouchableOpacity, View} from 'react-native';
 import React, {useState} from 'react';
 import {
   InputText,
@@ -21,7 +21,7 @@ import {UserSignInActions} from '../../../redux/actions';
 import {AuthNavigationType, RootPage} from '../../../navigation/type';
 import {NavigationProp, useNavigation} from '@react-navigation/native';
 import {AuthContext} from '../../../utils/AuthContext';
-import {ColorConst, fontSize, hp, wp} from '../../../theme';
+import {ColorConst} from '../../../theme';
 import {ShowTostMessage} from '../../../utils';
 
 const LoginScreen: React.FC = () => {
@@ -44,6 +44,7 @@ const LoginScreen: React.FC = () => {
     } else if (password === '') {
       ShowTostMessage('Please enter password', 'error');
     } else {
+      Keyboard.dismiss();
       const userData: UserSignInActionRequest = {
         data: {userEmail: email, userPassword: password},
         onSuccess: response => {
