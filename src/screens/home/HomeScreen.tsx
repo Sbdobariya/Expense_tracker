@@ -4,6 +4,7 @@ import {
   TransactionList,
   EditCategoryModal,
   CustomStatusBar,
+  CommonLoader,
 } from '../../components';
 import React from 'react';
 import {useHome} from './useHome';
@@ -13,6 +14,7 @@ import {HomeStrings} from '../../constants/String';
 import {RootPage, TabStack} from '../../navigation/type';
 import {useNavigation, NavigationProp} from '@react-navigation/native';
 import {ColorConst} from '../../theme';
+import {AuthLoader} from '../../redux/reducer';
 
 const HomeScreen: React.FC = () => {
   const tabNavigation = useNavigation<NavigationProp<TabStack>>();
@@ -49,6 +51,7 @@ const HomeScreen: React.FC = () => {
     <View style={styles.container}>
       <CustomStatusBar backgroundColor={ColorConst.status_bar} />
       <HomeHeader />
+      <CommonLoader isVisible={transactionData?.length === 0} />
       <HomeCard transactionData={transactionData} />
       <FlatList
         data={transactionData?.slice(0, 10)}

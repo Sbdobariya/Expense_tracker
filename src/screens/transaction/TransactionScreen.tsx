@@ -10,7 +10,6 @@ import {TransactionImages} from '../../../assets';
 import React from 'react';
 import {Text, View, Image, FlatList, SafeAreaView} from 'react-native';
 import {CalendarProvider, ExpandableCalendar} from 'react-native-calendars';
-
 import {ColorConst} from '../../theme';
 import {useTransactions} from './useTransactions';
 

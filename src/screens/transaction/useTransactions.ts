@@ -100,7 +100,7 @@ export const useTransactions = () => {
   const onChangeText = (text: string) => {
     if (text) {
       setSearchText(text);
-      const filterData = allTransactions.filter(transaction => {
+      const filterData = transactionData.filter(transaction => {
         return transaction.transaction_note
           .toLowerCase()
           .includes(text.toLowerCase());
