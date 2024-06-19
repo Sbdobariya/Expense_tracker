@@ -306,13 +306,11 @@ export const useExportData = () => {
                 ShowTostMessage('File Download Successfully', 'success');
                 FileViewer.open(filePath);
               })
-              .catch(err => {
-                ShowTostMessage('Tried Again', 'error');
-              });
+              .catch(err => {});
           }
         })
         .catch(err => {
-          console.log('err----------', err);
+          ShowTostMessage('Tried Again', 'error');
         });
     }
   };
