@@ -215,57 +215,9 @@ export const useExportData = () => {
         base64: true,
       };
       const file = await RNHTMLtoPDF.convert(options);
-
-      if (Platform.OS === 'android') {
-        request(PERMISSIONS.ANDROID.WRITE_EXTERNAL_STORAGE).then(
-          async result => {
-            switch (result) {
-              case RESULTS.UNAVAILABLE:
-                break;
-              case RESULTS.DENIED:
-                break;
-              case RESULTS.GRANTED:
-                downloadPDF(file.filePath);
-                break;
-              case RESULTS.BLOCKED:
-                openSettings();
-                break;
-            }
-          },
-        );
-      } else {
-        downloadPDF(file.filePath);
-      }
+      downloadPDF(file.filePath);
     }
   };
-
-  // async function downloadPDF(sourceFilePath: string) {
-  //   const currentDate = new Date();
-  //   const formattedDate = `${currentDate.getDate()}-${
-  //     currentDate.getMonth() + 1
-  //   }-${currentDate.getFullYear()}`;
-  //   const fileName = `TransactionReport-${formattedDate}.pdf`;
-
-  //   if (Platform.OS === 'android') {
-  //     const destinationPath = `${RNFS.DocumentDirectoryPath}/${fileName}`;
-
-  //     try {
-  //       const destinationExists = await RNFS.exists(destinationPath);
-  //       if (destinationExists) {
-  //         await RNFS.unlink(destinationPath);
-  //       }
-
-  //       await RNFS.copyFile(sourceFilePath, destinationPath);
-  //       ShowTostMessage('File Downloaded Successfully', 'success');
-
-  //       // Open the downloaded file using FileViewer
-  //       FileViewer.open(destinationPath);
-  //     } catch (error) {
-  //       console.log('Error:', error);
-  //       ShowTostMessage('Failed to Download File', 'error');
-  //     }
-  //   }
-  // }
 
   const downloadPDF = async (sourceFilePath: any) => {
     const currentDate = new Date();
@@ -274,18 +226,24 @@ export const useExportData = () => {
     }-${currentDate.getFullYear()}`;
     const fileName = `TransactionReport-${formattedDate}.pdf`;
     if (Platform.OS === 'android') {
-      const destinationPath = RNFS.DownloadDirectoryPath + `/${fileName}`;
       try {
-        const destinationExists = await RNFS.exists(destinationPath);
-        if (destinationExists) {
-          await RNFS.unlink(destinationPath);
-        }
-
-        await RNFS.copyFile(sourceFilePath, destinationPath);
-        ShowTostMessage('File Download Successfully', 'success');
-        FileViewer.open(destinationPath);
+        const currentDate = new Date();
+        const formattedDate = `${currentDate.getDate()}-${
+          currentDate.getMonth() + 1
+        }-${currentDate.getFullYear()}`;
+        const fileName = `TransactionReport-${formattedDate}.pdf`;
+        const savePath = RNFS.DownloadDirectoryPath + '/AnalysisBudget';
+        await RNFS.mkdir(savePath);
+        const pdfContents = await RNFS.readFile(sourceFilePath, 'base64');
+        await RNFS.writeFile(
+          `${savePath}/${fileName}`,
+          pdfContents,
+          'base64',
+        ).then(res => {
+          console.log('res----------', res);
+        });
       } catch (error) {
-        ShowTostMessage('Tried Again', 'error');
+        console.log('error----------', error);
       }
     } else {
       const destinationPath = RNFS.DocumentDirectoryPath + `/${fileName}`;
