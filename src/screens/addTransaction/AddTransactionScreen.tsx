@@ -75,6 +75,8 @@ const AddTransactionScreen: React.FC = () => {
             const numericValue = parseFloat(text);
             if (!isNaN(numericValue)) {
               setAmountValue(numericValue);
+            } else {
+              setAmountValue(undefined);
             }
           }}
           inputCustomStyle={styles.amountInputStyle}

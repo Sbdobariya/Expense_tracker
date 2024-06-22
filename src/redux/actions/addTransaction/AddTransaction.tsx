@@ -59,6 +59,7 @@ export const GetTransactionAction = createAsyncThunk(
           : null,
       };
     });
+    request.onSuccess && request.onSuccess('Success');
     dispatch(TransactionAction(data));
   },
 );

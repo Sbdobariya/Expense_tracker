@@ -5,17 +5,9 @@ import {useSelector} from 'react-redux';
 import {TransactionData, TransactionReducerType} from '../../../interface';
 import RNHTMLtoPDF from 'react-native-html-to-pdf';
 import {ShowTostMessage} from '../../../utils';
-import {Platform} from 'react-native';
-import RNFS from 'react-native-fs';
 import Share from 'react-native-share';
-import {
-  PERMISSIONS,
-  RESULTS,
-  check,
-  openSettings,
-  request,
-} from 'react-native-permissions';
-import FileViewer from 'react-native-file-viewer';
+import {DateType} from 'react-native-ui-datepicker';
+import dayjs from 'dayjs';
 
 export const useExportData = () => {
   const {transactionData} = useSelector(
@@ -27,21 +19,15 @@ export const useExportData = () => {
     name: '',
     value: '',
   });
-  const [selectedDate, setSelectedDate] = useState({
-    name: '',
-    value: '',
-  });
   const [filteredData, setFilteredData] = useState<TransactionData[]>([]);
+  const [isCalenderModalVisible, setIsCalenderModalVisible] = useState(false);
+  const [range, setRange] = useState<{
+    startDate: DateType;
+    endDate: DateType;
+  }>({startDate: undefined, endDate: undefined});
 
   const onBackPress = () => {
     navigation.goBack();
-  };
-
-  const onDateChange = (item: any) => {
-    setSelectedDate({
-      value: item.value,
-      name: item.name,
-    });
   };
 
   const onDataChange = (item: any) => {
@@ -50,7 +36,6 @@ export const useExportData = () => {
       name: item.name,
     });
   };
-
   useEffect(() => {
     const filterData = () => {
       let newData = transactionData;
@@ -63,37 +48,21 @@ export const useExportData = () => {
         );
       }
 
-      if (selectedDate.value) {
-        const today = new Date();
-        let startDate: Date;
+      if (range.startDate && range.endDate) {
+        const startDate = dayjs(range.startDate).toDate();
+        const endDate = dayjs(range.endDate).toDate();
 
-        switch (selectedDate.name.toLowerCase()) {
-          case 'last 30 days':
-            startDate = new Date(today.getTime() - 30 * 24 * 60 * 60 * 1000);
-            break;
-          case 'last 3 months':
-            startDate = new Date(today.getTime() - 90 * 24 * 60 * 60 * 1000);
-            break;
-          case 'last 6 months':
-            startDate = new Date(today.getTime() - 180 * 24 * 60 * 60 * 1000);
-            break;
-          case 'last year':
-            startDate = new Date(today.getTime() - 365 * 24 * 60 * 60 * 1000);
-            break;
-          default:
-            startDate = today;
-            break;
-        }
-
-        newData = newData.filter(
-          item => new Date(item.transaction_createdAt) >= startDate,
-        );
+        newData = newData.filter(item => {
+          const transactionDate = new Date(item.transaction_createdAt);
+          return transactionDate >= startDate && transactionDate <= endDate;
+        });
       }
+
       setFilteredData(newData);
     };
 
     filterData();
-  }, [selectedData, selectedDate, transactionData]);
+  }, [selectedData, range, transactionData]);
 
   const generateHtml = () => {
     let balance = 0;
@@ -204,13 +173,18 @@ export const useExportData = () => {
   };
 
   const onExportPress = async () => {
-    if (selectedDate.name === '' || selectedData.name === '') {
+    if (range.endDate === '' || selectedData.name === '') {
       ShowTostMessage('Please Select data', 'error');
     } else {
       const htmlContent = generateHtml();
+      const currentDate = new Date();
+      const formattedDate = `${currentDate.getDate()}-${
+        currentDate.getMonth() + 1
+      }-${currentDate.getFullYear()}`;
+      const fileName = `TransactionReport-${formattedDate}`;
       let options = {
         html: htmlContent,
-        fileName: 'TransactionReport',
+        fileName: fileName,
         directory: 'Documents',
         base64: true,
       };
@@ -220,65 +194,35 @@ export const useExportData = () => {
   };
 
   const downloadPDF = async (sourceFilePath: any) => {
-    const currentDate = new Date();
-    const formattedDate = `${currentDate.getDate()}-${
-      currentDate.getMonth() + 1
-    }-${currentDate.getFullYear()}`;
-    const fileName = `TransactionReport-${formattedDate}.pdf`;
-    if (Platform.OS === 'android') {
-      try {
-        const currentDate = new Date();
-        const formattedDate = `${currentDate.getDate()}-${
-          currentDate.getMonth() + 1
-        }-${currentDate.getFullYear()}`;
-        const fileName = `TransactionReport-${formattedDate}.pdf`;
-        const savePath = RNFS.DownloadDirectoryPath + '/AnalysisBudget';
-        await RNFS.mkdir(savePath);
-        const pdfContents = await RNFS.readFile(sourceFilePath, 'base64');
-        await RNFS.writeFile(
-          `${savePath}/${fileName}`,
-          pdfContents,
-          'base64',
-        ).then(res => {
-          console.log('res----------', res);
-        });
-      } catch (error) {
-        console.log('error----------', error);
-      }
-    } else {
-      const destinationPath = RNFS.DocumentDirectoryPath + `/${fileName}`;
-      RNFS.downloadFile({
-        fromUrl: `file://${sourceFilePath}`,
-        toFile: destinationPath,
+    const filePath = `file://${sourceFilePath}`;
+    let options = {
+      type: 'application/pdf',
+      url: filePath,
+      saveToFiles: true,
+    };
+    Share.open(options)
+      .then(resp => {
+        ShowTostMessage('File Download Successfully', 'success');
       })
-        .promise.then(response => {
-          if (Platform.OS === 'ios') {
-            const filePath = `file://${sourceFilePath}`;
-            let options = {
-              type: 'application/pdf',
-              url: filePath,
-              saveToFiles: true,
-            };
-            Share.open(options)
-              .then(resp => {
-                ShowTostMessage('File Download Successfully', 'success');
-                FileViewer.open(filePath);
-              })
-              .catch(err => {});
-          }
-        })
-        .catch(err => {
-          ShowTostMessage('Tried Again', 'error');
-        });
-    }
+      .catch(err => {});
+  };
+
+  const toggleModal = () => {
+    setIsCalenderModalVisible(false);
+  };
+  const onDateSelect = () => {
+    setIsCalenderModalVisible(true);
   };
 
   return {
     onBackPress,
     selectedData,
-    selectedDate,
-    onDateChange,
     onDataChange,
     onExportPress,
+    toggleModal,
+    onDateSelect,
+    range,
+    setRange,
+    isCalenderModalVisible,
   };
 };

@@ -92,7 +92,7 @@ const styling = (selectedTab?: string) =>
       marginHorizontal: wp(2),
     },
     labelStyle: {
-      fontSize: fontSize(15),
+      fontSize: fontSize(13),
       fontFamily: fonts.semiBold,
     },
     incomeButtonStyle: {
@@ -110,13 +110,13 @@ const styling = (selectedTab?: string) =>
       borderRadius: hp(10),
     },
     incomeText: {
-      fontSize: fontSize(20),
+      fontSize: fontSize(15),
       color:
         selectedTab === 'income' ? ColorConst.white : ColorConst.dark_black,
       fontFamily: fonts.semiBold,
     },
     expenseText: {
-      fontSize: fontSize(20),
+      fontSize: fontSize(15),
       color:
         selectedTab === 'expense' ? ColorConst.white : ColorConst.dark_black,
       fontFamily: fonts.semiBold,

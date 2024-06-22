@@ -2307,10 +2307,6 @@ PODS:
     - Firebase/Storage (= 10.24.0)
     - React-Core
     - RNFBApp
-  - RNFileViewer (2.1.5):
-    - React-Core
-  - RNFS (2.20.0):
-    - React-Core
   - RNImageCropPicker (0.41.1):
     - React-Core
     - React-RCTImage
@@ -2320,8 +2316,6 @@ PODS:
     - React-Core
     - React-RCTImage
     - TOCropViewController (~> 2.7.4)
-  - RNPermissions (4.1.5):
-    - React-Core
   - RNScreens (3.31.1):
     - DoubleConversion
     - glog
@@ -2417,10 +2411,7 @@ DEPENDENCIES:
   - "RNFBAuth (from `../node_modules/@react-native-firebase/auth`)"
   - "RNFBFirestore (from `../node_modules/@react-native-firebase/firestore`)"
   - "RNFBStorage (from `../node_modules/@react-native-firebase/storage`)"
-  - RNFileViewer (from `../node_modules/react-native-file-viewer`)
-  - RNFS (from `../node_modules/react-native-fs`)
   - RNImageCropPicker (from `../node_modules/react-native-image-crop-picker`)
-  - RNPermissions (from `../node_modules/react-native-permissions`)
   - RNScreens (from `../node_modules/react-native-screens`)
   - RNShare (from `../node_modules/react-native-share`)
   - RNSVG (from `../node_modules/react-native-svg`)
@@ -2578,14 +2569,8 @@ EXTERNAL SOURCES:
     :path: "../node_modules/@react-native-firebase/firestore"
   RNFBStorage:
     :path: "../node_modules/@react-native-firebase/storage"
-  RNFileViewer:
-    :path: "../node_modules/react-native-file-viewer"
-  RNFS:
-    :path: "../node_modules/react-native-fs"
   RNImageCropPicker:
     :path: "../node_modules/react-native-image-crop-picker"
-  RNPermissions:
-    :path: "../node_modules/react-native-permissions"
   RNScreens:
     :path: "../node_modules/react-native-screens"
   RNShare:
@@ -2679,10 +2664,7 @@ SPEC CHECKSUMS:
   RNFBAuth: 40b9953bc9a8e2e207843e424aa82aa84bf34057
   RNFBFirestore: ed29ba9f6fda6341b660d78fd333d39af5641d91
   RNFBStorage: 591d676ad5596b11ca1b0e324111dbdc6cb7aa95
-  RNFileViewer: ce7ca3ac370e18554d35d6355cffd7c30437c592
-  RNFS: 4ac0f0ea233904cb798630b3c077808c06931688
   RNImageCropPicker: 601604515fd6fbba318147b0a56aed0be9379415
-  RNPermissions: 88cb833d70198c254e3ea7ccc4179fde91670700
   RNScreens: 30249f9331c3b00ae7cb7922e11f58b3ed369c07
   RNShare: 0fad69ae2d71de9d1f7b9a43acf876886a6cb99c
   RNSVG: a48668fd382115bc89761ce291a81c4ca5f2fd2e
@@ -2690,6 +2672,6 @@ SPEC CHECKSUMS:
   TOCropViewController: 80b8985ad794298fb69d3341de183f33d1853654
   Yoga: dafebc41bc66910af33077aaa41078e89fd635bf
 
-PODFILE CHECKSUM: cd4825bb5415663be20c1b181653da4450ef136c
+PODFILE CHECKSUM: 67eabc7bdc5bf5747c576214010327b899f762f5
 
 COCOAPODS: 1.15.2

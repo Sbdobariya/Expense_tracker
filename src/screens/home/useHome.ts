@@ -35,15 +35,20 @@ export const useHome = () => {
     isVisible: false,
     item: undefined,
   });
+  const [isLoading, setIsLoading] = useState(false);
   useEffect(() => {
     const fetchData = async () => {
       if (userData?.userID && IsFocus) {
+        setIsLoading(true);
         const data: GetTransaction = {
           data: {
             user_data: userData,
           },
-          onSuccess: _response => {},
+          onSuccess: _response => {
+            setIsLoading(false);
+          },
           onFail: error => {
+            setIsLoading(false);
             ShowTostMessage(JSON.stringify(error), 'error');
           },
         };
@@ -86,6 +91,7 @@ export const useHome = () => {
     setIsVisibleEditModal({isVisible: false, item: undefined});
 
   return {
+    isLoading,
     onEditPress,
     toggleModal,
     onDeletePress,

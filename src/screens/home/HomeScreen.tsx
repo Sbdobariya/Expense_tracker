@@ -26,6 +26,7 @@ const HomeScreen: React.FC = () => {
     transactionData,
     isVisibleEditModal,
     onTransactionPress,
+    isLoading,
   } = useHome();
 
   const onSeeAllPress = () => {
@@ -46,12 +47,12 @@ const HomeScreen: React.FC = () => {
       </View>
     );
   };
-
+  console.log('transactionData----------', transactionData);
   return (
     <View style={styles.container}>
       <CustomStatusBar backgroundColor={ColorConst.status_bar} />
       <HomeHeader />
-      <CommonLoader isVisible={transactionData?.length === 0} />
+      <CommonLoader isVisible={isLoading} />
       <HomeCard transactionData={transactionData} />
       <FlatList
         data={transactionData?.slice(0, 10)}

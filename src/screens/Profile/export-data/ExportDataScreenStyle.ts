@@ -17,4 +17,22 @@ export const styles = StyleSheet.create({
     flex: 1,
     justifyContent: 'space-between',
   },
+  selectDateBox: {
+    height: hp(6),
+    borderWidth: 1,
+    borderRadius: 8,
+    marginTop: hp(3),
+    borderColor: 'gray',
+    marginHorizontal: wp(5),
+    paddingHorizontal: wp(4),
+    justifyContent: 'center',
+  },
+  dateTextStyle: {
+    color: ColorConst.dark_black,
+    fontSize: fontSize(17),
+    fontFamily: fonts.medium,
+  },
+  buttonContainer: {
+    marginBottom: hp(7),
+  },
 });
