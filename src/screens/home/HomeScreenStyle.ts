@@ -34,7 +34,17 @@ export const styles = StyleSheet.create({
     height: hp(3),
     borderRadius: 10,
   },
-  flatlistStyle: {
+  flatListStyle: {
     marginTop: hp(1.5),
+  },
+  noDataText: {
+    fontSize: fontSize(20),
+    fontFamily: fonts.bold,
+    color: ColorConst.dark_black,
+  },
+  noDataView: {
+    flex: 1,
+    marginTop: hp(10),
+    alignItems: 'center',
   },
 });

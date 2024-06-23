@@ -34,7 +34,7 @@ const styles = StyleSheet.create({
     paddingLeft: wp(3),
   },
   headerText: {
-    fontSize: fontSize(18),
+    fontSize: fontSize(25),
     fontFamily: fonts.bold,
     color: ColorConst.white,
   },
@@ -43,7 +43,7 @@ const styles = StyleSheet.create({
     position: 'absolute',
   },
   timeStyle: {
-    fontSize: fontSize(13),
+    fontSize: fontSize(18),
     color: ColorConst.white,
     fontFamily: fonts.medium,
   },

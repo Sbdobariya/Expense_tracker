@@ -9,7 +9,7 @@
 	<key>PLIST_VERSION</key>
 	<string>1</string>
 	<key>BUNDLE_ID</key>
-	<string>org.reactjs.native.example.expenseTracker</string>
+	<string>com.analysisbudge</string>
 	<key>PROJECT_ID</key>
 	<string>expensetracker-183c7</string>
 	<key>STORAGE_BUCKET</key>
@@ -25,6 +25,6 @@
 	<key>IS_SIGNIN_ENABLED</key>
 	<true></true>
 	<key>GOOGLE_APP_ID</key>
-	<string>1:286303594856:ios:f7ae5bfc0666054dac8edd</string>
+	<string>1:286303594856:ios:148f98fba839b021ac8edd</string>
 </dict>
 </plist>

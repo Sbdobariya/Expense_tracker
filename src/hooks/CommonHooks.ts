@@ -1,24 +1,36 @@
 import moment, {MomentInput} from 'moment';
 import storage from '@react-native-firebase/storage';
 import {ImageOrVideo} from 'react-native-image-crop-picker';
-import {CalendarUtils} from 'react-native-calendars';
-import {Platform} from 'react-native';
 
-const FirebaseStorage = (
+const FirebaseStorage = async (
   response: ImageOrVideo,
   resolve: (res: string) => void,
 ) => {
-  const docPath =
-    Platform.OS === 'ios' ? response.sourceURL ?? '' : response.path ?? '';
-  const docName = response.filename;
-  const reference = storage().ref();
-  const task = reference.child('/invoices/' + docName).putFile(docPath);
-  task?.on('state_changed', async onSnap => {
+  const localFilePath = response?.path;
+  const filename = localFilePath.substring(localFilePath.lastIndexOf('/') + 1);
+
+  try {
+    await storage().ref(`invoicing/${filename}`).putFile(localFilePath);
     const imageUrl = await storage()
-      .ref(onSnap?.ref?.fullPath)
+      .ref(`invoicing/${filename}`)
       .getDownloadURL();
+    console.log('Image URL:', imageUrl);
     resolve(imageUrl);
-  });
+  } catch (error) {
+    console.error('Error uploading image:', error);
+  }
+
+  // const docPath =
+  //   Platform.OS === 'ios' ? response.sourceURL ?? '' : response.path ?? '';
+  // const docName = response.filename;
+  // const reference = storage().ref();
+  // const task = reference.child('/invoices/' + docName).putFile(docPath);
+  // task?.on('state_changed', async onSnap => {
+  //   const imageUrl = await storage()
+  //     .ref(onSnap?.ref?.fullPath)
+  //     .getDownloadURL();
+  //   resolve(imageUrl);
+  // });
 };
 
 const TransactionTimeStamp = (item: MomentInput) => {

@@ -13,7 +13,7 @@ import {
   UserSignUpActionRequest,
 } from '../../../interface';
 import React, {useState} from 'react';
-import {View} from 'react-native';
+import {Keyboard, View} from 'react-native';
 import {styles} from './SignUpScreenStyle';
 import {useDispatch, useSelector} from 'react-redux';
 import {AuthStrings} from '../../../constants/String';
@@ -47,6 +47,7 @@ const SignUpScreen: React.FC = () => {
     } else if (password?.length < 6) {
       ShowTostMessage('Minimum length of password is 6s', 'error');
     } else {
+      Keyboard.dismiss();
       const userData: UserSignUpActionRequest = {
         data: {userName: name, userEmail: email, userPassword: password},
         onSuccess: response => {

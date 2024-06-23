@@ -14,7 +14,6 @@ import {HomeStrings} from '../../constants/String';
 import {RootPage, TabStack} from '../../navigation/type';
 import {useNavigation, NavigationProp} from '@react-navigation/native';
 import {ColorConst} from '../../theme';
-import {AuthLoader} from '../../redux/reducer';
 
 const HomeScreen: React.FC = () => {
   const tabNavigation = useNavigation<NavigationProp<TabStack>>();
@@ -37,17 +36,21 @@ const HomeScreen: React.FC = () => {
 
   const ListHeaderComponent = () => {
     return (
-      <View style={styles.headerContainer}>
-        <Text style={styles.headerText1}>
-          {HomeStrings.transactions_history}
-        </Text>
-        <Text onPress={onSeeAllPress} style={styles.seeAllText}>
-          {HomeStrings.see_all}
-        </Text>
-      </View>
+      <>
+        {transactionData.length !== 0 ? (
+          <View style={styles.headerContainer}>
+            <Text style={styles.headerText1}>
+              {HomeStrings.transactions_history}
+            </Text>
+            <Text onPress={onSeeAllPress} style={styles.seeAllText}>
+              {HomeStrings.see_all}
+            </Text>
+          </View>
+        ) : null}
+      </>
     );
   };
-  console.log('transactionData----------', transactionData);
+
   return (
     <View style={styles.container}>
       <CustomStatusBar backgroundColor={ColorConst.status_bar} />
@@ -67,7 +70,14 @@ const HomeScreen: React.FC = () => {
         }}
         showsVerticalScrollIndicator={false}
         ListHeaderComponent={ListHeaderComponent}
-        style={styles.flatlistStyle}
+        style={styles.flatListStyle}
+        ListEmptyComponent={() => {
+          return (
+            <View style={styles.noDataView}>
+              <Text style={styles.noDataText}>No Transaction Available</Text>
+            </View>
+          );
+        }}
       />
       <EditCategoryModal
         onEditPress={onEditPress}
