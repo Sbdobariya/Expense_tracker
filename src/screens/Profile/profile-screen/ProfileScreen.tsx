@@ -43,7 +43,7 @@ const ProfileScreen: React.FC = () => {
 
       <FlatList
         data={MenuItem}
-        style={styles.flatlist}
+        style={styles.flatList}
         renderItem={({item}) => {
           return <MenuItemList item={item} onItemPress={onItemPress} />;
         }}

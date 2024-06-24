@@ -16,7 +16,7 @@ export const styles = StyleSheet.create({
     color: ColorConst.dark_black,
     fontFamily: fonts.semiBold,
   },
-  flatlist: {
+  flatList: {
     flexGrow: 0,
     borderRadius: hp(2),
     marginHorizontal: wp(4),

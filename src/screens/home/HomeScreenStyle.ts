@@ -13,11 +13,6 @@ export const styles = StyleSheet.create({
     marginHorizontal: wp(5),
     justifyContent: 'space-between',
   },
-  itemSubContaine: {
-    gap: 10,
-    flexDirection: 'row',
-    alignItems: 'center',
-  },
   headerText1: {
     color: '#000',
     fontSize: fontSize(18),

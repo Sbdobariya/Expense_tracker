@@ -5,6 +5,7 @@ import {
   EditCategoryModal,
   CustomStatusBar,
   CommonLoader,
+  ImageViewModal,
 } from '../../components';
 import React from 'react';
 import {useHome} from './useHome';
@@ -26,6 +27,10 @@ const HomeScreen: React.FC = () => {
     isVisibleEditModal,
     onTransactionPress,
     isLoading,
+    onInvoicePress,
+    invoiceImage,
+    isImageViewModalVisible,
+    toggleModalOfImageModal,
   } = useHome();
 
   const onSeeAllPress = () => {
@@ -65,6 +70,7 @@ const HomeScreen: React.FC = () => {
               item={item}
               index={index}
               onTransactionPress={onTransactionPress}
+              onInvoicePress={onInvoicePress}
             />
           );
         }}
@@ -85,6 +91,11 @@ const HomeScreen: React.FC = () => {
         onDeletePress={onDeletePress}
         isVisible={isVisibleEditModal.isVisible}
         items={isVisibleEditModal.item || undefined}
+      />
+      <ImageViewModal
+        isVisible={isImageViewModalVisible}
+        source={invoiceImage}
+        toggleModal={toggleModalOfImageModal}
       />
     </View>
   );

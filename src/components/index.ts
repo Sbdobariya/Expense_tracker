@@ -11,6 +11,7 @@ import CustomStatusBar from './common/CustomStatusBar';
 import PasswordInput from './common/PasswordInput';
 import DropdownComponent from './common/DropDown';
 import SearchBar from './common/SearchBar';
+import ImageViewModal from './common/ImageViewModal';
 
 // addTransaction
 import SelectButton from './addTransaction/SelectButton';
@@ -49,6 +50,7 @@ export {
   CategoryIcons,
   TouchableIcon,
   StringDivider,
+  ImageViewModal,
   CategoryModal,
   PasswordInput,
   ProfileHeader,

@@ -11,4 +11,5 @@ export const ColorConst = {
   profile_header: '#418984',
   gradient_color1: '#69AEA9',
   gradient_color2: '#3F8782',
+  delete: '#f30103',
 };

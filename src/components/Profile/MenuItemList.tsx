@@ -25,7 +25,19 @@ const MenuItemList: React.FC<Props> = ({item, onItemPress}) => {
             backgroundColor: item.bgColor,
           },
         ]}>
-        <Image source={item.image} style={styles.image} />
+        {item.id == 4 ? (
+          <Image
+            source={item.image}
+            style={[
+              styles.image,
+              {
+                tintColor: '#fff',
+              },
+            ]}
+          />
+        ) : (
+          <Image source={item.image} style={styles.image} />
+        )}
       </View>
       <Text style={styles.text}>{item.name}</Text>
     </TouchableOpacity>

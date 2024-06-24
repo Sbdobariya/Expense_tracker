@@ -32,13 +32,13 @@
 		<true/>
 	</dict>
 	<key>NSCameraUsageDescription</key>
-	<string>Expense Tracker Want o use permission of Camera</string>
+	<string>Analysis Budge Want to use permission of  Camera to upload bills and invoice within the app</string>
 	<key>NSLocationWhenInUseUsageDescription</key>
 	<string></string>
 	<key>NSMicrophoneUsageDescription</key>
-	<string>Expense Tracker Want o use permission of MicroPhone</string>
+	<string>Analysis Budge Want to use permission of MicroPhone</string>
 	<key>NSPhotoLibraryUsageDescription</key>
-	<string>Expense Tracker Want o use permission of Photo</string>
+	<string>Analysis Budge Want to use permission of Photo to upload bills and invoice within the app</string>
 	<key>UIAppFonts</key>
 	<array>
 		<string>OpenSans-Bold.ttf</string>

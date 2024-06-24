@@ -1,5 +1,6 @@
 export const HomeImages = {
   edit_ic: require('./edit.png'),
+  image_ic: require('./image.png'),
   rupee_ic: require('./rupee.png'),
   delete_ic: require('./delete.png'),
   upArrow_ic: require('./up_arrow.png'),

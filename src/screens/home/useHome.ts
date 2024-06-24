@@ -36,6 +36,9 @@ export const useHome = () => {
     item: undefined,
   });
   const [isLoading, setIsLoading] = useState(false);
+  const [isImageViewModalVisible, setIsImageViewModalVisible] = useState(false);
+  const [invoiceImage, setInvoiceImage] = useState('');
+
   useEffect(() => {
     const fetchData = async () => {
       if (userData?.userID && IsFocus) {
@@ -90,6 +93,13 @@ export const useHome = () => {
   const toggleModal = () =>
     setIsVisibleEditModal({isVisible: false, item: undefined});
 
+  const toggleModalOfImageModal = () => setIsImageViewModalVisible(false);
+
+  const onInvoicePress = (item: string) => {
+    setInvoiceImage(item);
+    setIsImageViewModalVisible(true);
+  };
+
   return {
     isLoading,
     onEditPress,
@@ -98,5 +108,9 @@ export const useHome = () => {
     transactionData,
     isVisibleEditModal,
     onTransactionPress,
+    onInvoicePress,
+    isImageViewModalVisible,
+    invoiceImage,
+    toggleModalOfImageModal,
   };
 };

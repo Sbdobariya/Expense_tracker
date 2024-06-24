@@ -1,15 +1,18 @@
 import React from 'react';
 import {TransactionTimeStamp} from '../../hooks';
 import {TransactionData} from '../../interface';
-import {StyleSheet, Text, TouchableOpacity, View} from 'react-native';
+import {Image, StyleSheet, Text, TouchableOpacity, View} from 'react-native';
 import {fontSize, fonts, hp, wp} from '../../theme';
 import CategoryIcons from '../common/CategoryIcons';
+import {HomeImages} from '../../../assets';
+import TouchableIcon from '../common/TouchableIcon';
 
 interface Props {
   index: number;
   disabled?: boolean;
   item: TransactionData;
   onTransactionPress?: (item: TransactionData) => void;
+  onInvoicePress: (item: string) => void;
 }
 
 const TransactionList: React.FC<Props> = ({
@@ -17,6 +20,7 @@ const TransactionList: React.FC<Props> = ({
   index,
   onTransactionPress,
   disabled = false,
+  onInvoicePress,
 }) => {
   const color = item.transaction_mode === 'income' ? '#25A969' : 'red';
 
@@ -38,6 +42,12 @@ const TransactionList: React.FC<Props> = ({
             {TransactionTimeStamp(item.timestamp)}
           </Text>
         </View>
+        {item?.transaction_invoice !== '' ? (
+          <TouchableIcon
+            source={HomeImages.image_ic}
+            onIconPress={() => onInvoicePress(item.transaction_invoice)}
+          />
+        ) : null}
       </View>
       <View style={styles.subContainer}>
         <Text
