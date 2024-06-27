@@ -83,22 +83,6 @@ export const useProfile = () => {
             text: 'Yes',
             onPress: async () => {
               deleteDocument();
-              // const uid = auth().currentUser?.uid;
-              // console.log('uid----------', uid);
-              // setTimeout(async () => {
-              //   firestore()
-              //     .collection('Transactions')
-              //     .doc('0A9ql8iwKgNduzCh3HyLH79y2Ox2')
-              //     .delete()
-              //     .then(() => {
-              //       console.log('successfully deleted! ');
-              //     })
-              //     .catch(error => {
-              //       console.log('Error removing document:', error);
-              //     });
-              // }, 200);
-              // await auth().currentUser?.delete();
-              // signOut();
             },
           },
         ],
@@ -108,18 +92,22 @@ export const useProfile = () => {
 
   const deleteDocument = async () => {
     try {
-      console.log('userData?.userID----------', userData?.userID);
       await firestore()
         .collection('Transactions')
         .doc(userData?.userID)
-        .collection('incomeExpense')
-        .doc()
-        .delete()
-        .then(res => {
-          console.log('res----------', res);
-        });
+        .delete();
 
-      console.log('Document successfully deleted!');
+      const postsQuerySnapshot = await firestore()
+        .collection('Transactions')
+        .doc(userData?.userID)
+        .collection('incomeExpense')
+        .get();
+      postsQuerySnapshot.forEach(async doc => {
+        await doc.ref.delete();
+      });
+
+      auth().currentUser?.delete();
+      signOut();
     } catch (error) {
       console.error('Error removing document: ', error);
     }
