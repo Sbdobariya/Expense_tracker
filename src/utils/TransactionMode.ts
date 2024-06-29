@@ -16,4 +16,9 @@ export const TransactionAccountData = [
     name: 'UPI / Net Banking',
     image: TransactionModeImages.upi_ic,
   },
+  {
+    id: 4,
+    name: 'Add Other',
+    image: TransactionModeImages.plus_ic,
+  },
 ];

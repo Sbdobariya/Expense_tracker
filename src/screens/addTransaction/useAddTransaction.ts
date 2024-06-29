@@ -64,6 +64,8 @@ export const useAddTransaction = () => {
       : undefined,
   );
   const [isImageLoader, setIsImageLoader] = useState(false);
+  const [isShowAddCategoryModal, setIsShowAddCategoryModal] = useState(false);
+
   const onToggleModal = () => {
     setShowCategoryModal({
       isVisible: false,
@@ -173,6 +175,12 @@ export const useAddTransaction = () => {
         : IncomeCategoryData
       : TransactionAccountData;
 
+  const onAddCategoryToggleModal = () => {
+    console.log('Calla');
+
+    setIsShowAddCategoryModal(!isShowAddCategoryModal);
+  };
+
   return {
     activeTab,
     noteValue,
@@ -196,6 +204,8 @@ export const useAddTransaction = () => {
     CategoryModalData,
     onSelectCategoryPress,
     setSelectedExpenseItem,
+    isShowAddCategoryModal,
+    onAddCategoryToggleModal,
     setSelectedTransactionWay,
   };
 };

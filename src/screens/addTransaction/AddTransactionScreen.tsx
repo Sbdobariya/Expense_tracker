@@ -13,6 +13,7 @@ import {
   TransactionHeader,
   SelectButton,
   CustomStatusBar,
+  AddCategoryModal,
 } from '../../components';
 import React from 'react';
 import {HomeImages} from '../../../assets';
@@ -44,6 +45,8 @@ const AddTransactionScreen: React.FC = () => {
     showCategoryModal,
     onSelectCategoryPress,
     setSelectedExpenseItem,
+    isShowAddCategoryModal,
+    onAddCategoryToggleModal,
     setSelectedTransactionWay,
   } = useAddTransaction();
 
@@ -112,19 +115,31 @@ const AddTransactionScreen: React.FC = () => {
           customGradientStyle={styles.bottomAddButton}
         />
       </View>
-      <CategoryModal
-        data={CategoryModalData}
-        isVisible={showCategoryModal.isVisible}
-        toggleModal={onToggleModal}
-        onSelectExpenseCategory={item => {
-          onToggleModal();
-          if (showCategoryModal.mode === 'category') {
-            setSelectedExpenseItem(item);
-          } else {
-            setSelectedTransactionWay(item);
-          }
-        }}
-      />
+      {showCategoryModal.isVisible && (
+        <CategoryModal
+          data={CategoryModalData}
+          isVisible={showCategoryModal.isVisible}
+          toggleModal={onToggleModal}
+          onSelectExpenseCategory={item => {
+            onToggleModal();
+            if (showCategoryModal.mode === 'category') {
+              setSelectedExpenseItem(item);
+            } else {
+              if (item.name == 'Add Other') {
+                onAddCategoryToggleModal();
+              } else {
+                setSelectedTransactionWay(item);
+              }
+            }
+          }}
+        />
+      )}
+      {isShowAddCategoryModal && (
+        <AddCategoryModal
+          isVisible={isShowAddCategoryModal}
+          toggleModal={onAddCategoryToggleModal}
+        />
+      )}
     </View>
   );
 };

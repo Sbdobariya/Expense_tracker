@@ -60,7 +60,6 @@ const CategoryModal: React.FC<Props> = ({
           />
         )}
         ListFooterComponent={() => <View style={styles.footerStyle} />}
-        contentContainerStyle={styles.contentContainerStyle}
       />
     </View>
   </Modal>
@@ -99,9 +98,7 @@ const styles = StyleSheet.create({
     padding: 15,
     borderRadius: 15,
   },
-  contentContainerStyle: {
-    alignItems: 'center',
-  },
+
   footerStyle: {
     height: hp(3),
   },

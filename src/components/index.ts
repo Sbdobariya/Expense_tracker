@@ -12,6 +12,7 @@ import PasswordInput from './common/PasswordInput';
 import DropdownComponent from './common/DropDown';
 import SearchBar from './common/SearchBar';
 import ImageViewModal from './common/ImageViewModal';
+import AddCategoryModal from './common/AddCategoryModal';
 
 // addTransaction
 import SelectButton from './addTransaction/SelectButton';
@@ -59,6 +60,7 @@ export {
   TransactionList,
   UpdateNameModal,
   CustomStatusBar,
+  AddCategoryModal,
   EditCategoryModal,
   TransactionHeader,
   DropdownComponent,

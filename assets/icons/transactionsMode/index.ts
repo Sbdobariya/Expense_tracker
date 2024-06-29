@@ -2,4 +2,5 @@ export const TransactionModeImages = {
   upi_ic: require('./upi.png'),
   cash_ic: require('./cash.png'),
   card_ic: require('./card.png'),
+  plus_ic: require('./plus.png'),
 };
