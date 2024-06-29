@@ -65,6 +65,25 @@ export const useExportData = () => {
   }, [selectedData, range, transactionData]);
 
   const generateHtml = () => {
+    const appIcon =
+      'https://firebasestorage.googleapis.com/v0/b/expensetracker-183c7.appspot.com/o/ic_launcher%20copy.png?alt=media&token=641f7606-1b82-40a2-ad5b-c44a046fab07';
+    filteredData.sort((a, b) => {
+      const dateA = a.timestamp ? new Date(a.timestamp) : null;
+      const dateB = b.timestamp ? new Date(b.timestamp) : null;
+
+      if (dateA === null && dateB === null) {
+        return 0;
+      } else if (dateA === null) {
+        return 1;
+      } else if (dateB === null) {
+        return -1;
+      } else {
+        if (dateA < dateB) return -1;
+        if (dateA > dateB) return 1;
+        return 0;
+      }
+    });
+
     let balance = 0;
     let totalIncome = 0;
     let totalExpense = 0;
@@ -88,88 +107,89 @@ export const useExportData = () => {
         }
 
         return `
-        <tr class="${rowClass}">
-          <td>${
-            transaction.timestamp
-              ? new Date(transaction.timestamp).toLocaleDateString()
-              : ''
-          }</td>
-          <td>${
-            transaction.transaction_note ??
-            transaction.transaction_category?.name ??
-            ''
-          }</td>
-          <td class="debit">${debit}</td>
-          <td class="credit">${credit}</td>
-          <td class="balance">${balance.toFixed(2)} Cr</td>
-        </tr>
-      `;
+    <tr class="${rowClass}">
+      <td>${
+        transaction.timestamp
+          ? new Date(transaction.timestamp).toLocaleDateString()
+          : ''
+      }</td>
+      <td>${
+        transaction.transaction_note ??
+        transaction.transaction_category?.name ??
+        ''
+      }</td>
+      <td class="debit">${debit}</td>
+      <td class="credit">${credit}</td>
+      <td class="balance">${balance.toFixed(2)} Cr</td>
+    </tr>
+  `;
       })
       .join('');
 
-    // Total rows
+    // Total rows (unchanged)
     const totalRow = `
-      <tr>
-        <td colspan="2">Total Income</td>
-        <td colspan="3" class="right-align">${totalIncome.toFixed(2)}</td>
-      </tr>
-      <tr>
-        <td colspan="2">Total Expense</td>
-        <td colspan="3" class="right-align">${totalExpense.toFixed(2)}</td>
-      </tr>
-      <tr>
-        <td colspan="2">Remaining Balance</td>
-        <td colspan="3" class="right-align">${balance.toFixed(2)}</td>
-      </tr>
-    `;
+  <tr>
+    <td colspan="2">Total Income</td>
+    <td colspan="3" class="right-align">${totalIncome.toFixed(2)}</td>
+  </tr>
+  <tr>
+    <td colspan="2">Total Expense</td>
+    <td colspan="3" class="right-align">${totalExpense.toFixed(2)}</td>
+  </tr>
+  <tr>
+    <td colspan="2">Remaining Balance</td>
+    <td colspan="3" class="right-align">${balance.toFixed(2)}</td>
+  </tr>
+`;
 
+    // Return the HTML template with sorted rows
     return `
-      <!DOCTYPE html>
-      <html>
-        <head>
-          <style>
-            table {
-              width: 100%;
-              border-collapse: collapse;
-            }
-            th, td {
-              border: 1px solid black;
-              padding: 8px;
-              text-align: right;
-            }
-            th {
-              background-color: #f2f2f2;
-            }
-            .debit {
-              color: red;
-            }
-            .credit {
-              color: green;
-            }
-            .right-align {
-              text-align: right;
-            }
-          </style>
-        </head>
-        <body>
-          <table>
-            <thead>
-              <tr>
-                <th>Date</th>
-                <th>Details</th>
-                <th>Debit(-)</th>
-                <th>Credit(+)</th>
-                <th>Balance</th>
-              </tr>
-            </thead>
-            <tbody>
-              ${rows}
-              ${totalRow}
-            </tbody>
-          </table>
-        </body>
-      </html>
-    `;
+  <!DOCTYPE html>
+  <html>
+    <head>
+      <style>
+        table {
+          width: 100%;
+          border-collapse: collapse;
+        }
+        th, td {
+          border: 1px solid black;
+          padding: 8px;
+          text-align: right;
+        }
+        th {
+          background-color: #f2f2f2;
+        }
+        .debit {
+          color: red;
+        }
+        .credit {
+          color: green;
+        }
+        .right-align {
+          text-align: right;
+        }
+      </style>
+    </head>
+    <body>
+      <table>
+        <thead>
+          <tr>
+            <th>Date</th>
+            <th>Details</th>
+            <th>Debit(-)</th>
+            <th>Credit(+)</th>
+            <th>Balance</th>
+          </tr>
+        </thead>
+        <tbody>
+          ${rows}
+          ${totalRow}
+        </tbody>
+      </table>
+    </body>
+  </html>
+`;
   };
 
   const onExportPress = async () => {

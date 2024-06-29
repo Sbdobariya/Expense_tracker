@@ -1,4 +1,4 @@
 ios :: 
 
-Version : 1.0
+Version : 1.0 // App distributed
 Build : 6

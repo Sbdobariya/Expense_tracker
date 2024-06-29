@@ -19,18 +19,6 @@ const FirebaseStorage = async (
   } catch (error) {
     console.error('Error uploading image:', error);
   }
-
-  // const docPath =
-  //   Platform.OS === 'ios' ? response.sourceURL ?? '' : response.path ?? '';
-  // const docName = response.filename;
-  // const reference = storage().ref();
-  // const task = reference.child('/invoices/' + docName).putFile(docPath);
-  // task?.on('state_changed', async onSnap => {
-  //   const imageUrl = await storage()
-  //     .ref(onSnap?.ref?.fullPath)
-  //     .getDownloadURL();
-  //   resolve(imageUrl);
-  // });
 };
 
 const TransactionTimeStamp = (item: MomentInput) => {
