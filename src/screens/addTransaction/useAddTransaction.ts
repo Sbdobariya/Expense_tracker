@@ -9,6 +9,7 @@ import {
   AuthReducerType,
   EditTransaction,
   ExpenseArray,
+  FirebaseDatabase,
   TransactionReducerType,
 } from '../../interface';
 import {HomeImages} from '../../../assets';
@@ -18,6 +19,7 @@ import {
   ShowTostMessage,
   TransactionAccountData,
 } from '../../utils';
+import {ImageOrVideo} from 'react-native-image-crop-picker';
 
 export const useAddTransaction = () => {
   const dispatch = useDispatch();
@@ -111,9 +113,13 @@ export const useAddTransaction = () => {
   };
 
   const onAddInvoicePress = () => {
-    UseImagePicker(async response => {
+    UseImagePicker(async (response: ImageOrVideo) => {
       setIsImageLoader(true);
-      FirebaseStorage(response, res => {
+      const obj: FirebaseDatabase = {
+        image: response,
+        from: 'AddTransaction',
+      };
+      FirebaseStorage(obj, res => {
         setSelectedInvoice(res);
         setIsImageLoader(false);
       });

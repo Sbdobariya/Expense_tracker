@@ -136,6 +136,7 @@ const AddTransactionScreen: React.FC = () => {
       )}
       {isShowAddCategoryModal && (
         <AddCategoryModal
+          activeTab={activeTab}
           isVisible={isShowAddCategoryModal}
           toggleModal={onAddCategoryToggleModal}
         />

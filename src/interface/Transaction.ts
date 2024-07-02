@@ -58,3 +58,13 @@ export interface DeleteDataType {
   item: TransactionData;
   id: string | undefined;
 }
+
+export interface AddAccountType {
+  data: {
+    userID?: string;
+    accountName: string;
+    selectedImage: string | undefined;
+  };
+  onSuccess?: (res: any) => void;
+  onFail?: (err: any) => void;
+}

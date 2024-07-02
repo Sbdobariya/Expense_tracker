@@ -1,5 +1,6 @@
 // AddTransaction
 import {
+  AddAccountAction,
   AddTransactionAction,
   DeleteTransactions,
   EditTransactionAction,
@@ -11,6 +12,7 @@ import {UserSignInActions, UserSignUpAction} from './auth/AuthAction';
 
 export {
   UserSignUpAction,
+  AddAccountAction,
   UserSignInActions,
   DeleteTransactions,
   AddTransactionAction,

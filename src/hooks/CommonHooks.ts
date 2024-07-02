@@ -1,19 +1,22 @@
 import moment, {MomentInput} from 'moment';
 import storage from '@react-native-firebase/storage';
 import {ImageOrVideo} from 'react-native-image-crop-picker';
+import {FirebaseDatabase} from '../interface';
 
 const FirebaseStorage = async (
-  response: ImageOrVideo,
+  response: FirebaseDatabase,
   resolve: (res: string) => void,
 ) => {
-  const localFilePath = response?.path;
+  const localFilePath = response?.image.path;
   const filename = localFilePath.substring(localFilePath.lastIndexOf('/') + 1);
 
+  const ref =
+    response.from == 'AddAccount'
+      ? `account/${filename}`
+      : `invoicing/${filename}`;
   try {
-    await storage().ref(`invoicing/${filename}`).putFile(localFilePath);
-    const imageUrl = await storage()
-      .ref(`invoicing/${filename}`)
-      .getDownloadURL();
+    await storage().ref(ref).putFile(localFilePath);
+    const imageUrl = await storage().ref(ref).getDownloadURL();
     console.log('Image URL:', imageUrl);
     resolve(imageUrl);
   } catch (error) {

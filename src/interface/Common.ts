@@ -1,5 +1,6 @@
 import {ImageSourcePropType} from 'react-native';
 import {TransactionData} from './Transaction';
+import {ImageOrVideo} from 'react-native-image-crop-picker';
 
 export interface ExpenseArray {
   id: number;
@@ -36,4 +37,11 @@ export interface ChartData {
 export interface FilterDataProps {
   id: number;
   label: string;
+}
+
+export type DatabaseType = 'AddAccount' | 'AddTransaction';
+
+export interface FirebaseDatabase {
+  image: ImageOrVideo;
+  from: DatabaseType;
 }

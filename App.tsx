@@ -4,6 +4,7 @@ import MyStore from './src/redux/store/Store';
 import SplashScreen from 'react-native-splash-screen';
 import MainNavigator from './src/navigation/MainNavigator';
 import Toast from 'react-native-toast-message';
+import {hp} from './src/theme';
 
 const App = () => {
   useEffect(() => {
@@ -13,7 +14,7 @@ const App = () => {
   return (
     <Provider store={MyStore}>
       <MainNavigator />
-      <Toast position="top" />
+      <Toast position="top" topOffset={hp(7)} />
     </Provider>
   );
 };

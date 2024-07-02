@@ -1,5 +1,6 @@
 import moment from 'moment';
 import {
+  AddAccountType,
   AddTransaction,
   DeleteDataType,
   EditTransaction,
@@ -93,5 +94,22 @@ export const EditTransactionAction = (request: EditTransaction) => {
     })
     .then(() => {
       request.onSuccess && request.onSuccess('User updated!');
+    });
+};
+
+export const AddAccountAction = (request: AddAccountType) => {
+  firestore()
+    .collection('Transactions')
+    .doc(request.data.userID)
+    .collection('accounts')
+    .add({
+      accountName: request.data.accountName,
+      selectedImage: request.data.selectedImage,
+    })
+    .then(() => {
+      request.onSuccess && request.onSuccess('success');
+    })
+    .catch(() => {
+      request.onFail && request.onFail('error');
     });
 };
