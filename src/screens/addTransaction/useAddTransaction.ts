@@ -162,6 +162,7 @@ export const useAddTransaction = () => {
   const onTabChange = (val: string) => {
     setActiveTab(val);
     setSelectedExpenseItem(undefined);
+    setSelectedTransactionWay(undefined);
   };
 
   const onUpDatePress = () => {

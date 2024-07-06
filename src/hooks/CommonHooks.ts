@@ -10,7 +10,9 @@ const FirebaseStorage = async (
   const filename = localFilePath.substring(localFilePath.lastIndexOf('/') + 1);
 
   const ref =
-    response.from === 'AddAccount'
+    response.from === 'Profile'
+      ? `profile/${filename}`
+      : response.from === 'AddAccount'
       ? `account/${filename}`
       : `invoicing/${filename}`;
   try {

@@ -1,7 +1,7 @@
 import React from 'react';
 import {useSelector} from 'react-redux';
 import {AuthImages} from '../../../assets';
-import {Image, Platform, StyleSheet, Text} from 'react-native';
+import {Image, Platform, StyleSheet, Text, View} from 'react-native';
 import LinearGradient from 'react-native-linear-gradient';
 import {AuthReducerType} from '../../interface';
 import {ColorConst, fontSize, fonts, hp, wp} from '../../theme';
@@ -17,8 +17,13 @@ const HomeHeader = () => {
       colors={[ColorConst.gradient_color1, ColorConst.gradient_color2]}
       style={[styles.linearGradient]}>
       <Image style={styles.headerImage} source={AuthImages.header_bg_ic} />
-      <Text style={styles.timeStyle}>{getTime()},</Text>
-      <Text style={styles.headerText}>{userData?.userName}</Text>
+      <View style={styles.innerView}>
+        <Image source={{uri: userData?.userImage}} style={styles.userProfile} />
+        <View>
+          <Text style={styles.timeStyle}>{getTime()},</Text>
+          <Text style={styles.headerText}>{userData?.userName}</Text>
+        </View>
+      </View>
     </LinearGradient>
   );
 };
@@ -46,5 +51,15 @@ const styles = StyleSheet.create({
     fontSize: fontSize(18),
     color: ColorConst.white,
     fontFamily: fonts.medium,
+  },
+  userProfile: {
+    height: hp(8),
+    width: hp(8),
+    borderRadius: hp(10),
+  },
+  innerView: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    gap: hp(2),
   },
 });

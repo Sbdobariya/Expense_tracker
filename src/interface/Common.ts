@@ -39,7 +39,7 @@ export interface FilterDataProps {
   label: string;
 }
 
-export type DatabaseType = 'AddAccount' | 'AddTransaction';
+export type DatabaseType = 'AddAccount' | 'AddTransaction' | 'Profile';
 
 export interface FirebaseDatabase {
   image: ImageOrVideo;

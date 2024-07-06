@@ -43,5 +43,16 @@ export const styles = StyleSheet.create({
   userProfile: {
     height: hp(15),
     width: hp(15),
+    borderRadius: hp(10),
+  },
+  cameraImage: {
+    height: hp(4),
+    width: hp(4),
+    right: wp(0),
+    bottom: hp(0),
+    position: 'absolute',
+  },
+  cameraView: {
+    marginVertical: hp(2),
   },
 });

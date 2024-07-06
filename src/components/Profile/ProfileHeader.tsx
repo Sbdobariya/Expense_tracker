@@ -39,8 +39,8 @@ const styles = StyleSheet.create({
   },
   imageBackground: {
     flexDirection: 'row',
-    paddingTop: Platform.OS === 'ios' ? hp(12) : hp(9),
-    height: hp(25),
+    paddingTop: Platform.OS === 'ios' ? hp(10) : hp(9),
+    height: hp(22),
   },
   buttonContainer: {
     flex: 1,

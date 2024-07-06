@@ -1,7 +1,7 @@
 import React from 'react';
 import {useSelector} from 'react-redux';
 import {useProfile} from './useProfile';
-import {ProfileImage} from '../../../../assets';
+import {ProfileImage, TransactionImages} from '../../../../assets';
 import {styles} from './ProfileScreenStyle';
 import {FlatList, Image, Text, View} from 'react-native';
 import {AuthReducerType} from '../../../interface';
@@ -10,6 +10,7 @@ import {
   UpdateNameModal,
   CustomStatusBar,
   ProfileHeader,
+  TouchableIcon,
 } from '../../../components';
 import {ColorConst} from '../../../theme';
 
@@ -26,6 +27,7 @@ const ProfileScreen: React.FC = () => {
     userName,
     onChangeText,
     onSubmitPress,
+    onCameraPress,
   } = useProfile();
 
   return (
@@ -36,7 +38,21 @@ const ProfileScreen: React.FC = () => {
       />
       <ProfileHeader title="Profile" onToggleModal={onToggleModal} />
       <View style={styles.headerContainer}>
-        <Image source={ProfileImage.user_ic} style={styles.userProfile} />
+        <View style={styles.cameraView}>
+          <Image
+            source={
+              userData?.userImage
+                ? {uri: userData?.userImage}
+                : ProfileImage.user_ic
+            }
+            style={styles.userProfile}
+          />
+          <TouchableIcon
+            source={TransactionImages.camera_ic}
+            customIconStyle={styles.cameraImage}
+            onIconPress={onCameraPress}
+          />
+        </View>
         <Text style={styles.userNameText}>{userData?.userName}</Text>
         <Text style={styles.userEmailText}>{userData?.userEmail}</Text>
       </View>

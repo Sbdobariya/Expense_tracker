@@ -21,6 +21,7 @@ export interface UserDataType {
   userID?: string;
   userName?: string;
   userEmail?: string;
+  userImage?: string;
 }
 
 export interface AuthReducerType {

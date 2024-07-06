@@ -6,12 +6,14 @@ import {ProfileStrings} from '../../../constants/String';
 import {AuthContext} from '../../../utils/AuthContext';
 import {NavigationProp, useNavigation} from '@react-navigation/native';
 import {MainNavigatorType, RootPage} from '../../../navigation/type';
-import {StoreData} from '../../../utils';
+import {ShowTostMessage, StoreData} from '../../../utils';
 import {userDataAction} from '../../../redux/reducer';
 import {useDispatch, useSelector} from 'react-redux';
 import {Alert} from 'react-native';
 import firestore from '@react-native-firebase/firestore';
-import {AuthReducerType} from '../../../interface';
+import {AuthReducerType, FirebaseDatabase} from '../../../interface';
+import {FirebaseStorage, UseImagePicker} from '../../../hooks';
+import {ImageOrVideo} from 'react-native-image-crop-picker';
 
 export const useProfile = () => {
   const MenuItem = [
@@ -135,6 +137,28 @@ export const useProfile = () => {
     setUserName('');
   };
 
+  const onCameraPress = () => {
+    UseImagePicker(async (response: ImageOrVideo) => {
+      const obj: FirebaseDatabase = {
+        image: response,
+        from: 'Profile',
+      };
+      ShowTostMessage('Wait a few second Image Uploading...', 'info');
+      FirebaseStorage(obj, async res => {
+        await auth().currentUser?.updateProfile({photoURL: res});
+        const updatedUser = auth().currentUser;
+        let updatedUserData = {
+          userName: updatedUser?.displayName,
+          userEmail: updatedUser?.email,
+          userID: updatedUser?.uid,
+          userImage: updatedUser?.photoURL,
+        };
+        dispatch(userDataAction(updatedUserData));
+        StoreData('userData', JSON.stringify(updatedUserData));
+      });
+    });
+  };
+
   return {
     MenuItem,
     userName,
@@ -142,6 +166,7 @@ export const useProfile = () => {
     onChangeText,
     onToggleModal,
     onSubmitPress,
+    onCameraPress,
     isUpdateModalVisible,
   };
 };
