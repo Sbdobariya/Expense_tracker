@@ -29,7 +29,7 @@ export const styles = StyleSheet.create({
   headerContainer: {
     alignItems: 'center',
   },
-  flatlistStyle: {
+  flatListStyle: {
     marginTop: hp(7),
   },
   listContainer: {
@@ -59,5 +59,10 @@ export const styles = StyleSheet.create({
     fontSize: fontSize(17),
     fontFamily: fonts.semiBold,
     color: ColorConst.dark_black,
+  },
+  imageURL: {
+    width: hp(5),
+    height: hp(5),
+    borderRadius: hp(1),
   },
 });

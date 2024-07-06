@@ -38,7 +38,7 @@ const ChartComponent: React.FC<Props> = ({chartData, filteredData}) => {
           showGradient
           sectionAutoFocus
           radius={90}
-          innerRadius={50}
+          innerRadius={60}
           innerCircleColor={'#29756e'}
           centerLabelComponent={() => (
             <View style={styles.focusedDataView}>
@@ -62,11 +62,16 @@ const ChartComponent: React.FC<Props> = ({chartData, filteredData}) => {
   return (
     <View style={styles.container}>
       <FlatList
-        style={styles.mainFlatlistStyle}
+        style={styles.mainFlatListStyle}
         ListHeaderComponent={ListHeaderComponent}
         data={filteredData}
         renderItem={({item, index}) => (
-          <TransactionList item={item} index={index} disabled />
+          <TransactionList
+            item={item}
+            index={index}
+            disabled
+            onInvoicePress={() => {}}
+          />
         )}
         showsVerticalScrollIndicator={false}
       />
@@ -87,7 +92,7 @@ const styles = StyleSheet.create({
     borderRadius: hp(2),
     backgroundColor: '#29756e',
   },
-  mainFlatlistStyle: {
+  mainFlatListStyle: {
     marginTop: hp(1),
     flexGrow: 1,
   },

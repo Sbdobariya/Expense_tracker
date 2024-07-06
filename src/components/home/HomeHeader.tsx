@@ -27,7 +27,7 @@ export default HomeHeader;
 
 const styles = StyleSheet.create({
   linearGradient: {
-    height: Platform.OS == 'ios' ? hp(35) : hp(30),
+    height: Platform.OS === 'ios' ? hp(35) : hp(30),
     paddingTop: Platform.OS === 'ios' ? hp(10) : hp(3),
     borderBottomLeftRadius: hp(5),
     borderBottomRightRadius: hp(5),

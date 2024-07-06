@@ -41,13 +41,16 @@ const ProfileScreen: React.FC = () => {
         <Text style={styles.userEmailText}>{userData?.userEmail}</Text>
       </View>
 
-      <FlatList
-        data={MenuItem}
-        style={styles.flatList}
-        renderItem={({item}) => {
-          return <MenuItemList item={item} onItemPress={onItemPress} />;
-        }}
-      />
+      <View style={styles.listContainer}>
+        <FlatList
+          bounces={false}
+          data={MenuItem}
+          style={styles.flatList}
+          renderItem={({item}) => {
+            return <MenuItemList item={item} onItemPress={onItemPress} />;
+          }}
+        />
+      </View>
       <UpdateNameModal
         onSubmitPress={onSubmitPress}
         onChangeText={onChangeText}

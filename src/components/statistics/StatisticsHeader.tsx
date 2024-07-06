@@ -32,7 +32,7 @@ const styles = StyleSheet.create({
   linearGradient: {
     alignItems: 'center',
     justifyContent: 'center',
-    height: Platform.OS == 'ios' ? hp(18) : hp(10),
-    paddingTop: Platform.OS == 'ios' ? hp(5) : hp(0),
+    height: Platform.OS === 'ios' ? hp(18) : hp(10),
+    paddingTop: Platform.OS === 'ios' ? hp(5) : hp(0),
   },
 });

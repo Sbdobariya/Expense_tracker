@@ -39,7 +39,7 @@ const UpdateNameModal: React.FC<Props> = ({
         <PrimaryButton
           title="Submit"
           onPress={onSubmitPress}
-          disabled={userName.length == 0}
+          disabled={userName.length === 0}
           customGradientStyle={styles.customGradientStyle}
         />
       </View>

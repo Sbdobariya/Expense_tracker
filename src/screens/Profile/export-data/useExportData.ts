@@ -65,8 +65,8 @@ export const useExportData = () => {
   }, [selectedData, range, transactionData]);
 
   const generateHtml = () => {
-    const appIcon =
-      'https://firebasestorage.googleapis.com/v0/b/expensetracker-183c7.appspot.com/o/ic_launcher%20copy.png?alt=media&token=641f7606-1b82-40a2-ad5b-c44a046fab07';
+    // const appIcon =
+    //   'https://firebasestorage.googleapis.com/v0/b/expensetracker-183c7.appspot.com/o/ic_launcher%20copy.png?alt=media&token=641f7606-1b82-40a2-ad5b-c44a046fab07';
     filteredData.sort((a, b) => {
       const dateA = a.timestamp ? new Date(a.timestamp) : null;
       const dateB = b.timestamp ? new Date(b.timestamp) : null;
@@ -78,8 +78,12 @@ export const useExportData = () => {
       } else if (dateB === null) {
         return -1;
       } else {
-        if (dateA < dateB) return -1;
-        if (dateA > dateB) return 1;
+        if (dateA < dateB) {
+          return -1;
+        }
+        if (dateA > dateB) {
+          return 1;
+        }
         return 0;
       }
     });
@@ -221,10 +225,10 @@ export const useExportData = () => {
       saveToFiles: true,
     };
     Share.open(options)
-      .then(resp => {
+      .then(_resp => {
         ShowTostMessage('File Download Successfully', 'success');
       })
-      .catch(err => {});
+      .catch(_err => {});
   };
 
   const toggleModal = () => {

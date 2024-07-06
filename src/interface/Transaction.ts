@@ -63,7 +63,18 @@ export interface AddAccountType {
   data: {
     userID?: string;
     accountName: string;
+    activeTab?: string;
     selectedImage: string | undefined;
+  };
+  onSuccess?: (res: any) => void;
+  onFail?: (err: any) => void;
+}
+
+export interface GetAccountDataType {
+  data: {
+    userID?: string;
+    account: string;
+    activeTab: string;
   };
   onSuccess?: (res: any) => void;
   onFail?: (err: any) => void;

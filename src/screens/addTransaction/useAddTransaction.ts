@@ -1,15 +1,20 @@
-import {useState} from 'react';
+import {useEffect, useState} from 'react';
 import {useDispatch, useSelector} from 'react-redux';
 import {useNavigation} from '@react-navigation/native';
 import {EditTransactionData} from '../../redux/reducer';
 import {FirebaseStorage, UseImagePicker} from '../../hooks';
-import {AddTransactionAction, EditTransactionAction} from '../../redux/actions';
+import {
+  AddTransactionAction,
+  EditTransactionAction,
+  GetAccountAction,
+} from '../../redux/actions';
 import {
   AddTransaction,
   AuthReducerType,
   EditTransaction,
   ExpenseArray,
   FirebaseDatabase,
+  GetAccountDataType,
   TransactionReducerType,
 } from '../../interface';
 import {HomeImages} from '../../../assets';
@@ -67,6 +72,7 @@ export const useAddTransaction = () => {
   );
   const [isImageLoader, setIsImageLoader] = useState(false);
   const [isShowAddCategoryModal, setIsShowAddCategoryModal] = useState(false);
+  const [categoryData, setCategoryData] = useState<ExpenseArray[]>([]);
 
   const onToggleModal = () => {
     setShowCategoryModal({
@@ -74,6 +80,34 @@ export const useAddTransaction = () => {
       mode: '',
     });
   };
+
+  useEffect(() => {
+    const fetch = () => {
+      const transactionDetail: GetAccountDataType = {
+        data: {
+          userID: userData?.userID,
+          account: showCategoryModal.mode,
+          activeTab: activeTab,
+        },
+        onSuccess: response => {
+          if (showCategoryModal.mode === 'category') {
+            if (activeTab === 'expense') {
+              setCategoryData(ExpenseCategoryData);
+            } else {
+              setCategoryData(IncomeCategoryData);
+            }
+          } else {
+            setCategoryData([...TransactionAccountData, ...response]);
+          }
+        },
+        onFail: error => {
+          ShowTostMessage(JSON.stringify(error), 'error');
+        },
+      };
+      GetAccountAction(transactionDetail);
+    };
+    fetch();
+  }, [showCategoryModal, activeTab, userData?.userID]);
 
   const onAddButtonPress = () => {
     if (!selectedExpenseItem) {
@@ -174,16 +208,7 @@ export const useAddTransaction = () => {
     ? selectedExpenseItem?.name
     : 'Select Category';
 
-  const CategoryModalData =
-    showCategoryModal.mode === 'category'
-      ? activeTab === 'expense'
-        ? ExpenseCategoryData
-        : IncomeCategoryData
-      : TransactionAccountData;
-
   const onAddCategoryToggleModal = () => {
-    console.log('Calla');
-
     setIsShowAddCategoryModal(!isShowAddCategoryModal);
   };
 
@@ -202,12 +227,12 @@ export const useAddTransaction = () => {
     onToggleModal,
     CategoryImage,
     onUpDatePress,
+    categoryData,
     setAmountValue,
     selectedInvoice,
     onAddButtonPress,
     onAddInvoicePress,
     showCategoryModal,
-    CategoryModalData,
     onSelectCategoryPress,
     setSelectedExpenseItem,
     isShowAddCategoryModal,

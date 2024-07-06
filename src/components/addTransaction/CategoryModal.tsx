@@ -1,9 +1,17 @@
-import {FlatList, StyleSheet, Text, TouchableOpacity, View} from 'react-native';
+import {
+  Text,
+  View,
+  Image,
+  FlatList,
+  StyleSheet,
+  TouchableOpacity,
+} from 'react-native';
 import React from 'react';
 import Modal from 'react-native-modal';
 import {ColorConst, fontSize, hp, wp} from '../../theme';
 import {ExpenseArray} from '../../interface';
 import CategoryIcons from '../common/CategoryIcons';
+import {IsImageURl} from '../../hooks';
 
 interface Props {
   isVisible: boolean;
@@ -18,21 +26,31 @@ const RenderItem = ({
 }: {
   item: ExpenseArray;
   onSelectExpenseCategory: (item: ExpenseArray) => void;
-}) => (
-  <TouchableOpacity
-    onPress={() => onSelectExpenseCategory(item)}
-    key={`${item?.id}cc`}
-    style={styles.renderItemContainer}>
-    <CategoryIcons
-      imageSource={item?.image}
-      customCategoryImageView={styles.imageContainer}
-      customCategoryImage={styles.iconStyle}
-    />
-    <Text style={styles.textStyle} numberOfLines={3} ellipsizeMode="tail">
-      {item?.name}
-    </Text>
-  </TouchableOpacity>
-);
+}) => {
+  const isURl = IsImageURl(item?.image as string);
+  return (
+    <TouchableOpacity
+      onPress={() => onSelectExpenseCategory(item)}
+      key={`${item?.id}cc`}
+      style={styles.renderItemContainer}>
+      {isURl ? (
+        <Image
+          source={{uri: item?.image as string}}
+          style={styles.selectedImage}
+        />
+      ) : (
+        <CategoryIcons
+          imageSource={item?.image}
+          customCategoryImageView={styles.imageContainer}
+          customCategoryImage={styles.iconStyle}
+        />
+      )}
+      <Text style={styles.textStyle} numberOfLines={3} ellipsizeMode="tail">
+        {item?.name}
+      </Text>
+    </TouchableOpacity>
+  );
+};
 
 const CategoryModal: React.FC<Props> = ({
   data,
@@ -82,7 +100,7 @@ const styles = StyleSheet.create({
     width: hp(10),
     height: hp(8),
     alignItems: 'center',
-    marginVertical: hp(2),
+    marginVertical: hp(2.5),
     marginHorizontal: wp(5),
   },
   iconStyle: {
@@ -95,11 +113,18 @@ const styles = StyleSheet.create({
     fontSize: fontSize(12),
   },
   imageContainer: {
-    padding: 15,
-    borderRadius: 15,
+    borderRadius: hp(1),
+    height: hp(7),
+    width: hp(7),
+    alignItems: 'center',
+    justifyContent: 'center',
   },
-
   footerStyle: {
     height: hp(3),
+  },
+  selectedImage: {
+    width: hp(7),
+    height: hp(7),
+    borderRadius: 10,
   },
 });

@@ -4,6 +4,7 @@ import {
   AddTransactionAction,
   DeleteTransactions,
   EditTransactionAction,
+  GetAccountAction,
   GetTransactionAction,
 } from './addTransaction/AddTransaction';
 
@@ -11,6 +12,7 @@ import {
 import {UserSignInActions, UserSignUpAction} from './auth/AuthAction';
 
 export {
+  GetAccountAction,
   UserSignUpAction,
   AddAccountAction,
   UserSignInActions,

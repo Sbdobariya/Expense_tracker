@@ -17,10 +17,20 @@ export const styles = StyleSheet.create({
     fontFamily: fonts.semiBold,
   },
   flatList: {
-    flexGrow: 0,
     borderRadius: hp(2),
-    marginHorizontal: wp(4),
+  },
+  listContainer: {
     marginTop: hp(5),
+    marginHorizontal: wp(4),
+    // shadow
+    shadowColor: '#000',
+    shadowOffset: {
+      width: 0,
+      height: 7,
+    },
+    shadowOpacity: 0.41,
+    shadowRadius: 9.11,
+    elevation: 14,
   },
   userName: {
     color: ColorConst.light_gray,

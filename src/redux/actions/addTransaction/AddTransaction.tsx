@@ -4,6 +4,7 @@ import {
   AddTransaction,
   DeleteDataType,
   EditTransaction,
+  GetAccountDataType,
   GetTransaction,
 } from '../../../interface';
 import {createAsyncThunk} from '@reduxjs/toolkit';
@@ -101,10 +102,10 @@ export const AddAccountAction = (request: AddAccountType) => {
   firestore()
     .collection('Transactions')
     .doc(request.data.userID)
-    .collection('accounts')
+    .collection(`${request.data.activeTab}_accounts`)
     .add({
-      accountName: request.data.accountName,
-      selectedImage: request.data.selectedImage,
+      name: request.data.accountName,
+      image: request.data.selectedImage,
     })
     .then(() => {
       request.onSuccess && request.onSuccess('success');
@@ -112,4 +113,17 @@ export const AddAccountAction = (request: AddAccountType) => {
     .catch(() => {
       request.onFail && request.onFail('error');
     });
+};
+
+export const GetAccountAction = async (request: GetAccountDataType) => {
+  const querySnapshot = await firestore()
+    .collection('Transactions')
+    .doc(request.data.userID)
+    .collection(`${request.data.activeTab}_${request.data.account}`)
+    .get();
+  const data = querySnapshot?.docs?.map(snp => {
+    const transactionData = snp.data();
+    return transactionData;
+  });
+  request.onSuccess && request.onSuccess(data);
 };

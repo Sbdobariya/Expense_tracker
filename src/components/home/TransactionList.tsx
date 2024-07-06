@@ -1,7 +1,7 @@
 import React from 'react';
 import {TransactionTimeStamp} from '../../hooks';
 import {TransactionData} from '../../interface';
-import {Image, StyleSheet, Text, TouchableOpacity, View} from 'react-native';
+import {StyleSheet, Text, TouchableOpacity, View} from 'react-native';
 import {fontSize, fonts, hp, wp} from '../../theme';
 import CategoryIcons from '../common/CategoryIcons';
 import {HomeImages} from '../../../assets';

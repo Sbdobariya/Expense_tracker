@@ -35,7 +35,7 @@ export default TransactionHeader;
 const styles = StyleSheet.create({
   linearGradient: {
     flexDirection: 'row',
-    height: Platform.OS == 'ios' ? hp(35) : hp(30),
+    height: Platform.OS === 'ios' ? hp(35) : hp(30),
     paddingTop: Platform.OS === 'ios' ? hp(10) : hp(5),
     borderBottomLeftRadius: hp(5),
     borderBottomRightRadius: hp(5),

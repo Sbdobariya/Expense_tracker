@@ -1,4 +1,4 @@
-import React, {useEffect, useState} from 'react';
+import React, {useEffect, useState, useCallback} from 'react';
 import {useDispatch} from 'react-redux';
 import {NavigationContainer} from '@react-navigation/native';
 import AsyncStorage from '@react-native-async-storage/async-storage';
@@ -18,11 +18,7 @@ const MainNavigator = () => {
   const [isLoading, setIsLoading] = useState(true);
   const [userData, setUserData] = useState<UserDataType | undefined>();
 
-  useEffect(() => {
-    fetchData();
-  }, []);
-
-  const fetchData = async () => {
+  const fetchData = useCallback(async () => {
     try {
       const getUserData = await AsyncStorage.getItem('userData');
       if (getUserData !== null) {
@@ -35,7 +31,11 @@ const MainNavigator = () => {
     } finally {
       setIsLoading(false);
     }
-  };
+  }, [dispatch]);
+
+  useEffect(() => {
+    fetchData();
+  }, [fetchData]);
 
   const authContext = React.useMemo(
     () => ({
@@ -66,7 +66,7 @@ const MainNavigator = () => {
         }
       },
     }),
-    [],
+    [dispatch],
   );
 
   if (isLoading) {

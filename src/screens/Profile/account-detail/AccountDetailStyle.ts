@@ -85,4 +85,9 @@ export const styles = StyleSheet.create({
   footerComponent: {
     height: hp(5),
   },
+  imageURL: {
+    width: hp(5),
+    height: hp(5),
+    borderRadius: hp(1),
+  },
 });

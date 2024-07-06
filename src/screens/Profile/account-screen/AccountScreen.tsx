@@ -1,4 +1,4 @@
-import {FlatList, Text, TouchableOpacity, View} from 'react-native';
+import {FlatList, Image, Text, TouchableOpacity, View} from 'react-native';
 import React from 'react';
 import {styles} from './AccountScreenStyle';
 import {useAccount} from './useAccount';
@@ -10,7 +10,8 @@ import {
   CustomStatusBar,
 } from '../../../components';
 import {ModifiedData} from '../../../interface';
-import {ColorConst} from '../../../theme';
+import {ColorConst, hp} from '../../../theme';
+import {IsImageURl} from '../../../hooks';
 
 const AccountScreen: React.FC = () => {
   const {onBackPress, totalIncomeExpense, accountData, onAccountListPress} =
@@ -37,16 +38,23 @@ const AccountScreen: React.FC = () => {
         <FlatList
           bounces={false}
           data={accountData}
-          style={styles.flatlistStyle}
+          style={styles.flatListStyle}
           renderItem={({item}: {item: ModifiedData}) => {
+            const isURL = IsImageURl(item.accountImage as string);
             return (
               <TouchableOpacity
                 style={styles.listContainer}
                 onPress={() => onAccountListPress(item)}>
                 <View style={styles.listSubContainer}>
-                  {item.accountImage && (
+                  {isURL ? (
+                    <Image
+                      source={{uri: item.accountImage as string}}
+                      style={styles.imageURL}
+                    />
+                  ) : item.accountImage ? (
                     <CategoryIcons imageSource={item.accountImage} />
-                  )}
+                  ) : null}
+
                   <Text style={styles.accountName}>{item.accountName}</Text>
                 </View>
                 <AmountText

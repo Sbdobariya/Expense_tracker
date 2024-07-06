@@ -41,13 +41,13 @@ const AddTransactionScreen: React.FC = () => {
     selectedInvoice,
     onAddButtonPress,
     onAddInvoicePress,
-    CategoryModalData,
     showCategoryModal,
     onSelectCategoryPress,
     setSelectedExpenseItem,
     isShowAddCategoryModal,
     onAddCategoryToggleModal,
     setSelectedTransactionWay,
+    categoryData,
   } = useAddTransaction();
 
   return (
@@ -61,7 +61,7 @@ const AddTransactionScreen: React.FC = () => {
           onExpensePress={onTabChange}
         />
         <SelectButton
-          onPress={() => onSelectCategoryPress('TransactionWay')}
+          onPress={() => onSelectCategoryPress('accounts')}
           imagesSource={AccountImage}
           title={AccountName}
         />
@@ -117,7 +117,7 @@ const AddTransactionScreen: React.FC = () => {
       </View>
       {showCategoryModal.isVisible && (
         <CategoryModal
-          data={CategoryModalData}
+          data={categoryData}
           isVisible={showCategoryModal.isVisible}
           toggleModal={onToggleModal}
           onSelectExpenseCategory={item => {
@@ -125,7 +125,7 @@ const AddTransactionScreen: React.FC = () => {
             if (showCategoryModal.mode === 'category') {
               setSelectedExpenseItem(item);
             } else {
-              if (item.name == 'Add Other') {
+              if (item.name === 'Add Other') {
                 onAddCategoryToggleModal();
               } else {
                 setSelectedTransactionWay(item);

@@ -2,7 +2,7 @@ import React from 'react';
 import Modal from 'react-native-modal';
 import {HomeImages} from '../../../assets';
 import ImageText from '../common/ImageText';
-import {TransactionTimeStamp} from '../../hooks';
+import {IsImageURl, TransactionTimeStamp} from '../../hooks';
 import {StyleSheet, Text, View} from 'react-native';
 import TouchableIcon from '../common/TouchableIcon';
 import {TransactionData} from '../../interface';
@@ -25,6 +25,7 @@ const EditCategoryModal: React.FC<Props> = ({
   onDeletePress,
 }) => {
   const styles = styling(items?.transaction_mode);
+  const isURL = IsImageURl(items?.transaction_account?.image as string);
 
   return (
     <Modal
@@ -71,7 +72,11 @@ const EditCategoryModal: React.FC<Props> = ({
           <View style={styles.bottomSubContainer}>
             <Text style={styles.bottomHeaderText}>Account</Text>
             <ImageText
-              source={items?.transaction_account?.image}
+              source={
+                isURL
+                  ? {uri: items?.transaction_account?.image as string}
+                  : items?.transaction_account?.image
+              }
               title={items?.transaction_account?.name}
             />
           </View>

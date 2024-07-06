@@ -23,12 +23,12 @@ export const useStatistics = () => {
 
   useEffect(() => {
     if (transactionData) {
-      const filteredData = transactionData.filter(
+      const dataFilteredByTab = transactionData.filter(
         item => item.transaction_mode === selectedTab,
       );
-      setFilteredData(filteredData);
+      setFilteredData(dataFilteredByTab);
 
-      const intervalFilteredData = filteredData.filter(item => {
+      const dataFilteredByInterval = dataFilteredByTab.filter(item => {
         const transactionDate = moment(
           item.transaction_createdAt,
           'YYYY-MM-DD',
@@ -49,10 +49,10 @@ export const useStatistics = () => {
             return true;
         }
       });
-      setFilteredData(intervalFilteredData);
+      setFilteredData(dataFilteredByInterval);
 
       const categorySum: CategorySum = {};
-      intervalFilteredData.forEach(item => {
+      dataFilteredByInterval.forEach(item => {
         const categoryName = item.transaction_category?.name;
         const transactionAmount = item.transaction_amount;
 

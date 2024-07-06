@@ -4,11 +4,10 @@ import {
   StyleSheet,
   Text,
   TouchableOpacity,
-  View,
 } from 'react-native';
 import React from 'react';
-import {HomeImages} from '../../../assets';
 import {fontSize, fonts, hp, wp} from '../../theme';
+import {IsImageURl} from '../../hooks';
 
 interface SelectButtonProps {
   title: string;
@@ -21,9 +20,14 @@ const SelectButton: React.FC<SelectButtonProps> = ({
   imagesSource,
   onPress,
 }) => {
+  const isURL = IsImageURl(imagesSource as string);
+
   return (
     <TouchableOpacity style={styles.selectCategoryButton} onPress={onPress}>
-      <Image source={imagesSource} style={styles.categoryIcon} />
+      <Image
+        source={isURL ? {uri: imagesSource as string} : imagesSource}
+        style={styles.categoryIcon}
+      />
       <Text style={styles.selectCategory}>{title}</Text>
     </TouchableOpacity>
   );
@@ -43,8 +47,9 @@ const styles = StyleSheet.create({
     backgroundColor: '#29756F',
   },
   categoryIcon: {
-    height: hp(3),
-    width: hp(3),
+    height: hp(4),
+    width: hp(4),
+    borderRadius: 12,
   },
   selectCategory: {
     color: '#FFFFFF',

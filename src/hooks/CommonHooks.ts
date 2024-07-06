@@ -1,6 +1,5 @@
 import moment, {MomentInput} from 'moment';
 import storage from '@react-native-firebase/storage';
-import {ImageOrVideo} from 'react-native-image-crop-picker';
 import {FirebaseDatabase} from '../interface';
 
 const FirebaseStorage = async (
@@ -11,13 +10,12 @@ const FirebaseStorage = async (
   const filename = localFilePath.substring(localFilePath.lastIndexOf('/') + 1);
 
   const ref =
-    response.from == 'AddAccount'
+    response.from === 'AddAccount'
       ? `account/${filename}`
       : `invoicing/${filename}`;
   try {
     await storage().ref(ref).putFile(localFilePath);
     const imageUrl = await storage().ref(ref).getDownloadURL();
-    console.log('Image URL:', imageUrl);
     resolve(imageUrl);
   } catch (error) {
     console.error('Error uploading image:', error);
@@ -42,9 +40,9 @@ const AccountDetailTimeStamp = (item: MomentInput) => {
   const currentDate = moment();
 
   if (transactionDate.isSame(currentDate, 'day')) {
-    return `Today`;
+    return 'Today';
   } else if (transactionDate.isSame(currentDate.subtract(1, 'day'), 'day')) {
-    return `Yesterday`;
+    return 'Yesterday';
   } else {
     return transactionDate.format('D MMMM');
   }
@@ -70,8 +68,16 @@ const getTime = () => {
   }
 };
 
+const IsImageURl = (imagesSource?: string) => {
+  return (
+    typeof imagesSource === 'string' &&
+    (imagesSource.startsWith('http://') || imagesSource.startsWith('https://'))
+  );
+};
+
 export {
   getTime,
+  IsImageURl,
   RandomBGColor,
   FirebaseStorage,
   TransactionTimeStamp,

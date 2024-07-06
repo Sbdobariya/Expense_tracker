@@ -9,6 +9,7 @@ import {
   EditCategoryModal,
 } from '../../../components';
 import {FormattedTransaction} from '../../../interface';
+import {IsImageURl} from '../../../hooks';
 
 const AccountDetails: React.FC = () => {
   const {
@@ -40,27 +41,30 @@ const AccountDetails: React.FC = () => {
         style={[
           styles.transactionAmount,
           {
-            color: item.transaction_mode == 'income' ? 'green' : 'red',
+            color: item.transaction_mode === 'income' ? 'green' : 'red',
           },
         ]}>
-        {item.transaction_mode == 'income'
+        {item.transaction_mode === 'income'
           ? `+ ${item.transaction_amount}`
           : `- ${item.transaction_amount}`}
       </Text>
     </TouchableOpacity>
   );
+  const isURL = IsImageURl(params.accountImage as string);
 
   return (
     <View style={styles.container}>
       <CommonHeader title={'Accounts Details'} onPress={onBackPress} />
       <View style={styles.subContainer}>
         <View style={styles.headerContainer}>
-          {params.accountImage && (
-            <CategoryIcons
-              imageSource={params.accountImage}
-              customCategoryImageView={styles.customCategoryImageView}
+          {isURL ? (
+            <Image
+              source={{uri: params.accountImage as string}}
+              style={styles.imageURL}
             />
-          )}
+          ) : params.accountImage ? (
+            <CategoryIcons imageSource={params.accountImage} />
+          ) : null}
           <Text style={styles.balanceText}>{params.accountName}</Text>
           <AmountText
             num={params.transactionAmount}

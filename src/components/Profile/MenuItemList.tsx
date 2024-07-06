@@ -49,7 +49,7 @@ export default MenuItemList;
 const styles = StyleSheet.create({
   container: {
     gap: hp(1),
-    padding: hp(1.5),
+    padding: hp(2),
     marginBottom: 1,
     alignItems: 'center',
     flexDirection: 'row',

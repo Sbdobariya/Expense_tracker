@@ -16,11 +16,7 @@ const ProfileHeader: React.FC<ProfileHeaderProps> = ({
   return (
     <ImageBackground
       source={ProfileImage.bg_ic}
-      style={{
-        flexDirection: 'row',
-        paddingTop: Platform.OS === 'ios' ? hp(12) : hp(9),
-        height: hp(25),
-      }}
+      style={styles.imageBackground}
       resizeMode="stretch">
       <View style={styles.flexBox} />
       <Text style={styles.headerText}>{title}</Text>
@@ -41,7 +37,11 @@ const styles = StyleSheet.create({
   flexBox: {
     flex: 1,
   },
-
+  imageBackground: {
+    flexDirection: 'row',
+    paddingTop: Platform.OS === 'ios' ? hp(12) : hp(9),
+    height: hp(25),
+  },
   buttonContainer: {
     flex: 1,
     alignItems: 'flex-end',

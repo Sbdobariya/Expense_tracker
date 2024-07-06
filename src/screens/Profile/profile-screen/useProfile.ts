@@ -1,7 +1,7 @@
 import React, {useState} from 'react';
 import {ColorConst} from '../../../theme';
 import {ProfileImage} from '../../../../assets';
-import auth, {firebase} from '@react-native-firebase/auth';
+import auth from '@react-native-firebase/auth';
 import {ProfileStrings} from '../../../constants/String';
 import {AuthContext} from '../../../utils/AuthContext';
 import {NavigationProp, useNavigation} from '@react-navigation/native';
@@ -124,13 +124,13 @@ export const useProfile = () => {
     };
     await auth().currentUser?.updateProfile(update);
     const updatedUser = auth().currentUser;
-    let userData = {
+    let updatedUserData = {
       userName: updatedUser?.displayName,
       userEmail: updatedUser?.email,
       userID: updatedUser?.uid,
     };
-    dispatch(userDataAction(userData));
-    StoreData('userData', JSON.stringify(userData));
+    dispatch(userDataAction(updatedUserData));
+    StoreData('userData', JSON.stringify(updatedUserData));
     onToggleModal();
     setUserName('');
   };

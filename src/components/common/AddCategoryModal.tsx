@@ -57,28 +57,33 @@ const AddCategoryModal: React.FC<Props> = ({
   };
 
   const onAddPress = () => {
-    if (accountName === '') {
-      ShowTostMessage('Please Enter Account Name', 'error');
+    if (isImageLoader) {
+      ShowTostMessage('Processing .... ', 'error');
     } else {
-      const transactionDetail: AddAccountType = {
-        data: {
-          userID: userData?.userID,
-          accountName: accountName,
-          selectedImage: selectedImage,
-        },
-        onSuccess: response => {
-          if (response === 'success') {
-            setAccountName('');
-            setSelectedImage(undefined);
-            ShowTostMessage('Account Added Successfully', 'success');
-            toggleModal();
-          }
-        },
-        onFail: error => {
-          ShowTostMessage(JSON.stringify(error), 'error');
-        },
-      };
-      AddAccountAction(transactionDetail);
+      if (accountName === '') {
+        ShowTostMessage('Please Enter Account Name', 'error');
+      } else {
+        const transactionDetail: AddAccountType = {
+          data: {
+            userID: userData?.userID,
+            accountName: accountName,
+            selectedImage: selectedImage,
+            activeTab: activeTab,
+          },
+          onSuccess: response => {
+            if (response === 'success') {
+              setAccountName('');
+              setSelectedImage(undefined);
+              ShowTostMessage('Account Added Successfully', 'success');
+              toggleModal();
+            }
+          },
+          onFail: error => {
+            ShowTostMessage(JSON.stringify(error), 'error');
+          },
+        };
+        AddAccountAction(transactionDetail);
+      }
     }
   };
 
