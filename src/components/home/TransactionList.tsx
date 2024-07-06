@@ -1,7 +1,14 @@
 import React from 'react';
-import {TransactionTimeStamp} from '../../hooks';
+import {IsImageURl, TransactionTimeStamp} from '../../hooks';
 import {TransactionData} from '../../interface';
-import {StyleSheet, Text, TouchableOpacity, View} from 'react-native';
+import {
+  Image,
+  ImageSourcePropType,
+  StyleSheet,
+  Text,
+  TouchableOpacity,
+  View,
+} from 'react-native';
 import {fontSize, fonts, hp, wp} from '../../theme';
 import CategoryIcons from '../common/CategoryIcons';
 import {HomeImages} from '../../../assets';
@@ -26,6 +33,8 @@ const TransactionList: React.FC<Props> = ({
 
   const Notes =
     item.transaction_note.length === 0 ? 'Not Added' : item.transaction_note;
+  const isURL = IsImageURl(item?.transaction_category?.image as string);
+
   return (
     <TouchableOpacity
       disabled={disabled}
@@ -33,8 +42,18 @@ const TransactionList: React.FC<Props> = ({
       key={index}
       onPress={() => onTransactionPress && onTransactionPress(item)}>
       <View style={styles.itemSubContainer}>
-        {item?.transaction_category?.image && (
-          <CategoryIcons imageSource={item?.transaction_category?.image} />
+        {isURL ? (
+          <Image
+            source={{uri: item?.transaction_category?.image as string}}
+            style={styles.selectedImage}
+          />
+        ) : (
+          <CategoryIcons
+            imageSource={
+              item?.transaction_category?.image as ImageSourcePropType
+            }
+            text={item.transaction_note}
+          />
         )}
         <View>
           <Text style={styles.categoryText}>{Notes}</Text>
@@ -118,5 +137,10 @@ const styles = StyleSheet.create({
   IEIcon: {
     fontSize: fontSize(18),
     fontFamily: fonts.bold,
+  },
+  selectedImage: {
+    height: hp(5),
+    width: hp(5),
+    borderRadius: 10,
   },
 });

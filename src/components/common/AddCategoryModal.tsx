@@ -69,7 +69,7 @@ const AddCategoryModal: React.FC<Props> = ({
           data: {
             userID: userData?.userID,
             accountName: accountName,
-            selectedImage: selectedImage,
+            selectedImage: selectedImage ?? '',
             activeTab: activeTab,
             account: account,
           },

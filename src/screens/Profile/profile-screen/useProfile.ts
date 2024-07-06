@@ -99,12 +99,46 @@ export const useProfile = () => {
         .doc(userData?.userID)
         .delete();
 
-      const postsQuerySnapshot = await firestore()
+      const incomeExpenseQuerySnapshot = await firestore()
         .collection('Transactions')
         .doc(userData?.userID)
         .collection('incomeExpense')
         .get();
-      postsQuerySnapshot.forEach(async doc => {
+      incomeExpenseQuerySnapshot.forEach(async doc => {
+        await doc.ref.delete();
+      });
+
+      const expenseAccountQuerySnapshot = await firestore()
+        .collection('Transactions')
+        .doc(userData?.userID)
+        .collection('expense_accounts')
+        .get();
+      expenseAccountQuerySnapshot.forEach(async doc => {
+        await doc.ref.delete();
+      });
+
+      const incomeAccountQuerySnapshot = await firestore()
+        .collection('Transactions')
+        .doc(userData?.userID)
+        .collection('income_accounts')
+        .get();
+      incomeAccountQuerySnapshot.forEach(async doc => {
+        await doc.ref.delete();
+      });
+      const incomeCategoryQuerySnapshot = await firestore()
+        .collection('Transactions')
+        .doc(userData?.userID)
+        .collection('income_category')
+        .get();
+      incomeCategoryQuerySnapshot.forEach(async doc => {
+        await doc.ref.delete();
+      });
+      const expenseCategoryQuerySnapshot = await firestore()
+        .collection('Transactions')
+        .doc(userData?.userID)
+        .collection('expense_category')
+        .get();
+      expenseCategoryQuerySnapshot.forEach(async doc => {
         await doc.ref.delete();
       });
 

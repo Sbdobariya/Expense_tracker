@@ -25,7 +25,12 @@ const EditCategoryModal: React.FC<Props> = ({
   onDeletePress,
 }) => {
   const styles = styling(items?.transaction_mode);
-  const isURL = IsImageURl(items?.transaction_account?.image as string);
+  const isURLForAccountImage = IsImageURl(
+    items?.transaction_account?.image as string,
+  );
+  const isURLForCategoryImage = IsImageURl(
+    items?.transaction_category?.image as string,
+  );
 
   return (
     <Modal
@@ -65,7 +70,11 @@ const EditCategoryModal: React.FC<Props> = ({
           <View style={styles.bottomSubContainer}>
             <Text style={styles.bottomHeaderText}>Category</Text>
             <ImageText
-              source={items?.transaction_category?.image}
+              source={
+                isURLForCategoryImage
+                  ? {uri: items?.transaction_category?.image as string}
+                  : items?.transaction_account?.image
+              }
               title={items?.transaction_category?.name}
             />
           </View>
@@ -73,7 +82,7 @@ const EditCategoryModal: React.FC<Props> = ({
             <Text style={styles.bottomHeaderText}>Account</Text>
             <ImageText
               source={
-                isURL
+                isURLForAccountImage
                   ? {uri: items?.transaction_account?.image as string}
                   : items?.transaction_account?.image
               }

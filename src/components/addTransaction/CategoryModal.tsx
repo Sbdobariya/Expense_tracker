@@ -40,6 +40,7 @@ const RenderItem = ({
         />
       ) : (
         <CategoryIcons
+          text={item?.name}
           imageSource={item?.image}
           customCategoryImageView={styles.imageContainer}
           customCategoryImage={styles.iconStyle}

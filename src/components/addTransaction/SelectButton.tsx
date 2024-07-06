@@ -4,10 +4,11 @@ import {
   StyleSheet,
   Text,
   TouchableOpacity,
+  View,
 } from 'react-native';
 import React from 'react';
 import {fontSize, fonts, hp, wp} from '../../theme';
-import {IsImageURl} from '../../hooks';
+import {IsImageURl, RandomBGColor} from '../../hooks';
 
 interface SelectButtonProps {
   title: string;
@@ -24,10 +25,16 @@ const SelectButton: React.FC<SelectButtonProps> = ({
 
   return (
     <TouchableOpacity style={styles.selectCategoryButton} onPress={onPress}>
-      <Image
-        source={isURL ? {uri: imagesSource as string} : imagesSource}
-        style={styles.categoryIcon}
-      />
+      {imagesSource ? (
+        <Image
+          source={isURL ? {uri: imagesSource as string} : imagesSource}
+          style={styles.categoryIcon}
+        />
+      ) : (
+        <View style={styles.selectImageCategory}>
+          <Text style={styles.selectTextCategory}>{title?.slice(0, 2)}</Text>
+        </View>
+      )}
       <Text style={styles.selectCategory}>{title}</Text>
     </TouchableOpacity>
   );
@@ -55,5 +62,17 @@ const styles = StyleSheet.create({
     color: '#FFFFFF',
     fontSize: fontSize(15),
     fontFamily: fonts.medium,
+  },
+  selectTextCategory: {
+    color: '#FFFFFF',
+    fontSize: fontSize(20),
+    fontFamily: fonts.medium,
+  },
+  selectImageCategory: {
+    fontSize: fontSize(17),
+    fontFamily: fonts.medium,
+    backgroundColor: RandomBGColor(),
+    padding: hp(1.2),
+    borderRadius: hp(1),
   },
 });
