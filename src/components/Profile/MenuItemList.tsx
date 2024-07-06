@@ -25,7 +25,7 @@ const MenuItemList: React.FC<Props> = ({item, onItemPress}) => {
             backgroundColor: item.bgColor,
           },
         ]}>
-        {item.id == 4 ? (
+        {item.id === 4 ? (
           <Image
             source={item.image}
             style={[

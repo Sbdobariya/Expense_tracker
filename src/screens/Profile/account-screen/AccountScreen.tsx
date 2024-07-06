@@ -10,7 +10,7 @@ import {
   CustomStatusBar,
 } from '../../../components';
 import {ModifiedData} from '../../../interface';
-import {ColorConst, hp} from '../../../theme';
+import {ColorConst} from '../../../theme';
 import {IsImageURl} from '../../../hooks';
 
 const AccountScreen: React.FC = () => {
