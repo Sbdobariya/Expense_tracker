@@ -63,12 +63,12 @@ const CategoryModal: React.FC<Props> = ({
     style={styles.modal}
     backdropOpacity={0.5}
     animationIn="slideInUp"
-    swipeDirection={['down']}
     onSwipeComplete={toggleModal}
     animationOut="slideOutDown"
     onBackdropPress={toggleModal}>
     <View style={styles.modalContent}>
       <FlatList
+        showsVerticalScrollIndicator={false}
         data={data}
         numColumns={3}
         renderItem={({item}) => (
@@ -95,6 +95,7 @@ const styles = StyleSheet.create({
     borderTopLeftRadius: 20,
     borderTopRightRadius: 20,
     backgroundColor: ColorConst.white,
+    maxHeight: hp(60),
   },
   renderItemContainer: {
     width: hp(10),

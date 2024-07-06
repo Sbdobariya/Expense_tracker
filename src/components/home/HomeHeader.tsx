@@ -1,6 +1,6 @@
 import React from 'react';
 import {useSelector} from 'react-redux';
-import {AuthImages} from '../../../assets';
+import {AuthImages, ProfileImage} from '../../../assets';
 import {Image, Platform, StyleSheet, Text, View} from 'react-native';
 import LinearGradient from 'react-native-linear-gradient';
 import {AuthReducerType} from '../../interface';
@@ -18,7 +18,14 @@ const HomeHeader = () => {
       style={[styles.linearGradient]}>
       <Image style={styles.headerImage} source={AuthImages.header_bg_ic} />
       <View style={styles.innerView}>
-        <Image source={{uri: userData?.userImage}} style={styles.userProfile} />
+        <Image
+          source={
+            userData?.userImage
+              ? {uri: userData?.userImage}
+              : ProfileImage.user_ic
+          }
+          style={styles.userProfile}
+        />
         <View>
           <Text style={styles.timeStyle}>{getTime()},</Text>
           <Text style={styles.headerText}>{userData?.userName}</Text>

@@ -1,4 +1,4 @@
-import {ExpenseImages} from '../../assets';
+import {ExpenseImages, TransactionModeImages} from '../../assets';
 
 export const ExpenseCategoryData = [
   {
@@ -83,12 +83,12 @@ export const ExpenseCategoryData = [
   },
   {
     id: 17,
-    name: 'Transport',
-    image: ExpenseImages.transporting_ic,
-  },
-  {
-    id: 17,
     name: 'Home',
     image: ExpenseImages.house_ic,
+  },
+  {
+    id: 18,
+    name: 'Add Other',
+    image: TransactionModeImages.plus_ic,
   },
 ];

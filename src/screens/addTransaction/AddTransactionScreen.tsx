@@ -30,11 +30,13 @@ const AddTransactionScreen: React.FC = () => {
     onBackPress,
     setNoteValue,
     onTabChange,
+    accountName,
     AccountName,
     CategoryName,
     AccountImage,
     CategoryImage,
     onToggleModal,
+    categoryData,
     isImageLoader,
     onUpDatePress,
     setAmountValue,
@@ -42,12 +44,12 @@ const AddTransactionScreen: React.FC = () => {
     onAddButtonPress,
     onAddInvoicePress,
     showCategoryModal,
+    isCategoryLoading,
     onSelectCategoryPress,
     setSelectedExpenseItem,
     isShowAddCategoryModal,
     onAddCategoryToggleModal,
     setSelectedTransactionWay,
-    categoryData,
   } = useAddTransaction();
 
   return (
@@ -115,7 +117,7 @@ const AddTransactionScreen: React.FC = () => {
           customGradientStyle={styles.bottomAddButton}
         />
       </View>
-      {showCategoryModal.isVisible && (
+      {showCategoryModal.isVisible && !isCategoryLoading && (
         <CategoryModal
           data={categoryData}
           isVisible={showCategoryModal.isVisible}
@@ -123,7 +125,11 @@ const AddTransactionScreen: React.FC = () => {
           onSelectExpenseCategory={item => {
             onToggleModal();
             if (showCategoryModal.mode === 'category') {
-              setSelectedExpenseItem(item);
+              if (item.name === 'Add Other') {
+                onAddCategoryToggleModal();
+              } else {
+                setSelectedExpenseItem(item);
+              }
             } else {
               if (item.name === 'Add Other') {
                 onAddCategoryToggleModal();
@@ -139,6 +145,7 @@ const AddTransactionScreen: React.FC = () => {
           activeTab={activeTab}
           isVisible={isShowAddCategoryModal}
           toggleModal={onAddCategoryToggleModal}
+          account={accountName}
         />
       )}
     </View>

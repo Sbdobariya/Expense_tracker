@@ -73,6 +73,8 @@ export const useAddTransaction = () => {
   const [isImageLoader, setIsImageLoader] = useState(false);
   const [isShowAddCategoryModal, setIsShowAddCategoryModal] = useState(false);
   const [categoryData, setCategoryData] = useState<ExpenseArray[]>([]);
+  const [isCategoryLoading, setIsCategoryLoading] = useState(false);
+  const [accountName, setAccountName] = useState('');
 
   const onToggleModal = () => {
     setShowCategoryModal({
@@ -83,6 +85,7 @@ export const useAddTransaction = () => {
 
   useEffect(() => {
     const fetch = () => {
+      setIsCategoryLoading(true);
       const transactionDetail: GetAccountDataType = {
         data: {
           userID: userData?.userID,
@@ -90,14 +93,28 @@ export const useAddTransaction = () => {
           activeTab: activeTab,
         },
         onSuccess: response => {
-          if (showCategoryModal.mode === 'category') {
-            if (activeTab === 'expense') {
-              setCategoryData(ExpenseCategoryData);
+          if (response) {
+            setIsCategoryLoading(false);
+            if (showCategoryModal.mode === 'category') {
+              if (activeTab === 'expense') {
+                setCategoryData([...response, ...ExpenseCategoryData]);
+              } else {
+                setCategoryData([...response, ...IncomeCategoryData]);
+              }
             } else {
-              setCategoryData(IncomeCategoryData);
+              setCategoryData([...response, ...TransactionAccountData]);
             }
           } else {
-            setCategoryData([...TransactionAccountData, ...response]);
+            setIsCategoryLoading(false);
+            if (showCategoryModal.mode === 'category') {
+              if (activeTab === 'expense') {
+                setCategoryData(ExpenseCategoryData);
+              } else {
+                setCategoryData(IncomeCategoryData);
+              }
+            } else {
+              setCategoryData(TransactionAccountData);
+            }
           }
         },
         onFail: error => {
@@ -193,6 +210,7 @@ export const useAddTransaction = () => {
   };
 
   const onSelectCategoryPress = (item: string) => {
+    setAccountName(item);
     setShowCategoryModal({isVisible: true, mode: item});
   };
 
@@ -223,6 +241,7 @@ export const useAddTransaction = () => {
     onTabChange,
     AccountName,
     AccountImage,
+    accountName,
     CategoryName,
     isImageLoader,
     onToggleModal,
@@ -234,6 +253,7 @@ export const useAddTransaction = () => {
     onAddButtonPress,
     onAddInvoicePress,
     showCategoryModal,
+    isCategoryLoading,
     onSelectCategoryPress,
     setSelectedExpenseItem,
     isShowAddCategoryModal,

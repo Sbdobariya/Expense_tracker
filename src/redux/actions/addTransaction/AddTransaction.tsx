@@ -102,7 +102,7 @@ export const AddAccountAction = (request: AddAccountType) => {
   firestore()
     .collection('Transactions')
     .doc(request.data.userID)
-    .collection(`${request.data.activeTab}_accounts`)
+    .collection(`${request.data.activeTab}_${request.data.account}`)
     .add({
       name: request.data.accountName,
       image: request.data.selectedImage,

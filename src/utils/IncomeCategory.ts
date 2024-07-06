@@ -1,4 +1,4 @@
-import {IncomeImage} from '../../assets';
+import {IncomeImage, TransactionModeImages} from '../../assets';
 
 export const IncomeCategoryData = [
   {
@@ -27,8 +27,8 @@ export const IncomeCategoryData = [
     image: IncomeImage.salary_ic,
   },
   {
-    id: 6,
-    name: 'Other',
-    image: IncomeImage.other_ic,
+    id: 7,
+    name: 'Add Other',
+    image: TransactionModeImages.plus_ic,
   },
 ];

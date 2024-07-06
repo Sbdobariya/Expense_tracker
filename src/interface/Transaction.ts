@@ -64,6 +64,7 @@ export interface AddAccountType {
     userID?: string;
     accountName: string;
     activeTab?: string;
+    account?: string;
     selectedImage: string | undefined;
   };
   onSuccess?: (res: any) => void;

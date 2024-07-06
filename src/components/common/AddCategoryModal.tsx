@@ -28,12 +28,14 @@ interface Props {
   isVisible: boolean;
   toggleModal: () => void;
   activeTab?: string;
+  account?: string;
 }
 
 const AddCategoryModal: React.FC<Props> = ({
   isVisible,
   toggleModal,
   activeTab,
+  account,
 }) => {
   const {userData} = useSelector(
     (state: {authReducer: AuthReducerType}) => state?.authReducer,
@@ -69,6 +71,7 @@ const AddCategoryModal: React.FC<Props> = ({
             accountName: accountName,
             selectedImage: selectedImage,
             activeTab: activeTab,
+            account: account,
           },
           onSuccess: response => {
             if (response === 'success') {
