@@ -16,8 +16,8 @@ export const styles = StyleSheet.create({
     paddingBottom: hp(5),
     marginHorizontal: wp(7),
     backgroundColor: '#FFFFFF',
-
-    // shado
+  },
+  boxShadow: {
     shadowColor: '#000',
     shadowOffset: {
       width: 0,
