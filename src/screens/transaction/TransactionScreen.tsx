@@ -27,6 +27,7 @@ const TransactionScreen: React.FC = () => {
     isVisibleEditModal,
     searchText,
     onChangeText,
+    sortedTransactionData,
   } = useTransactions();
 
   const ListEmptyComponent = () => {
@@ -70,13 +71,14 @@ const TransactionScreen: React.FC = () => {
           <ExpandableCalendar firstDay={1} style={styles.calenderStyle} />
         )}
         <FlatList
-          data={allTransactions}
+          data={sortedTransactionData}
           renderItem={({item, index}) => {
             return (
               <TransactionList
                 item={item}
                 index={index}
                 onTransactionPress={onTransactionPress}
+                onInvoicePress={() => {}}
               />
             );
           }}

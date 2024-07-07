@@ -31,6 +31,27 @@ export const useHome = () => {
       state?.transactionReducer,
   );
 
+  const sortedTransactionData = [...transactionData].sort((a, b) => {
+    const dateA = a.timestamp ? new Date(a.timestamp) : null;
+    const dateB = b.timestamp ? new Date(b.timestamp) : null;
+
+    if (dateA === null && dateB === null) {
+      return 0;
+    } else if (dateA === null) {
+      return 1;
+    } else if (dateB === null) {
+      return -1;
+    } else {
+      if (dateA < dateB) {
+        return 1;
+      }
+      if (dateA > dateB) {
+        return -1;
+      }
+      return 0;
+    }
+  });
+
   const [isVisibleEditModal, setIsVisibleEditModal] = useState<StateProps>({
     isVisible: false,
     item: undefined,
@@ -105,12 +126,13 @@ export const useHome = () => {
     onEditPress,
     toggleModal,
     onDeletePress,
+    invoiceImage,
+    onInvoicePress,
     transactionData,
     isVisibleEditModal,
     onTransactionPress,
-    onInvoicePress,
+    sortedTransactionData,
     isImageViewModalVisible,
-    invoiceImage,
     toggleModalOfImageModal,
   };
 };

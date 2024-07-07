@@ -33,6 +33,27 @@ export const useTransactions = () => {
   const [selectedDate, setSelectedDate] = useState(Today);
   const [searchText, setSearchText] = useState('');
 
+  const sortedTransactionData = [...allTransactions].sort((a, b) => {
+    const dateA = a.timestamp ? new Date(a.timestamp) : null;
+    const dateB = b.timestamp ? new Date(b.timestamp) : null;
+
+    if (dateA === null && dateB === null) {
+      return 0;
+    } else if (dateA === null) {
+      return 1;
+    } else if (dateB === null) {
+      return -1;
+    } else {
+      if (dateA < dateB) {
+        return 1;
+      }
+      if (dateA > dateB) {
+        return -1;
+      }
+      return 0;
+    }
+  });
+
   const onEditPress = (item: TransactionData) => {
     dispatch(EditTransactionData(item));
     setIsVisibleEditModal({
@@ -125,5 +146,6 @@ export const useTransactions = () => {
     handleFilterToggle,
     onTransactionPress,
     isVisibleEditModal,
+    sortedTransactionData,
   };
 };

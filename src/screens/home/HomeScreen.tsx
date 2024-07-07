@@ -31,6 +31,7 @@ const HomeScreen: React.FC = () => {
     invoiceImage,
     isImageViewModalVisible,
     toggleModalOfImageModal,
+    sortedTransactionData,
   } = useHome();
 
   const onSeeAllPress = () => {
@@ -63,7 +64,7 @@ const HomeScreen: React.FC = () => {
       <CommonLoader isVisible={isLoading} />
       <HomeCard transactionData={transactionData} />
       <FlatList
-        data={transactionData?.slice(0, 10)}
+        data={sortedTransactionData?.slice(0, 10)}
         renderItem={({item, index}) => {
           return (
             <TransactionList

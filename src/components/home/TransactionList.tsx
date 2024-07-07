@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {memo} from 'react';
 import {IsImageURl, TransactionTimeStamp} from '../../hooks';
 import {TransactionData} from '../../interface';
 import {
@@ -92,7 +92,7 @@ const TransactionList: React.FC<Props> = ({
   );
 };
 
-export default TransactionList;
+export default memo(TransactionList);
 
 const styles = StyleSheet.create({
   renderItemContainer: {

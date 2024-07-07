@@ -2,3 +2,9 @@ ios ::
 
 Version : 1.0 // App distributed
 Build : 6
+
+
+Version : 1.1 // App distributed
+Build : 8
+
+=> Added Other option for add account and category 
