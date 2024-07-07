@@ -31,10 +31,7 @@ const EditCategoryModal: React.FC<Props> = ({
   const isURLForCategoryImage = IsImageURl(
     items?.transaction_category?.image as string,
   );
-  console.log(
-    'items?.transaction_account?.image----------',
-    items?.transaction_category?.image,
-  );
+
   return (
     <Modal
       isVisible={isVisible}
