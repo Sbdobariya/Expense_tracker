@@ -25,10 +25,10 @@ import TransactionList from './home/TransactionList';
 import EditCategoryModal from './home/EditCategoryModal';
 
 // Profile
-import MenuItemList from './profile/MenuItemList';
-import UpdateNameModal from './profile/UpdateNameModal';
-import ProfileHeader from './profile/ProfileHeader';
-import ExportDataDropDown from './profile/ExportDataDropDown';
+import MenuItemList from './Profile/MenuItemList';
+import UpdateNameModal from './Profile/UpdateNameModal';
+import ProfileHeader from './Profile/ProfileHeader';
+import ExportDataDropDown from './Profile/ExportDataDropDown';
 
 // Statistics
 import StatisticsTab from './statistics/StatisticsTab';

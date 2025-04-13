@@ -217,22 +217,28 @@ export const useExportData = () => {
       const file = await RNHTMLtoPDF.convert(options);
 
       if (Platform.OS === 'android') {
-        request(PERMISSIONS.ANDROID.WRITE_EXTERNAL_STORAGE).then(
-          async result => {
-            switch (result) {
-              case RESULTS.UNAVAILABLE:
-                break;
-              case RESULTS.DENIED:
-                break;
-              case RESULTS.GRANTED:
-                downloadPDF(file.filePath);
-                break;
-              case RESULTS.BLOCKED:
-                openSettings();
-                break;
-            }
-          },
-        );
+        if (Platform.Version < 33) {
+          const result = await request(
+            PERMISSIONS.ANDROID.WRITE_EXTERNAL_STORAGE,
+          );
+
+          switch (result) {
+            case RESULTS.UNAVAILABLE:
+              // handle unavailable
+              break;
+            case RESULTS.DENIED:
+              // handle denied
+              break;
+            case RESULTS.GRANTED:
+              downloadPDF(file.filePath);
+              break;
+            case RESULTS.BLOCKED:
+              openSettings();
+              break;
+          }
+        } else {
+          downloadPDF(file.filePath);
+        }
       } else {
         downloadPDF(file.filePath);
       }
