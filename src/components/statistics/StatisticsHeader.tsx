@@ -1,4 +1,4 @@
-import {Image, Platform, StyleSheet, Text} from 'react-native';
+import {Image, Platform, StyleSheet, Text, View} from 'react-native';
 import React from 'react';
 import LinearGradient from 'react-native-linear-gradient';
 import {ColorConst, fontSize, fonts, hp, wp} from '../../theme';
@@ -9,8 +9,10 @@ const StatisticsHeader = () => {
     <LinearGradient
       colors={[ColorConst.gradient_color1, ColorConst.gradient_color2]}
       style={[styles.linearGradient]}>
-      <Image style={styles.headerImage} source={AuthImages.header_bg_ic} />
-      <Text style={styles.headerText}>{'Financial Report'}</Text>
+      <View style={styles.gradientView}>
+        <Image style={styles.headerImage} source={AuthImages.header_bg_ic} />
+        <Text style={styles.headerText}>{'Financial Report'}</Text>
+      </View>
     </LinearGradient>
   );
 };
@@ -22,7 +24,6 @@ const styles = StyleSheet.create({
     left: wp(-5),
     position: 'absolute',
   },
-
   headerText: {
     fontWeight: 'bold',
     fontSize: fontSize(20),
@@ -33,6 +34,8 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'center',
     height: Platform.OS == 'ios' ? hp(18) : hp(10),
+  },
+  gradientView: {
     paddingTop: Platform.OS == 'ios' ? hp(5) : hp(0),
   },
 });

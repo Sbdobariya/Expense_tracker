@@ -21,12 +21,17 @@ const CommonHeader: React.FC<Props> = ({title, onPress}) => {
     <LinearGradient
       colors={[ColorConst.gradient_color1, ColorConst.gradient_color2]}
       style={[styles.linearGradient]}>
-      <Image style={styles.headerImage} source={AuthImages.header_bg_ic} />
-      <TouchableOpacity onPress={onPress}>
-        <Image source={AuthImages.left_icon_ic} style={styles.leftIconStyle} />
-      </TouchableOpacity>
-      <Text style={styles.headerText}>{title}</Text>
-      <View style={styles.leftIconStyle} />
+      <View style={styles.gradientView}>
+        <Image style={styles.headerImage} source={AuthImages.header_bg_ic} />
+        <TouchableOpacity onPress={onPress}>
+          <Image
+            source={AuthImages.left_icon_ic}
+            style={styles.leftIconStyle}
+          />
+        </TouchableOpacity>
+        <Text style={styles.headerText}>{title}</Text>
+        <View style={styles.leftIconStyle} />
+      </View>
     </LinearGradient>
   );
 };
@@ -51,10 +56,12 @@ const styles = StyleSheet.create({
   },
   linearGradient: {
     height: Platform.OS == 'ios' ? hp(18) : hp(10),
+  },
+  gradientView: {
     paddingTop: Platform.OS == 'ios' ? hp(7) : hp(3),
+    paddingHorizontal: wp(2),
     flexDirection: 'row',
     alignItems: 'center',
-    paddingHorizontal: wp(2),
     justifyContent: 'space-between',
   },
 });

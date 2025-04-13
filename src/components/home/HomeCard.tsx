@@ -29,31 +29,36 @@ const HomeCard: React.FC<Props> = ({transactionData}) => {
     <LinearGradient
       colors={[ColorConst.gradient_color1, ColorConst.gradient_color2]}
       style={styles.linearGradient}>
-      <View style={styles.subIncomeView}>
-        <Text style={styles.totalBalance}>{HomeStrings.total_balance}</Text>
-        <Image source={HomeImages.chevron_down_ic} style={styles.rupeesIcon} />
-      </View>
-      <AmountText
-        customNumStyle={{
-          fontFamily: fonts.bold,
-          fontSize: fontSize(22),
-        }}
-        num={totalIncomeExpense}
-      />
-      <View style={styles.subContainer}>
-        <View>
-          <View style={styles.incomeView}>
-            <Image source={HomeImages.downArrow_ic} style={styles.arrowImage} />
-            <Text style={styles.incomeExpense}>{HomeStrings.income}</Text>
-          </View>
-          <AmountText num={totalIncome} customNumStyle={styles.expenseNum} />
+      <View style={styles.gradientView}>
+        <View style={styles.subIncomeView}>
+          <Text style={styles.totalBalance}>{HomeStrings.total_balance}</Text>
+          <Image
+            source={HomeImages.chevron_down_ic}
+            style={styles.rupeesIcon}
+          />
         </View>
-        <View>
-          <View style={styles.incomeView}>
-            <Image source={HomeImages.upArrow_ic} style={styles.arrowImage} />
-            <Text style={styles.incomeExpense}>{HomeStrings.expense}</Text>
+        <AmountText
+          customNumStyle={styles.customNum}
+          num={totalIncomeExpense}
+        />
+        <View style={styles.subContainer}>
+          <View>
+            <View style={styles.incomeView}>
+              <Image
+                source={HomeImages.downArrow_ic}
+                style={styles.arrowImage}
+              />
+              <Text style={styles.incomeExpense}>{HomeStrings.income}</Text>
+            </View>
+            <AmountText num={totalIncome} customNumStyle={styles.expenseNum} />
           </View>
-          <AmountText num={totalExpense} customNumStyle={styles.expenseNum} />
+          <View>
+            <View style={styles.incomeView}>
+              <Image source={HomeImages.upArrow_ic} style={styles.arrowImage} />
+              <Text style={styles.incomeExpense}>{HomeStrings.expense}</Text>
+            </View>
+            <AmountText num={totalExpense} customNumStyle={styles.expenseNum} />
+          </View>
         </View>
       </View>
     </LinearGradient>
@@ -65,7 +70,6 @@ export default HomeCard;
 const styles = StyleSheet.create({
   linearGradient: {
     height: hp(22),
-    padding: hp(2),
     marginTop: Platform.OS === 'ios' ? hp(-15) : hp(-15),
     borderRadius: hp(3),
     marginHorizontal: wp(3),
@@ -81,7 +85,9 @@ const styles = StyleSheet.create({
     shadowRadius: 11.95,
     elevation: 18,
   },
-
+  gradientView: {
+    padding: hp(2),
+  },
   subContainer: {
     marginTop: hp(3),
     flexDirection: 'row',
@@ -119,5 +125,9 @@ const styles = StyleSheet.create({
     color: '#D0E5E4',
     fontSize: fontSize(15),
     fontFamily: fonts.regular,
+  },
+  customNum: {
+    fontFamily: fonts.bold,
+    fontSize: fontSize(22),
   },
 });

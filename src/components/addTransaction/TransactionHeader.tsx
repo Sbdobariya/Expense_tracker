@@ -20,12 +20,17 @@ const TransactionHeader: React.FC<TransactionHeaderProps> = ({onBackPress}) => {
     <LinearGradient
       colors={[ColorConst.gradient_color1, ColorConst.gradient_color2]}
       style={[styles.linearGradient]}>
-      <Image style={styles.headerImage} source={AuthImages.header_bg_ic} />
-      <TouchableOpacity onPress={onBackPress}>
-        <Image source={AuthImages.left_icon_ic} style={styles.leftIconStyle} />
-      </TouchableOpacity>
-      <Text style={styles.headerText}>Add Transaction</Text>
-      <View style={styles.leftIconStyle} />
+      <View style={styles.gradientView}>
+        <Image style={styles.headerImage} source={AuthImages.header_bg_ic} />
+        <TouchableOpacity onPress={onBackPress}>
+          <Image
+            source={AuthImages.left_icon_ic}
+            style={styles.leftIconStyle}
+          />
+        </TouchableOpacity>
+        <Text style={styles.headerText}>Add Transaction</Text>
+        <View style={styles.leftIconStyle} />
+      </View>
     </LinearGradient>
   );
 };
@@ -34,12 +39,15 @@ export default TransactionHeader;
 
 const styles = StyleSheet.create({
   linearGradient: {
-    flexDirection: 'row',
     height: Platform.OS == 'ios' ? hp(35) : hp(30),
-    paddingTop: Platform.OS === 'ios' ? hp(10) : hp(5),
     borderBottomLeftRadius: hp(5),
     borderBottomRightRadius: hp(5),
+  },
+  gradientView: {
+    paddingTop: Platform.OS === 'ios' ? hp(10) : hp(5),
+    flexDirection: 'row',
     justifyContent: 'space-between',
+    alignItems: 'center',
   },
   headerText: {
     fontWeight: 'bold',
